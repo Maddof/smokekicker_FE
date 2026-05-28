@@ -4,10 +4,6 @@ import { Clock, Info, Package } from "lucide-react";
 import Link from "next/link";
 
 export default function UserAccountStatus({ user }) {
-  // Count active subscriptions
-  const activeSubscriptions =
-    user.subscriptions?.filter((sub) => sub.status === "ACTIVE").length || 0;
-
   // Calculate account age
   const accountCreatedDate = new Date(user.createdAt);
   const currentDate = new Date();
@@ -36,30 +32,6 @@ export default function UserAccountStatus({ user }) {
             <span className="font-medium">Senaste inloggning:</span>{" "}
             {formatDate(user.lastLogin)}
           </p>
-        </div>
-      </div>
-
-      {/* Subscription status */}
-      <div>
-        <div className="mb-2 flex items-center gap-2 text-sm font-medium">
-          <Package className="text-primary/70 h-4 w-4" />
-          <span>Prenumerationer</span>
-        </div>
-        <div className="bg-primary/10 rounded-md p-3">
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-sm">
-              <span className="font-medium">Aktiva prenumerationer:</span>{" "}
-              {activeSubscriptions}
-            </p>
-            {activeSubscriptions > 0 && (
-              <Link
-                href={ROUTES.DASHBOARD.SUBSCRIPTIONS.ACTIVE}
-                className="text-primary text-sm hover:underline"
-              >
-                Visa alla
-              </Link>
-            )}
-          </div>
         </div>
       </div>
 

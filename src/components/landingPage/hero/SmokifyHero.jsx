@@ -37,11 +37,6 @@ function CategoryLinkItem({ href, icon: Icon, children }) {
 // USP items data
 const categoryLinks = [
   {
-    href: ROUTES.SHOP.SUBSCRIPTIONS,
-    icon: Repeat,
-    label: "Smarta prenumerationer",
-  },
-  {
     href: ROUTES.SHOP.CATEGORY("start-kit-forfyllda-podsystem"),
     icon: Zap,
     label: "Startkit Förfyllda Vape Podsystem",
@@ -210,7 +205,7 @@ export default function SmokifyHero({
               className="w-full justify-center border border-white/20 bg-transparent text-white hover:border-white/40 hover:bg-white/5 hover:text-white"
               asChild
             >
-              <Link href={ROUTES.SHOP.SUBSCRIPTIONS}>
+              <Link href={"#subscriptions"}>
                 <Calendar className="mr-2 h-4 w-4" /> {resolvedSecondaryCta}
               </Link>
             </Button>

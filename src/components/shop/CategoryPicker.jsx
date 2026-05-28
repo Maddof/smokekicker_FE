@@ -4,7 +4,6 @@ import { ROUTES } from "@/config/routes";
 export default function CategoryPicker({ currentPath }) {
   const categories = [
     { name: "Alla produkter", href: ROUTES.SHOP.INDEX },
-    { name: "Prenumerationer", href: ROUTES.SHOP.SUBSCRIPTIONS },
     {
       name: "Start-kit Förfyllda Podsystem",
       href: `${ROUTES.SHOP.INDEX}/start-kit-forfyllda-podsystem`,

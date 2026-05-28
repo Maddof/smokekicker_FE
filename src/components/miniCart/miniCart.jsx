@@ -15,9 +15,8 @@ import Link from "next/link";
 export default function MiniCart() {
   const {
     cartItems = [],
-    handeMiniCartAdd,
-    handeMiniCartSubtract,
-    cartContainsFreeStarterKitsWithoutSubscription,
+    addToCart,
+    subtractItemFromCart,
     removeFromCart,
     subtotal = 0,
     discount = 0,
@@ -88,14 +87,12 @@ export default function MiniCart() {
                   <div className="flex w-full justify-between gap-2">
                     <SheetClose asChild>
                       <Link
-                        href={
-                          item.type === "PRODUCT"
-                            ? ROUTES.SHOP.PRODUCT(
+                        href={                      
+                            ROUTES.SHOP.PRODUCT(
                                 item.categorySlug,
                                 item.brandSlug,
                                 item.slug,
                               )
-                            : ROUTES.SHOP.SUBSCRIPTION(item.slug)
                         }
                         className="text-primary pr-1 font-bold text-wrap"
                       >
@@ -121,31 +118,6 @@ export default function MiniCart() {
                         )}
                       </p>
 
-                      {/* Subscription metadata */}
-                      {item.type === "SUBSCRIPTION" && (
-                        <p className="text-muted-foreground mt-1 text-sm">
-                          {item.intervalCount === 1 && "Skickas varje vecka"}
-                          {item.intervalCount === 2 && "Skickas varannan vecka"}
-                          {item.intervalCount > 2 &&
-                            `Skickas var ${item.intervalCount}:e vecka`}
-                        </p>
-                      )}
-
-                      {/* Subscription items */}
-                      {item.type === "SUBSCRIPTION" &&
-                        item.items?.length > 0 && (
-                          <ul className="text-muted-foreground mt-2 space-y-1 text-xs">
-                            {item.items.map((boxItem) => (
-                              <li
-                                key={boxItem.itemId}
-                                className="max-w-80 truncate"
-                              >
-                                – {boxItem.name} ({boxItem.quantity}x)
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-
                       {/* per-line savings */}
                       {hasDiscount && lineDiscount > 0 && (
                         <p className="text-muted-foreground mt-2 text-xs">
@@ -158,15 +130,13 @@ export default function MiniCart() {
                     <div className="flex shrink-0 flex-col items-end gap-2">
                       <div className="flex items-center space-x-2">
                         <QuantityButton
-                          onClick={() => handeMiniCartSubtract(item)}
+                          onClick={() => subtractItemFromCart(item)}
                           icon={Minus}
-                          itemCategoryId={item.categoryId}
                           disabled={shouldDisableControls}
                         />
                         <QuantityButton
-                          onClick={() => handeMiniCartAdd(item)}
+                          onClick={() => addToCart(item.itemId)}
                           icon={Plus}
-                          itemCategoryId={item.categoryId}
                           disabled={shouldDisableControls}
                         />
                         <button
@@ -197,13 +167,6 @@ export default function MiniCart() {
           {/* Errors / warnings */}
           {errorMessage && (
             <p className="text-destructive mb-2">{errorMessage}</p>
-          )}
-
-          {cartContainsFreeStarterKitsWithoutSubscription && (
-            <p className="mb-2 text-sm font-medium text-amber-600">
-              Startkit kräver en prenumeration. Lägg till en prenumeration eller
-              ta bort startkitet innan du går vidare.
-            </p>
           )}
 
           <button

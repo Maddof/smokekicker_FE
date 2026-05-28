@@ -1,6 +1,5 @@
 export const CATEGORY_SLUGS = Object.freeze({
   DEFAULT: "default",
-  SUBSCRIPTIONS: "prenumerationer",
   START_KIT_PREFILLED: "start-kit-forfyllda-podsystem",
   START_KIT_VAPE: "start-kit-vape",
   PREFILLED_PODS: "forfyllda-poddar",

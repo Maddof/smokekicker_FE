@@ -12,7 +12,7 @@ export default function ShopHeader({
   primaryButtonText = "Se ala produkter",
   primaryButtonLink = "#category-picker",
   secondaryButtonText = "Se prenumerationer",
-  secondaryButtonLink = ROUTES.SHOP.SUBSCRIPTIONS,
+  secondaryButtonLink = "#subscriptions",
   showNavigationButtons = true,
   viewProductsText = "Se produkter",
   warningLabelText,

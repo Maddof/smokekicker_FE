@@ -1,7 +1,7 @@
 import { fetchProductsByCategorySlugAndBrandSlug } from "@/lib/data/api/fetchProducts";
 import { fetchAllBrands, fetchBrandBySlug } from "@/lib/data/api/fetchBrands";
 import {
-  fetchAllPublishedCategoriesExcludeSubscription,
+  fetchAllPublishedCategories,
   fetchPublishedCategoryBySlug,
 } from "@/lib/data/api/fetchCategories";
 import { notFound } from "next/navigation";
@@ -55,7 +55,7 @@ export async function generateStaticParams() {
   }
   try {
     // Fetch all published categories and brands
-    const categories = await fetchAllPublishedCategoriesExcludeSubscription();
+    const categories = await fetchAllPublishedCategories();
     const brands = await fetchAllBrands();
 
     // Handle missing data safely

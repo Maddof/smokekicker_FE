@@ -6,8 +6,6 @@ import { calcSubtotal, calcVat } from "@/lib/utils/cart/calculations";
 const CartContext = createContext();
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const TEN_MINUTES = parseInt(process.env.NEXT_PUBLIC_TIMECHECK_TOKEN);
-const FREE_KIT_CATEGORY_ID =
-  parseInt(process.env.NEXT_PUBLIC_FREE_KIT_CATEGORY_ID) || 7;
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -18,28 +16,10 @@ export const CartProvider = ({ children }) => {
   });
   const [errorMessage, setErrorMessage] = useState(null); // State for managing error messages
   const [loadingProductIds, setLoadingProductIds] = useState([]); // Track loading by product ID
-  const [loadingBoxIds, setLoadingBoxIds] = useState([]); // Track loading by box (subscriptions) ID
   const [loading, setLoading] = useState(false); // Track loading globally
   const [shippingCost, setShippingCost] = useState(0); // Default shipping cost (example)
 
   // const { sessionTimeleft, refreshToken } = useAuth();
-
-  // Add a memoized check for free starter kits only
-  const containsOnlyFreeStarterKits = useMemo(() => {
-    return (
-      cartItems.length > 0 &&
-      cartItems.every((item) => {
-        return item.categoryId === FREE_KIT_CATEGORY_ID;
-      })
-    );
-  }, [cartItems]);
-
-  const cartContainsFreeStarterKitsWithoutSubscription = useMemo(() => {
-    return (
-      cartItems.some((item) => item.categoryId === FREE_KIT_CATEGORY_ID) &&
-      !cartItems.some((item) => item.type === "SUBSCRIPTION")
-    );
-  }, [cartItems]);
 
   // Fetch the cart from the backend
   const fetchCartFromBackend = async () => {
@@ -89,26 +69,6 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const handeMiniCartAdd = async (item) => {
-    const itemId = item.itemId;
-    if (item.type === "PRODUCT") {
-      addToCart(itemId);
-    } else if (item.type === "SUBSCRIPTION") {
-      // For subscription items, call addSubscriptionToCart with the flattened itemId.
-      addSubscriptionToCart(itemId);
-    }
-  };
-
-  // If its a subscription we remove it from cart since
-  // max is 1 quantity per box in cart.
-  const handeMiniCartSubtract = async (item) => {
-    if (item.type === "PRODUCT") {
-      subtractItemFromCart(item.itemId);
-    } else if (item.type === "SUBSCRIPTION") {
-      removeFromCart(item);
-    }
-  };
-
   // Add an item to the cart
   const addToCart = async (productId, quantity = 1) => {
     const safeQuantity = Math.max(1, Number(quantity) || 1);
@@ -149,73 +109,6 @@ export const CartProvider = ({ children }) => {
         setTimeout(() => setErrorMessage(null), 3000); // Clear error after 4 seconds
       }
       // setErrorMessage(null); // Clear error if successful
-    }
-  };
-
-  const addSubscriptionToCart = async ({
-    boxId,
-    intervalCount,
-    selectedItems,
-  }) => {
-    let hasError = false;
-
-    try {
-      setLoading(true);
-      setLoadingBoxIds((prev) => [...prev, boxId]); // Add box ID to loading state
-
-      // Check if any subscription box is already in the cart
-      const anySubIsAlreadyInCart = cartItems.some(
-        (item) => item.type === "SUBSCRIPTION",
-      );
-
-      if (anySubIsAlreadyInCart) {
-        setErrorMessage(
-          "Du kan endast ha en prenumeration i varukorgen. Vänligen handla först och återkom för att lägga till fler prenumerationer.",
-        );
-        hasError = true;
-        return;
-      }
-
-      // Check if this subscription box is already in the cart
-      const isAlreadyInCart = cartItems.some(
-        (item) => item.type === "SUBSCRIPTION" && item.itemId === boxId,
-      );
-
-      if (isAlreadyInCart) {
-        hasError = true;
-        setErrorMessage("Du kan endast lägga till en prenumeration åt gången");
-        return;
-      }
-
-      const response = await fetch(
-        `${API_BASE_URL}/cart/add-subscription-box`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({ boxId, intervalCount, selectedItems }),
-        },
-      );
-
-      // To throw, or not to throw?
-      if (!response.ok) {
-        hasError = true;
-        const errorData = await response.json();
-        setErrorMessage(errorData.error); // Store error message in state
-
-        throw new Error(errorData.error || "Failed to add subscription box");
-      }
-    } catch (error) {
-      hasError = true;
-      console.error("Error adding sub box to cart:", error);
-      setErrorMessage(error.message);
-    } finally {
-      setLoadingBoxIds((prev) => prev.filter((id) => id !== boxId)); // Remove box ID from loading state
-      setLoading(false); // Stop loading
-      if (!hasError) {
-        setErrorMessage(null); // Clear error if successful
-        await fetchCartFromBackend();
-      }
     }
   };
 
@@ -267,10 +160,7 @@ export const CartProvider = ({ children }) => {
       setLoading(true); // Start loading
 
       // Since the cart is flattened, use item.itemId depending on the type
-      const payload =
-        item.type === "PRODUCT"
-          ? { productId: item.itemId }
-          : { subscriptionBoxId: item.itemId };
+      const payload = { productId: item.itemId };
 
       await fetch(`${API_BASE_URL}/cart/item`, {
         method: "DELETE",
@@ -376,12 +266,10 @@ export const CartProvider = ({ children }) => {
       value={{
         cartItems,
         setCartItems,
-        handeMiniCartAdd,
         addToCart,
         loadingProductIds,
-        loadingBoxIds,
         loading,
-        handeMiniCartSubtract,
+        subtractItemFromCart,
         clearCart,
         removeFromCart,
         totalQuantity,
@@ -392,9 +280,6 @@ export const CartProvider = ({ children }) => {
         total,
         discount,
         errorMessage,
-        addSubscriptionToCart,
-        containsOnlyFreeStarterKits,
-        cartContainsFreeStarterKitsWithoutSubscription,
         getUnitPrice,
         getDiscountedUnitPrice,
         getLineTotal,

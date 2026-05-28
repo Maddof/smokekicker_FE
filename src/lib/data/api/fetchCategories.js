@@ -14,27 +14,6 @@ async function fetchAllPublishedCategories() {
   }
 }
 
-// New function to fetch published categories excluding subscription category
-// Reason: We build the page for the subscription category separately and don't want it to appear in the general category list
-async function fetchAllPublishedCategoriesExcludeSubscription() {
-  try {
-    const response = await fetch(
-      `${API_BASE_URL}/categories/published?excludeSubscription=true`,
-    );
-    if (!response.ok) {
-      throw new Error(`Failed to fetch categories: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(
-      "Error fetching published categories excluding subscription:",
-      error,
-    );
-    return null; // Explicitly return `null` on failure
-  }
-}
-
 async function fetchPublishedCategoryBySlug(slug) {
   try {
     const response = await fetch(`${API_BASE_URL}/categories/slug/${slug}`);
@@ -51,6 +30,5 @@ async function fetchPublishedCategoryBySlug(slug) {
 
 export {
   fetchAllPublishedCategories,
-  fetchAllPublishedCategoriesExcludeSubscription,
   fetchPublishedCategoryBySlug,
 };

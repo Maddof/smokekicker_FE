@@ -757,74 +757,6 @@ export const categoryContent = {
         "Lär dig när du ska byta coil, pod eller batteri och hitta tips för att hålla ditt podsystem i toppskick längre med rätt underhåll.",
     },
   },
-
-  [CATEGORY_SLUGS.SUBSCRIPTIONS]: {
-    title: "Smarta Prenumerationer",
-    description:
-      "En prenumeration som gör skillnad – mer hållbar än engångsvapes, mer flexibel än vanliga köp. Få dina favoritsmaker levererade direkt hem och alltid med fri frakt. Anpassa din box efter dina behov och ändra eller pausa när du vill.",
-    heroImage: "/images/bg/subscription_bg_shop.jpg",
-    heroImageAlt: "Prenumerationslåda med olika vapes i neon",
-    showNavigationButtons: false,
-    warningLabelText: vapeWarningText,
-    belowHero: {
-      title: "Prenumerationer - Bekvämt, Flexibelt & Prisvärt",
-      iconImgBg: "/images/icons/sketches/vape_prenumeration_sketch.png",
-      inconImgBgAlt: "Prenumerationslåda illustration",
-      initialParagraphs: 3,
-      content: (
-        <>
-          <p>
-            Hos Smokify är en prenumeration inte vilken prenumeration som helst.
-            Vi har skapat en tjänst som är lika flexibel som den är smart – med
-            fokus på kvalitet, hållbarhet och frihet för dig.
-          </p>
-          <p>
-            Få dina favoritsmaker och produkter levererade regelbundet direkt
-            hem eller välj slumpmässiga smaker. Du bestämmer, anpassa din box
-            efter dina preferenser och välj leveransintervall som passar dig –
-            allt kontrollerar du själv från din kontrollpanel.
-          </p>
-          <p>
-            Början vape enheten slitas ut? Inga problem. Du kan enkelt lägga
-            till ersättningsdelar i din nästa leverans. Allt för att din
-            upplevelse ska vara så smidig som möjligt. Är du osäker på vad du
-            vill ha? Välj slumpmässiga smaker och låt oss överraska dig med nya
-            favoriter varje gång.
-          </p>
-
-          <h2 className="mt-4 text-lg font-bold">Fördelar med prenumeration</h2>
-          <h3 className="mt-3 font-semibold">Spara tid & pengar</h3>
-          <p>
-            Slipp sista-minuten-stressen. Med en prenumeration får du fri frakt,
-            bättre priser än vid enstaka köp och slipper oroa dig för att
-            produkterna tar slut.
-          </p>
-          <h3 className="mt-3 font-semibold">Upptäck nya favoriter</h3>
-          <p>
-            Vill du överraskas? Välj slumpmässiga smaker i din prenumeration.
-            Vår prenumeration gör det enkelt att upptäcka nya favoriter med
-            överraskningar i varje leverans.
-          </p>
-          <h3 className="mt-3 font-semibold">Trygg garanti</h3>
-          <p>
-            Går något sönder? Beställ enkelt ett ersättningskit. Du gör det
-            enkelt efter att ha loggat in på ditt konto.
-          </p>
-          <h3 className="mt-3 font-semibold">Flexibla extratillägg</h3>
-          <p>
-            Behöver du mer nikotintuggummi för att hålla suget i schack? Eller
-            vill du prova vårt nikotinfria godis? Lägg enkelt till extra
-            produkter i din nästa leverans – du bestämmer själv.
-          </p>
-        </>
-      ),
-    },
-    relatedPostsSection: {
-      title: "Om vape-prenumerationer och smarta nikotinval",
-      description:
-        "Läs om hur en smart vape-prenumeration kan spara tid och pengar – och hur du anpassar smaker, leveransintervall och tillbehör efter dina behov.",
-    },
-  },
 };
 
 export const categoryFaqContent = {
@@ -1048,49 +980,6 @@ export const categoryFaqContent = {
         question: "Vilka smaker finns tillgängliga?",
         answer:
           "Vi erbjuder en mängd olika smaker, inklusive mint, frukt, lakrits och bär. Många ex-rökare föredrar starka smaker som mint eller kanel, då dessa ger en liknande känsla i munnen som rökning tidigare gjorde.",
-      },
-    ],
-  },
-  [CATEGORY_SLUGS.SUBSCRIPTIONS]: {
-    title: "Frågor och svar om vape prenumerationer",
-    description:
-      "Här hittar du svar på de vanligaste frågorna om våra vape prenumerationer.",
-    items: [
-      {
-        question: "Hur fungerar en prenumeration?",
-        answer:
-          "Du väljer själv vilka produkter du vill ha, hur ofta de ska levereras och du kan enkelt ändra nästa leveransdatum när du vill. Allt sker via din kontrollpanel. Du kan även lägga till engångsköp till din nästa leverans när du vill från hela vårat sortiment, eller ta bort produkter du inte längre vill ha. Mix & Match – du bestämmer!",
-      },
-      {
-        question: "Är det bindningstid?",
-        answer:
-          "Nej. Våra prenumerationer är helt flexibla – du kan ändra innehåll, leveransdatum eller avsluta när som helst utan extra kostnad.",
-      },
-      {
-        question: "Jag ska resa iväg, kan jag pausa min prenumeration?",
-        answer:
-          "Ja och nej, du kan ändra nästa leveransdatum i din kontrollpanel, men du kan inte pausa prenumerationen helt och för evigt. Du kan dock avsluta när som helst utan extra kostnad och starta en ny när du är tillbaka.",
-      },
-
-      {
-        question: "Vad händer om min vape-enhet går sönder?",
-        answer:
-          "Som prenumerant av förfyllda pods får du kostnadsfritt ersättningskit via din kontrollpanel baserat på antal levereranser. För vape kit får du ersättningspoddar. Kontakta vår kundtjänst vid övriga fel. Vi vill att du alltid ska ha en problemfri upplevelse.",
-      },
-      {
-        question: "Måste jag köpa ett vape pod start-kit för att prenumerera?",
-        answer:
-          "Nej, äger du redan ett start-kit som passar pods eller e-vätskor kan du självklart prenumerera på pods och e-vätskor utan att köpa ett nytt kit. Se bara till att välja rätt märke och modell som passar din enhet. Vi rekommenderar dock att du köper ett start-kit från oss för att säkerställa bästa kompatibilitet och prestanda samt för att få tillgång till reservdelar och support.",
-      },
-      {
-        question: "Kan jag byta smaker i efterhand?",
-        answer:
-          "Absolut! Du kan när som helst logga in på ditt konto och ändra smakpreferenser för kommande leveranser. Du kan välja specifika smaker eller låta oss överraska dig med slumpmässiga val.",
-      },
-      {
-        question: "Kan jag byta adress?",
-        answer:
-          "Nej, du kan inte byta adress. Vi levererar endast till din folkbokförda adress. Om du har flyttat och ändrat din folkbokföringsadress, uppdateras den automatiskt hos oss nästa gång du loggar in.",
       },
     ],
   },
@@ -1346,60 +1235,6 @@ export const categoryBenefitsContent = {
     image: {
       src: "/images/other/lollipops_retro_bg.jpg",
       alt: "Fördelar med nikotinfritt godis",
-      width: 500,
-      height: 500,
-    },
-  },
-  [CATEGORY_SLUGS.SUBSCRIPTIONS]: {
-    title: "Varför prenumerera?",
-    description:
-      "Vape prenumerationstjänst för bekväma och regelbundna leveranser av dina favorit pods eller e-juice med fri frakt, vape startkit och full kontroll över ditt abonnemang.",
-    benefits: [
-      {
-        title: "RESERVDELAR",
-        text: "Om din vape enhet eller pod behöver bytas ingår tomma påfyllningsbara pods och ersättningskit.",
-        icon: {
-          src: "/images/icons/gift-box-with-a-bow.svg",
-          alt: "Gift Box Icon",
-          width: 24,
-          height: 24,
-        },
-      },
-      {
-        title: "BEKVÄMA LEVERANSER",
-        text: "Alltid fri frakt och hemleveranser (giltig folkbokföringsadress).",
-        icon: {
-          src: "/images/icons/delivery-truck.svg",
-          alt: "Delivery Truck Icon",
-          width: 24,
-          height: 24,
-        },
-      },
-      {
-        title: "NYA SMAKER",
-        text: "Få slumpmässigt utvalda pods och e-juicer eller bestäm exakt din låda.",
-        icon: {
-          src: "/images/icons/surprise-box.svg",
-          alt: "Surprise Box Icon",
-          width: 24,
-          height: 24,
-        },
-      },
-      {
-        title: "BESPARINGAR",
-        text: "Spara extra jämfört med vanliga engångsvapes.",
-        icon: {
-          src: "/images/icons/piggy-bank.svg",
-          alt: "Piggy Bank Icon",
-          width: 24,
-          height: 24,
-        },
-      },
-    ],
-    showImage: true,
-    image: {
-      src: "/images/other/vape-subscriptionbox_illustration.jpg",
-      alt: "Illustration av låda med olika vape-produkter",
       width: 500,
       height: 500,
     },

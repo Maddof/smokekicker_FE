@@ -12,8 +12,6 @@ export const ROUTES = {
     CATEGORY: (slug) => `/produkter/${slug}`,
     PRODUCT: (categorySlug, brandSlug, productSlug) =>
       `/produkter/${categorySlug}/${brandSlug}/${productSlug}`,
-    SUBSCRIPTIONS: "/produkter/prenumerationer",
-    SUBSCRIPTION: (subSlug) => `/produkter/prenumerationer/${subSlug}`,
   },
 
   // Brand related
@@ -59,11 +57,6 @@ export const ROUTES = {
       INDEX: "/mina-sidor/bestallningar",
       ALL: "/mina-sidor/bestallningar/alla",
       DETAIL: (id) => `/mina-sidor/bestallningar/${id}`,
-    },
-    SUBSCRIPTIONS: {
-      ACTIVE: "/mina-sidor/prenumerationer",
-      ALL: "/mina-sidor/prenumerationer/alla",
-      DETAIL: (id) => `/mina-sidor/prenumerationer/${id}`,
     },
   },
 };

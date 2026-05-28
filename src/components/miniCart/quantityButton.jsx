@@ -6,13 +6,8 @@ const FREE_KIT_CATEGORY_ID =
 export default function QuantityButton({
   onClick,
   icon: Icon,
-  itemCategoryId,
   disabled = false,
 }) {
-  // Check if the item is a free starter kit
-  if (itemCategoryId === FREE_KIT_CATEGORY_ID) {
-    return "";
-  }
   return (
     <button
       className={`flex h-7 w-7 items-center justify-center rounded-full ${

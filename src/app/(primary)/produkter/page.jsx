@@ -188,44 +188,6 @@ export default async function ShopPage() {
 
       <CategoryPicker currentPath={ROUTES.SHOP.INDEX} />
 
-      <section className="">
-        <div className="container px-0 md:px-4">
-          <div className="flex flex-col items-stretch md:flex-row">
-            <div className="neon-bg-radial-top-right text-secondary-foreground flex w-full flex-col items-start justify-center gap-4 p-6 sm:p-7 md:w-2/5 md:gap-6">
-              <Image
-                src="/images/icons/calendar_white_icon.svg"
-                alt="Calendar"
-                width={400}
-                height={400}
-                className="w-24 opacity-20 md:w-32"
-              />
-              <h2 className="h2-shop">
-                Dina Pods. Ditt Schema. <br /> Vår Leverans.
-              </h2>
-              <p>
-                Prenumerera på dina favoritsmaker och få dem
-                levererade precis när du vill. Flexibelt,
-                enkelt och alltid på dina villkor.
-              </p>
-              <Button asChild>
-                <Link href={ROUTES.SHOP.SUBSCRIPTIONS}>
-                  Se prenumerationer
-                </Link>
-              </Button>
-            </div>
-            <div className="flex w-full flex-col items-start gap-2 md:w-3/5">
-              <Image
-                src="/images/other/vape_pods_frunk_bar_flavors.jpg"
-                alt="Prefilled pods in different flavors"
-                width={1000}
-                height={667}
-                className="h-60 w-full object-cover object-[50%_70%] sm:h-80 md:h-full"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Starter Kits Section */}
       {prefilledPodStarterKits.length > 0 && (
         <>

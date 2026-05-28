@@ -1,5 +1,4 @@
 import DashboardSectionWrapper from "@/components/dashboard/DashboardSection";
-import AddExtraItemButtonClient from "@/components/subscriptions/management/AddExtraItem";
 import { Button } from "@/components/ui/scn/button";
 import { fetchProductsByCategoryId } from "@/lib/data/api/fetchProducts";
 import { fetchSession } from "@/lib/utils/auth/authDAL";
@@ -191,12 +190,6 @@ export default async function PerkDetailPage({ params }) {
                       Slut i lager
                     </p>
                   )}
-                  <div className="mt-auto">
-                    <AddExtraItemButtonClient
-                      product={product}
-                      isPerkItem={true}
-                    />
-                  </div>
                 </div>
               );
             })}

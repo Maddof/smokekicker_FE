@@ -4,9 +4,8 @@ import {
   fetchPublishedBlogPosts,
 } from "@/lib/data/api/fetchBlog";
 import { fetchAllBrands } from "@/lib/data/api/fetchBrands";
-import { fetchAllPublishedCategoriesExcludeSubscription } from "@/lib/data/api/fetchCategories";
+import { fetchAllPublishedCategories } from "@/lib/data/api/fetchCategories";
 import { fetchAllPublishedProducts } from "@/lib/data/api/fetchProducts";
-import { fetchAllPublishedAndPredefinedBoxes } from "@/lib/data/api/fetchSubs";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
@@ -28,14 +27,12 @@ export default async function sitemap() {
   const [
     categories,
     brands,
-    subscriptionBoxesPublished,
     products,
     blogCategories,
     blogPostsData,
   ] = await Promise.all([
-    fetchAllPublishedCategoriesExcludeSubscription(),
+    fetchAllPublishedCategories(),
     fetchAllBrands(),
-    fetchAllPublishedAndPredefinedBoxes(),
     fetchAllPublishedProducts(),
     fetchBlogCategories(),
     fetchPublishedBlogPosts(),
@@ -65,14 +62,6 @@ export default async function sitemap() {
       ? brand.updatedAt
       : new Date(),
   }));
-
-  const subscriptionsRoutes =
-    subscriptionBoxesPublished.map((box) => ({
-      url: `${BASE_URL}/produkter/prenumerationer/${box.slug}`,
-      lastModified: box.updatedAt
-        ? box.updatedAt
-        : new Date(),
-    }));
 
   const productsRoutes = products.map((product) => ({
     url: `${BASE_URL}/produkter/${product.category.slug}/${product.brand.slug}/${product.slug}`,
@@ -106,7 +95,6 @@ export default async function sitemap() {
     ...staticRoutes,
     ...categoriesRoutes,
     ...brandsRoutes,
-    ...subscriptionsRoutes,
     ...productsRoutes,
     ...blogCategoriesRoutes,
     ...blogPostRoutes,

@@ -18,11 +18,6 @@ export default function QuickMenu() {
       icon: <PackageIcon className="mr-2 h-4 w-4" />,
     },
     {
-      label: "Prenumerationer",
-      href: ROUTES.DASHBOARD.SUBSCRIPTIONS.ACTIVE,
-      icon: <RefreshCcw className="mr-2 h-4 w-4" />,
-    },
-    {
       label: "Reservdelar",
       href: ROUTES.DASHBOARD.PERKS,
       icon: <Zap className="mr-2 h-4 w-4" />,

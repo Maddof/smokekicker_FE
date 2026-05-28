@@ -1,6 +1,5 @@
 import AtcButtonDefault from "@/components/cart/atcButton";
-import AddExtraItemButtonClient from "@/components/subscriptions/management/AddExtraItem";
-import { fetchAllPublishedCategoriesExcludeSubscription } from "@/lib/data/api/fetchCategories";
+import { fetchAllPublishedCategories } from "@/lib/data/api/fetchCategories";
 import {
   fetchProductBySlugCategoryAndBrand,
   fetchProductsByCategorySlug,
@@ -126,7 +125,7 @@ export async function generateStaticParams() {
   if (process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION === "true") {
     return [];
   }
-  const categories = await fetchAllPublishedCategoriesExcludeSubscription();
+  const categories = await fetchAllPublishedCategories();
   const paths = [];
 
   // if (!products) return [];
@@ -320,7 +319,6 @@ export default async function SingleProductPage({ params }) {
                 </span>
                 <div className="flex w-full flex-wrap gap-2">
                   <AtcButtonDefault product={product} className="w-full" />
-                  <AddExtraItemButtonClient product={product} />
                 </div>
               </div>
 

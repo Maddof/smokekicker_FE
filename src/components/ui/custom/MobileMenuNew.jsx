@@ -13,7 +13,6 @@ import {
   User,
   ChevronDown,
   ShoppingCart,
-  CalendarClock,
 } from "lucide-react";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
@@ -33,7 +32,6 @@ const MENU_SECTIONS = [
     icon: Package,
     items: [
       { href: ROUTES.SHOP.INDEX, label: "Alla produkter" },
-      { href: ROUTES.SHOP.SUBSCRIPTIONS, label: "Prenumerationer" },
       {
         href: ROUTES.SHOP.CATEGORY("start-kit-forfyllda-podsystem"),
         label: "Start-kit Förfyllda Podsystem",
@@ -76,11 +74,6 @@ const MENU_SECTIONS = [
         href: ROUTES.DASHBOARD.ORDERS.INDEX,
         label: "Mina beställningar",
         icon: ShoppingCart,
-      },
-      {
-        href: ROUTES.DASHBOARD.SUBSCRIPTIONS.ACTIVE,
-        label: "Mina prenumerationer",
-        icon: CalendarClock,
       },
     ],
   },

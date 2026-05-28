@@ -119,29 +119,6 @@ export default function CartPage() {
                             )}
                           </div>
 
-                          {/* Subscription details */}
-                          {item.type === "SUBSCRIPTION" && (
-                            <p className="mt-1 text-sm text-slate-400">
-                              {item.intervalCount === 1 &&
-                                "Skickas varje vecka"}
-                              {item.intervalCount === 2 &&
-                                "Skickas varannan vecka"}
-                              {item.intervalCount > 2 &&
-                                `Skickas var ${item.intervalCount}:e vecka`}
-                            </p>
-                          )}
-
-                          {item.type === "SUBSCRIPTION" &&
-                            item.items?.length > 0 && (
-                              <ul className="mt-2 space-y-1 text-xs text-slate-400">
-                                {item.items.map((boxItem) => (
-                                  <li key={boxItem.itemId} className="truncate">
-                                    – {boxItem.name} ({boxItem.quantity}x)
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-
                           {hasDiscount && lineDiscount > 0 && (
                             <p className="mt-2 text-xs text-slate-300">
                               Du sparar {formatCurrency(lineDiscount)} på denna

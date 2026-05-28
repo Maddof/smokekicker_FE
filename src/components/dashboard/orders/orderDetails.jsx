@@ -25,7 +25,7 @@ export default function OrderDetails({ order }) {
           {order.orderItems.map((item) => (
             <TableRow key={item.id} className="border-b-primary/20 border-b">
               <TableCell className="min-w-32 pl-0">
-                {item.productId ? item.productName : item.subscriptionBoxName}
+                {item.productId ? item.productName : "Okänd produkt"}
               </TableCell>
               <TableCell className="">{item.quantity}</TableCell>
               <TableCell>{formatCurrency(item.price)}</TableCell>

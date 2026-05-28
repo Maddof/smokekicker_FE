@@ -3,15 +3,11 @@
 import { useActionState, useEffect } from "react";
 import { submitCheckoutFormData } from "./action";
 import AddressForm from "@/components/AddressForm";
-import { useCart } from "@/app/context/CartContext";
 
 export default function UserCheckoutProfileForm({ data, onAddressSubmit }) {
   const [state, formAction, pending] = useActionState(submitCheckoutFormData, {
     data,
   });
-
-  // Get cart status for free kits check
-  const { cartContainsFreeStarterKitsWithoutSubscription } = useCart();
 
   // When server action succeeds, notify parent component
   useEffect(() => {
@@ -44,16 +40,7 @@ export default function UserCheckoutProfileForm({ data, onAddressSubmit }) {
         submitLabel="Fortsätt"
         loadingLabel="Sparar..."
         showSuccessMessage={false} // Don't show success message in checkout flow
-        disableSubmit={cartContainsFreeStarterKitsWithoutSubscription} // Disable submit button if cart only has free kits
       />
-      {cartContainsFreeStarterKitsWithoutSubscription && (
-        <div className="mt-4 rounded-md bg-amber-50 p-3 text-amber-800">
-          <p className="text-sm font-medium">
-            Din varukorg innehåller startpaket som kräver prenumeration.
-            Vänligen lägg till en prenumeration för att fortsätta.
-          </p>
-        </div>
-      )}
     </div>
   );
 }

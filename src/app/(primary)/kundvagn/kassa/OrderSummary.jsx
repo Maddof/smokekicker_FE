@@ -69,27 +69,6 @@ export default function OrderSummary({
                   )}
                 </div>
 
-                {/* Subscription metadata */}
-                {item.type === "SUBSCRIPTION" && (
-                  <p className="text-muted-foreground mt-1 text-sm">
-                    {item.intervalCount === 1 && "Skickas varje vecka"}
-                    {item.intervalCount === 2 && "Skickas varannan vecka"}
-                    {item.intervalCount > 2 &&
-                      `Skickas var ${item.intervalCount}:e vecka`}
-                  </p>
-                )}
-
-                {/* Subscription box items */}
-                {item.type === "SUBSCRIPTION" && item.items?.length > 0 && (
-                  <ul className="text-muted-foreground mt-2 space-y-1 text-xs">
-                    {item.items.map((boxItem) => (
-                      <li key={boxItem.itemId} className="truncate">
-                        – {boxItem.name} ({boxItem.quantity}x)
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
                 {/* Line discount (optional) */}
                 {hasDiscount && lineDiscount > 0 && (
                   <p className="text-muted-foreground mt-2 text-xs">

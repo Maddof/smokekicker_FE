@@ -88,10 +88,6 @@ export default function DropdownMenu() {
       label: "Beställningar",
       href: ROUTES.DASHBOARD.ORDERS.INDEX,
     },
-    {
-      label: "Prenumerationer",
-      href: ROUTES.DASHBOARD.SUBSCRIPTIONS.ACTIVE,
-    },
     { label: "Reservdelar", href: ROUTES.DASHBOARD.PERKS },
     { label: "Konto", href: ROUTES.DASHBOARD.PROFILE },
   ];

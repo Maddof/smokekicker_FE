@@ -109,22 +109,6 @@ export const productContent = {
       showIfEmpty: false,
     },
   },
-  [CATEGORY_SLUGS.SUBSCRIPTIONS]: {
-    bulletPointsIcon: {
-      src: "/images/icons/sketches/subscription_box_sketch.png",
-      alt: "Prenumerationslåda illustration",
-      width: 160,
-      height: 200,
-    },
-    warningText:
-      "OBS! Vissa produkter i prenumerationen innehåller nikotin som är ett beroendeframkallande ämne.",
-    sameBrandProductsPicker: {
-      title: "Upptäck våra prenumerationsalternativ",
-      description: "Välj den prenumeration som passar dig bäst!",
-      emptyMessage: "Inga andra prenumerationer tillgängliga just nu.",
-      showIfEmpty: false,
-    },
-  },
   [CATEGORY_SLUGS.NICOTINE_CESSATION]: {
     bulletPointsIcon: {
       src: "/images/icons/sketches/nicotine_chewing-gum_blister.png", // You'll need to create this image

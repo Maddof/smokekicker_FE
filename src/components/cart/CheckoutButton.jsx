@@ -7,18 +7,14 @@ import { cn } from "@/lib/utils";
 import { SheetClose } from "../ui/scn/sheet";
 import { ROUTES } from "@/config/routes";
 
-const FREE_KIT_CATEGORY_ID =
-  parseInt(process.env.NEXT_PUBLIC_FREE_KIT_CATEGORY_ID) || 6;
 
 const CheckoutButton = () => {
-  const { loading, cartContainsFreeStarterKitsWithoutSubscription } = useCart(); // Access the cart from context
+  const { loading } = useCart(); // Access the cart from context
 
-  const buttonLabel = cartContainsFreeStarterKitsWithoutSubscription
-    ? "Saknar prenumeration"
-    : "Till Kassan";
+  const buttonLabel = "Till Kassan";
 
   // If cart is empty or only contains free starter kits, disable the link by making it a span
-  if (loading || cartContainsFreeStarterKitsWithoutSubscription) {
+  if (loading) {
     return (
       <span
         className={cn(

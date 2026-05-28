@@ -27,7 +27,7 @@ export default function RecentOrderCard({ order }) {
           <ul className="list-disc pl-5">
             {order.orderItems.map((item) => (
               <li key={item.id} className="text-sm">
-                {item?.productName ?? item?.subscriptionBoxName} x{" "}
+                {item?.productName ?? "Okänd produkt"} x{" "}
                 {item.quantity}
               </li>
             ))}

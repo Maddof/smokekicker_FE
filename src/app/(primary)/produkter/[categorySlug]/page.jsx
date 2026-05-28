@@ -1,6 +1,6 @@
 import ShopHeader from "@/components/shop/ShopHeader";
 import {
-  fetchAllPublishedCategoriesExcludeSubscription,
+  fetchAllPublishedCategories,
   fetchPublishedCategoryBySlug,
 } from "@/lib/data/api/fetchCategories";
 import { fetchProductsByCategorySlug } from "@/lib/data/api/fetchProducts";
@@ -72,7 +72,7 @@ export async function generateStaticParams() {
   if (process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION === "true") {
     return [];
   }
-  const categories = await fetchAllPublishedCategoriesExcludeSubscription();
+  const categories = await fetchAllPublishedCategories();
   if (!categories) {
     return [];
   }
