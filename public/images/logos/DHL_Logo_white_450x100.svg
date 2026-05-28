@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 450 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="Ebene_1" data-name="Ebene 1" inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+    <sodipodi:namedview id="namedview7" bordercolor="#666666" borderopacity="1" fit-margin-bottom="0" fit-margin-left="0" fit-margin-right="0" fit-margin-top="0" gridtolerance="10" guidetolerance="10" inkscape:current-layer="Ebene_1" inkscape:cx="117.60352" inkscape:cy="-18.612463" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="988" inkscape:window-maximized="1" inkscape:window-width="1680" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="2" objecttolerance="10" pagecolor="#ffffff" showgrid="false"/>
+    <path id="path4" class="cls-1" d="M145.5,41.9c-2,2.6-5.2,7.2-7.2,9.9-1,1.4-2.8,3.8,3.2,3.8h31.8s5.1-7,9.4-12.8c5.8-7.9.5-24.5-20.4-24.5h-82.4l-14.3,19.4h77.8c3.9,0,3.9,1.5,2,4.1ZM122.1,60.5c-6,0-4.2-2.5-3.2-3.9,2-2.7,5.3-7.2,7.3-9.9,1.9-2.6,2-4.1-2-4.1h-35.6l-28.7,39h69.9c23.1,0,36-15.7,39.9-21.1,0,0-41.3,0-47.7,0ZM167.6,81.6h41l15.6-21.1h-41s-15.6,21.1-15.6,21.1ZM273.5,18.4l-15.7,21.4h-18.3l15.7-21.4h-41l-27.4,37.3h100.4l27.4-37.3h-41ZM227,81.6h41l15.6-21.1h-41s-15.6,21.1-15.6,21.1ZM1.4,68.8v4.5h57.1l3.3-4.5H1.4ZM68,60.5H1.4v4.5h63.3l3.3-4.5ZM1.4,81.6h51l3.3-4.5H1.4v4.5ZM388.1,73.3h60.2v-4.5h-56.9l-3.3,4.5ZM382,81.6h66.3v-4.5h-63l-3.3,4.5ZM397.6,60.5l-3.3,4.5h54.1v-4.5h-50.8ZM343.9,55.7l27.4-37.3h-43.4s-27.5,37.3-27.5,37.3h43.5ZM296.9,60.5s-3,4.1-4.5,6.1c-5.2,7-.6,15.1,16.2,15.1h65.9l15.6-21.1h-93.2Z"/>
+  </g>
+</svg>

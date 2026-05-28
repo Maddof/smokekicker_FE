@@ -1,0 +1,407 @@
+import AtcButtonDefault from "@/components/cart/atcButton";
+import AddExtraItemButtonClient from "@/components/subscriptions/management/AddExtraItem";
+import { fetchAllPublishedCategoriesExcludeSubscription } from "@/lib/data/api/fetchCategories";
+import {
+  fetchProductBySlugCategoryAndBrand,
+  fetchProductsByCategorySlug,
+  fetchProductsByCategorySlugAndBrandSlug,
+  fetchRelatedProductsSeeded,
+} from "@/lib/data/api/fetchProducts";
+import { productContent } from "@/lib/data/productContent";
+import { formatCurrency } from "@/lib/utils/currencyFormatter";
+import { getImageUrl } from "@/lib/utils/getUrl";
+import Image from "next/image";
+import { ROUTES } from "@/config/routes";
+import { SITE_NAME } from "@/config/metadata";
+import ProductDescription from "./ProductDescription";
+import BulkDealCallout from "./BulkDealCallout";
+import SameBrandProductsPicker from "@/components/shop/products/SameBrandProductsPicker";
+import ProductCard from "@/components/shop/ProductCard";
+import Link from "next/link";
+import { Button } from "@/components/ui/scn/button";
+import { ChevronRight } from "lucide-react";
+
+const fallBackImage = "/images/fallback.png";
+
+export const revalidate = 86400; // Revalidate this page every 24 hours
+
+export async function generateMetadata({ params }) {
+  const { categorySlug, brandSlug, productSlug } = await params;
+
+  // Fetch the product by slugs
+  const product = await fetchProductBySlugCategoryAndBrand(
+    categorySlug,
+    brandSlug,
+    productSlug,
+  );
+
+  if (!product) {
+    return {
+      title: `Produkt ej hittad - ${SITE_NAME}`,
+      description: "Den här produkten kunde inte hittas.",
+    };
+  }
+
+  // Prepare product title
+  const title = `${product.name} - ${product.details.type ? product.details.type : ""}`;
+
+  // Prepare description - use product description or a fallback
+  const shortDesc = product.details.shortDesc;
+  const longDesc = product.details?.longDesc
+    ? product.details.longDesc.replace(/<[^>]+>/g, "")
+    : "";
+
+  const description = shortDesc + " " + longDesc.slice(0, 150) + "...";
+
+  // Prepare price for display in metadata
+  const price = formatCurrency(product.price);
+
+  // Build canonical URL
+  const url = `https://smokify.se${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`;
+
+  // Get image URL for social sharing
+  const imageUrl = product.imgUrl ? getImageUrl(product.imgUrl) : null;
+
+  return {
+    title: title,
+    description: description,
+    keywords: [
+      product.name,
+      product.brand.name,
+      product.category.name,
+      "vejping",
+      "vape",
+      "e-cigarett",
+    ].join(", "),
+
+    // Open Graph / Facebook
+    openGraph: {
+      title: title,
+      description: description,
+      url: url,
+      siteName: SITE_NAME,
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: product.name,
+            },
+          ]
+        : [],
+      locale: "sv_SE",
+      type: "website",
+      product: {
+        price: price,
+        currency: "SEK",
+      },
+    },
+
+    // Twitter
+    twitter: {
+      card: imageUrl ? "summary_large_image" : "summary",
+      title: title,
+      description: description,
+      images: imageUrl ? [imageUrl] : [],
+    },
+
+    // Additional metadata
+    alternates: {
+      canonical: url,
+    },
+
+    // Product structured data for rich results
+    other: {
+      "product:price:amount": (product.price / 100).toString(),
+      "product:price:currency": "SEK",
+      "product:availability": product.stock > 0 ? "in stock" : "out of stock",
+      "product:brand": product.brand.name,
+      "product:condition": "new",
+    },
+  };
+}
+
+export async function generateStaticParams() {
+  if (process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION === "true") {
+    return [];
+  }
+  const categories = await fetchAllPublishedCategoriesExcludeSubscription();
+  const paths = [];
+
+  // if (!products) return [];
+
+  for (const category of categories) {
+    const products = await fetchProductsByCategorySlug(category.slug);
+
+    for (const product of products) {
+      // Make sure product has a brand with a slug
+      if (product.brand && product.brand.slug) {
+        paths.push({
+          categorySlug: category.slug,
+          brandSlug: product.brand.slug,
+          productSlug: product.slug,
+        });
+      } else {
+        console.warn(
+          `Product ${product.name} (ID: ${product.id}) is missing brand slug`,
+        );
+      }
+    }
+  }
+
+  return paths;
+}
+
+export default async function SingleProductPage({ params }) {
+  const { categorySlug, brandSlug, productSlug } = await params;
+
+  // Fetch the product by slugs from the params
+  const product = await fetchProductBySlugCategoryAndBrand(
+    categorySlug,
+    brandSlug,
+    productSlug,
+  );
+
+  if (!product) {
+    return (
+      <section>
+        <div className="container">Product not found!</div>
+      </section>
+    );
+  }
+
+  const relatedProducts = await fetchRelatedProductsSeeded(
+    categorySlug,
+    brandSlug,
+    productSlug,
+  );
+
+  const bulkEnabled = product.category?.qualifiesForBulkDiscount ?? false;
+
+  // Prefer category values, but keep safe defaults
+  const threshold = product.category?.bulkDiscountThreshold ?? 3;
+  const percent = product.category?.bulkDiscountPercentage ?? 10;
+
+  // Convert percent -> rate
+  const discountRate = percent / 100;
+
+  // show only if enabled and has a meaningful discount
+  const showBulkCallout = bulkEnabled && threshold >= 2 && percent > 0;
+
+  // Fetch other products from the same category and brand
+  const similarProducts = await fetchProductsByCategorySlugAndBrandSlug(
+    categorySlug,
+    brandSlug,
+  );
+
+  // Filter out the current product
+  const sameBrandProducts = similarProducts.filter(
+    (item) => item.slug !== productSlug,
+  );
+
+  const productConfig = productContent[categorySlug];
+
+  const shortDesc = product.details.shortDesc;
+  const longDesc = product.details?.longDesc
+    ? product.details.longDesc.replace(/<[^>]+>/g, "")
+    : "";
+
+  const description = shortDesc + " " + longDesc.slice(0, 150) + "...";
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${siteUrl}${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}#product`,
+    url: `${siteUrl}${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`,
+    name: product.name,
+    image: [getImageUrl(product.imgUrl) || fallBackImage],
+    description: description,
+    brand: {
+      "@type": "Brand",
+      name: product.brand.name,
+    },
+    offers: {
+      "@type": "Offer",
+      url: `${siteUrl}${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`,
+      priceCurrency: "SEK",
+      price: (product.price / 100).toFixed(2),
+      availability:
+        product.stock > 0
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Hem",
+        item: `${siteUrl}${ROUTES.HOME}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Produkter",
+        item: `${siteUrl}${ROUTES.SHOP.INDEX}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.category.name,
+        item: `${siteUrl}${ROUTES.SHOP.CATEGORY(product.category.slug)}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: product.brand.name,
+        item: `${siteUrl}${ROUTES.BRANDS.DETAIL(product.brand.slug)}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: product.name,
+        item: `${siteUrl}${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`,
+      },
+    ],
+  };
+
+  return (
+    <>
+      <section className="overflow-hidden pt-4 md:pt-8 md:pb-4">
+        {/* Add JSON-LD to your page */}
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
+        <div className="z-10 container">
+          <div className="flex flex-col gap-6 md:flex-row md:gap-10">
+            {/* Product Image Column */}
+            <div className="relative flex w-full items-center justify-center md:w-1/3">
+              <Image
+                src={getImageUrl(product.imgUrl) || fallBackImage}
+                alt={product.name}
+                width={600}
+                height={700}
+                fetchPriority="high"
+                loading="eager"
+                className="z-20 h-auto w-auto"
+              />
+              {/* Full-width background overlay */}
+              <div
+                className="absolute -right-[100vw] bottom-0 -left-[100vw] z-10 mx-auto h-16 md:-bottom-4 md:h-32"
+                style={{
+                  backgroundColor: product.details?.color || "#FFF", // fallback to white if no color is specified
+                }}
+              />
+            </div>
+
+            {/* Product Info Column */}
+            <div className="z-10 mt-4 flex w-full flex-col items-start gap-6 md:mt-0 md:w-2/3">
+              <div className="w-full border-b-2 text-xs uppercase md:text-sm">
+                {product.details?.type}
+              </div>
+              <h1>{product.name}</h1>
+              <div className="flex w-full items-center gap-4">
+                <span className="text-2xl md:text-3xl">
+                  {formatCurrency(product.price)}
+                </span>
+                <div className="flex w-full flex-wrap gap-2">
+                  <AtcButtonDefault product={product} className="w-full" />
+                  <AddExtraItemButtonClient product={product} />
+                </div>
+              </div>
+
+              {showBulkCallout && (
+                <BulkDealCallout
+                  product={product}
+                  unitPrice={product.price}
+                  threshold={threshold}
+                  discountRate={discountRate}
+                  className="w-full"
+                />
+              )}
+
+              <p>{product.details.shortDesc}</p>
+
+              <div className="xsm:flex-row flex w-full flex-col gap-4 rounded-lg bg-white p-4 shadow-sm">
+                <div className="flex w-full flex-col gap-4 md:w-2/3">
+                  <ul className="space-y-2">
+                    {/* Map over product features array */}
+                    {/* List items with custom orange bullets */}
+                    {product.details.bulletPoints.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="bg-primary mt-1.5 mr-3 h-3 w-3 shrink-0 rounded-full"></div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-auto text-xs italic">
+                    {productConfig.warningText}
+                  </p>
+                </div>
+                <div className="xxsm:flex hidden w-full items-center justify-center md:w-1/3">
+                  <Image
+                    src={productConfig.bulletPointsIcon.src}
+                    alt={productConfig.bulletPointsIcon.alt}
+                    width={productConfig.bulletPointsIcon.width}
+                    height={productConfig.bulletPointsIcon.height}
+                    className="xxsm:block xxsm:w-40 hidden h-auto w-28 object-cover opacity-35"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Product Description */}
+      <ProductDescription
+        longDesc={product.details.longDesc}
+        nicotineLabelWarningText={productConfig.nicotineLabelWarningText}
+        specifications={product.specifications}
+        ingredients={product.details.ingredients}
+      />
+      <SameBrandProductsPicker
+        sameBrandProducts={sameBrandProducts}
+        title={
+          product.brand?.name
+            ? `Mer från ${product.brand.name}`
+            : productConfig.sameBrandProductsPicker.title
+        }
+        brandName={product.brand?.name}
+        description={productConfig.sameBrandProductsPicker.description}
+      />
+      {relatedProducts?.length > 0 && (
+        <section id="related-products">
+          <div className="container">
+            <h2 className="h2-product mb-8">Du kanske också gillar</h2>
+
+            <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              {relatedProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </ul>
+            <Button asChild variant="outline" className="group mt-6 px-4 py-6">
+              <Link href={ROUTES.SHOP.CATEGORY(product.category.slug)}>
+                Se alla produkter i {product.category.name}
+                <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+      )}
+    </>
+  );
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512.002 512.002" style="enable-background:new 0 0 512.002 512.002;" xml:space="preserve" width="512" height="512">
+  <g>
+
+    <path style="fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#fff;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256;" d="&#10;&#9;&#9;M150.52,236.962c-2.023-25.415,6.626-51.539,25.956-70.869L332.569,10l127.279,127.279L303.755,293.372&#10;&#9;&#9;c-19.331,19.331-45.454,27.979-70.868,25.957" />
+
+    <rect x="141.258" y="219.662" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -162.0461 208.1091)" style="fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#fff;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256;" width="57.857" height="160" />
+
+    <line style="fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#fff;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256;" x1="424.493" y1="165.564" x2="304.285" y2="45.355" />
+
+    <line style="fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#fff;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256;" x1="300.22" y1="289.837" x2="180.012" y2="169.629" />
+
+    <circle style="fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#fff;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256;" cx="302.252" cy="167.596" r="35" />
+
+    <polyline style="fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#fff;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256;" points="&#10;&#9;&#9;165.339,343.401 104.528,390.07 79.779,365.321 126.448,304.51 &#9;" />
+
+    <path style="fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#fff;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256;" d="&#10;&#9;&#9;M82.153,502.002c-16.569,0-30-13.431-30-30c0-16.613,19.623-37.418,30-49.322c10.377,11.903,30,32.708,30,49.322&#10;&#9;&#9;C112.153,488.57,98.722,502.002,82.153,502.002z" />
+  </g>
+
+
+
+
+
+</svg>

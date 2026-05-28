@@ -1,0 +1,146 @@
+import { Suspense } from "react";
+import { searchProducts } from "@/lib/data/api/fetchProducts";
+import { AlertCircle, Search } from "lucide-react";
+import SearchBox from "@/components/header/search";
+import Spinner from "@/components/ui/custom/spinner";
+import ProductCard from "@/components/shop/ProductCard";
+
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const query = params?.query?.trim() || "";
+  const title = query
+    ? `Sökresultat för "${query}" | Smokify`
+    : "Utforska vape, vitt snus, nikotinpåsar och nikotinprodukter online hos Smokify";
+  const description = query
+    ? `Visar sökresultat för "${query}". Hitta dina favoritprodukter hos Smokify.`
+    : "Använd sökfunktionen för att hitta produkter såsom vape, vitt snus, nikotinpåsar och nikotinprodukter. Skriv in sökord och upptäck vårt sortiment.";
+  const pageUrl = query
+    ? `${process.env.NEXT_PUBLIC_SITE_URL}/sok?query=${encodeURIComponent(query)}`
+    : `${process.env.NEXT_PUBLIC_SITE_URL}/sok`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: pageUrl,
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
+    openGraph: {
+      title,
+      description,
+      url: pageUrl,
+      siteName: "Smokify",
+    },
+  };
+}
+
+// Loading component for Suspense
+function SearchResultsLoading() {
+  return (
+    <div className="flex flex-col items-center justify-center py-12">
+      <Spinner />
+      <p className="text-muted-foreground mt-4">
+        Söker produkter...
+      </p>
+    </div>
+  );
+}
+
+// No results component
+function NoResults({ query }) {
+  return (
+    <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 py-12">
+      <AlertCircle className="mb-4 h-12 w-12 text-red-700" />
+      <h2 className="mb-2 text-xl font-medium">
+        Inga produkter hittades
+      </h2>
+      <p className="text-center">
+        Vi kunde inte hitta några produkter som matchar "
+        {query}".
+      </p>
+      <p className="mt-4 text-center">
+        Försök med andra sökord eller bläddra i våra
+        kategorier.
+      </p>
+      {query.length <= 2 && (
+        <p className="mt-4 text-center text-red-700">
+          Tips: Använd minst 3 tecken för bättre
+          sökresultat.
+        </p>
+      )}
+    </div>
+  );
+}
+
+// Search results component
+async function SearchResults({ query }) {
+  // artificial delay for demonstration (remove in production)
+  // await new Promise((resolve) => setTimeout(resolve, 1500));
+  const products = await searchProducts(query);
+
+  if (!products || products.length === 0) {
+    return <NoResults query={query} />;
+  }
+
+  return (
+    <div className="space-y-6">
+      <p className="text-muted-foreground">
+        Visar {products.length} resultat för "{query}"
+      </p>
+      <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default async function SearchPage({ searchParams }) {
+  const params = await searchParams;
+  const query = params?.query || "";
+
+  return (
+    <section>
+      <div className="container">
+        <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+          <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
+            Sökresultat
+          </h1>
+          <Suspense
+            fallback={
+              <div className="w-full sm:w-64">
+                <Spinner />
+              </div>
+            }
+          >
+            <SearchBox defaultValue={query} />
+          </Suspense>
+        </div>
+
+        {query ? (
+          <Suspense
+            key={query}
+            fallback={<SearchResultsLoading />}
+          >
+            <SearchResults query={query} />
+          </Suspense>
+        ) : (
+          <div className="rounded-lg border p-6 text-center">
+            <Search className="text-muted-foreground/60 mx-auto mb-4 h-12 w-12" />
+            <h2 className="mb-2 text-xl font-medium">
+              Sök bland våra produkter
+            </h2>
+            <p className="text-muted-foreground mx-auto max-w-md">
+              Ange sökord i sökfältet ovan för att hitta
+              produkter.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
