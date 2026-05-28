@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HomeIcon, PackageIcon, RefreshCcw, UserIcon, Zap } from "lucide-react";
+import { HomeIcon, PackageIcon, UserIcon, Zap } from "lucide-react";
 import { ROUTES } from "@/config/routes";
 
 export default function QuickMenu() {

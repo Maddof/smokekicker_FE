@@ -17,9 +17,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `Smokify - Vape och vitt snus med omtanke`,
+    fallbackTitle: `Smokekicker | Buy Nicotine Pouches Online Worldwide | Fast EU Shipping`,
     fallbackDescription:
-      "Vapes, förfyllda pods, e-cigaretter, vitt snus, smarta prenumerationer och nikotinersättning. Din väg till en rökfri vardag börjar här.",
+      "Discover premium nicotine pouches at Smokekicker. Fast worldwide shipping, modern flavors, and smoke-free nicotine products for every lifestyle.",
     defaultPath: ROUTES.HOME,
   });
 }

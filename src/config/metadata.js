@@ -1,1 +1,1 @@
-export const SITE_NAME = "Smokify";
+export const SITE_NAME = "Smokekicker";
