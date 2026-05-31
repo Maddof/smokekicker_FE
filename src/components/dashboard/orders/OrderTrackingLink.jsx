@@ -12,7 +12,8 @@ const carrierTrackingLinks = {
     `https://www.dbschenker.com/se-sv/om-oss/kundservice/spara-och-sok?tracking_id=${trackingNumber}`,
   Bring: (trackingNumber) =>
     `https://tracking.bring.se/tracking/${trackingNumber}`,
-  Instabox: (trackingNumber) => `https://instabox.io/track/${trackingNumber}`,
+  Instabox: (trackingNumber) =>
+    `https://instabox.io/track/${trackingNumber}`,
 };
 
 export default function OrderTrackingLink({ order }) {
@@ -20,7 +21,11 @@ export default function OrderTrackingLink({ order }) {
   const shipment = order?.shipments?.[0];
 
   // If there's no shipment, render a disabled button
-  if (!shipment || !shipment.trackingNumber || !shipment.carrier) {
+  if (
+    !shipment ||
+    !shipment.trackingNumber ||
+    !shipment.carrier
+  ) {
     return (
       <button
         disabled
@@ -30,13 +35,14 @@ export default function OrderTrackingLink({ order }) {
         })} w-full cursor-not-allowed opacity-50`}
       >
         <Truck className="mr-2 h-4 w-4" />
-        Spåra (ej skickad)
+        Track (not shipped)
       </button>
     );
   }
 
   // Get the URL generation function for the specific carrier
-  const getTrackingUrl = carrierTrackingLinks[shipment.carrier];
+  const getTrackingUrl =
+    carrierTrackingLinks[shipment.carrier];
 
   // If the carrier is unknown, render a disabled button
   if (!getTrackingUrl) {
@@ -47,16 +53,18 @@ export default function OrderTrackingLink({ order }) {
           variant: "outline",
           size: "sm",
         })} w-full cursor-not-allowed opacity-50`}
-        title={`Okänd transportör: ${shipment.carrier}`}
+        title={`Unknown carrier: ${shipment.carrier}`}
       >
         <Truck className="mr-2 h-4 w-4" />
-        Spårning ej tillgänglig
+        Tracking not available
       </button>
     );
   }
 
   // Generate the tracking URL
-  const trackingUrl = getTrackingUrl(shipment.trackingNumber);
+  const trackingUrl = getTrackingUrl(
+    shipment.trackingNumber,
+  );
 
   return (
     <Link
@@ -69,7 +77,7 @@ export default function OrderTrackingLink({ order }) {
       })} text-secondary-foreground hover:text-secondary-foreground w-full`}
     >
       <Truck className="mr-2 h-4 w-4" />
-      Spåra
+      Track
     </Link>
   );
 }

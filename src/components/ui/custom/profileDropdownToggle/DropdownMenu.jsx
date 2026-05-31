@@ -83,13 +83,13 @@ export default function DropdownMenu() {
   );
 
   const authenticatedItems = [
-    { label: "Mina sidor", href: ROUTES.DASHBOARD.INDEX },
+    { label: "Dashboard", href: ROUTES.DASHBOARD.INDEX },
     {
-      label: "Beställningar",
+      label: "Orders",
       href: ROUTES.DASHBOARD.ORDERS.INDEX,
     },
-    { label: "Reservdelar", href: ROUTES.DASHBOARD.PERKS },
-    { label: "Konto", href: ROUTES.DASHBOARD.PROFILE },
+    { label: "Perks", href: ROUTES.DASHBOARD.PERKS },
+    { label: "Account", href: ROUTES.DASHBOARD.PROFILE },
   ];
 
   const guestItems = [];
@@ -104,7 +104,7 @@ export default function DropdownMenu() {
       >
         <CircleUserRound />
         <span className="ml-1 min-w-10 self-center text-xs">
-          Konto
+          Account
         </span>
       </button>
       {isOpen && (
@@ -112,11 +112,11 @@ export default function DropdownMenu() {
           <div className="text-muted-foreground w-full border-b border-stone-500 px-4 py-2 text-xs">
             {isAuthenticated && user?.givenName ? (
               <div>
-                <span>Inloggad: </span>
+                <span>Logged in: </span>
                 <span>{user.givenName}</span>
               </div>
             ) : (
-              <span>Inte inloggad</span>
+              <span>Not logged in</span>
             )}
           </div>
           <MenuItems
@@ -134,7 +134,7 @@ export default function DropdownMenu() {
                 setIsOpen(false);
               }}
             >
-              <LogOutIcon /> Logga ut
+              <LogOutIcon /> Log out
             </button>
           ) : (
             <>
@@ -142,13 +142,13 @@ export default function DropdownMenu() {
               href={`${ROUTES.AUTH.BANKID}?returnUrl=${encodeURIComponent(pathname)}`}
               className="text-primary mt-3 inline-flex gap-1 px-3 py-1"
             >
-              <LogInIcon /> Logga in
+              <LogInIcon /> Log in
             </Link> */}
               <div
                 className="mt-3 inline-flex cursor-not-allowed gap-1 px-3 py-1 text-[85%] text-white opacity-50"
                 title="Login is currently disabled"
               >
-                <LogInIcon /> Logga in (kommer snart)
+                <LogInIcon /> Log in (coming soon)
               </div>
             </>
           )}

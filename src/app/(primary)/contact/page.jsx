@@ -27,9 +27,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `Kontakta oss | ${SITE_NAME}`,
+    fallbackTitle: `Contact | ${SITE_NAME}`,
     fallbackDescription:
-      "Kontakta Smokify för frågor, support eller feedback.",
+      "Contact Smokekicker for questions, support, or feedback.",
     defaultPath: ROUTES.CONTACT,
   });
 }
@@ -46,13 +46,13 @@ export default async function ContactPage() {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Hem",
+        name: "Home",
         item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Kontakta oss",
+        name: "Contact",
         item: `${SITE_URL}${ROUTES.CONTACT}`,
       },
     ],
@@ -71,14 +71,14 @@ export default async function ContactPage() {
           <h1 className="mb-8 text-center">
             {orderedSections.length > 0
               ? orderedSections[0].headline
-              : "Kontakta oss"}
+              : "Contact"}
           </h1>
 
           <div className="text-center">
             <p className="text-muted/80 mx-auto mb-12 max-w-3xl">
               {orderedSections.length > 0
                 ? orderedSections[0].description
-                : "Har du frågor, feedback eller behöver support? Kontakta oss så hjälper vi dig gärna!"}
+                : "Do you have questions, feedback, or need support? Contact us and we will be happy to help you!"}
             </p>
           </div>
 
@@ -90,10 +90,10 @@ export default async function ContactPage() {
 
             <div className="rounded-lg bg-gray-50 p-6 shadow-sm">
               <h2 className="mb-1 font-semibold">
-                Kontaktinformation
+                Contact Information
               </h2>
               <p className="text-muted-foreground mb-4">
-                Kontakta oss via någon av dessa kanaler.
+                Contact us via any of these channels.
               </p>
 
               <div className="space-y-4">
@@ -103,7 +103,7 @@ export default async function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold">
-                      Adress
+                      Address
                     </h3>
                     <address className="text-muted-foreground">
                       {STORE_ADDRESS_LINE1}
@@ -118,9 +118,7 @@ export default async function ContactPage() {
                     <Phone className="text-primary h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">
-                      Telefon
-                    </h3>
+                    <h3 className="font-semibold">Phone</h3>
                     <p className="text-muted-foreground">
                       {STORE_PHONE_NUMBER}
                     </p>
@@ -143,14 +141,14 @@ export default async function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold">
-                      Öppettider
+                      Opening Hours
                     </h3>
                     <p className="text-muted-foreground">
-                      Måndag - Fredag: 9:00 - 18:00
+                      Monday - Friday: 9:00 - 18:00
                       <br />
-                      Lördag: 10:00 - 16:00
+                      Saturday: 10:00 - 16:00
                       <br />
-                      Söndag: Stängt
+                      Sunday: Closed
                     </p>
                   </div>
                 </div>

@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
-import { fetchAllBrands, fetchBrandBySlug } from "@/lib/data/api/fetchBrands";
+import {
+  fetchAllBrands,
+  fetchBrandBySlug,
+} from "@/lib/data/api/fetchBrands";
 import { fetchProductsByBrandSlug } from "@/lib/data/api/fetchProducts";
 import ProductFilterWrapper from "@/components/filter/ProductFilterWrapper";
 import { ReadMore } from "@/components/ReadMore";
@@ -14,8 +17,9 @@ export async function generateMetadata({ params }) {
 
   if (!brand) {
     return {
-      title: "Varumärke hittades inte | Smokify",
-      description: "Det begärda varumärket kunde inte hittas.",
+      title: "Brand not found",
+      description:
+        "The requested brand could not be found.",
     };
   }
 
@@ -23,12 +27,15 @@ export async function generateMetadata({ params }) {
     title: `${brand.name}`,
     description:
       brand.description ||
-      `Utforska ${brand.name} produkter hos Smokify - kvalitet, smak och en bättre upplevelse utan tobaksrök.`,
+      `Explore ${brand.name} products at Smokekicker - quality, taste, and a better experience without tobacco smoke.`,
   };
 }
 
 export async function generateStaticParams() {
-  if (process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION === "true") {
+  if (
+    process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION ===
+    "true"
+  ) {
     return [];
   }
   try {
@@ -45,7 +52,10 @@ export async function generateStaticParams() {
         brandSlug: brand.slug,
       }));
   } catch (error) {
-    console.error("Error generating static params for brand pages:", error);
+    console.error(
+      "Error generating static params for brand pages:",
+      error,
+    );
     return [];
   }
 }
@@ -61,7 +71,9 @@ export default async function BrandPage({ params }) {
       notFound();
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      "https://smokekicker.com";
 
     // Generate JSON-LD for breadcrumbs
     const breadcrumbJsonLd = {
@@ -71,13 +83,13 @@ export default async function BrandPage({ params }) {
         {
           "@type": "ListItem",
           position: 1,
-          name: "Hem",
+          name: "Home",
           item: siteUrl,
         },
         {
           "@type": "ListItem",
           position: 2,
-          name: "Varumärken",
+          name: "Brands",
           item: `${siteUrl}${ROUTES.BRANDS.INDEX}`,
         },
         {
@@ -90,13 +102,16 @@ export default async function BrandPage({ params }) {
     };
 
     // Fetch products for this brand
-    const products = await fetchProductsByBrandSlug(brandSlug);
+    const products =
+      await fetchProductsByBrandSlug(brandSlug);
 
     return (
       <section>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbJsonLd),
+          }}
         />
         <div className="container">
           <div className="mb-8">
@@ -118,9 +133,11 @@ export default async function BrandPage({ params }) {
                 {brand.description && (
                   <ReadMore initialParagraphs={1}>
                     <div className="text-muted max-w-3xl">
-                      {brand.description.split("\n").map((paragraph, i) => (
-                        <p key={i}>{paragraph}</p>
-                      ))}
+                      {brand.description
+                        .split("\n")
+                        .map((paragraph, i) => (
+                          <p key={i}>{paragraph}</p>
+                        ))}
                     </div>
                   </ReadMore>
                 )}
@@ -137,12 +154,18 @@ export default async function BrandPage({ params }) {
       </section>
     );
   } catch (error) {
-    console.error(`Error loading brand page for ${brandSlug}:`, error);
+    console.error(
+      `Error loading brand page for ${brandSlug}:`,
+      error,
+    );
     return (
       <section>
         <div className="container py-8">
-          <h1>Ett fel uppstod</h1>
-          <p>Vi kunde inte ladda detta varumärke. Försök igen senare.</p>
+          <h1>An error occurred</h1>
+          <p>
+            We couldn't load this brand. Please try again
+            later.
+          </p>
         </div>
       </section>
     );

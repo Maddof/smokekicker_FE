@@ -20,9 +20,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `Alla varumärken | ${SITE_NAME}`,
+    fallbackTitle: `All brands | ${SITE_NAME}`,
     fallbackDescription:
-      "Upptäck noga utvalda varumärken inom vapes, e-juicer och produkter för rökstopp. Kvalitet och smak i fokus.",
+      "Discover carefully selected brands in nicotine pouches and white snus. Quality and taste in focus.",
     defaultPath: ROUTES.BRANDS.INDEX,
   });
 }
@@ -55,13 +55,13 @@ export default async function BrandsPage() {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Hem",
+        name: "Home",
         item: siteUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Varumärken",
+        name: "Brands",
         item: `${siteUrl}${ROUTES.BRANDS.INDEX}`,
       },
     ],
@@ -79,7 +79,7 @@ export default async function BrandsPage() {
         <div className="mb-6">
           <h1 className="mb-2">
             {getFieldValue(page, "hero", "headline") ||
-              "Alla varumärken"}
+              "All brands"}
           </h1>
           <ReadMore initialParagraphs={2}>
             {paragraphs.map((paragraph, index) => (

@@ -26,60 +26,85 @@ export default function Component() {
               width={48}
               height={48}
             />
-            <p className="font-bold">18 års gräns gäller på alla köp.</p>
-            <p>
-              Obligatorisk BankID verifiering och leverans endast till
-              folkbokföringsadress.
+            <p className="font-bold">
+              You must be 18 or older to purchase.
             </p>
+            <p>Mandatory age verification in checkout.</p>
           </div>
         </div>
       </div>
       <div className="xsm:grid-cols-2 relative z-10 container mx-auto grid grid-cols-1 gap-6 py-12 md:grid-cols-4 md:justify-between lg:grid-cols-4">
         {/* Quick Links */}
         <div className="flex flex-col gap-2">
-          <FooterHeading>Hjälp</FooterHeading>
+          <FooterHeading>Help</FooterHeading>
 
-          <FooterLink href={ROUTES.CONTACT}>Kontakta oss</FooterLink>
-          <FooterLink href={ROUTES.PERSONALITY}>AI-smaktest </FooterLink>
-          <FooterLink href={ROUTES.BRANDS.INDEX}>Varumärken</FooterLink>
-          <FooterLink href={ROUTES.BLOG.INDEX}>Blogg</FooterLink>
+          <FooterLink href={ROUTES.CONTACT}>
+            Contact Us
+          </FooterLink>
+          <FooterLink href={ROUTES.PERSONALITY}>
+            AI Taste Test{" "}
+          </FooterLink>
+          <FooterLink href={ROUTES.BRANDS.INDEX}>
+            Brands
+          </FooterLink>
+          <FooterLink href={ROUTES.BLOG.INDEX}>
+            Blog
+          </FooterLink>
         </div>
 
         {/* Popular Categories */}
         <div className="flex flex-col gap-2">
-          <FooterHeading>Populära kategorier</FooterHeading>
-          <FooterLink href={ROUTES.SHOP.CATEGORY("e-juice")}>
-            E-juice
-          </FooterLink>
-          <FooterLink href={ROUTES.SHOP.CATEGORY("vitt-snus")}>
-            Vitt snus
-          </FooterLink>
-          <FooterLink href={ROUTES.SHOP.CATEGORY("forfyllda-poddar")}>
-            Förfyllda poddar
-          </FooterLink>
-          <FooterLink href={ROUTES.SHOP.CATEGORY("start-kit-vape")}>
-            Start kit vape
+          <FooterHeading>Shop</FooterHeading>
+          <FooterLink
+            href={ROUTES.SHOP.CATEGORY("nicotine-pouches")}
+          >
+            Nicotine Pouches
           </FooterLink>
           <FooterLink
-            href={ROUTES.SHOP.CATEGORY("start-kit-forfyllda-podsystem")}
+            href={ROUTES.SHOP.CATEGORY(
+              "nicotine-free-pouches",
+            )}
           >
-            Start kit förfyllda podsystem
+            Nicotine-Free Pouches
+          </FooterLink>
+          <FooterLink
+            href={ROUTES.SHOP.CATEGORY("caffeine-pouches")}
+          >
+            Caffeine Pouches
+          </FooterLink>
+          <FooterLink
+            href={ROUTES.SHOP.CATEGORY("swedish-candy")}
+          >
+            Swedish Candy
+          </FooterLink>
+          <FooterLink
+            href={ROUTES.SHOP.CATEGORY("accessories")}
+          >
+            Accessories
           </FooterLink>
         </div>
 
         {/* Resources */}
         <div className="flex flex-col gap-2">
           <FooterHeading>Information</FooterHeading>
-          <FooterLink href={ROUTES.ABOUT}>Om oss</FooterLink>
-          <FooterLink href={ROUTES.TERMS}>Köp- och leveransvillkor</FooterLink>
-          <FooterLink href={ROUTES.PRIVACY}>Integritetspolicy</FooterLink>
-          <FooterLink href={ROUTES.COOKIE_POLICY}>Cookie Policy</FooterLink>
+          <FooterLink href={ROUTES.ABOUT}>
+            About Us
+          </FooterLink>
+          <FooterLink href={ROUTES.TERMS}>
+            Terms and Conditions
+          </FooterLink>
+          <FooterLink href={ROUTES.PRIVACY}>
+            Privacy Policy
+          </FooterLink>
+          <FooterLink href={ROUTES.COOKIE_POLICY}>
+            Cookie Policy
+          </FooterLink>
           {/* <FooterLink href="#">Cookie Policy</FooterLink> */}
         </div>
 
         {/* Contact Information */}
         <div className="flex flex-col gap-2">
-          <FooterHeading>Kontakt</FooterHeading>
+          <FooterHeading>Contact</FooterHeading>
           <div className="flex items-center gap-2">
             <MapPin className="h-5 w-5" />
             <address className="not-italic">
@@ -112,7 +137,8 @@ export default function Component() {
               559445-1386 <br />
             </p>
             <p className="text-sm">
-              © {new Date().getFullYear()} Smokify AB. All rights reserved.
+              © {new Date().getFullYear()} Smokify AB. All
+              rights reserved.
             </p>
             <div className="flex gap-4">
               <Link
@@ -153,23 +179,21 @@ export default function Component() {
           </div>
           <div className="col-span-3 flex">
             <p className="text-xs">
-              Elektroniska cigaretter kan vara hälsofarliga och innehålla
-              nikotin, vilket är beroendeframkallande. Elektroniska cigaretter
-              är inte lämpliga att använda av: personer under 18 år; personer
-              som är allergiska/känsliga mot nikotin; gravida eller ammande
-              kvinnor; personer som bör undvika att använda tobak eller
-              nikotinprodukter av medicinska skäl; eller personer med instabil
-              hjärtsjukdom, allvarlig hypertoni eller diabetes. Förvaras utom
-              räckhåll för barn.
+              Nicotine is a highly addictive substance. This
+              product is not risk-free and is only
+              recommended for people who are already using
+              nicotine. The product should not be used by
+              pregnant or breastfeeding women and should be
+              kept out of the reach of children.
               <br />
               <br />
-              Elektroniska cigaretter är nikotinprodukter för vuxna.
-              <br />
-              <br />
-              Nikotin är ett mycket beroendeframkallande ämne. Denna produkt är
-              inte riskfri och rekommenderas endast för personer som redan
-              använder nikotin. Produkten ska inte användas av gravida eller
-              ammande och ska förvaras utom räckhåll för barn.
+              Only for adults 18 years and older. Smokify AB
+              does not sell to minors. By purchasing, you
+              confirm that you are of legal age in your
+              country to buy nicotine products. If you are
+              under 18, please do not attempt to purchase
+              from our store. We are committed to preventing
+              underage access to nicotine products.
             </p>
           </div>
         </div>

@@ -1,7 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HomeIcon, PackageIcon, UserIcon, Zap } from "lucide-react";
+import {
+  HomeIcon,
+  PackageIcon,
+  UserIcon,
+  Zap,
+} from "lucide-react";
 import { ROUTES } from "@/config/routes";
 
 export default function QuickMenu() {
@@ -13,17 +18,17 @@ export default function QuickMenu() {
       icon: <HomeIcon className="mr-2 h-4 w-4" />,
     },
     {
-      label: "Beställningar",
+      label: "Orders",
       href: ROUTES.DASHBOARD.ORDERS.INDEX,
       icon: <PackageIcon className="mr-2 h-4 w-4" />,
     },
     {
-      label: "Reservdelar",
+      label: "Perks",
       href: ROUTES.DASHBOARD.PERKS,
       icon: <Zap className="mr-2 h-4 w-4" />,
     },
     {
-      label: "Konto",
+      label: "Account",
       href: ROUTES.DASHBOARD.PROFILE,
       icon: <UserIcon className="mr-2 h-4 w-4" />,
     },

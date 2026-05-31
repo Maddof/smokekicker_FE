@@ -3,7 +3,10 @@
 import { Search } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Input } from "../ui/scn/input";
-import { useSearchParams, useRouter } from "next/navigation";
+import {
+  useSearchParams,
+  useRouter,
+} from "next/navigation";
 import { fetchLiveSearchSuggestions } from "@/lib/data/api/fetchProducts";
 import Link from "next/link";
 import { X } from "lucide-react";
@@ -17,12 +20,15 @@ export default function SearchBox({
 }) {
   const [query, setQuery] = useState("");
   const [allSuggestions, setAllSuggestions] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(
+    [],
+  );
   const [filteredBrands, setFilteredBrands] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [suggestionsLoaded, setSuggestionsLoaded] = useState(false);
+  const [suggestionsLoaded, setSuggestionsLoaded] =
+    useState(false);
 
   const searchRef = useRef(null);
   const inputRef = useRef(null);
@@ -37,11 +43,15 @@ export default function SearchBox({
 
     setIsLoading(true);
     try {
-      const suggestions = await fetchLiveSearchSuggestions();
+      const suggestions =
+        await fetchLiveSearchSuggestions();
       setAllSuggestions(suggestions);
       setSuggestionsLoaded(true);
     } catch (error) {
-      console.error("Error fetching live search suggestions:", error);
+      console.error(
+        "Error fetching live search suggestions:",
+        error,
+      );
     } finally {
       setIsLoading(false);
     }
@@ -64,8 +74,12 @@ export default function SearchBox({
     const lowerQuery = query.toLowerCase();
     const matches = allSuggestions.filter(
       (suggestion) =>
-        suggestion.name.toLowerCase().includes(lowerQuery) ||
-        suggestion.brand.name.toLowerCase().includes(lowerQuery),
+        suggestion.name
+          .toLowerCase()
+          .includes(lowerQuery) ||
+        suggestion.brand.name
+          .toLowerCase()
+          .includes(lowerQuery),
     );
 
     // Limit to top 5 results for dropdown
@@ -85,7 +99,8 @@ export default function SearchBox({
       .filter(
         (brand, index, self) =>
           brand.name.toLowerCase().includes(lowerQuery) &&
-          index === self.findIndex((b) => b.id === brand.id), // Ensure uniqueness
+          index ===
+            self.findIndex((b) => b.id === brand.id), // Ensure uniqueness
       );
 
     // Limit to top 5 brand results for dropdown
@@ -95,13 +110,22 @@ export default function SearchBox({
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target)
+      ) {
         setShowDropdown(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside,
+    );
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside,
+      );
     };
   }, []);
 
@@ -124,7 +148,7 @@ export default function SearchBox({
       params.delete("query");
     }
 
-    replace(`/sok?${params.toString()}`);
+    replace(`/search?${params.toString()}`);
     setShowDropdown(false);
     // Clear the input after navigating to search results
     setQuery("");
@@ -147,7 +171,10 @@ export default function SearchBox({
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      if (selectedIndex >= 0 && selectedIndex < filteredProducts.length) {
+      if (
+        selectedIndex >= 0 &&
+        selectedIndex < filteredProducts.length
+      ) {
         // Navigate to the selected product
         const product = filteredProducts[selectedIndex];
         const url = `${ROUTES.SHOP.INDEX}/${product.category.slug}/${product.brand.slug}/${product.slug}`;
@@ -184,7 +211,9 @@ export default function SearchBox({
     if (e.key === "ArrowDown") {
       e.preventDefault();
       setSelectedIndex((prev) =>
-        prev < filteredProducts.length - 1 ? prev + 1 : prev,
+        prev < filteredProducts.length - 1
+          ? prev + 1
+          : prev,
       );
       return;
     }
@@ -192,7 +221,9 @@ export default function SearchBox({
     // Arrow up
     if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+      setSelectedIndex((prev) =>
+        prev > 0 ? prev - 1 : -1,
+      );
       return;
     }
   };
@@ -217,16 +248,16 @@ export default function SearchBox({
           onKeyDown={handleKeyPress}
           // onFocus={() => query.length >= 2 && setShowDropdown(true)}
           onFocus={handleInputFocus}
-          placeholder="Sök produkter..."
+          placeholder="Search products..."
           className="text-foreground border-foreground border pr-10 placeholder:text-gray-800"
-          aria-label="Sök produkter"
+          aria-label="Search products"
           autoFocus={isExpanded}
         />
         {query ? (
           <button
             onClick={clearSearch}
             className="absolute top-1/2 right-10 -translate-y-1/2 transform text-gray-500 hover:text-gray-700"
-            aria-label="Rensa sökning"
+            aria-label="Clear search"
           >
             <X className="text-foreground h-4 w-4" />
           </button>
@@ -234,7 +265,7 @@ export default function SearchBox({
         <button
           onClick={handleSearch}
           className="absolute top-1/2 right-2 -translate-y-1/2 transform text-gray-500 hover:text-gray-700"
-          aria-label="Sök"
+          aria-label="Search"
         >
           <Search className="text-foreground" />
         </button>
@@ -247,7 +278,7 @@ export default function SearchBox({
             <>
               <ul className="overflow-auto py-1">
                 <p className="px-4 py-1 text-sm text-gray-500">
-                  Sökförslag för {query}
+                  Search suggestions for {query}
                 </p>
                 {filteredProducts.map((product, index) => (
                   <li
@@ -265,7 +296,9 @@ export default function SearchBox({
                         }
                       }}
                     >
-                      <p className="font-medium">{product.name}</p>
+                      <p className="font-medium">
+                        {product.name}
+                      </p>
                     </Link>
                   </li>
                 ))}
@@ -273,11 +306,18 @@ export default function SearchBox({
 
               {filteredBrands.length > 0 && (
                 <ul className="overflow-auto border-b border-gray-200 py-1">
-                  <p className="px-4 py-1 text-sm text-gray-500">Varumärken</p>
+                  <p className="px-4 py-1 text-sm text-gray-500">
+                    Brands
+                  </p>
                   {filteredBrands.map((brand) => (
-                    <li key={brand.id} className="px-4 py-2 hover:bg-gray-100">
+                    <li
+                      key={brand.id}
+                      className="px-4 py-2 hover:bg-gray-100"
+                    >
                       <Link
-                        href={ROUTES.BRANDS.DETAIL(brand.slug)}
+                        href={ROUTES.BRANDS.DETAIL(
+                          brand.slug,
+                        )}
                         className="flex items-center justify-between"
                         onClick={() => {
                           setShowDropdown(false);
@@ -287,7 +327,9 @@ export default function SearchBox({
                           }
                         }}
                       >
-                        <p className="font-medium">{brand.name}</p>
+                        <p className="font-medium">
+                          {brand.name}
+                        </p>
                       </Link>
                     </li>
                   ))}
@@ -302,20 +344,20 @@ export default function SearchBox({
                   className="text-primary flex w-full items-center justify-center font-medium"
                 >
                   <Search className="mr-2 h-4 w-4" />
-                  Visa alla resultat
+                  View all results for "{query}"
                 </button>
               </li>
             </>
           ) : (
             <div className="p-4 text-center text-gray-500">
-              <p>Inga sökförslag för "{query}"</p>
+              <p>No search suggestions for "{query}"</p>
               <br />
               <button
                 onClick={handleSearch}
                 className="text-primary flex w-full items-center justify-center border-t pt-2 font-medium"
               >
                 <Search className="mr-2 h-4 w-4" />
-                Sök alla resultat
+                View all results for "{query}"
               </button>
             </div>
           )}

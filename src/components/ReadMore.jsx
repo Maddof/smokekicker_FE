@@ -2,24 +2,41 @@
 import { useState, Fragment } from "react";
 import { Button } from "./ui/scn/button";
 
-export const ReadMore = ({ id, children, initialParagraphs = 1 }) => {
+export const ReadMore = ({
+  id,
+  children,
+  initialParagraphs = 1,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Convert children to array for easier handling
-  const childrenArray = Array.isArray(children) ? children : [children];
+  const childrenArray = Array.isArray(children)
+    ? children
+    : [children];
 
   // Check if we have enough children to need a "read more" button
-  const hasMoreContent = childrenArray.length > initialParagraphs;
+  const hasMoreContent =
+    childrenArray.length > initialParagraphs;
 
   // Get initial and hidden content
-  const initialContent = childrenArray.slice(0, initialParagraphs);
-  const hiddenContent = childrenArray.slice(initialParagraphs);
+  const initialContent = childrenArray.slice(
+    0,
+    initialParagraphs,
+  );
+  const hiddenContent = childrenArray.slice(
+    initialParagraphs,
+  );
 
   return (
-    <div id={id} className="flex flex-col items-start gap-2">
+    <div
+      id={id}
+      className="flex flex-col items-start gap-2"
+    >
       {/* Always render initial content */}
       {initialContent.map((child, index) => (
-        <Fragment key={`initial-${index}`}>{child}</Fragment>
+        <Fragment key={`initial-${index}`}>
+          {child}
+        </Fragment>
       ))}
 
       {/* Render hidden content with conditional visibility */}
@@ -29,7 +46,9 @@ export const ReadMore = ({ id, children, initialParagraphs = 1 }) => {
           aria-hidden={!isExpanded}
         >
           {hiddenContent.map((child, index) => (
-            <Fragment key={`hidden-${index}`}>{child}</Fragment>
+            <Fragment key={`hidden-${index}`}>
+              {child}
+            </Fragment>
           ))}
         </div>
       )}
@@ -43,7 +62,7 @@ export const ReadMore = ({ id, children, initialParagraphs = 1 }) => {
           aria-expanded={isExpanded}
           aria-controls={id}
         >
-          {isExpanded ? "visa mindre -" : "visa mer +"}
+          {isExpanded ? "show less -" : "show more +"}
         </Button>
       )}
     </div>

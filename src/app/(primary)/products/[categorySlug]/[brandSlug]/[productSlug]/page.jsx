@@ -25,7 +25,8 @@ const fallBackImage = "/images/fallback.png";
 export const revalidate = 86400; // Revalidate this page every 24 hours
 
 export async function generateMetadata({ params }) {
-  const { categorySlug, brandSlug, productSlug } = await params;
+  const { categorySlug, brandSlug, productSlug } =
+    await params;
 
   // Fetch the product by slugs
   const product = await fetchProductBySlugCategoryAndBrand(
@@ -36,8 +37,8 @@ export async function generateMetadata({ params }) {
 
   if (!product) {
     return {
-      title: `Produkt ej hittad - ${SITE_NAME}`,
-      description: "Den här produkten kunde inte hittas.",
+      title: `Product not found - ${SITE_NAME}`,
+      description: "This product could not be found.",
     };
   }
 
@@ -50,16 +51,19 @@ export async function generateMetadata({ params }) {
     ? product.details.longDesc.replace(/<[^>]+>/g, "")
     : "";
 
-  const description = shortDesc + " " + longDesc.slice(0, 150) + "...";
+  const description =
+    shortDesc + " " + longDesc.slice(0, 150) + "...";
 
   // Prepare price for display in metadata
   const price = formatCurrency(product.price);
 
   // Build canonical URL
-  const url = `https://smokify.se${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`;
+  const url = `https://smokekicker.com${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`;
 
   // Get image URL for social sharing
-  const imageUrl = product.imgUrl ? getImageUrl(product.imgUrl) : null;
+  const imageUrl = product.imgUrl
+    ? getImageUrl(product.imgUrl)
+    : null;
 
   return {
     title: title,
@@ -68,9 +72,8 @@ export async function generateMetadata({ params }) {
       product.name,
       product.brand.name,
       product.category.name,
-      "vejping",
-      "vape",
-      "e-cigarett",
+      "nicotine pouches",
+      "white snus",
     ].join(", "),
 
     // Open Graph / Facebook
@@ -89,11 +92,11 @@ export async function generateMetadata({ params }) {
             },
           ]
         : [],
-      locale: "sv_SE",
+      locale: "en_US",
       type: "website",
       product: {
         price: price,
-        currency: "SEK",
+        currency: "EUR",
       },
     },
 
@@ -112,9 +115,12 @@ export async function generateMetadata({ params }) {
 
     // Product structured data for rich results
     other: {
-      "product:price:amount": (product.price / 100).toString(),
-      "product:price:currency": "SEK",
-      "product:availability": product.stock > 0 ? "in stock" : "out of stock",
+      "product:price:amount": (
+        product.price / 100
+      ).toString(),
+      "product:price:currency": "EUR",
+      "product:availability":
+        product.stock > 0 ? "in stock" : "out of stock",
       "product:brand": product.brand.name,
       "product:condition": "new",
     },
@@ -122,7 +128,10 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  if (process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION === "true") {
+  if (
+    process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION ===
+    "true"
+  ) {
     return [];
   }
   const categories = await fetchAllPublishedCategories();
@@ -131,7 +140,9 @@ export async function generateStaticParams() {
   // if (!products) return [];
 
   for (const category of categories) {
-    const products = await fetchProductsByCategorySlug(category.slug);
+    const products = await fetchProductsByCategorySlug(
+      category.slug,
+    );
 
     for (const product of products) {
       // Make sure product has a brand with a slug
@@ -152,8 +163,11 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export default async function SingleProductPage({ params }) {
-  const { categorySlug, brandSlug, productSlug } = await params;
+export default async function SingleProductPage({
+  params,
+}) {
+  const { categorySlug, brandSlug, productSlug } =
+    await params;
 
   // Fetch the product by slugs from the params
   const product = await fetchProductBySlugCategoryAndBrand(
@@ -176,23 +190,28 @@ export default async function SingleProductPage({ params }) {
     productSlug,
   );
 
-  const bulkEnabled = product.category?.qualifiesForBulkDiscount ?? false;
+  const bulkEnabled =
+    product.category?.qualifiesForBulkDiscount ?? false;
 
   // Prefer category values, but keep safe defaults
-  const threshold = product.category?.bulkDiscountThreshold ?? 3;
-  const percent = product.category?.bulkDiscountPercentage ?? 10;
+  const threshold =
+    product.category?.bulkDiscountThreshold ?? 3;
+  const percent =
+    product.category?.bulkDiscountPercentage ?? 10;
 
   // Convert percent -> rate
   const discountRate = percent / 100;
 
   // show only if enabled and has a meaningful discount
-  const showBulkCallout = bulkEnabled && threshold >= 2 && percent > 0;
+  const showBulkCallout =
+    bulkEnabled && threshold >= 2 && percent > 0;
 
   // Fetch other products from the same category and brand
-  const similarProducts = await fetchProductsByCategorySlugAndBrandSlug(
-    categorySlug,
-    brandSlug,
-  );
+  const similarProducts =
+    await fetchProductsByCategorySlugAndBrandSlug(
+      categorySlug,
+      brandSlug,
+    );
 
   // Filter out the current product
   const sameBrandProducts = similarProducts.filter(
@@ -206,9 +225,12 @@ export default async function SingleProductPage({ params }) {
     ? product.details.longDesc.replace(/<[^>]+>/g, "")
     : "";
 
-  const description = shortDesc + " " + longDesc.slice(0, 150) + "...";
+  const description =
+    shortDesc + " " + longDesc.slice(0, 150) + "...";
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://smokify.se";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -225,7 +247,7 @@ export default async function SingleProductPage({ params }) {
     offers: {
       "@type": "Offer",
       url: `${siteUrl}${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`,
-      priceCurrency: "SEK",
+      priceCurrency: "EUR",
       price: (product.price / 100).toFixed(2),
       availability:
         product.stock > 0
@@ -242,13 +264,13 @@ export default async function SingleProductPage({ params }) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Hem",
+        name: "Home",
         item: `${siteUrl}${ROUTES.HOME}`,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Produkter",
+        name: "Products",
         item: `${siteUrl}${ROUTES.SHOP.INDEX}`,
       },
       {
@@ -279,18 +301,25 @@ export default async function SingleProductPage({ params }) {
 
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbJsonLd),
+          }}
         />
         <div className="z-10 container">
           <div className="flex flex-col gap-6 md:flex-row md:gap-10">
             {/* Product Image Column */}
             <div className="relative flex w-full items-center justify-center md:w-1/3">
               <Image
-                src={getImageUrl(product.imgUrl) || fallBackImage}
+                src={
+                  getImageUrl(product.imgUrl) ||
+                  fallBackImage
+                }
                 alt={product.name}
                 width={600}
                 height={700}
@@ -302,7 +331,8 @@ export default async function SingleProductPage({ params }) {
               <div
                 className="absolute -right-[100vw] bottom-0 -left-[100vw] z-10 mx-auto h-16 md:-bottom-4 md:h-32"
                 style={{
-                  backgroundColor: product.details?.color || "#FFF", // fallback to white if no color is specified
+                  backgroundColor:
+                    product.details?.color || "#FFF", // fallback to white if no color is specified
                 }}
               />
             </div>
@@ -318,7 +348,10 @@ export default async function SingleProductPage({ params }) {
                   {formatCurrency(product.price)}
                 </span>
                 <div className="flex w-full flex-wrap gap-2">
-                  <AtcButtonDefault product={product} className="w-full" />
+                  <AtcButtonDefault
+                    product={product}
+                    className="w-full"
+                  />
                 </div>
               </div>
 
@@ -339,12 +372,17 @@ export default async function SingleProductPage({ params }) {
                   <ul className="space-y-2">
                     {/* Map over product features array */}
                     {/* List items with custom orange bullets */}
-                    {product.details.bulletPoints.map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <div className="bg-primary mt-1.5 mr-3 h-3 w-3 shrink-0 rounded-full"></div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
+                    {product.details.bulletPoints.map(
+                      (feature, index) => (
+                        <li
+                          key={index}
+                          className="flex items-start"
+                        >
+                          <div className="bg-primary mt-1.5 mr-3 h-3 w-3 shrink-0 rounded-full"></div>
+                          <span>{feature}</span>
+                        </li>
+                      ),
+                    )}
                   </ul>
                   <p className="mt-auto text-xs italic">
                     {productConfig.warningText}
@@ -354,8 +392,12 @@ export default async function SingleProductPage({ params }) {
                   <Image
                     src={productConfig.bulletPointsIcon.src}
                     alt={productConfig.bulletPointsIcon.alt}
-                    width={productConfig.bulletPointsIcon.width}
-                    height={productConfig.bulletPointsIcon.height}
+                    width={
+                      productConfig.bulletPointsIcon.width
+                    }
+                    height={
+                      productConfig.bulletPointsIcon.height
+                    }
                     className="xxsm:block xxsm:w-40 hidden h-auto w-28 object-cover opacity-35"
                   />
                 </div>
@@ -367,7 +409,9 @@ export default async function SingleProductPage({ params }) {
       {/* Product Description */}
       <ProductDescription
         longDesc={product.details.longDesc}
-        nicotineLabelWarningText={productConfig.nicotineLabelWarningText}
+        nicotineLabelWarningText={
+          productConfig.nicotineLabelWarningText
+        }
         specifications={product.specifications}
         ingredients={product.details.ingredients}
       />
@@ -379,21 +423,36 @@ export default async function SingleProductPage({ params }) {
             : productConfig.sameBrandProductsPicker.title
         }
         brandName={product.brand?.name}
-        description={productConfig.sameBrandProductsPicker.description}
+        description={
+          productConfig.sameBrandProductsPicker.description
+        }
       />
       {relatedProducts?.length > 0 && (
         <section id="related-products">
           <div className="container">
-            <h2 className="h2-product mb-8">Du kanske också gillar</h2>
+            <h2 className="h2-product mb-8">
+              You might also like
+            </h2>
 
             <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
               {relatedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
               ))}
             </ul>
-            <Button asChild variant="outline" className="group mt-6 px-4 py-6">
-              <Link href={ROUTES.SHOP.CATEGORY(product.category.slug)}>
-                Se alla produkter i {product.category.name}
+            <Button
+              asChild
+              variant="outline"
+              className="group mt-6 px-4 py-6"
+            >
+              <Link
+                href={ROUTES.SHOP.CATEGORY(
+                  product.category.slug,
+                )}
+              >
+                View all products in {product.category.name}
                 <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </Button>

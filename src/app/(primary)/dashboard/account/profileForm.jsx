@@ -2,12 +2,15 @@
 
 import { useActionState } from "react";
 import AddressForm from "@/components/AddressForm";
-import { submitCheckoutFormData } from "../../kundvagn/kassa/action";
+import { submitCheckoutFormData } from "../../cart/checkout/action";
 
 export default function UserProfileForm({ data }) {
-  const [state, formAction, pending] = useActionState(submitCheckoutFormData, {
-    data,
-  });
+  const [state, formAction, pending] = useActionState(
+    submitCheckoutFormData,
+    {
+      data,
+    },
+  );
 
   return (
     <AddressForm

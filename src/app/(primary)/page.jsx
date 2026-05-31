@@ -45,7 +45,7 @@ export default async function Home() {
 
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://smokify.se";
+    "https://smokekicker.com";
   const homepageFaqSection = orderedSections.find(
     (section) => section.key === "faqHome",
   );
@@ -78,7 +78,7 @@ export default async function Home() {
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: `${siteUrl}/sok?q={search_term_string}`,
+      target: `${siteUrl}/search?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };

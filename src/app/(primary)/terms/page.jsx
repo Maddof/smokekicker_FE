@@ -1,32 +1,33 @@
 import { SITE_NAME } from "@/config/metadata";
 import { ROUTES } from "@/config/routes";
-import { buildCmsPageMetadata } from "@/lib/cms/pageMetadata";
-import { cookiePolicySectionComponents } from "./sectionsCookiepolicyPage";
-import { getOrderedSections } from "@/lib/cms/getSection";
 import { getPageByKey } from "@/lib/cms/getPage";
+import { getOrderedSections } from "@/lib/cms/getSection";
+import { buildCmsPageMetadata } from "@/lib/cms/pageMetadata";
+import { termsSectionComponents } from "./sectionsTermsPage";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://smokekicker.com";
 
-async function getCookiePolicyPage() {
-  const page = await getPageByKey("cookie-policy");
+async function getTermsPage() {
+  const page = await getPageByKey("terms");
   return page;
 }
 
 export async function generateMetadata() {
-  const page = await getCookiePolicyPage();
+  const page = await getTermsPage();
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `Cookie Policy | ${SITE_NAME}`,
+    fallbackTitle: `Terms and Conditions | ${SITE_NAME}`,
     fallbackDescription:
-      "Read how Smokekicker handles, stores, and protects your personal data according to GDPR.",
-    defaultPath: ROUTES.COOKIE_POLICY,
+      "Read our terms and conditions to understand our rules regarding purchases, delivery, returns, and the right of withdrawal.",
+    defaultPath: ROUTES.TERMS,
   });
 }
 
-export default async function CookiePolicyPage() {
-  const page = await getCookiePolicyPage();
+export default async function TermsAndConditionsPage() {
+  const page = await getTermsPage();
 
   const orderedSections = getOrderedSections(page);
 
@@ -43,11 +44,12 @@ export default async function CookiePolicyPage() {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Cookie Policy",
-        item: `${SITE_URL}${ROUTES.COOKIE_POLICY}`,
+        name: "Terms and Conditions",
+        item: `${SITE_URL}${ROUTES.TERMS}`,
       },
     ],
   };
+
   return (
     <>
       <script
@@ -59,7 +61,7 @@ export default async function CookiePolicyPage() {
       {/* Dynamically render sections in CMS-defined order */}
       {orderedSections.map((section) => {
         const SectionComponent =
-          cookiePolicySectionComponents[section.key];
+          termsSectionComponents[section.key];
 
         if (!SectionComponent) {
           return null;

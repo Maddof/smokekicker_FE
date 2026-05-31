@@ -30,9 +30,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `Vape, Startkit, E-juice, Vitt Snus & Nikotinprodukter Online`,
+    fallbackTitle: `Nicotine pouches, white snus online | Worldwide shipping | Fast EU shipping`,
     fallbackDescription:
-      "Köp hållbara vape-startkit, förfyllda pods, vitt snus och nikotinfritt tuggummi. Snabb leverans, prenumerationer och ett noga kurerat sortiment för moderna nikotinkonsumenter.",
+      "Buy nicotine pouches online. Fast EU and Worldwide delivery, and a carefully curated selection for modern nicotine consumers.",
     defaultPath: ROUTES.SHOP.INDEX,
   });
 }
@@ -43,9 +43,7 @@ export default async function ShopPage() {
   if (!productsPublished) {
     return (
       <section>
-        <div className="container">
-          Produkter hittades inte!
-        </div>
+        <div className="container">No products found!</div>
       </section>
     );
   }
@@ -147,13 +145,13 @@ export default async function ShopPage() {
         {
           "@type": "ListItem",
           position: 1,
-          name: "Hem",
+          name: "Home",
           item: SITE_URL,
         },
         {
           "@type": "ListItem",
           position: 2,
-          name: "Produkter",
+          name: "Products",
           item: shopUrl,
         },
       ],
@@ -280,12 +278,14 @@ export default async function ShopPage() {
       {whiteSnus.length > 0 && (
         <>
           <CategoryHeader
-            title="Vitt Snus"
-            description="Tobaksfritt alternativ som erbjuder en ren och fräsch smakupplevelse. Sortiementet fokuserar på lägre nikotinhalt och diskreta prillor såsom slim och mini portioner."
+            title="White Snus"
+            description="Tobacco-free alternative offering a clean and fresh taste experience. The assortment focuses on lower nicotine content and discreet portions such as slim and mini portions."
             imageSrc="/images/icons/pouch_icon.svg"
             imageAlt="White snus icon"
             imageClassName="w-24 opacity-20 sm:w-32 invert brightness-200"
-            categoryHref={ROUTES.SHOP.CATEGORY("vitt-snus")}
+            categoryHref={ROUTES.SHOP.CATEGORY(
+              "white-snus",
+            )}
           />
 
           <section>

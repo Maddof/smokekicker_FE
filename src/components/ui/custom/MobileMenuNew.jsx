@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 const MAIN_ITEMS = [
   {
     href: ROUTES.HOME,
-    label: "Hem",
+    label: "Home",
     icon: Home,
   },
 ];
@@ -28,27 +28,30 @@ const MAIN_ITEMS = [
 const MENU_SECTIONS = [
   {
     id: "shop",
-    title: "Produkter",
+    title: "Products",
     icon: Package,
     items: [
-      { href: ROUTES.SHOP.INDEX, label: "Alla produkter" },
+      { href: ROUTES.SHOP.INDEX, label: "All Products" },
       {
-        href: ROUTES.SHOP.CATEGORY("start-kit-forfyllda-podsystem"),
-        label: "Start-kit Förfyllda Podsystem",
+        href: ROUTES.SHOP.CATEGORY("nicotine-pouches"),
+        label: "Nicotine Pouches",
       },
-      { href: ROUTES.SHOP.CATEGORY("start-kit-vape"), label: "Start-kit Vape" },
       {
-        href: ROUTES.SHOP.CATEGORY("forfyllda-poddar"),
-        label: "Förfyllda poddar",
+        href: ROUTES.SHOP.CATEGORY("nicotine-free-pouches"),
+        label: "Nicotine-Free Pouches",
       },
-      { href: ROUTES.SHOP.CATEGORY("e-juice"), label: "E-Juice" },
-      { href: ROUTES.SHOP.CATEGORY("vitt-snus"), label: "Vitt snus" },
       {
-        href: ROUTES.SHOP.CATEGORY("nikotinavvanjning"),
-        label: "Nikotinavvänjning",
+        href: ROUTES.SHOP.CATEGORY("caffeine-pouches"),
+        label: "Caffeine Pouches",
       },
-      { href: ROUTES.SHOP.CATEGORY("konfektyr"), label: "Konfektyr" },
-      { href: ROUTES.SHOP.CATEGORY("tillbehor"), label: "Tillbehor" },
+      {
+        href: ROUTES.SHOP.CATEGORY("swedish-candy"),
+        label: "Swedish Candy",
+      },
+      {
+        href: ROUTES.SHOP.CATEGORY("accessories"),
+        label: "Accessories",
+      },
     ],
   },
   {
@@ -56,30 +59,37 @@ const MENU_SECTIONS = [
     title: "Information",
     icon: Info,
     items: [
-      { href: ROUTES.ABOUT, label: "Om oss" },
-      { href: ROUTES.TERMS, label: "Köpvillkor" },
+      { href: ROUTES.ABOUT, label: "About Us" },
+      { href: ROUTES.TERMS, label: "Terms and Conditions" },
     ],
   },
   {
     id: "account",
-    title: "Mitt konto",
+    title: "My Account",
     icon: User,
     items: [
       {
         href: ROUTES.DASHBOARD.INDEX,
-        label: "Mina sidor",
+        label: "My Pages",
         icon: User,
       },
       {
         href: ROUTES.DASHBOARD.ORDERS.INDEX,
-        label: "Mina beställningar",
+        label: "My Orders",
         icon: ShoppingCart,
       },
     ],
   },
 ];
 
-function MenuSection({ id, title, icon, isOpen, onToggle, children }) {
+function MenuSection({
+  id,
+  title,
+  icon,
+  isOpen,
+  onToggle,
+  children,
+}) {
   const panelId = `${id}-panel`;
   const buttonId = `${id}-button`;
 
@@ -94,7 +104,10 @@ function MenuSection({ id, title, icon, isOpen, onToggle, children }) {
         className="hover:bg-secondary flex w-full items-center justify-between rounded-md px-3 py-2 text-left"
       >
         <div className="flex items-center gap-3">
-          <span className="text-primary h-5 w-5" aria-hidden="true">
+          <span
+            className="text-primary h-5 w-5"
+            aria-hidden="true"
+          >
             {icon}
           </span>
           <span>{title}</span>
@@ -115,7 +128,9 @@ function MenuSection({ id, title, icon, isOpen, onToggle, children }) {
         {...(!isOpen && { inert: true })}
         className={cn(
           "border-primary mt-2 ml-5.75 space-y-2 overflow-hidden border-l pl-4 transition-[max-height,opacity] duration-200",
-          isOpen ? "max-h-200 opacity-100" : "max-h-0 opacity-60",
+          isOpen
+            ? "max-h-200 opacity-100"
+            : "max-h-0 opacity-60",
         )}
       >
         {children}
@@ -124,7 +139,13 @@ function MenuSection({ id, title, icon, isOpen, onToggle, children }) {
   );
 }
 
-function MenuItem({ href, children, icon, isSubmenuItem = false, onSelect }) {
+function MenuItem({
+  href,
+  children,
+  icon,
+  isSubmenuItem = false,
+  onSelect,
+}) {
   const pathname = usePathname();
   const isCurrent = pathname === href;
 
@@ -194,7 +215,10 @@ export default function MobileMenuNew() {
       const last = focusable[focusable.length - 1];
       const active = document.activeElement;
 
-      if (event.shiftKey && (active === first || !panel?.contains(active))) {
+      if (
+        event.shiftKey &&
+        (active === first || !panel?.contains(active))
+      ) {
         event.preventDefault();
         last.focus();
       } else if (!event.shiftKey && active === last) {
@@ -219,7 +243,9 @@ export default function MobileMenuNew() {
   }, [isOpen]);
 
   const toggleSection = (section) => {
-    setOpenSection(openSection === section ? null : section);
+    setOpenSection(
+      openSection === section ? null : section,
+    );
   };
 
   const closeMenu = () => setIsOpen(false);
@@ -229,7 +255,9 @@ export default function MobileMenuNew() {
       <button
         ref={triggerRef}
         type="button"
-        aria-label={isOpen ? "Stäng huvudmenyn" : "Öppna huvudmenyn"}
+        aria-label={
+          isOpen ? "Close main menu" : "Open main menu"
+        }
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-controls="mobile-menu-new-panel"
@@ -242,14 +270,16 @@ export default function MobileMenuNew() {
       <div
         className={cn(
           "fixed inset-0 z-70 transition-opacity duration-200",
-          isOpen ? "opacity-100" : "pointer-events-none opacity-0",
+          isOpen
+            ? "opacity-100"
+            : "pointer-events-none opacity-0",
         )}
         {...(!isOpen && { inert: true })}
         aria-hidden={!isOpen}
       >
         <button
           type="button"
-          aria-label="Stäng meny"
+          aria-label="Close menu"
           onClick={closeMenu}
           className="absolute inset-0 bg-black/50"
         />
@@ -259,7 +289,7 @@ export default function MobileMenuNew() {
           id="mobile-menu-new-panel"
           role="dialog"
           aria-modal={isOpen ? "true" : undefined}
-          aria-label="MENY"
+          aria-label="MENU"
           tabIndex={-1}
           className={cn(
             "minicart-bg-radial-vertical text-secondary-foreground border-primary absolute top-0 right-0 z-10 flex h-full w-75 flex-col overflow-y-auto border-l p-4 transition-transform duration-200 sm:w-87.5",
@@ -268,22 +298,27 @@ export default function MobileMenuNew() {
         >
           <div className="mb-4 flex items-center justify-between border-b pb-3">
             <div>
-              <p className="mb-1 text-sm font-semibold tracking-wide">MENY</p>
+              <p className="mb-1 text-sm font-semibold tracking-wide">
+                MENU
+              </p>
               <p className="text-muted-foreground text-[80%]">
-                Navigera genom vår webbplats
+                Navigate through our website
               </p>
             </div>
             <button
               type="button"
               onClick={closeMenu}
-              aria-label="Stäng meny"
+              aria-label="Close menu"
               className="hover:bg-secondary rounded-md p-1"
             >
-              <X className="text-destructive h-6 w-6" aria-hidden="true" />
+              <X
+                className="text-destructive h-6 w-6"
+                aria-hidden="true"
+              />
             </button>
           </div>
 
-          <nav className="py-2" aria-label="Huvudmeny">
+          <nav className="py-2" aria-label="Main menu">
             <ul className="space-y-3">
               {MAIN_ITEMS.map((item) => {
                 const MainIcon = item.icon;
@@ -308,7 +343,9 @@ export default function MobileMenuNew() {
                     key={section.id}
                     id={section.id}
                     title={section.title}
-                    icon={<SectionIcon aria-hidden="true" />}
+                    icon={
+                      <SectionIcon aria-hidden="true" />
+                    }
                     isOpen={openSection === section.id}
                     onToggle={toggleSection}
                   >
@@ -348,8 +385,11 @@ export default function MobileMenuNew() {
               onClick={closeMenu}
               className="hover:bg-secondary flex items-center gap-3 rounded-md px-3 py-2 transition-colors"
             >
-              <Mail className="text-primary h-5 w-5" aria-hidden="true" />
-              Kontakta oss
+              <Mail
+                className="text-primary h-5 w-5"
+                aria-hidden="true"
+              />
+              Contact us
             </Link>
           </div>
         </aside>

@@ -1,6 +1,10 @@
 "use client";
 
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import {
+  useRouter,
+  useSearchParams,
+  usePathname,
+} from "next/navigation";
 
 import {
   Pagination,
@@ -10,10 +14,16 @@ import {
 
 import { Button } from "@/components/ui/scn/button";
 
-const PaginationArrow = ({ direction, href, isDisabled }) => {
+const PaginationArrow = ({
+  direction,
+  href,
+  isDisabled,
+}) => {
   const router = useRouter();
   const isLeft = direction === "left";
-  const disabledClassName = isDisabled ? "opacity-50 cursor-not-allowed" : "";
+  const disabledClassName = isDisabled
+    ? "opacity-50 cursor-not-allowed"
+    : "";
 
   return (
     <Button
@@ -50,7 +60,7 @@ export function PaginationComponent({ pageCount }) {
         </PaginationItem>
         <PaginationItem>
           <span className="p-2 font-semibold text-gray-500">
-            Sida {currentPage}
+            Page {currentPage}
           </span>
         </PaginationItem>
         <PaginationItem>

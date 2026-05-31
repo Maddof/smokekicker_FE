@@ -20,11 +20,11 @@ export async function generateMetadata({ searchParams }) {
 
   const title =
     page > 1
-      ? `Vape & Nikotinguider – Blogg Sida ${page} | ${SITE_NAME}`
-      : `Vape, Vitt Snus & Nikotinguider | Blogg | ${SITE_NAME}`;
+      ? `All about nicotine pouches – Blog Page ${page} | ${SITE_NAME}`
+      : `All about nicotine pouches | Blog | ${SITE_NAME}`;
 
   const description =
-    "Läs guider, nyheter och tips om vape, e-cigaretter, vitt snus och nikotinpåsar. Utforska smakguider, produkttips, lagar och information om skademinimering.";
+    "Read guides, news and tips about white snus and nicotine pouches. Explore flavor guides, product tips, laws and harm reduction information.";
 
   return {
     title,
@@ -38,13 +38,13 @@ export async function generateMetadata({ searchParams }) {
       url,
       siteName: SITE_NAME,
       type: "website",
-      locale: "sv_SE",
+      locale: "en_US",
       images: [
         {
           url: `${SITE_URL}/images/bg/blog_hero_moon-neon.jpg`,
           width: 2000,
           height: 600,
-          alt: "Smokify Blogg",
+          alt: "Smokify Blog - Nicotine Pouches and White Snus Guides, News and Tips",
         },
       ],
     },
@@ -71,16 +71,16 @@ export default async function BlogPage({ searchParams }) {
   if (!blogData || !blogData.posts) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="mb-4 text-3xl font-bold">Blogg</h1>
+        <h1 className="mb-4 text-3xl font-bold">Blog</h1>
         <p className="mb-8 text-gray-600">
-          Det gick inte att ladda blogginläggen. Försök igen
-          senare.
+          Unfortunately, we couldn't load the blog posts at
+          the moment. Please try again later.
         </p>
         <a
           href={ROUTES.HOME}
           className="inline-block rounded bg-orange-500 px-6 py-3 text-white transition hover:bg-orange-600"
         >
-          Tillbaka till startsidan
+          Back to Home
         </a>
       </div>
     );
@@ -99,11 +99,11 @@ export default async function BlogPage({ searchParams }) {
       url: pageUrl,
       name:
         page > 1
-          ? `Vape & Nikotinguider – Blogg Sida ${page} | ${SITE_NAME}`
-          : `Vape, Vitt Snus & Nikotinguider | Blogg | ${SITE_NAME}`,
+          ? `All about nicotine pouches – Blog Page ${page} | ${SITE_NAME}`
+          : `All about nicotine pouches | Blog | ${SITE_NAME}`,
       description:
-        "Läs guider, nyheter och tips om vape, e-cigaretter, vitt snus och nikotinpåsar. Utforska smakguider, produkttips, lagar och information om skademinimering.",
-      inLanguage: "sv-SE",
+        "Read guides, news and tips about white snus and nicotine pouches. Explore flavor guides, product tips, laws and harm reduction information.",
+      inLanguage: "en-US",
       isPartOf: {
         "@id": `${SITE_URL}#website`,
       },
@@ -135,13 +135,13 @@ export default async function BlogPage({ searchParams }) {
         {
           "@type": "ListItem",
           position: 1,
-          name: "Hem",
+          name: "Home",
           item: SITE_URL,
         },
         {
           "@type": "ListItem",
           position: 2,
-          name: "Blogg",
+          name: "Blog",
           item: base,
         },
         ...(page > 1
@@ -149,7 +149,7 @@ export default async function BlogPage({ searchParams }) {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: `Sida ${page}`,
+                name: `Page ${page}`,
                 item: pageUrl,
               },
             ]
@@ -175,7 +175,7 @@ export default async function BlogPage({ searchParams }) {
       >
         {posts.length === 0 ? (
           <p className="text-muted-foreground py-16 text-center">
-            Inga blogginlägg hittades.
+            No blog posts found.
           </p>
         ) : (
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

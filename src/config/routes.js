@@ -8,38 +8,39 @@ export const ROUTES = {
 
   // Shop related
   SHOP: {
-    INDEX: "/produkter",
-    CATEGORY: (slug) => `/produkter/${slug}`,
+    INDEX: "/products",
+    CATEGORY: (slug) => `/products/${slug}`,
     PRODUCT: (categorySlug, brandSlug, productSlug) =>
-      `/produkter/${categorySlug}/${brandSlug}/${productSlug}`,
+      `/products/${categorySlug}/${brandSlug}/${productSlug}`,
   },
 
   // Brand related
   BRANDS: {
-    INDEX: "/varumarken",
-    DETAIL: (brandSlug) => `/varumarken/${brandSlug}`,
+    INDEX: "/brands",
+    DETAIL: (brandSlug) => `/brands/${brandSlug}`,
   },
 
   // Blog related
   BLOG: {
-    INDEX: "/blogg",
-    CATEGORY: (slug) => `/blogg/${slug}`,
-    POST: (categorySlug, postSlug) => `/blogg/${categorySlug}/${postSlug}`,
+    INDEX: "/blog",
+    CATEGORY: (slug) => `/blog/${slug}`,
+    POST: (categorySlug, postSlug) =>
+      `/blog/${categorySlug}/${postSlug}`,
   },
 
-  CART: "/kundvagn",
-  CHECKOUT: "/kundvagn/kassa",
+  CART: "/cart",
+  CHECKOUT: "/cart/checkout",
 
-  HELP: "/help",
-  ABOUT: "/om-oss",
-  CONTACT: "/kontakt",
-  TERMS: "/villkor",
-  PRIVACY: "/integritetspolicy",
+  ABOUT: "/about",
+  PERSONALITY: "/ai-taste-tester",
+  CONTACT: "/contact",
   COOKIE_POLICY: "/cookiepolicy",
-  SHIPPING: "/frakt-och-leveranstid",
-  RETURNS: "/returer",
+  HELP: "/help",
+  TERMS: "/terms",
+  PRIVACY: "/privacypolicy",
+  SHIPPING: "/shipping",
+  RETURNS: "/returns",
   FAQ: "/faq",
-  PERSONALITY: "/smak-personlighet",
 
   // Auth related
   AUTH: {
@@ -50,13 +51,13 @@ export const ROUTES = {
 
   // Dashboard related
   DASHBOARD: {
-    INDEX: "/mina-sidor",
-    PROFILE: "/mina-sidor/konto",
-    PERKS: "/mina-sidor/reservdelar",
+    INDEX: "/dashboard",
+    PROFILE: "/dashboard/account",
+    PERKS: "/dashboard/perks",
     ORDERS: {
-      INDEX: "/mina-sidor/bestallningar",
-      ALL: "/mina-sidor/bestallningar/alla",
-      DETAIL: (id) => `/mina-sidor/bestallningar/${id}`,
+      INDEX: "/dashboard/orders",
+      ALL: "/dashboard/orders/all",
+      DETAIL: (id) => `/dashboard/orders/${id}`,
     },
   },
 };

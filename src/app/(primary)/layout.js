@@ -6,11 +6,12 @@ import { SITE_NAME } from "@/config/metadata";
 
 export const metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se",
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      "https://smokekicker.com",
   ),
-  title: `${SITE_NAME} - Vape och vitt snus med omtanke`,
+  title: `${SITE_NAME} - Buy Nicotine Pouches Online Worldwide | Fast EU Shipping`,
   description:
-    "Vapes, förfyllda pods, e-cigaretter, vitt snus, smarta prenumerationer och nikotinersättning. Din väg till en rökfri vardag börjar här.",
+    "Discover premium nicotine pouches at Smokekicker. Fast worldwide shipping, modern flavors, and smoke-free nicotine products for every lifestyle.",
 };
 
 export default function RootLayout({ children }) {
@@ -21,7 +22,7 @@ export default function RootLayout({ children }) {
         <div className="container">
           <Breadcrumbs
             customLabels={{
-              "/sok": "Sök",
+              "/search": "Search",
             }}
           />
         </div>

@@ -7,7 +7,8 @@ import { aboutSectionComponents } from "./sectionsAboutPage";
 
 export const revalidate = 86400; // Revalidate this page every 24 hours
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
 
 async function getAboutPage() {
   return getPageByKey("about");
@@ -18,9 +19,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `Om oss | ${SITE_NAME}`,
+    fallbackTitle: `About Us | ${SITE_NAME}`,
     fallbackDescription:
-      "Lär känna Smokify - vi erbjuder smartare, tryggare och mer hållbara alternativ till tobak och nikotin.",
+      "Get to know Smokekicker - nicotine pouches online, fast worldwide shipping.",
     defaultPath: ROUTES.ABOUT,
   });
 }
@@ -31,10 +32,10 @@ export default async function AboutUsPage() {
   if (!page) {
     return (
       <div className="container py-16">
-        <h1 className="text-3xl font-bold">Om oss</h1>
+        <h1 className="text-3xl font-bold">About Us</h1>
         <p className="text-muted-foreground mt-4">
-          Tyvärr kunde vi inte ladda innehållet för den här sidan just nu.
-          Vänligen försök igen senare.
+          Unfortunately, we couldn't load the content for
+          this page at the moment. Please try again later.
         </p>
       </div>
     );
@@ -50,13 +51,13 @@ export default async function AboutUsPage() {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Hem",
+        name: "Home",
         item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Om oss",
+        name: "About Us",
         item: `${SITE_URL}${ROUTES.ABOUT}`,
       },
     ],
@@ -65,11 +66,14 @@ export default async function AboutUsPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd),
+        }}
       />
       {/* Dynamically render sections in CMS-defined order */}
       {orderedSections.map((section) => {
-        const SectionComponent = aboutSectionComponents[section.key];
+        const SectionComponent =
+          aboutSectionComponents[section.key];
 
         if (!SectionComponent) {
           return null;
@@ -77,7 +81,10 @@ export default async function AboutUsPage() {
 
         // Render the component with resolved section data
         return (
-          <SectionComponent key={section.id || section.key} section={section} />
+          <SectionComponent
+            key={section.id || section.key}
+            section={section}
+          />
         );
       })}
     </>

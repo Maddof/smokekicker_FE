@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import BrandCard from "@/app/(primary)/varumarken/BrandCard";
+import BrandCard from "@/app/(primary)/brands/BrandCard";
 // import BrandFilter from "./BrandFilter";
 import SearchFilter from "./SearchFilter";
 
-export default function BrandFilterWrapper({ initialBrands }) {
-  const [filteredBrands, setFilteredBrands] = useState(initialBrands);
+export default function BrandFilterWrapper({
+  initialBrands,
+}) {
+  const [filteredBrands, setFilteredBrands] =
+    useState(initialBrands);
 
   return (
     <>
