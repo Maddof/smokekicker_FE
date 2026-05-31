@@ -17,11 +17,11 @@ export const productContent = {
     nicotineLabelWarningText,
     warningText: warningText,
     sameBrandProductsPicker: {
-      title: "Upptäck övriga startkit",
+      title: "Discover more flavors from the same brand",
       description:
-        "Välj bland alla övriga förfyllda vape start-kit från ",
+        "Explore more flavors and strengths of nicotine pouches from " /* + brandName will be added in the component */,
       emptyMessage:
-        "Inga andra produkter tillgängliga just nu.",
+        "No other products available at the moment.",
       showIfEmpty: false,
     },
   },

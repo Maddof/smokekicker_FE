@@ -13,7 +13,7 @@ import Image from "next/image";
 import { ROUTES } from "@/config/routes";
 import { SITE_NAME } from "@/config/metadata";
 import ProductDescription from "./ProductDescription";
-import BulkDealCallout from "./BulkDealCallout";
+import BulkDealCalloutNew from "./BulkDealCalloutNew";
 import SameBrandProductsPicker from "@/components/shop/products/SameBrandProductsPicker";
 import ProductCard from "@/components/shop/ProductCard";
 import Link from "next/link";
@@ -192,21 +192,9 @@ export default async function SingleProductPage({
     productSlug,
   );
 
-  const bulkEnabled =
-    product.category?.qualifiesForBulkDiscount ?? false;
-
-  // Prefer category values, but keep safe defaults
-  const threshold =
-    product.category?.bulkDiscountThreshold ?? 3;
-  const percent =
-    product.category?.bulkDiscountPercentage ?? 10;
-
-  // Convert percent -> rate
-  const discountRate = percent / 100;
-
-  // show only if enabled and has a meaningful discount
-  const showBulkCallout =
-    bulkEnabled && threshold >= 2 && percent > 0;
+  const bulkDiscountTiers =
+    product.category?.bulkDiscountTiers ?? [];
+  const showBulkCallout = bulkDiscountTiers.length > 0;
 
   // Fetch other products from the same category and brand
   const similarProducts =
@@ -232,7 +220,7 @@ export default async function SingleProductPage({
 
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://smokify.se";
+    "https://smokekicker.com";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -316,7 +304,7 @@ export default async function SingleProductPage({
     primaryMedia?.mediaAsset?.altText || product.name;
   return (
     <>
-      <section className="overflow-hidden pt-4 md:pt-8 md:pb-4">
+      <section className="overflow-hidden pt-4 pb-2 md:pt-8 md:pb-4">
         {/* Add JSON-LD to your page */}
 
         <script
@@ -334,18 +322,22 @@ export default async function SingleProductPage({
         <div className="z-10 container">
           <div className="flex flex-col gap-6 md:flex-row md:gap-10">
             {/* Product Image Column */}
-            <div className="relative flex w-full items-center justify-center md:w-1/3">
+            <div className="relative flex h-64 w-full items-center justify-center sm:h-72 md:h-auto md:w-2/5">
               <Image
                 src={imageUrl}
                 alt={imageAlt}
                 {...imageDimensions}
                 fetchPriority="high"
                 loading="eager"
-                className="z-20 h-auto w-auto"
+                className={`z-20 object-contain ${
+                  imageWidth && imageHeight
+                    ? "h-auto w-auto"
+                    : "h-full w-full"
+                }`}
               />
               {/* Full-width background overlay */}
               <div
-                className="absolute -right-[100vw] bottom-0 -left-[100vw] z-10 mx-auto h-16 md:-bottom-4 md:h-32"
+                className="absolute right-[-100vw] bottom-0 left-[-100vw] z-10 mx-auto h-16 md:-bottom-4 md:h-32"
                 style={{
                   backgroundColor:
                     product.details?.color || "#FFF", // fallback to white if no color is specified
@@ -354,7 +346,7 @@ export default async function SingleProductPage({
             </div>
 
             {/* Product Info Column */}
-            <div className="z-10 mt-4 flex w-full flex-col items-start gap-6 md:mt-0 md:w-2/3">
+            <div className="z-10 mt-4 flex w-full flex-col items-start gap-6 md:mt-0 md:w-4/5">
               <div className="w-full border-b-2 text-xs uppercase md:text-sm">
                 {product.details?.type}
               </div>
@@ -372,11 +364,10 @@ export default async function SingleProductPage({
               </div>
 
               {showBulkCallout && (
-                <BulkDealCallout
+                <BulkDealCalloutNew
                   product={product}
                   unitPrice={product.price}
-                  threshold={threshold}
-                  discountRate={discountRate}
+                  tiers={bulkDiscountTiers}
                   className="w-full"
                 />
               )}
@@ -435,7 +426,7 @@ export default async function SingleProductPage({
         sameBrandProducts={sameBrandProducts}
         title={
           product.brand?.name
-            ? `Mer från ${product.brand.name}`
+            ? `More from ${product.brand.name}`
             : productConfig.sameBrandProductsPicker.title
         }
         brandName={product.brand?.name}

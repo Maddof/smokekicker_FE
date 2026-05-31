@@ -42,8 +42,8 @@ export default function AtcButtonDefault({
     if (isOutOfStock) return "NOT ENOUGH IN STOCK";
     if (isLoading) return "Adding...";
     return sameBrandProductPickerButton
-      ? "Add to cart"
-      : `Add to cart (${safeQuantity})`;
+      ? "Buy"
+      : `Buy (${safeQuantity})`;
   };
 
   return (

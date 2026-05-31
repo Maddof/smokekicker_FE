@@ -4,7 +4,7 @@ export const formatCurrency = (valueInCents) => {
   const formatter = new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: "EUR",
-    minimumFractionDigits: 0,
+    minimumFractionDigits: 2,
   });
 
   // Convert value from cents (öre) to whole EUR
