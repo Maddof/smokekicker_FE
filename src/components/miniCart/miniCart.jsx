@@ -34,23 +34,28 @@ export default function MiniCart() {
     getLineDiscount,
   } = useCart();
 
-  const { isCheckoutPage, addressSubmitted } = useCheckout();
+  const { isCheckoutPage, addressSubmitted } =
+    useCheckout();
   const shouldDisableControls =
-    (isCheckoutPage && addressSubmitted) || loading || errorMessage;
+    (isCheckoutPage && addressSubmitted) ||
+    loading ||
+    errorMessage;
 
   const cartQuantityMessage =
     totalQuantity === 1
-      ? `Du har ${totalQuantity} produkt i varukorgen`
-      : `Du har ${totalQuantity} produkter i varukorgen`;
+      ? `You have ${totalQuantity} product in your cart`
+      : `You have ${totalQuantity} products in your cart`;
 
   const hasAnyDiscount =
     (discount ?? 0) > 0 ||
-    cartItems.some((i) => (i?.pricing?.discountRate ?? 0) > 0);
+    cartItems.some(
+      (i) => (i?.pricing?.discountRate ?? 0) > 0,
+    );
 
   return (
     <SheetWrapper
       trigger={<CartLink />}
-      title="Varukorg"
+      title="Shopping Cart"
       description={cartQuantityMessage}
     >
       <div
@@ -58,25 +63,34 @@ export default function MiniCart() {
       >
         {cartItems.length === 0 ? (
           <div className="text-center">
-            <p className="text-muted-foreground">Din varukorg är tom!</p>
+            <p className="text-muted-foreground">
+              Your cart is empty!
+            </p>
             <SheetClose className="border-muted-foreground text-muted-foreground hover:border-primary hover:text-primary focus:ring-primary mt-4 inline-block rounded-md border bg-transparent px-4 py-2 text-sm font-semibold transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-hidden">
-              Fortsätt handla
+              Continue Shopping
             </SheetClose>
           </div>
         ) : (
           <ul className="space-y-4">
             {cartItems.map((item) => {
-              const unit = getUnitPrice?.(item) ?? item.price ?? 0;
+              const unit =
+                getUnitPrice?.(item) ?? item.price ?? 0;
               const discountedUnit =
-                getDiscountedUnitPrice?.(item) ?? item.price ?? 0;
+                getDiscountedUnitPrice?.(item) ??
+                item.price ??
+                0;
 
               const lineTotal =
-                getLineTotal?.(item) ?? discountedUnit * (item.quantity || 0);
+                getLineTotal?.(item) ??
+                discountedUnit * (item.quantity || 0);
 
-              const lineDiscount = getLineDiscount?.(item) ?? 0;
-              const discountRate = item?.pricing?.discountRate ?? 0;
+              const lineDiscount =
+                getLineDiscount?.(item) ?? 0;
+              const discountRate =
+                item?.pricing?.discountRate ?? 0;
 
-              const hasDiscount = discountRate > 0 && discountedUnit < unit;
+              const hasDiscount =
+                discountRate > 0 && discountedUnit < unit;
 
               return (
                 <li
@@ -87,13 +101,11 @@ export default function MiniCart() {
                   <div className="flex w-full justify-between gap-2">
                     <SheetClose asChild>
                       <Link
-                        href={                      
-                            ROUTES.SHOP.PRODUCT(
-                                item.categorySlug,
-                                item.brandSlug,
-                                item.slug,
-                              )
-                        }
+                        href={ROUTES.SHOP.PRODUCT(
+                          item.categorySlug,
+                          item.brandSlug,
+                          item.slug,
+                        )}
                         className="text-primary pr-1 font-bold text-wrap"
                       >
                         {item?.name || "Okänd produkt"}
@@ -111,17 +123,25 @@ export default function MiniCart() {
 
                         {hasDiscount ? (
                           <>
-                            <span>{formatCurrency(discountedUnit)}</span>
+                            <span>
+                              {formatCurrency(
+                                discountedUnit,
+                              )}
+                            </span>
                           </>
                         ) : (
-                          <span>{formatCurrency(unit)}</span>
+                          <span>
+                            {formatCurrency(unit)}
+                          </span>
                         )}
                       </p>
 
                       {/* per-line savings */}
                       {hasDiscount && lineDiscount > 0 && (
                         <p className="text-muted-foreground mt-2 text-xs">
-                          Du sparar {formatCurrency(lineDiscount)} på denna vara
+                          You save{" "}
+                          {formatCurrency(lineDiscount)} on
+                          this item
                         </p>
                       )}
                     </div>
@@ -130,12 +150,18 @@ export default function MiniCart() {
                     <div className="flex shrink-0 flex-col items-end gap-2">
                       <div className="flex items-center space-x-2">
                         <QuantityButton
-                          onClick={() => subtractItemFromCart(item)}
+                          onClick={() =>
+                            subtractItemFromCart(
+                              item.itemId,
+                            )
+                          }
                           icon={Minus}
                           disabled={shouldDisableControls}
                         />
                         <QuantityButton
-                          onClick={() => addToCart(item.itemId)}
+                          onClick={() =>
+                            addToCart(item.itemId)
+                          }
                           icon={Plus}
                           disabled={shouldDisableControls}
                         />
@@ -145,10 +171,12 @@ export default function MiniCart() {
                               ? "cursor-not-allowed opacity-50"
                               : "hover:text-destructive hover:bg-destructive-foreground"
                           }`}
-                          onClick={() => removeFromCart(item)}
+                          onClick={() =>
+                            removeFromCart(item)
+                          }
                           disabled={shouldDisableControls}
-                          aria-label="Ta bort"
-                          title="Ta bort"
+                          aria-label="Remove item from cart"
+                          title="Remove item from cart"
                         >
                           <X className="h-4 w-4" />
                         </button>
@@ -166,7 +194,9 @@ export default function MiniCart() {
         <div className="mt-auto pt-4">
           {/* Errors / warnings */}
           {errorMessage && (
-            <p className="text-destructive mb-2">{errorMessage}</p>
+            <p className="text-destructive mb-2">
+              {errorMessage}
+            </p>
           )}
 
           <button
@@ -174,19 +204,19 @@ export default function MiniCart() {
             onClick={clearCart}
             disabled={loading || shouldDisableControls}
           >
-            Töm varukorg
+            Empty Cart
           </button>
 
           {/* Summary */}
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span>Delsumma</span>
+              <span>Subtotal</span>
               <span>{formatCurrency(subtotal)}</span>
             </div>
 
             {hasAnyDiscount && (discount ?? 0) > 0 && (
               <div className="flex justify-between">
-                <span>Rabatt</span>
+                <span>Discount</span>
                 <span className="text-primary">
                   − {formatCurrency(discount)}
                 </span>
@@ -194,12 +224,12 @@ export default function MiniCart() {
             )}
 
             <div className="flex justify-between">
-              <span>Frakt</span>
+              <span>Shipping</span>
               <span>{formatCurrency(shippingCost)}</span>
             </div>
 
             <div className="mt-2 flex justify-between border-t pt-2 font-semibold">
-              <span>Totalt</span>
+              <span>Total</span>
               <span>{formatCurrency(total)}</span>
             </div>
           </div>

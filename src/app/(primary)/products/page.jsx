@@ -30,9 +30,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `Nicotine pouches, white snus online | Worldwide shipping | Fast EU shipping`,
+    fallbackTitle: `Buy Nicotine Pouches Online | Worldwide & EU Shipping`,
     fallbackDescription:
-      "Buy nicotine pouches online. Fast EU and Worldwide delivery, and a carefully curated selection for modern nicotine consumers.",
+      "Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on tobacco-free nicotine products.",
     defaultPath: ROUTES.SHOP.INDEX,
   });
 }
@@ -47,39 +47,35 @@ export default async function ShopPage() {
       </section>
     );
   }
+
+  console.log("Fetched products:", productsPublished);
+
   const headerConfig = categoryContent["default"];
 
   // Get below hero content or use default
   const belowHeroConfig = headerConfig.belowHero;
 
   // Filter products by category
-  const prefilledPodStarterKits = productsPublished.filter(
+  const nicotinepouches = productsPublished.filter(
     (product) =>
-      product.category.slug ===
-      "start-kit-forfyllda-podsystem",
+      product.category.slug === "nicotine-pouches",
   );
   const vapePodStarterKits = productsPublished.filter(
     (product) => product.category.slug === "start-kit-vape",
   );
-  const filledPods = productsPublished.filter(
+  const nicotineFreePouches = productsPublished.filter(
     (product) =>
-      product.category.slug === "forfyllda-poddar",
+      product.category.slug === "nicotine-free-pouches",
   );
-  const eJuiceProducts = productsPublished.filter(
-    (product) => product.category.slug === "e-juice",
+  const caffeinePouches = productsPublished.filter(
+    (product) =>
+      product.category.slug === "caffeine-pouches",
   );
   const candyProducts = productsPublished.filter(
-    (product) => product.category.slug === "konfektyr",
+    (product) => product.category.slug === "swedish-candy",
   );
   const accessories = productsPublished.filter(
-    (product) => product.category.slug === "tillbehor",
-  );
-  const whiteSnus = productsPublished.filter(
-    (product) => product.category.slug === "vitt-snus",
-  );
-  const nicotineAlternatives = productsPublished.filter(
-    (product) =>
-      product.category.slug === "nikotinavvanjning",
+    (product) => product.category.slug === "accessories",
   );
 
   const shopUrl = `${SITE_URL}${ROUTES.SHOP.INDEX}`;
@@ -90,10 +86,10 @@ export default async function ShopPage() {
       "@type": "CollectionPage",
       "@id": shopUrl,
       url: shopUrl,
-      name: `Vapes, startkit, e-juice, vitt snus och nikotinprodukter`,
+      name: `Buy Nicotine Pouches Online | Worldwide & EU Shipping`,
       description:
-        "Köp hållbara vape-startkit, förfyllda pods, vitt snus och nikotinfritt tuggummi. Snabb leverans, prenumerationer och ett noga kurerat sortiment för moderna nikotinkonsumenter.",
-      inLanguage: "sv-SE",
+        "Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on tobacco-free nicotine products.",
+      inLanguage: "en-US",
       isPartOf: {
         "@id": `${SITE_URL}#website`,
       },
@@ -102,7 +98,7 @@ export default async function ShopPage() {
       },
       mainEntity: {
         "@type": "ItemList",
-        name: "Alla produkter",
+        name: "All Products",
         numberOfItems: productsPublished.length,
         itemListElement: productsPublished.map(
           (product, index) => ({
@@ -125,7 +121,7 @@ export default async function ShopPage() {
                 : undefined,
               offers: {
                 "@type": "Offer",
-                priceCurrency: product.currency ?? "SEK",
+                priceCurrency: product.currency ?? "EUR",
                 price: (product.price / 100).toFixed(2),
                 availability:
                   product.stock > 0
@@ -172,6 +168,8 @@ export default async function ShopPage() {
         showNavigationButtons={
           headerConfig.showNavigationButtons
         }
+        backgroundImage={headerConfig.heroImage}
+        backgroundAlt={headerConfig.heroImageAlt}
       />
       <ShopHeaderBelow
         title={belowHeroConfig.title}
@@ -187,144 +185,81 @@ export default async function ShopPage() {
       <CategoryPicker currentPath={ROUTES.SHOP.INDEX} />
 
       {/* Starter Kits Section */}
-      {prefilledPodStarterKits.length > 0 && (
+      {nicotinepouches.length > 0 && (
         <>
           <CategoryHeader
-            title="Start-Kit Förfyllda Podsystem"
-            description="Ett miljövänligare, enkelt och ekonomiskt alternativ mot engångsvapes. Kompletta startpaket med batteri och förfyllda pods."
-            imageSrc="/images/icons/vape_pod-startkit_icon.svg"
-            imageAlt="Starter Kit Icons"
-            categoryHref={ROUTES.SHOP.CATEGORY(
-              "start-kit-forfyllda-podsystem",
-            )}
-          />
-
-          <section>
-            <div className="container">
-              <ProductGridLoadMore
-                products={prefilledPodStarterKits}
-              />
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* Vape Starter Kits Section */}
-      {vapePodStarterKits.length > 0 && (
-        <>
-          <CategoryHeader
-            title="Start-Kit Vape Podsystem"
-            description="Startkit med allt du behöver för att börja vejpa – batterienhet, laddare och pods. Med dessa fyller du på den tomma podden med e-vätska."
-            imageSrc="/images/icons/vape_pod-startkit_icon.svg"
-            imageAlt="Starter Kit Icons"
-            categoryHref={ROUTES.SHOP.CATEGORY(
-              "start-kit-vape",
-            )}
-          />
-
-          <section>
-            <div className="container">
-              <ProductGridLoadMore
-                products={vapePodStarterKits}
-              />
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* Filled Pods Section */}
-      {filledPods.length > 0 && (
-        <>
-          <CategoryHeader
-            title="Förfyllda Poddar"
-            description="Förfyllda pods ger dig en smidig och diskret vapingupplevelse utan påfyllning. Byt pod, fortsätt vejpa."
-            imageSrc="/images/icons/vape_prefilled-pods_icons.svg"
-            imageAlt="Prefilled pods icons"
-            categoryHref={ROUTES.SHOP.CATEGORY(
-              "forfyllda-poddar",
-            )}
-          />
-
-          <section>
-            <div className="container">
-              <ProductGridLoadMore products={filledPods} />
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* E-Juice Section */}
-      {eJuiceProducts.length > 0 && (
-        <>
-          <CategoryHeader
-            title="E-Juice"
-            description="E-juice för påfyllningsbara podsystem, brett utbud av smaker."
-            imageSrc="/images/icons/e-juice_icon.svg"
-            imageAlt="E-juice icon"
-            categoryHref={ROUTES.SHOP.CATEGORY("e-juice")}
-          />
-
-          <section>
-            <div className="container">
-              <ProductGridLoadMore
-                products={eJuiceProducts}
-              />
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* White Snus Section */}
-      {whiteSnus.length > 0 && (
-        <>
-          <CategoryHeader
-            title="White Snus"
-            description="Tobacco-free alternative offering a clean and fresh taste experience. The assortment focuses on lower nicotine content and discreet portions such as slim and mini portions."
+            title="Nicotine Pouches"
+            description="Nicotine pouches in a variety of flavors and strengths."
             imageSrc="/images/icons/pouch_icon.svg"
-            imageAlt="White snus icon"
             imageClassName="w-24 opacity-20 sm:w-32 invert brightness-200"
+            imageAlt="Nicotine Pouch Icon"
             categoryHref={ROUTES.SHOP.CATEGORY(
-              "white-snus",
-            )}
-          />
-
-          <section>
-            <div className="container">
-              <ProductGridLoadMore products={whiteSnus} />
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* Nicotine Alternatives Section */}
-      {nicotineAlternatives.length > 0 && (
-        <>
-          <CategoryHeader
-            title="Nikotinavvänjning"
-            description="Utforska våra nikotinalternativ som hjälper dig att hantera ditt nikotinbehov på ett flexibelt och kontrollerat sätt."
-            imageSrc="/images/icons/nicotine.svg"
-            imageAlt="Nicotine alternatives icon"
-            categoryHref={ROUTES.SHOP.CATEGORY(
-              "nikotinavvanjning",
+              "nicotine-pouches",
             )}
           />
 
           <section>
             <div className="container">
               <ProductGridLoadMore
-                products={nicotineAlternatives}
+                products={nicotinepouches}
               />
             </div>
           </section>
         </>
       )}
 
-      {/* Candy Products Section */}
+      {/* Nicotine-Free Pouches Section */}
+      {nicotineFreePouches.length > 0 && (
+        <>
+          <CategoryHeader
+            title="Nicotine-Free Pouches"
+            description="Nicotine-free pouches for a smooth and discreet experience without refilling. Swap pods, keep vaping."
+            imageSrc="/images/icons/vape_prefilled-pods_icons.svg"
+            imageAlt="Nicotine-Free Pouches Icon"
+            categoryHref={ROUTES.SHOP.CATEGORY(
+              "nicotine-free-pouches",
+            )}
+          />
+
+          <section>
+            <div className="container">
+              <ProductGridLoadMore
+                products={nicotineFreePouches}
+              />
+            </div>
+          </section>
+        </>
+      )}
+
+      {/* Caffeine Pouches Section */}
+      {caffeinePouches.length > 0 && (
+        <>
+          <CategoryHeader
+            title="Caffeine Pouches"
+            description="Caffeine pouches for a convenient and discreet energy boost."
+            imageSrc="/images/icons/caffeine_pouch_icon.svg"
+            imageAlt="Caffeine pouch icon"
+            categoryHref={ROUTES.SHOP.CATEGORY(
+              "caffeine-pouches",
+            )}
+          />
+
+          <section>
+            <div className="container">
+              <ProductGridLoadMore
+                products={caffeinePouches}
+              />
+            </div>
+          </section>
+        </>
+      )}
+
+      {/* Swedish Candy Products Section */}
       {candyProducts.length > 0 && (
         <>
           <CategoryHeader
-            title="Tuggummi & Konfektyr"
-            description="Hjälper med orala vanor och verkar stressreducerande genom distraktion. Helt nikotinfritt."
+            title="Swedish Candy"
+            description="Discover our selection of Swedish candy, including popular brands and unique flavors that offer a sweet and satisfying treat for every palate."
             imageSrc="/images/icons/candy.svg"
             imageAlt="Candy and gum icons"
             imageClassName="w-24 opacity-20 sm:w-32 invert brightness-200"
@@ -345,8 +280,8 @@ export default async function ShopPage() {
       {accessories.length > 0 && (
         <>
           <CategoryHeader
-            title="Tillbehör"
-            description="Komplettera din vape-upplevelse med praktiska tillbehör som laddare, fodral och andra användbara produkter."
+            title="Accessories"
+            description="Complement your nicotine pouch experience with practical accessories."
             imageSrc="/images/icons/accessory_icon_charger.svg"
             imageAlt="Vape accessories icons"
             categoryHref={ROUTES.SHOP.CATEGORY("tillbehor")}

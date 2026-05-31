@@ -176,6 +176,8 @@ export default async function SingleProductPage({
     productSlug,
   );
 
+  console.log("product: ", product);
+
   if (!product) {
     return (
       <section>
@@ -294,6 +296,24 @@ export default async function SingleProductPage({
     ],
   };
 
+  const primaryMedia =
+    product.media?.find(
+      (m) => m.role === "PRIMARY_IMAGE",
+    ) ?? product.media?.[0];
+
+  const imageUrl =
+    getImageUrl(primaryMedia?.mediaAsset?.url) ||
+    fallBackImage;
+
+  const imageWidth = primaryMedia?.mediaAsset?.width;
+  const imageHeight = primaryMedia?.mediaAsset?.height;
+  const imageDimensions =
+    imageWidth && imageHeight
+      ? { width: imageWidth, height: imageHeight }
+      : { fill: true };
+
+  const imageAlt =
+    primaryMedia?.mediaAsset?.altText || product.name;
   return (
     <>
       <section className="overflow-hidden pt-4 md:pt-8 md:pb-4">
@@ -316,13 +336,9 @@ export default async function SingleProductPage({
             {/* Product Image Column */}
             <div className="relative flex w-full items-center justify-center md:w-1/3">
               <Image
-                src={
-                  getImageUrl(product.imgUrl) ||
-                  fallBackImage
-                }
-                alt={product.name}
-                width={600}
-                height={700}
+                src={imageUrl}
+                alt={imageAlt}
+                {...imageDimensions}
                 fetchPriority="high"
                 loading="eager"
                 className="z-20 h-auto w-auto"

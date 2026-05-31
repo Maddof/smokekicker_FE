@@ -29,8 +29,11 @@ export default function CategoryHeader({
                 href={categoryHref}
                 className="inline-flex items-center gap-1 font-medium"
               >
-                Visa allt inom {title}
-                <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                View all in {title}
+                <ChevronRight
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                />
               </Link>
             )}
           </div>

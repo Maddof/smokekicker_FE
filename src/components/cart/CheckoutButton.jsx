@@ -7,13 +7,12 @@ import { cn } from "@/lib/utils";
 import { SheetClose } from "../ui/scn/sheet";
 import { ROUTES } from "@/config/routes";
 
-
 const CheckoutButton = () => {
   const { loading } = useCart(); // Access the cart from context
 
-  const buttonLabel = "Till Kassan";
+  const buttonLabel = "To Checkout";
 
-  // If cart is empty or only contains free starter kits, disable the link by making it a span
+  // If cart is empty, disable the link by making it a span
   if (loading) {
     return (
       <span
@@ -34,7 +33,7 @@ const CheckoutButton = () => {
         href={ROUTES.CHECKOUT}
         className={cn(
           buttonVariants({ variant: "default" }),
-          "mt-4 block w-full text-center tracking-wide uppercase",
+          "mt-4 flex w-full text-center tracking-wide uppercase",
         )}
       >
         {buttonLabel}

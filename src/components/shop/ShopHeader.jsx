@@ -5,16 +5,16 @@ import { ChevronDown } from "lucide-react";
 import { ROUTES } from "@/config/routes";
 
 export default function ShopHeader({
-  title = "Vape och vitt snus med omtanke",
-  description = "Upptäck utvalda podsystem från Frunk Bar, förfyllda pods, nikotintuggummi och smarta prenumerationer – ett enklare och mer kontrollerat alternativ till traditionell rökning.",
-  backgroundImage = "/images/bg/vape_bg_shop.jpg",
-  backgroundAlt = "Vape Hero Background",
-  primaryButtonText = "Se ala produkter",
+  title = "Nicotine Pouches Delivered Worldwide",
+  description = "Discover selected pod systems from Frunk Bar, pre-filled pods, nicotine gum, and smart subscriptions – a simpler and more controlled alternative to traditional smoking.",
+  backgroundImage = "/images/bg/nicotine-pouch_neon-bg.jpg",
+  backgroundAlt = "Nicotine pouches in neon",
+  primaryButtonText = "View All Products",
   primaryButtonLink = "#category-picker",
-  secondaryButtonText = "Se prenumerationer",
+  secondaryButtonText = "View Subscriptions",
   secondaryButtonLink = "#subscriptions",
   showNavigationButtons = true,
-  viewProductsText = "Se produkter",
+  viewProductsText = "View Products",
   warningLabelText,
 }) {
   return (
@@ -59,21 +59,26 @@ export default function ShopHeader({
                   asChild
                   className="text-secondary-foreground hover:text-secondary-foreground"
                 >
-                  <a href={secondaryButtonLink}>{secondaryButtonText}</a>
+                  <a href={secondaryButtonLink}>
+                    {secondaryButtonText}
+                  </a>
                 </Button>
               </>
             ) : (
               /* Anchor link to products section */
               /* Anchor link to products section with arrow */
               <div className="flex flex-col items-start gap-2">
-                <Button asChild className="flex items-center gap-2">
+                <Button
+                  asChild
+                  className="flex items-center gap-2"
+                >
                   <a href="#category-picker">
                     {viewProductsText}
                     <ChevronDown className="ml-1 h-4 w-4 animate-bounce" />
                   </a>
                 </Button>
                 <span className="text-xs text-white/60">
-                  Scrolla ner för att se {title.toLowerCase()}
+                  Scroll down to view {title.toLowerCase()}
                 </span>
               </div>
             )}
@@ -83,13 +88,13 @@ export default function ShopHeader({
             <Image
               className="w-10"
               src="/images/icons/plus-18_white.svg"
-              alt="18 års gräns"
+              alt="18+"
               width={48}
               height={48}
             />
             <p className="text-xs text-white/70">
               {warningLabelText ||
-                "Elektroniska cigaretter är nikotinprodukter för vuxna och innehåller nikotin som är ett mycket beroendeframkallande ämne. Åldersverifikation (BankID) krävs för varje köp."}
+                "Nicotine is an addictive substance. Not for sale to minors. Use responsibly."}
             </p>
           </div>
         </div>

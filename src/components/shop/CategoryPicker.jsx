@@ -3,30 +3,27 @@ import { ROUTES } from "@/config/routes";
 
 export default function CategoryPicker({ currentPath }) {
   const categories = [
-    { name: "Alla produkter", href: ROUTES.SHOP.INDEX },
+    { name: "All Products", href: ROUTES.SHOP.INDEX },
     {
-      name: "Start-kit Förfyllda Podsystem",
-      href: `${ROUTES.SHOP.INDEX}/start-kit-forfyllda-podsystem`,
+      name: "Nicotine Pouches",
+      href: `${ROUTES.SHOP.INDEX}/nicotine-pouches`,
     },
     {
-      name: "Start-kit Vape",
-      href: `${ROUTES.SHOP.INDEX}/start-kit-vape`,
+      name: "Nicotine Free Pouches",
+      href: `${ROUTES.SHOP.INDEX}/nicotine-free-pouches`,
     },
     {
-      name: "Förfyllda poddar",
-      href: `${ROUTES.SHOP.INDEX}/forfyllda-poddar`,
+      name: "Caffeine Pouches",
+      href: `${ROUTES.SHOP.INDEX}/caffeine-pouches`,
     },
     {
-      name: "E-Juice",
-      href: `${ROUTES.SHOP.INDEX}/e-juice`,
+      name: "Swedish Candy",
+      href: `${ROUTES.SHOP.INDEX}/swedish-candy`,
     },
-    { name: "Vitt snus", href: `${ROUTES.SHOP.INDEX}/vitt-snus` },
     {
-      name: "Nikotinavvänjning",
-      href: `${ROUTES.SHOP.INDEX}/nikotinavvanjning`,
+      name: "Accessories",
+      href: `${ROUTES.SHOP.INDEX}/accessories`,
     },
-    { name: "Konfektyr", href: `${ROUTES.SHOP.INDEX}/konfektyr` },
-    { name: "Tillbehör", href: `${ROUTES.SHOP.INDEX}/tillbehor` },
   ];
 
   return (
@@ -40,7 +37,7 @@ export default function CategoryPicker({ currentPath }) {
           <div className="mb-2 flex items-center justify-center gap-2">
             <div className="bg-primary/70 h-0.5 w-6"></div>
             <span className="text-muted text-center text-xs uppercase sm:text-base">
-              Välj Produktkategori
+              Pick a product category
             </span>
             <div className="bg-primary/70 h-0.5 w-6"></div>
           </div>
@@ -56,7 +53,9 @@ export default function CategoryPicker({ currentPath }) {
                   <Link
                     href={cat.href}
                     className={`${
-                      isActive ? "bg-primary border" : "hover:text-primary"
+                      isActive
+                        ? "bg-primary border"
+                        : "hover:text-primary"
                     } border-primary text-foreground block rounded-lg border px-2 py-2`}
                   >
                     {cat.name}

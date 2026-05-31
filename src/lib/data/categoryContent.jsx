@@ -1,109 +1,86 @@
 import { CATEGORY_SLUGS } from "./categorySlugs";
 
-const vapeWarningText =
-  "Elektroniska cigaretter är nikotinprodukter för vuxna och innehåller nikotin som är ett mycket beroendeframkallande ämne. Åldersverifikation (BankID) krävs för varje köp.";
+const nicotineWarningText =
+  "Nicotine is an addictive substance. Not for sale to minors. Use responsibly.";
 
 export const categoryContent = {
   [CATEGORY_SLUGS.DEFAULT]: {
-    title: "Allt inom vape, e-juice och vitt snus",
+    title: "Nicotine Pouches Delivered Worldwide",
     description:
-      "Upptäck lättanvända podsystem, förfyllda pods, e-juice, vitt snus och nikotinprodukter – noggrant utvalda för att stötta ett steg bort från traditionell tobak. Eller smarta prenumerationer som ser till att du alltid har ettt fräscht vape-kit. För dig som vill gå hela vägen erbjuder vi även nikotinfria alternativ och klassisk konfektyr för att bryta vanor.",
-    heroImage: "/images/bg/vape_bg_shop.jpg",
-    heroImageAlt: "Vape maskin i neon",
-    showNavigationButtons: true,
-    warningLabelText: vapeWarningText,
+      "Explore a wide selection of tobacco-free nicotine pouches in popular flavors and strengths. Shop leading brands and discover your next favorite pouch.",
+    heroImage: "/images/bg/nicotine-pouch_neon-bg.jpg",
+    heroImageAlt: "Nicotine pouches in neon",
+    showNavigationButtons: false,
+    warningLabelText: nicotineWarningText,
     belowHero: {
-      title: "Upptäck vårt sortiment",
-      iconImgBg: "/images/icons/sketches/multiple_pods_transp.png",
-      inconImgBgAlt: "Vape pods illustration",
+      title: "Discover Our Range",
+      iconImgBg:
+        "/images/icons/sketches/nicotine_pouch_sketch-min.png",
+      inconImgBgAlt: "Nicotine pouches illustration",
       initialParagraphs: 3,
       content: (
         <>
+          <h2 className="mt-4 font-bold">
+            Find the Right Nicotine Pouch for You
+          </h2>
+
           <p>
-            På <b>Smokify</b> gör vi saker lite annorlunda. Här hittar du varken
-            engångsvapes eller nikotinstarka snuspåsar. I stället fokuserar vi
-            på kvalitativa, användarvänliga och återanvändbara produkter som ger
-            dig kontroll över ditt nikotinintag – och hjälper dig på vägen mot
-            en framtid utan traditionell tobak.
+            Nicotine pouches offer a modern, tobacco-free
+            alternative for adult nicotine users. Available
+            in a variety of flavors, strengths, and formats,
+            they provide a discreet and convenient
+            experience that fits seamlessly into everyday
+            life.
           </p>
           <p>
-            Vi tror på att göra skillnad – både för dig och för miljön. Därför
-            väljer vi produkter som minskar avfall och är bättre för planeten,
-            till exempel podsystem där endast själva poden byts ut istället för
-            hela enheten. Vi undviker engångsprodukter och samarbetar med
-            varumärken som delar vårt engagemang för hållbarhet och kvalitet.
+            Whether you prefer refreshing mint flavors,
+            fruity blends, citrus notes, or unique flavor
+            combinations, you'll find a wide selection of
+            nicotine pouches to suit your preferences. From
+            lower-strength options to extra strong
+            varieties, there are products available for both
+            new and experienced users.
+          </p>
+          <h2 className="mt-4 font-bold">
+            Explore Top Brands and Popular Flavors
+          </h2>
+          <p>
+            Browse nicotine pouches from some of the most
+            recognized brands in the industry. Discover slim
+            and mini formats, a wide range of nicotine
+            strengths, and flavors including mint, berry,
+            citrus, coffee, and more.
           </p>
           <p>
-            Från förfyllda pods och podsystem till vitt snus och
-            nikotintuggummin – vårt sortiment är noga utvalt för att vara
-            enkelt, stilrent och tillfredsställande. Allt för att göra ditt val
-            både smartare och mer hållbart.
-          </p>
-          <h2 className="mt-4 font-bold">Våra produktkategorier</h2>
-          <h3 className="mt-3 font-semibold">Prenumerationer</h3>
-          <p>
-            Få dina favoritsmaker levererade regelbundet direkt hem och slipp
-            stressen med spontanköp. Du sparar både tid och pengar, samtidigt
-            som du minskar onödigt avfall. Du bestämmer själv innehåll och
-            leveransintervall. Underhållsprodukter ingår också för att du alltid
-            ska ha det du behöver.
+            Our collection is regularly updated with new
+            releases and customer favorites, making it easy
+            to find the latest products and best-selling
+            nicotine pouches in one place.
           </p>
           <h3 className="mt-4 font-semibold">
-            Podsystem Startkit (förfyllda pods)
+            Why Choose Nicotine Pouches?
           </h3>
-          <p>
-            Den perfekta starten för dig som vill börja med vaping. Kompletta
-            paket med batterienhet, laddare och ofta en eller flera pods. När
-            smaken förändras eller börjar smaka bränt byter du enkelt pod i
-            stället för hela enheten.
-          </p>
-          <h3 className="mt-4 font-semibold">
-            Startkit Vape (påfyllningsbara pods)
-          </h3>
-          <p>
-            För dig som vill ha mer frihet att välja smak och nikotinstyrka.
-            Våra påfyllningsbara podsystem har integrerade coils i varje pod, så
-            du byter bara pod när det är dags – lika enkelt som förfyllda pods
-            (nästan).
-          </p>
-          <h3 className="mt-3 font-semibold">Förfyllda Poddar</h3>
-          <p>
-            Praktiska pods med färdig e-vätska som enkelt klickas på ditt
-            podsystem. Finns i olika smaker och nikotinstyrkor för att passa din
-            personliga preferens – och med mindre avfall än engångsvapes.
-          </p>
-          <h3 className="mt-3 font-semibold">E-juice</h3>
-          <p>
-            E-juice för påfyllningsbara podsystem, med ett brett utbud av smaker
-            och nikotinstyrkor. Välj din favorit och fyll på dina pods när det
-            behövs för en skräddarsydd vaping-upplevelse.
-          </p>
-          <h3 className="mt-3 font-semibold">Vitt Snus</h3>
-          <p>
-            Ett tobaksfritt, diskret och modernt nikotinalternativ. Vitt snus
-            missfärgar inte tänderna och är enkelt att använda var du än är –
-            ett smart val för dig som vill undvika tobak men ändå ha nikotin.
-          </p>
-          <h3 className="mt-3 font-semibold">Nikotinersättning</h3>
-          <p>
-            Nikotintuggummin och liknande produkter gör det lättare att hantera
-            nikotinbehovet på ett flexibelt och kontrollerat sätt. Perfekt för
-            dig som vill trappa ner eller sluta helt, utan att ge upp
-            vardagsfriheten.
-          </p>
-          <h3 className="mt-3 font-semibold">Konfektyr</h3>
-          <p>
-            Nikotinfritt tuggummi och godis som hjälper dig minska röksuget och
-            bryta vanor. Ett smart sätt att hålla munnen sysselsatt – och ett
-            steg närmare ett helt nikotinfritt liv.
-          </p>
+          <ul>
+            <li>
+              Tobacco-free alternatives for adult nicotine
+              users
+            </li>
+            <li>
+              Available in multiple nicotine strengths
+            </li>
+            <li>
+              Wide variety of flavors and pouch formats
+            </li>
+            <li>Discreet and convenient to use</li>
+            <li>Suitable for use without smoke or vapor</li>
+          </ul>
         </>
       ),
     },
     relatedPostsSection: {
-      title: "Blogginlägg om vape, podsystem och nikotinfritt",
+      title: "Guides and Tips for Nicotine Pouches",
       description:
-        "Läs guider och tips om podsystem, e-juice, vitt snus och rökfria alternativ – allt för att hjälpa dig ta ett steg bort från tobak.",
+        "Read guides and tips about white snus, nicotine pouches, and smoke-free alternatives – all to help you take a step away from tobacco.",
     },
   },
   [CATEGORY_SLUGS.START_KIT_PREFILLED]: {
@@ -115,51 +92,73 @@ export const categoryContent = {
     showNavigationButtons: false,
     belowHero: {
       title: "Vad är ett podsystem?",
-      iconImgBg: "/images/icons/sketches/vape_sketch_bg.png",
+      iconImgBg:
+        "/images/icons/sketches/vape_sketch_bg.png",
       inconImgBgAlt: "Vape pods illustration",
       initialParagraphs: 2,
       content: (
         <>
           <p>
-            Ett podsystem är en modern och användarvänlig form av e-cigarett,
-            särskilt utvecklad för att ge en smidig och diskret
-            nikotinupplevelse. Till skillnad från stora vape-enheter med
-            avancerade inställningar, är podsystem små, kompakta och enkla att
-            använda – ofta utan några knappar alls.
+            Ett podsystem är en modern och användarvänlig
+            form av e-cigarett, särskilt utvecklad för att
+            ge en smidig och diskret nikotinupplevelse. Till
+            skillnad från stora vape-enheter med avancerade
+            inställningar, är podsystem små, kompakta och
+            enkla att använda – ofta utan några knappar
+            alls.
           </p>
           <p>
-            Ett podsystem består av två delar: själva enheten (batteriet) och en
-            pod, alltså en kapsel fylld med e-vätska. Podden kan vara förfylld
-            eller påfyllningsbar beroende på modell, vi saluför båda varianter.
-            När smaken förändras eller podden är slut, byter du den enkelt mot
-            en ny.
+            Ett podsystem består av två delar: själva
+            enheten (batteriet) och en pod, alltså en kapsel
+            fylld med e-vätska. Podden kan vara förfylld
+            eller påfyllningsbar beroende på modell, vi
+            saluför båda varianter. När smaken förändras
+            eller podden är slut, byter du den enkelt mot en
+            ny.
           </p>
-          <h2 className="mt-4 font-bold">Fördelar med podsystem</h2>
+          <h2 className="mt-4 font-bold">
+            Fördelar med podsystem
+          </h2>
 
-          <h3 className="mt-3 font-semibold">Diskret & användarvänligt</h3>
+          <h3 className="mt-3 font-semibold">
+            Diskret & användarvänligt
+          </h3>
           <p>
-            Liten storlek, smidig design och inga komplicerade inställningar gör
-            podsystem perfekta både för nybörjare och vana användare.
+            Liten storlek, smidig design och inga
+            komplicerade inställningar gör podsystem
+            perfekta både för nybörjare och vana användare.
           </p>
-          <h3 className="mt-3 font-semibold">Kostnadseffektivt</h3>
-          <p>Podsystem är ofta billigare i drift än engångsvapes.</p>
-          <h3 className="mt-3 font-semibold">Mer hållbart & miljövänligt</h3>
+          <h3 className="mt-3 font-semibold">
+            Kostnadseffektivt
+          </h3>
           <p>
-            Engångsvapes slängs efter användning och bidrar till stora mängder
-            avfall. Med podsystem byter du bara ut själva poden, inte hela
-            enheten – vilket sparar både resurser och miljön.
+            Podsystem är ofta billigare i drift än
+            engångsvapes.
           </p>
-          <h3 className="mt-3 font-semibold">Ingen rök, bara ånga</h3>
+          <h3 className="mt-3 font-semibold">
+            Mer hållbart & miljövänligt
+          </h3>
           <p>
-            Cigaretter innehåller tusentals kemikalier, varav många är
-            cancerframkallande. Podsystem eliminerar tobaksförbränning, vilket
-            kraftigt minskar mängden farliga ämnen du får i dig.
+            Engångsvapes slängs efter användning och bidrar
+            till stora mängder avfall. Med podsystem byter
+            du bara ut själva poden, inte hela enheten –
+            vilket sparar både resurser och miljön.
+          </p>
+          <h3 className="mt-3 font-semibold">
+            Ingen rök, bara ånga
+          </h3>
+          <p>
+            Cigaretter innehåller tusentals kemikalier,
+            varav många är cancerframkallande. Podsystem
+            eliminerar tobaksförbränning, vilket kraftigt
+            minskar mängden farliga ämnen du får i dig.
           </p>
         </>
       ),
     },
     relatedPostsSection: {
-      title: "Guider om förfyllda podsystem och vape startkit",
+      title:
+        "Guider om förfyllda podsystem och vape startkit",
       description:
         "Lär dig allt om förfyllda podsystem – hur du väljer rätt startkit, byter pods och får bästa möjliga vaping-upplevelse utan krångel.",
     },
@@ -171,114 +170,164 @@ export const categoryContent = {
     heroImage: "/images/bg/vape_bg_shop.jpg",
     heroImageAlt: "Påfyllningsbart podsystem i neon",
     showNavigationButtons: false,
-    warningLabelText: vapeWarningText,
+    warningLabelText: nicotineWarningText,
     belowHero: {
-      title: "Påfyllningsbara Podsystem - Frihet & Flexibilitet",
-      iconImgBg: "/images/icons/sketches/vape_sketch_bg.png",
-      inconImgBgAlt: "Påfyllningsbart podsystem illustration",
+      title:
+        "Påfyllningsbara Podsystem - Frihet & Flexibilitet",
+      iconImgBg:
+        "/images/icons/sketches/vape_sketch_bg.png",
+      inconImgBgAlt:
+        "Påfyllningsbart podsystem illustration",
       initialParagraphs: 2,
       content: (
         <>
           <p>
-            Våra påfyllningsbara podsystem kombinerar enkelheten hos förfyllda
-            pods med friheten att välja din egen e-juice. Med integrerade coils
-            i varje pod behöver du aldrig byta värmespiral separat – när smaken
-            börjar avta eller podden är slut, byter du helt enkelt till en ny
-            pod och fyller på med din favoritsmak.
+            Våra påfyllningsbara podsystem kombinerar
+            enkelheten hos förfyllda pods med friheten att
+            välja din egen e-juice. Med integrerade coils i
+            varje pod behöver du aldrig byta värmespiral
+            separat – när smaken börjar avta eller podden är
+            slut, byter du helt enkelt till en ny pod och
+            fyller på med din favoritsmak.
           </p>
           <p>
-            Det är det bästa av två världar: lika enkelt som förfyllda pods, men
-            med tillgång till hundratals e-juice-smaker och nikotinstyrkor. Du
-            får full kontroll över din vaping-upplevelse utan krångliga
-            inställningar eller komplicerat underhåll.
+            Det är det bästa av två världar: lika enkelt som
+            förfyllda pods, men med tillgång till hundratals
+            e-juice-smaker och nikotinstyrkor. Du får full
+            kontroll över din vaping-upplevelse utan
+            krångliga inställningar eller komplicerat
+            underhåll.
           </p>
 
-          <h2 className="mt-4 font-bold">Så fungerar det</h2>
-          <h3 className="mt-3 font-semibold">1. Fyll på podden</h3>
+          <h2 className="mt-4 font-bold">
+            Så fungerar det
+          </h2>
+          <h3 className="mt-3 font-semibold">
+            1. Fyll på podden
+          </h3>
           <p>
-            Öppna påfyllningshålet på podden och fyll på med valfri e-juice.
-            Vänta några minuter så att veken hinner absorbera vätskan ordentligt
-            innan första användning.
+            Öppna påfyllningshålet på podden och fyll på med
+            valfri e-juice. Vänta några minuter så att veken
+            hinner absorbera vätskan ordentligt innan första
+            användning.
           </p>
-          <h3 className="mt-3 font-semibold">2. Klicka fast podden</h3>
+          <h3 className="mt-3 font-semibold">
+            2. Klicka fast podden
+          </h3>
           <p>
-            Sätt i podden i din enhet – den klickar enkelt på plats med magneter
-            eller en snäppfunktion. Inga komplicerade anslutningar eller
+            Sätt i podden i din enhet – den klickar enkelt
+            på plats med magneter eller en snäppfunktion.
+            Inga komplicerade anslutningar eller
             inställningar.
           </p>
-          <h3 className="mt-3 font-semibold">3. Börja vejpa</h3>
+          <h3 className="mt-3 font-semibold">
+            3. Börja vejpa
+          </h3>
           <p>
-            De flesta av våra podsystem aktiveras automatiskt när du drar – inga
-            knappar, inga menyer. Bara en smidig och tillfredsställande
+            De flesta av våra podsystem aktiveras
+            automatiskt när du drar – inga knappar, inga
+            menyer. Bara en smidig och tillfredsställande
             upplevelse.
           </p>
-          <h3 className="mt-3 font-semibold">4. Byt pod vid behov</h3>
+          <h3 className="mt-3 font-semibold">
+            4. Byt pod vid behov
+          </h3>
           <p>
-            När smaken börjar förändras eller bli bränd är det dags att byta
-            pod. Tack vare den integrerade coilen behöver du aldrig byta
-            värmespiral separat – bara sätt i en ny pod och fortsätt.
+            När smaken börjar förändras eller bli bränd är
+            det dags att byta pod. Tack vare den integrerade
+            coilen behöver du aldrig byta värmespiral
+            separat – bara sätt i en ny pod och fortsätt.
           </p>
 
-          <h2 className="mt-4 font-bold">Fördelar med påfyllningsbara pods</h2>
-          <h3 className="mt-3 font-semibold">Obegränsade smakmöjligheter</h3>
+          <h2 className="mt-4 font-bold">
+            Fördelar med påfyllningsbara pods
+          </h2>
+          <h3 className="mt-3 font-semibold">
+            Obegränsade smakmöjligheter
+          </h3>
           <p>
-            Välj bland hundratals e-juice-smaker istället för att vara begränsad
-            till ett fåtal förfyllda alternativ. Från klassisk tobak och mentol
-            till exotiska frukter och söta desserter.
+            Välj bland hundratals e-juice-smaker istället
+            för att vara begränsad till ett fåtal förfyllda
+            alternativ. Från klassisk tobak och mentol till
+            exotiska frukter och söta desserter.
           </p>
-          <h3 className="mt-3 font-semibold">Ekonomiskt smart</h3>
+          <h3 className="mt-3 font-semibold">
+            Ekonomiskt smart
+          </h3>
           <p>
-            E-juice är mer ekonomiskt på längre sikt. På sikt sparar du pengar
-            samtidigt som du får tillgång till fler smaker.
+            E-juice är mer ekonomiskt på längre sikt. På
+            sikt sparar du pengar samtidigt som du får
+            tillgång till fler smaker.
           </p>
-          <h3 className="mt-3 font-semibold">Anpassa nikotinstyrkan</h3>
+          <h3 className="mt-3 font-semibold">
+            Anpassa nikotinstyrkan
+          </h3>
           <p>
-            Välj exakt den nikotinstyrka som passar dig – från nikotinfritt till
-            högre halter. Perfekt för dig som vill trappa ner gradvis eller
-            hitta din optimala nivå.
+            Välj exakt den nikotinstyrka som passar dig –
+            från nikotinfritt till högre halter. Perfekt för
+            dig som vill trappa ner gradvis eller hitta din
+            optimala nivå.
           </p>
           <h3 className="mt-3 font-semibold">
             Integrerade coils = Enkel användning
           </h3>
           <p>
-            Glöm krångliga coil-byten. Våra pods har inbyggda värmespiraler, så
-            du byter bara hela podden när det är dags. Lika enkelt som förfyllda
-            pods, men med mer frihet.
+            Glöm krångliga coil-byten. Våra pods har
+            inbyggda värmespiraler, så du byter bara hela
+            podden när det är dags. Lika enkelt som
+            förfyllda pods, men med mer frihet.
           </p>
-          <h3 className="mt-3 font-semibold">Mer miljövänligt</h3>
+          <h3 className="mt-3 font-semibold">
+            Mer miljövänligt
+          </h3>
           <p>
-            Du fyller på samma pod flera gånger innan du byter, vilket minskar
-            avfallet jämfört med förfyllda pods och engångsvapes.
+            Du fyller på samma pod flera gånger innan du
+            byter, vilket minskar avfallet jämfört med
+            förfyllda pods och engångsvapes.
           </p>
 
-          <h2 className="mt-4 font-bold">Tips för bästa upplevelse</h2>
-          <h3 className="mt-3 font-semibold">Låt podden "primea"</h3>
+          <h2 className="mt-4 font-bold">
+            Tips för bästa upplevelse
+          </h2>
+          <h3 className="mt-3 font-semibold">
+            Låt podden "primea"
+          </h3>
           <p>
-            När du fyller på en ny pod, vänta 5-10 minuter innan du börjar vejpa
-            så att bomullsveken hinner absorbera e-juicen. Detta förlänger
-            poddens livslängd och ger bättre smak.
+            När du fyller på en ny pod, vänta 5-10 minuter
+            innan du börjar vejpa så att bomullsveken hinner
+            absorbera e-juicen. Detta förlänger poddens
+            livslängd och ger bättre smak.
           </p>
-          <h3 className="mt-3 font-semibold">Undvik att fylla för mycket</h3>
+          <h3 className="mt-3 font-semibold">
+            Undvik att fylla för mycket
+          </h3>
           <p>
-            Fyll aldrig podden över max-markeringen. Överfyllning kan orsaka
-            läckage och spottande.
+            Fyll aldrig podden över max-markeringen.
+            Överfyllning kan orsaka läckage och spottande.
           </p>
-          <h3 className="mt-3 font-semibold">Byt pod i tid</h3>
+          <h3 className="mt-3 font-semibold">
+            Byt pod i tid
+          </h3>
           <p>
-            När smaken börjar bli bränd eller avvikande är det dags att byta
-            pod. Att fortsätta använda en utbränd coil ger en obehaglig
-            upplevelse och kan vara skadligt.
+            När smaken börjar bli bränd eller avvikande är
+            det dags att byta pod. Att fortsätta använda en
+            utbränd coil ger en obehaglig upplevelse och kan
+            vara skadligt.
           </p>
-          <h3 className="mt-3 font-semibold">Förvara e-juice korrekt</h3>
+          <h3 className="mt-3 font-semibold">
+            Förvara e-juice korrekt
+          </h3>
           <p>
-            Håll dina e-juicer mörkt, svalt och utom räckhåll för barn. Korrekt
-            förvaring bevarar smaken och förlänger hållbarheten.
+            Håll dina e-juicer mörkt, svalt och utom
+            räckhåll för barn. Korrekt förvaring bevarar
+            smaken och förlänger hållbarheten.
           </p>
         </>
       ),
     },
     relatedPostsSection: {
-      title: "Tips om påfyllningsbara podsystem och e-juice",
+      title:
+        "Tips om påfyllningsbara podsystem och e-juice",
       description:
         "Utforska guider om påfyllningsbara podsystem – rätt e-juice, hur du fyller på pods och tips för smidigare och mer flexibel vaping.",
     },
@@ -290,42 +339,54 @@ export const categoryContent = {
     heroImage: "/images/bg/vape-pods_bg_shoppage_2.jpg",
     heroImageAlt: "Förfyllda vape pods i neon",
     showNavigationButtons: false,
-    warningLabelText: vapeWarningText,
+    warningLabelText: nicotineWarningText,
     belowHero: {
       title: "Förfyllda Poddar - Enklast möjliga vaping",
-      iconImgBg: "/images/icons/sketches/multiple_pods_transp.png",
+      iconImgBg:
+        "/images/icons/sketches/multiple_pods_transp.png",
       inconImgBgAlt: "Förfyllda pods illustration",
       initialParagraphs: 2,
       content: (
         <>
           <p>
-            Förfyllda poddar är små kapslar fyllda med e-vätska som enkelt
-            klickas fast i ditt podsystem. När smaken börjar avta eller podden
-            är slut, byter du helt enkelt till en ny. Inga krångliga
-            påfyllningar, ingen kladd – bara en smidig och bekväm
-            vaping-upplevelse.
+            Förfyllda poddar är små kapslar fyllda med
+            e-vätska som enkelt klickas fast i ditt
+            podsystem. När smaken börjar avta eller podden
+            är slut, byter du helt enkelt till en ny. Inga
+            krångliga påfyllningar, ingen kladd – bara en
+            smidig och bekväm vaping-upplevelse.
           </p>
           <p>
-            Hos oss hittar du noggrant utvalda pods i flera olika smaker från
-            flera olika märken och nikotinstyrkor, så att du kan anpassa din
+            Hos oss hittar du noggrant utvalda pods i flera
+            olika smaker från flera olika märken och
+            nikotinstyrkor, så att du kan anpassa din
             upplevelse efter just dina behov.
           </p>
-          <h2 className="mt-4 font-bold">Fördelar med förfyllda pods</h2>
-          <h3 className="mt-3 font-semibold">Enkelt och bekvämt</h3>
+          <h2 className="mt-4 font-bold">
+            Fördelar med förfyllda pods
+          </h2>
+          <h3 className="mt-3 font-semibold">
+            Enkelt och bekvämt
+          </h3>
           <p>
-            Inga påfyllningar, inga läckage, inget kladd. Bara sätt i podden och
-            börja vejpa.
+            Inga påfyllningar, inga läckage, inget kladd.
+            Bara sätt i podden och börja vejpa.
           </p>
-          <h3 className="mt-3 font-semibold">Perfekt för nybörjare</h3>
+          <h3 className="mt-3 font-semibold">
+            Perfekt för nybörjare
+          </h3>
           <p>
-            Inget att ställa in, ingen e-juice att köpa separat. Allt du behöver
-            finns redan i förpackningen, redo att användas direkt.
+            Inget att ställa in, ingen e-juice att köpa
+            separat. Allt du behöver finns redan i
+            förpackningen, redo att användas direkt.
           </p>
           <p className="mt-3">
-            Passar dig som vill ha en enkel och bekväm lösning utan att fylla på
-            e-vätska själv. Uppskattar variation av smaker och vill kunna byta
-            snabbt och smidigt. Vill ha en diskret, modern och mer hållbar
-            alternativ till engångsvapes och cigaretter.
+            Passar dig som vill ha en enkel och bekväm
+            lösning utan att fylla på e-vätska själv.
+            Uppskattar variation av smaker och vill kunna
+            byta snabbt och smidigt. Vill ha en diskret,
+            modern och mer hållbar alternativ till
+            engångsvapes och cigaretter.
           </p>
         </>
       ),
@@ -343,117 +404,152 @@ export const categoryContent = {
     heroImage: "/images/bg/e-juice_bg.jpg",
     heroImageAlt: "E-juice flaska i neon ",
     showNavigationButtons: false,
-    warningLabelText: vapeWarningText,
+    warningLabelText: nicotineWarningText,
     belowHero: {
       title: "E-Juice - kontroll, smak och valfrihet",
-      iconImgBg: "/images/icons/sketches/e-juice_sketch.png",
+      iconImgBg:
+        "/images/icons/sketches/e-juice_sketch.png",
       inconImgBgAlt: "E-juice flaska illustration",
       initialParagraphs: 2,
       content: (
         <>
           <p>
-            E-juice, även kallat e-vätska eller vape juice, är hjärtat i din
-            vaping-upplevelse. Det är vätskan som förångas i din e-cigarett och
-            ger dig både smak och nikotin. Hos oss hittar du ett noggrant utvalt
-            sortiment av högkvalitativa e-juicer från pålitliga tillverkare –
-            allt för att ge dig den bästa möjliga upplevelsen.
+            E-juice, även kallat e-vätska eller vape juice,
+            är hjärtat i din vaping-upplevelse. Det är
+            vätskan som förångas i din e-cigarett och ger
+            dig både smak och nikotin. Hos oss hittar du ett
+            noggrant utvalt sortiment av högkvalitativa
+            e-juicer från pålitliga tillverkare – allt för
+            att ge dig den bästa möjliga upplevelsen.
           </p>
           <p>
-            Välj bland klassiska tobakssmaker, mentol, milda fruktprofiler och
-            diskreta söta alternativ. Våra e-juicer finns i flera nikotinstyrkor
-            – från nikotinfritt till kontrollerade nivåer – så att du kan
-            anpassa användningen efter dina behov och eventuella mål att minska
-            eller avsluta nikotinintag.
+            Välj bland klassiska tobakssmaker, mentol, milda
+            fruktprofiler och diskreta söta alternativ. Våra
+            e-juicer finns i flera nikotinstyrkor – från
+            nikotinfritt till kontrollerade nivåer – så att
+            du kan anpassa användningen efter dina behov och
+            eventuella mål att minska eller avsluta
+            nikotinintag.
           </p>
 
-          <h2 className="mt-4 font-bold">Vad innehåller e-juice?</h2>
+          <h2 className="mt-4 font-bold">
+            Vad innehåller e-juice?
+          </h2>
           <p>
-            E-juice består av några få, enkla ingredienser som tillsammans
-            skapar din vaping-upplevelse:
+            E-juice består av några få, enkla ingredienser
+            som tillsammans skapar din vaping-upplevelse:
           </p>
-          <h3 className="mt-3 font-semibold">Propylenglykol (PG)</h3>
+          <h3 className="mt-3 font-semibold">
+            Propylenglykol (PG)
+          </h3>
           <p>
-            En tunn, smakfri vätska som bär smaken effektivt och ger en starkare
-            "throat hit" – den känsla i halsen som liknar rökning. Högre PG-halt
-            passar dig som vill ha mer smak och en intensivare känsla.
+            En tunn, smakfri vätska som bär smaken effektivt
+            och ger en starkare "throat hit" – den känsla i
+            halsen som liknar rökning. Högre PG-halt passar
+            dig som vill ha mer smak och en intensivare
+            känsla.
           </p>
-          <h3 className="mt-3 font-semibold">Vegetabiliskt Glycerin (VG)</h3>
+          <h3 className="mt-3 font-semibold">
+            Vegetabiliskt Glycerin (VG)
+          </h3>
           <p>
-            En tjockare, något söt vätska som producerar stora, tjocka ångmoln.
-            Högre VG-halt passar dig som vill ha mjukare drag och imponerande
+            En tjockare, något söt vätska som producerar
+            stora, tjocka ångmoln. Högre VG-halt passar dig
+            som vill ha mjukare drag och imponerande
             ångproduktion.
           </p>
           <h3 className="mt-3 font-semibold">Smakämnen</h3>
           <p>
-            Livsmedelsklassade aromer som ger e-juicen dess unika smak. Från
-            autentiska tobakssmaker till kreativa frukt- och
-            dessertkombinationer.
+            Livsmedelsklassade aromer som ger e-juicen dess
+            unika smak. Från autentiska tobakssmaker till
+            kreativa frukt- och dessertkombinationer.
           </p>
-          <h3 className="mt-3 font-semibold">Nikotin (valfritt)</h3>
+          <h3 className="mt-3 font-semibold">
+            Nikotin (valfritt)
+          </h3>
           <p>
-            Farmaceutiskt nikotin i olika styrkor. Välj den nivå som passar dig
-            – eller gå helt nikotinfritt om du föredrar det.
-          </p>
-
-          <h2 className="mt-4 font-bold">Fördelar med e-juice</h2>
-          <h3 className="mt-3 font-semibold">Oändliga smakmöjligheter</h3>
-          <p>
-            Till skillnad från förfyllda pods har du med e-juice tillgång till
-            ett nästan obegränsat utbud av smaker. Blanda och matcha för att
-            skapa din egen unika kombination.
-          </p>
-          <h3 className="mt-3 font-semibold">Ekonomiskt smart</h3>
-          <p>
-            E-juice är ofta det mest prisvärda alternativet för regelbundna
-            vejpare.
-          </p>
-          <h3 className="mt-3 font-semibold">Full kontroll</h3>
-          <p>
-            Anpassa PG/VG-förhållande och nikotinstyrka efter dina preferenser.
-            Du bestämmer exakt hur din vaping-upplevelse ska kännas.
-          </p>
-          <h3 className="mt-3 font-semibold">Miljövänligare alternativ</h3>
-          <p>
-            Återanvändbara tankar och större flaskor innebär mindre
-            plastförbrukning och avfall jämfört med engångsprodukter.
+            Farmaceutiskt nikotin i olika styrkor. Välj den
+            nivå som passar dig – eller gå helt nikotinfritt
+            om du föredrar det.
           </p>
 
-          <h2 className="mt-4 font-bold">Välj rätt nikotinstyrka</h2>
+          <h2 className="mt-4 font-bold">
+            Fördelar med e-juice
+          </h2>
+          <h3 className="mt-3 font-semibold">
+            Oändliga smakmöjligheter
+          </h3>
           <p>
-            Att välja rätt nikotinstyrka är viktigt för en tillfredsställande
-            upplevelse:
+            Till skillnad från förfyllda pods har du med
+            e-juice tillgång till ett nästan obegränsat
+            utbud av smaker. Blanda och matcha för att skapa
+            din egen unika kombination.
+          </p>
+          <h3 className="mt-3 font-semibold">
+            Ekonomiskt smart
+          </h3>
+          <p>
+            E-juice är ofta det mest prisvärda alternativet
+            för regelbundna vejpare.
+          </p>
+          <h3 className="mt-3 font-semibold">
+            Full kontroll
+          </h3>
+          <p>
+            Anpassa PG/VG-förhållande och nikotinstyrka
+            efter dina preferenser. Du bestämmer exakt hur
+            din vaping-upplevelse ska kännas.
+          </p>
+          <h3 className="mt-3 font-semibold">
+            Miljövänligare alternativ
+          </h3>
+          <p>
+            Återanvändbara tankar och större flaskor innebär
+            mindre plastförbrukning och avfall jämfört med
+            engångsprodukter.
+          </p>
+
+          <h2 className="mt-4 font-bold">
+            Välj rätt nikotinstyrka
+          </h2>
+          <p>
+            Att välja rätt nikotinstyrka är viktigt för en
+            tillfredsställande upplevelse:
           </p>
           <ul className="mt-2 list-disc pl-6">
             <li>
-              <strong>0 mg:</strong> Nikotinfritt – för dig som vill känna av
-              smaken utan nikotin.
+              <strong>0 mg:</strong> Nikotinfritt – för dig
+              som vill känna av smaken utan nikotin.
             </li>
             <li>
-              <strong>3 mg:</strong> Låg styrka – passar lätta rökare eller de
-              som trappar ner.
+              <strong>3 mg:</strong> Låg styrka – passar
+              lätta rökare eller de som trappar ner.
             </li>
             <li>
-              <strong>6 mg:</strong> Medium styrka – för måttliga rökare.
+              <strong>6 mg:</strong> Medium styrka – för
+              måttliga rökare.
             </li>
             <li>
-              <strong>12 mg:</strong> Högre styrka – för dig som rökt mer
-              regelbundet.
+              <strong>12 mg:</strong> Högre styrka – för dig
+              som rökt mer regelbundet.
             </li>
             <li>
-              <strong>18+ mg:</strong> Hög styrka – för tunga rökare i
-              övergångsfasen.
+              <strong>18+ mg:</strong> Hög styrka – för
+              tunga rökare i övergångsfasen.
             </li>
           </ul>
           <p className="mt-3">
-            Vår rekommendation: Börja med en styrka som matchar dina nuvarande
-            vanor och justera sedan efter behov. Målet kan vara att gradvis
-            trappa ner till lägre styrkor eller helt nikotinfritt.
+            Vår rekommendation: Börja med en styrka som
+            matchar dina nuvarande vanor och justera sedan
+            efter behov. Målet kan vara att gradvis trappa
+            ner till lägre styrkor eller helt nikotinfritt.
           </p>
         </>
       ),
     },
     relatedPostsSection: {
-      title: "Allt om e-juice – smaker, styrkor och blandningar",
+      title:
+        "Allt om e-juice – smaker, styrkor och blandningar",
       description:
         "Utforska vår blogg för tips om hur du väljer e-juice, förstår PG/VG-förhållanden och hittar din perfekta nikotinstyrka och smak.",
     },
@@ -475,28 +571,34 @@ export const categoryContent = {
       content: (
         <>
           <p>
-            Nikotinersättning är produkter som hjälper dig hantera
-            nikotinbehovet på ett mer kontrollerat sätt – utan rök, tobak eller
-            onödiga tillsatser. Det är ett beprövat stöd för dig som vill trappa
-            ner eller sluta helt med cigaretter och andra tobaksprodukter.
+            Nikotinersättning är produkter som hjälper dig
+            hantera nikotinbehovet på ett mer kontrollerat
+            sätt – utan rök, tobak eller onödiga tillsatser.
+            Det är ett beprövat stöd för dig som vill trappa
+            ner eller sluta helt med cigaretter och andra
+            tobaksprodukter.
           </p>
           <p>
-            I vårt sortiment hittar du <strong>nikotintuggummin</strong>,{" "}
-            <strong>nikotinplåster</strong> och <strong>nikotinspray</strong> –
-            enkla och effektiva hjälpmedel som gör det lättare att ta kontroll
-            över ditt nikotinintag, steg för steg.
+            I vårt sortiment hittar du{" "}
+            <strong>nikotintuggummin</strong>,{" "}
+            <strong>nikotinplåster</strong> och{" "}
+            <strong>nikotinspray</strong> – enkla och
+            effektiva hjälpmedel som gör det lättare att ta
+            kontroll över ditt nikotinintag, steg för steg.
           </p>
           <p className="mt-3">
-            Passar dig som vill sluta röka eller snusa men fortfarande behöver
-            stöd i övergången. Söker ett tobaksfritt, diskret och beprövat
-            alternativ. Vill ha friheten att anpassa styrka och form efter dina
-            behov.
+            Passar dig som vill sluta röka eller snusa men
+            fortfarande behöver stöd i övergången. Söker ett
+            tobaksfritt, diskret och beprövat alternativ.
+            Vill ha friheten att anpassa styrka och form
+            efter dina behov.
           </p>
         </>
       ),
     },
     relatedPostsSection: {
-      title: "Guider om nikotinersättning och rökavvänjning",
+      title:
+        "Guider om nikotinersättning och rökavvänjning",
       description:
         "Läs om nikotintuggummi, plåster och spray – produkter som hjälper dig trappa ner eller sluta med nikotin på ett kontrollerat sätt.",
     },
@@ -511,57 +613,72 @@ export const categoryContent = {
     warningLabelText:
       "Vitt snus är en nikotinprodukt för vuxna och innehåller nikotin som är ett mycket beroendeframkallande ämne. Åldersverifikation (BankID) krävs för varje köp.",
     belowHero: {
-      title: "Vitt snus (nikotinpåsar) – tobaksfritt alternativ",
-      iconImgBg: "/images/icons/sketches/nicotine_pouch_sketch-min.png",
+      title:
+        "Vitt snus (nikotinpåsar) – tobaksfritt alternativ",
+      iconImgBg:
+        "/images/icons/sketches/nicotine_pouch_sketch-min.png",
       inconImgBgAlt: "Vitt snus illustration",
       initialParagraphs: 2,
       content: (
         <>
           <p>
-            Vitt snus, även kallat nikotinpåsar, är en tobaksfri nikotinprodukt
-            avsedd för vuxna användare (18+). Produkten innehåller nikotin, som
-            är ett beroendeframkallande ämne, men ingen tobak. Till skillnad
-            från traditionellt snus innehåller vitt snus växtfiber istället för
-            tobak, som inte orsakar missfärgning av tänder och utan tobaksdoft.
+            Vitt snus, även kallat nikotinpåsar, är en
+            tobaksfri nikotinprodukt avsedd för vuxna
+            användare (18+). Produkten innehåller nikotin,
+            som är ett beroendeframkallande ämne, men ingen
+            tobak. Till skillnad från traditionellt snus
+            innehåller vitt snus växtfiber istället för
+            tobak, som inte orsakar missfärgning av tänder
+            och utan tobaksdoft.
           </p>
           <p>
-            Portionspåsarna placeras under läppen och används utan rök eller
-            förbränning. Vitt snus avger ingen rök och har ingen tobaksdoft,
-            vilket gör produkten diskret vid användning.
+            Portionspåsarna placeras under läppen och
+            används utan rök eller förbränning. Vitt snus
+            avger ingen rök och har ingen tobaksdoft, vilket
+            gör produkten diskret vid användning.
           </p>
-          <h2 className="mt-4 font-bold">Så fungerar vitt snus</h2>
+          <h2 className="mt-4 font-bold">
+            Så fungerar vitt snus
+          </h2>
           <p>
-            Nikotinpåsarna placeras under överläppen där nikotinet absorberas
-            genom munslemhinnan. Eftersom produkten inte förbränns uppstår ingen
-            rök, vilket gör vitt snus till ett diskret alternativ – både inomhus
-            och i sociala sammanhang.
+            Nikotinpåsarna placeras under överläppen där
+            nikotinet absorberas genom munslemhinnan.
+            Eftersom produkten inte förbränns uppstår ingen
+            rök, vilket gör vitt snus till ett diskret
+            alternativ – både inomhus och i sociala
+            sammanhang.
           </p>
           <ul>
             <li>
-              <strong>Tobaksfritt snus:</strong> Innehåller ingen tobak – endast
-              nikotin och fyllnadsämnen.
+              <strong>Tobaksfritt snus:</strong> Innehåller
+              ingen tobak – endast nikotin och
+              fyllnadsämnen.
             </li>
             <li>
-              <strong>Rökfritt alternativ:</strong> Ingen rök, aska eller lukt.
+              <strong>Rökfritt alternativ:</strong> Ingen
+              rök, aska eller lukt.
             </li>
             <li>
-              <strong>Diskret format:</strong> Små, vita påsar som inte rinner
-              eller missfärgar.
+              <strong>Diskret format:</strong> Små, vita
+              påsar som inte rinner eller missfärgar.
             </li>
             <li>
-              <strong>Kontrollerad dosering:</strong> Varje portion innehåller
-              en jämn mängd nikotin.
+              <strong>Kontrollerad dosering:</strong> Varje
+              portion innehåller en jämn mängd nikotin.
             </li>
             <li>
-              <strong>Flera styrkor och smaker:</strong> Finns i olika
-              nikotinhalter och smaker.
+              <strong>Flera styrkor och smaker:</strong>{" "}
+              Finns i olika nikotinhalter och smaker.
             </li>
           </ul>
-          <h3 className="mt-3 font-semibold">Viktig Information</h3>
+          <h3 className="mt-3 font-semibold">
+            Viktig Information
+          </h3>
           <p>
-            Nikotin är ett mycket beroendeframkallande ämne. Denna produkt är
-            inte riskfri och rekommenderas endast för personer som redan
-            använder nikotin. Produkten ska inte användas av gravida eller
+            Nikotin är ett mycket beroendeframkallande ämne.
+            Denna produkt är inte riskfri och rekommenderas
+            endast för personer som redan använder nikotin.
+            Produkten ska inte användas av gravida eller
             ammande och ska förvaras utom räckhåll för barn.
           </p>
         </>
@@ -584,45 +701,64 @@ export const categoryContent = {
       "Konfektyrprodukter är nikotinfria och avsedda för vuxna (18+). Åldersverifikation (BankID) krävs för varje köp.",
     belowHero: {
       title: "Varför godis för rökstopp?",
-      iconImgBg: "/images/icons/sketches/candy_sketch-min.png",
+      iconImgBg:
+        "/images/icons/sketches/candy_sketch-min.png",
       inconImgBgAlt: "Konfektyr illustration",
       initialParagraphs: 1,
       content: (
         <>
           <p>
-            Våra konfektyrprodukter – tuggummin, pastiller och godis – är helt
-            nikotinfria alternativ som kan hjälpa dig att hantera röksug och
-            bryta vanor. De är ett perfekt komplement till
-            nikotinersättningsprodukter eller som sista steget mot ett helt
-            nikotinfritt liv.
+            Våra konfektyrprodukter – tuggummin, pastiller
+            och godis – är helt nikotinfria alternativ som
+            kan hjälpa dig att hantera röksug och bryta
+            vanor. De är ett perfekt komplement till
+            nikotinersättningsprodukter eller som sista
+            steget mot ett helt nikotinfritt liv.
           </p>
-          <h2 className="mt-4 font-bold">Fördelar med konfektyr</h2>
-          <h3 className="mt-3 font-semibold">Hjälper vid orala vanor</h3>
+          <h2 className="mt-4 font-bold">
+            Fördelar med konfektyr
+          </h2>
+          <h3 className="mt-3 font-semibold">
+            Hjälper vid orala vanor
+          </h3>
           <p>
-            Många som slutar röka saknar känslan av att ha något i munnen. Våra
-            produkter ersätter den orala fixeringen som ofta är kopplad till
+            Många som slutar röka saknar känslan av att ha
+            något i munnen. Våra produkter ersätter den
+            orala fixeringen som ofta är kopplad till
             rökning.
           </p>
-          <h3 className="mt-3 font-semibold">Stressreducerande</h3>
+          <h3 className="mt-3 font-semibold">
+            Stressreducerande
+          </h3>
           <p>
-            Tuggande kan ha en lugnande effekt och bidra till minskad stress och
-            ångest under avvänjningsperioden.
+            Tuggande kan ha en lugnande effekt och bidra
+            till minskad stress och ångest under
+            avvänjningsperioden.
           </p>
-          <h3 className="mt-3 font-semibold">Helt nikotinfritt</h3>
+          <h3 className="mt-3 font-semibold">
+            Helt nikotinfritt
+          </h3>
           <p>
-            Till skillnad från nikotinersättningsprodukter innehåller konfektyr
-            inget nikotin – perfekt för dig som vill ta det sista steget bort
-            från nikotin helt och hållet.
+            Till skillnad från nikotinersättningsprodukter
+            innehåller konfektyr inget nikotin – perfekt för
+            dig som vill ta det sista steget bort från
+            nikotin helt och hållet.
           </p>
-          <h3 className="mt-3 font-semibold">Distraktionseffekt</h3>
+          <h3 className="mt-3 font-semibold">
+            Distraktionseffekt
+          </h3>
           <p>
-            En stark smak, en pastill eller en slickepinne kan ge dig något
-            annat att fokusera på när suget efter nikotin gör sig påmint.
+            En stark smak, en pastill eller en slickepinne
+            kan ge dig något annat att fokusera på när suget
+            efter nikotin gör sig påmint.
           </p>
-          <h3 className="mt-3 font-semibold">Ett hälsosammare substitut</h3>
+          <h3 className="mt-3 font-semibold">
+            Ett hälsosammare substitut
+          </h3>
           <p>
-            Istället för att återgå till rökning eller ta en cigarett under sug,
-            kan konfektyr vara en enkel, vardagsvänlig lösning.
+            Istället för att återgå till rökning eller ta en
+            cigarett under sug, kan konfektyr vara en enkel,
+            vardagsvänlig lösning.
           </p>
         </>
       ),
@@ -638,94 +774,130 @@ export const categoryContent = {
     title: "Tillbehör",
     description:
       "Allt du behöver för att hålla din vape i toppskick. Coils, pods, batterier och laddare – hitta rätt reservdelar och tillbehör för ditt podsystem.",
-    heroImage: "/images/bg/vape_accessories_bg_shoppage.jpg",
+    heroImage:
+      "/images/bg/vape_accessories_bg_shoppage.jpg",
     heroImageAlt: "Vape tillbehör i neon",
     showNavigationButtons: false,
     warningLabelText:
       "Vape-produkter är avsedda för vuxna (18+). Åldersverifikation (BankID) krävs för varje köp.",
     belowHero: {
       title: "Tillbehör - Håll din vape i toppform",
-      iconImgBg: "/images/icons/sketches/usb_charger_sketch.png",
+      iconImgBg:
+        "/images/icons/sketches/usb_charger_sketch.png",
       inconImgBgAlt: "Vape tillbehör illustration",
       initialParagraphs: 2,
       content: (
         <>
           <p>
-            Här hittar du alla tillbehör du behöver för att få ut det mesta av
-            din vaping-upplevelse. Oavsett om du behöver nya coils för bättre
-            smak, extra pods för att byta mellan smaker, eller en ny laddare för
-            att hålla enheten redo – vi har dig täckt.
+            Här hittar du alla tillbehör du behöver för att
+            få ut det mesta av din vaping-upplevelse.
+            Oavsett om du behöver nya coils för bättre smak,
+            extra pods för att byta mellan smaker, eller en
+            ny laddare för att hålla enheten redo – vi har
+            dig täckt.
           </p>
           <p>
-            Regelbundet underhåll och rätt tillbehör gör stor skillnad. Med
-            fräscha coils får du renare smak, med extra pods kan du växla mellan
-            favoritsmaker utan att behöva tömma och fylla på, och med pålitliga
-            laddare har du alltid batterikraft när du behöver den.
+            Regelbundet underhåll och rätt tillbehör gör
+            stor skillnad. Med fräscha coils får du renare
+            smak, med extra pods kan du växla mellan
+            favoritsmaker utan att behöva tömma och fylla
+            på, och med pålitliga laddare har du alltid
+            batterikraft när du behöver den.
           </p>
 
-          <h2 className="mt-4 font-bold">Våra tillbehörskategorier</h2>
+          <h2 className="mt-4 font-bold">
+            Våra tillbehörskategorier
+          </h2>
 
-          <h3 className="mt-3 font-semibold">Coils (Värmespiraler)</h3>
+          <h3 className="mt-3 font-semibold">
+            Coils (Värmespiraler)
+          </h3>
           <p>
-            Coilen är hjärtat i din vape – det är den som värmer upp e-juicen
-            och skapar ångan. Med tiden slits coilen och smaken försämras. Byt
-            coil regelbundet för att behålla ren, intensiv smak och undvika
-            brända drag. Vi har coils för de flesta populära podsystem.
+            Coilen är hjärtat i din vape – det är den som
+            värmer upp e-juicen och skapar ångan. Med tiden
+            slits coilen och smaken försämras. Byt coil
+            regelbundet för att behålla ren, intensiv smak
+            och undvika brända drag. Vi har coils för de
+            flesta populära podsystem.
           </p>
 
-          <h3 className="mt-3 font-semibold">Pods (Patroner)</h3>
+          <h3 className="mt-3 font-semibold">
+            Pods (Patroner)
+          </h3>
           <p>
-            Extra pods är perfekt för dig som gillar att ha flera smaker igång
-            samtidigt. Fyll olika pods med olika e-juicer och byt enkelt mellan
-            dem efter humör. Pods med integrerade coils gör bytet ännu smidigare
-            – bara klicka på en ny pod och fortsätt.
+            Extra pods är perfekt för dig som gillar att ha
+            flera smaker igång samtidigt. Fyll olika pods
+            med olika e-juicer och byt enkelt mellan dem
+            efter humör. Pods med integrerade coils gör
+            bytet ännu smidigare – bara klicka på en ny pod
+            och fortsätt.
           </p>
 
           <h3 className="mt-3 font-semibold">Batterier</h3>
           <p>
-            Har ditt batteri börjat tappa kapacitet? Ett nytt batteri ger dig
-            längre användningstid och jämnare effekt. Vi erbjuder
-            ersättningsbatterier och kompletta enheter för utvalda podsystem.
+            Har ditt batteri börjat tappa kapacitet? Ett
+            nytt batteri ger dig längre användningstid och
+            jämnare effekt. Vi erbjuder ersättningsbatterier
+            och kompletta enheter för utvalda podsystem.
           </p>
 
-          <h3 className="mt-3 font-semibold">Laddare & Kablar</h3>
+          <h3 className="mt-3 font-semibold">
+            Laddare & Kablar
+          </h3>
           <p>
-            Tappat bort laddaren eller behöver en extra? Våra USB-C-laddare och
-            kablar är kompatibla med de flesta moderna podsystem. Ha en hemma,
-            en på jobbet och en i väskan – så är du alltid redo.
+            Tappat bort laddaren eller behöver en extra?
+            Våra USB-C-laddare och kablar är kompatibla med
+            de flesta moderna podsystem. Ha en hemma, en på
+            jobbet och en i väskan – så är du alltid redo.
           </p>
 
-          <h2 className="mt-4 font-bold">Varför köpa tillbehör hos oss?</h2>
+          <h2 className="mt-4 font-bold">
+            Varför köpa tillbehör hos oss?
+          </h2>
 
-          <h3 className="mt-3 font-semibold">Originaltillbehör</h3>
+          <h3 className="mt-3 font-semibold">
+            Originaltillbehör
+          </h3>
           <p>
-            Vi säljer endast originaltillbehör och kvalitetsprodukter från
-            pålitliga tillverkare. Inga kopior eller billiga ersättningar som
-            kan skada din enhet eller ge sämre upplevelse.
+            Vi säljer endast originaltillbehör och
+            kvalitetsprodukter från pålitliga tillverkare.
+            Inga kopior eller billiga ersättningar som kan
+            skada din enhet eller ge sämre upplevelse.
           </p>
 
-          <h3 className="mt-3 font-semibold">Rätt tillbehör till rätt enhet</h3>
+          <h3 className="mt-3 font-semibold">
+            Rätt tillbehör till rätt enhet
+          </h3>
           <p>
-            Osäker på vilken coil eller pod som passar din enhet? Varje produkt
-            har tydlig information om kompatibilitet. Du kan också kontakta oss
-            om du behöver hjälp att hitta rätt.
+            Osäker på vilken coil eller pod som passar din
+            enhet? Varje produkt har tydlig information om
+            kompatibilitet. Du kan också kontakta oss om du
+            behöver hjälp att hitta rätt.
           </p>
 
-          <h3 className="mt-3 font-semibold">Spara med prenumeration</h3>
+          <h3 className="mt-3 font-semibold">
+            Spara med prenumeration
+          </h3>
           <p>
-            Använder du regelbundet coils eller pods? Lägg till dem i din
-            prenumeration och få dem levererade automatiskt – med fri frakt och
+            Använder du regelbundet coils eller pods? Lägg
+            till dem i din prenumeration och få dem
+            levererade automatiskt – med fri frakt och
             bättre pris.
           </p>
 
-          <h2 className="mt-4 font-bold">När bör du byta tillbehör?</h2>
+          <h2 className="mt-4 font-bold">
+            När bör du byta tillbehör?
+          </h2>
 
           <h3 className="mt-3 font-semibold">Coils</h3>
           <ul className="mt-2 list-disc pl-6">
             <li>Smaken blir svagare eller annorlunda</li>
             <li>Du märker en bränd eller metallisk smak</li>
             <li>Ångan minskar trots fulladdat batteri</li>
-            <li>Vanligtvis var 1-2 vecka beroende på användning</li>
+            <li>
+              Vanligtvis var 1-2 vecka beroende på
+              användning
+            </li>
           </ul>
 
           <h3 className="mt-3 font-semibold">Pods</h3>
@@ -737,7 +909,9 @@ export const categoryContent = {
 
           <h3 className="mt-3 font-semibold">Batteri</h3>
           <ul className="mt-2 list-disc pl-6">
-            <li>Batteriet håller inte lika länge som förut</li>
+            <li>
+              Batteriet håller inte lika länge som förut
+            </li>
             <li>Enheten stängs av oväntat</li>
             <li>Laddningen tar längre tid än normalt</li>
           </ul>
@@ -745,14 +919,19 @@ export const categoryContent = {
           <h3 className="mt-3 font-semibold">Laddare</h3>
           <ul className="mt-2 list-disc pl-6">
             <li>Kabeln är skadad eller sliten</li>
-            <li>Laddningen är långsam eller intermittent</li>
-            <li>Du behöver extra laddare för bekvämlighet</li>
+            <li>
+              Laddningen är långsam eller intermittent
+            </li>
+            <li>
+              Du behöver extra laddare för bekvämlighet
+            </li>
           </ul>
         </>
       ),
     },
     relatedPostsSection: {
-      title: "Guider om vape-tillbehör, coils och reservdelar",
+      title:
+        "Guider om vape-tillbehör, coils och reservdelar",
       description:
         "Lär dig när du ska byta coil, pod eller batteri och hitta tips för att hålla ditt podsystem i toppskick längre med rätt underhåll.",
     },
@@ -786,7 +965,8 @@ export const categoryFaqContent = {
           "Du bör byta pod när smaken försämras, när du märker en bränd lukt/smak, eller när e-vätskan börjar ta slut. Beroende på användning räcker en pod vanligtvis 2-7 dagar.",
       },
       {
-        question: "Kan jag använda andra pods med mitt system?",
+        question:
+          "Kan jag använda andra pods med mitt system?",
         answer:
           "Det varierar mellan olika märken och modeller. Det säkraste är att använda pods som är specifikt designade för ditt system för att säkerställa kompatibilitet och prestanda.",
       },
@@ -818,7 +998,8 @@ export const categoryFaqContent = {
           "En pod räcker vanligtvis 1-2 veckor vid normal användning, beroende på hur ofta du vejpar och vilken e-juice du använder. Byt pod när smaken försämras, blir bränd eller om du märker läckage.",
       },
       {
-        question: "Hur många gånger kan jag fylla på samma pod?",
+        question:
+          "Hur många gånger kan jag fylla på samma pod?",
         answer:
           "De flesta pods kan fyllas på 5-10 gånger innan coilen är utbränd och smaken försämras. Exakt antal beror på e-juice, användning och hur väl du sköter podden.",
       },
@@ -828,7 +1009,8 @@ export const categoryFaqContent = {
           "En bränd smak betyder oftast att coilen är utbränd och podden behöver bytas. Det kan också hända om du vejpar med tom eller nästan tom pod, eller om du inte lät veken absorbera vätskan ordentligt innan första användning.",
       },
       {
-        question: "Kan jag använda vilken e-juice som helst?",
+        question:
+          "Kan jag använda vilken e-juice som helst?",
         answer:
           "Ja, du kan använda de flesta e-juicer, men vi rekommenderar tunnare vätskor med 50/50 eller högre PG-halt för bästa resultat. Undvik mycket tjocka vätskor (max VG) då de kan orsaka dålig vekabsorption och torrbloss.",
       },
@@ -860,7 +1042,8 @@ export const categoryFaqContent = {
           "Nej, förfyllda pods är designade för engångsbruk och är inte avsedda att fyllas på. När vätskan är slut ska poden bytas ut mot en ny.",
       },
       {
-        question: "Är förfyllda pods bättre än engångsvapes?",
+        question:
+          "Är förfyllda pods bättre än engångsvapes?",
         answer:
           "Ja, förfyllda pods är ett miljövänligare alternativ eftersom bara själva poden byts ut medan enheten återanvänds. Detta genererar mindre elektroniskt avfall jämfört med engångsvapes där hela enheten slängs.",
       },
@@ -929,17 +1112,20 @@ export const categoryFaqContent = {
           "Placera en nikotinpåse under överläppen och låt den verka. Nikotinet absorberas genom munslemhinnan och effekten känns vanligtvis inom några minuter. En portion kan användas i cirka 30–60 minuter beroende på individuell preferens.",
       },
       {
-        question: "Är vitt snus säkrare än traditionellt snus?",
+        question:
+          "Är vitt snus säkrare än traditionellt snus?",
         answer:
           "Eftersom vitt snus inte innehåller tobak undviker användaren många av de skadliga ämnena som finns i tobak. Det innehåller dock fortfarande nikotin som är beroendeframkallande.",
       },
       {
-        question: "Vad är skillnaden mellan snus och vitt snus?",
+        question:
+          "Vad är skillnaden mellan snus och vitt snus?",
         answer:
           "Skillnaden mellan traditionellt snus och vitt snus är att vanligt snus innehåller tobak, medan vitt snus är helt tobaksfritt. Vitt snus är dessutom torrare, vitare och mer diskret i både smak och lukt.",
       },
       {
-        question: "Hur starkt är vitt snus jämfört med vanligt snus?",
+        question:
+          "Hur starkt är vitt snus jämfört med vanligt snus?",
         answer:
           "Vitt snus finns i olika nikotinstyrkor, vanligtvis mellan 3 mg och ända upp till 50 mg per portion. Vi saluför dock inte de allra starkaste styrkorna. Styrkan kan jämföras med traditionellt snus, men eftersom vitt snus inte innehåller tobak kan upplevelsen av nikotinets effekt vara något annorlunda. Det är viktigt att välja en styrka som passar din tidigare nikotinanvändning och att använda produkten ansvarsfullt.",
       },
@@ -961,12 +1147,14 @@ export const categoryFaqContent = {
           "Många som försöker sluta med nikotin upplever ett behov av att hålla händer och mun sysselsatta. Vårt konfektyrsortiment erbjuder ett hälsosammare alternativ som kan hjälpa till med den orala fixeringen utan att tillföra nikotin.",
       },
       {
-        question: "Hur kan tuggummi hjälpa vid rökavvänjning?",
+        question:
+          "Hur kan tuggummi hjälpa vid rökavvänjning?",
         answer:
           "Tuggummi ger både en mekanisk aktivitet (tuggandet) och en smakupplevelse, vilket kan hjälpa till att distrahera från nikotinsug. Det hjälper också till att hantera stressen och kan minska suget efter cigaretter genom att hålla munnen sysselsatt.",
       },
       {
-        question: "Kan slickepinnar verkligen hjälpa mig sluta med nikotin?",
+        question:
+          "Kan slickepinnar verkligen hjälpa mig sluta med nikotin?",
         answer:
           "Ja, många ex-rökare rapporterar att slickepinnar och annat godis hjälper dem hantera suget genom att erbjuda en alternativ munstimulering. De fungerar både som en psykologisk distraktion och som ett sätt att hålla händerna och munnen upptagna.",
       },
@@ -1004,12 +1192,14 @@ export const categoryFaqContent = {
           "En vanlig behandlingstid är cirka 3 månader, men det är individuellt. Målet är att gradvis minska antalet tuggummin eller tabletter per dag tills du inte längre känner ett behov av dem.",
       },
       {
-        question: "Kan jag använda nikotinersättning om jag är gravid?",
+        question:
+          "Kan jag använda nikotinersättning om jag är gravid?",
         answer:
           "Om du är gravid eller ammar bör du alltid rådfråga din läkare eller barnmorska innan du använder nikotinersättningsprodukter. Att sluta helt utan hjälpmedel är alltid det bästa alternativet.",
       },
       {
-        question: "Vad är skillnaden mellan tuggummi och sugtabletter?",
+        question:
+          "Vad är skillnaden mellan tuggummi och sugtabletter?",
         answer:
           "Båda produkterna levererar nikotin via munslemhinnan, men på olika sätt. Tuggummi kräver aktivt tuggande för att frigöra nikotin, medan sugtabletter löses upp långsamt i munnen. Valet är en personlig preferens – vissa föredrar aktiviteten av att tugga, medan andra tycker att sugtabletter är mer diskreta.",
       },
@@ -1031,12 +1221,14 @@ export const categoryFaqContent = {
           "Vi rekommenderar alltid pods och reservdelar som är tillverkade för just din modell. Pods från andra märken passar sällan korrekt och kan påverka både funktion och säkerhet.",
       },
       {
-        question: "Är alla laddare kompatibla med min enhet?",
+        question:
+          "Är alla laddare kompatibla med min enhet?",
         answer:
           "Nej, det är viktigt att använda rätt laddare för din specifika enhet. Användning av fel laddare kan skada batteriet eller förkorta dess livslängd. Kontrollera alltid specifikationerna eller fråga oss om du är osäker på vilken laddare som passar din modell.",
       },
       {
-        question: "Varför behöver jag ett fodral till min vejp?",
+        question:
+          "Varför behöver jag ett fodral till min vejp?",
         answer:
           "Ett fodral skyddar inte bara din enhet från fysiska skador vid fall eller stötar, utan förhindrar också att damm och smuts kommer in i enheten. Dessutom hindrar det knappar från att tryckas in av misstag när vejpen är i fickan eller väskan.",
       },
@@ -1048,7 +1240,8 @@ export const categoryFaqContent = {
       "Här hittar du svar på frågor om varför vi valt just dessa produkter och hur vårt sortiment fokuserar på skadereducering jämfört med traditionella tobaksprodukter.",
     items: [
       {
-        question: "Varför har ni valt just dessa produkter?",
+        question:
+          "Varför har ni valt just dessa produkter?",
         answer:
           "Vi har noggrant valt ut produkter som erbjuder ett mindre skadligt alternativ till traditionella cigaretter och tobaksprodukter samt produkter som är användarvänliga och enkla att använda. Vårt fokus ligger på kvalitet, säkerhet och att ge dig som kund bättre valmöjligheter för att minska riskerna med nikotinanvändning.",
       },
@@ -1063,12 +1256,14 @@ export const categoryFaqContent = {
           "Nej, vi säljer inte vanliga tobaksprodukter. Vårt fokus ligger på att erbjuda mindre skadliga alternativ till traditionell rökning.",
       },
       {
-        question: "Kan jag använda era produkter för att sluta röka?",
+        question:
+          "Kan jag använda era produkter för att sluta röka?",
         answer:
           "Många av våra kunder använder våra produkter som ett steg på vägen mot ett nikotinfritt liv. Vi erbjuder både nikotinfria och nikotinhaltiga alternativ för att stödja dig oavsett var du befinner dig i din resa.",
       },
       {
-        question: "Hur säkerställer ni kvaliteten på produkterna?",
+        question:
+          "Hur säkerställer ni kvaliteten på produkterna?",
         answer:
           "Vi samarbetar endast med välkända varumärken och leverantörer som följer strikta kvalitets- och säkerhetskrav. Alla produkter testas och kontrolleras för att säkerställa att de uppfyller lagkraven för att säljas och marknadsföras inom EU och Sverige. Bland annat kontrollerar vi korrekt märkning.",
       },

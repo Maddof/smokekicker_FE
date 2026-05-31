@@ -21,7 +21,8 @@ export default function AtcButtonDefault({
     Number(product?.stock) || 0,
   );
   const isOutOfStock = availableStock < safeQuantity;
-  // const isDisabled = isLoading || isOutOfStock || !!errorMessage;
+  const isDisabled =
+    isLoading || isOutOfStock || !!errorMessage;
 
   const handleAddToCart = async () => {
     if (isOutOfStock || isLoading) return;
@@ -37,20 +38,20 @@ export default function AtcButtonDefault({
   };
 
   const getButtonLabel = () => {
-    if (availableStock === 0) return "SLUT";
-    if (isOutOfStock) return "FÖR FÅ I LAGER";
-    if (isLoading) return "Lägger till...";
+    if (availableStock === 0) return "OUT OF STOCK";
+    if (isOutOfStock) return "NOT ENOUGH IN STOCK";
+    if (isLoading) return "Adding...";
     return sameBrandProductPickerButton
-      ? "KÖP (avstängd)"
-      : `KÖP (${safeQuantity}, avstängd)`;
+      ? "Add to cart"
+      : `Add to cart (${safeQuantity})`;
   };
 
   return (
     <>
       <Button
         onClick={handleAddToCart}
-        // disabled={isDisabled}
-        disabled
+        disabled={isDisabled}
+        // disabled
         className={className}
       >
         {sameBrandProductPickerButton ? (

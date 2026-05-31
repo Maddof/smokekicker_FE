@@ -1,11 +1,22 @@
 "use client";
 
-import { createContext, useState, useContext, useMemo, useEffect } from "react";
-import { calcSubtotal, calcVat } from "@/lib/utils/cart/calculations";
+import {
+  createContext,
+  useState,
+  useContext,
+  useMemo,
+  useEffect,
+} from "react";
+import {
+  calcSubtotal,
+  calcVat,
+} from "@/lib/utils/cart/calculations";
 
 const CartContext = createContext();
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const TEN_MINUTES = parseInt(process.env.NEXT_PUBLIC_TIMECHECK_TOKEN);
+const TEN_MINUTES = parseInt(
+  process.env.NEXT_PUBLIC_TIMECHECK_TOKEN,
+);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -15,7 +26,8 @@ export const CartProvider = ({ children }) => {
     total: 0,
   });
   const [errorMessage, setErrorMessage] = useState(null); // State for managing error messages
-  const [loadingProductIds, setLoadingProductIds] = useState([]); // Track loading by product ID
+  const [loadingProductIds, setLoadingProductIds] =
+    useState([]); // Track loading by product ID
   const [loading, setLoading] = useState(false); // Track loading globally
   const [shippingCost, setShippingCost] = useState(0); // Default shipping cost (example)
 
@@ -24,9 +36,10 @@ export const CartProvider = ({ children }) => {
   // Fetch the cart from the backend
   const fetchCartFromBackend = async () => {
     // Dubbelkolla även bot-check här innan fetch, ifall någon lyckas trigga fetchCartFromBackend på ett sätt som inte går via useEffect ovan.
-    const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(
-      navigator.userAgent,
-    );
+    const isBot =
+      /bot|googlebot|crawler|spider|robot|crawling/i.test(
+        navigator.userAgent,
+      );
     if (isBot) return;
 
     try {
@@ -36,14 +49,19 @@ export const CartProvider = ({ children }) => {
       });
 
       if (!response.ok) {
-        if (response.status === 401 || response.status === 403) {
+        if (
+          response.status === 401 ||
+          response.status === 403
+        ) {
           setErrorMessage(
             "Du måste vara inloggad och registrerad för att hantera din varukorg.",
           );
           return;
         }
         // Unexpected error: Throw for further handling
-        throw new Error(`Failed to fetch cart: ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch cart: ${response.statusText}`,
+        );
       }
 
       const data = await response.json();
@@ -81,7 +99,10 @@ export const CartProvider = ({ children }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ productId, quantity: safeQuantity }),
+        body: JSON.stringify({
+          productId,
+          quantity: safeQuantity,
+        }),
       });
 
       const data = await response.json();
@@ -100,7 +121,9 @@ export const CartProvider = ({ children }) => {
       return { success: false, error: error.message };
     } finally {
       // await fetchCartFromBackend(); // Refresh cart
-      setLoadingProductIds((prev) => prev.filter((id) => id !== productId)); // Remove product ID from loading state
+      setLoadingProductIds((prev) =>
+        prev.filter((id) => id !== productId),
+      ); // Remove product ID from loading state
       setLoading(false); // Stop loading
       if (!hasError) {
         setErrorMessage(null);
@@ -119,34 +142,32 @@ export const CartProvider = ({ children }) => {
 
       // Find product in cart using flattened key itemId
       const productInCart = cartItems.find(
-        (item) => item.type === "PRODUCT" && item.itemId === productId,
+        (item) => item.itemId === productId,
       );
 
-      if (productInCart) {
-        if (productInCart.quantity > 1) {
-          // Decrease quantity in backend
-          await fetch(`${API_BASE_URL}/cart`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include", // Include cookies for fallback
+      if (productInCart.quantity > 1) {
+        // Decrease quantity in backend
+        await fetch(`${API_BASE_URL}/cart`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Include cookies for fallback
 
-            body: JSON.stringify({
-              productId,
-              quantity: 1, // Reduce by 1
-            }),
-          });
-        } else {
-          // Remove item from backend if quantity becomes zero
-          await fetch(`${API_BASE_URL}/cart`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include", // Include cookies for fallback
+          body: JSON.stringify({
+            productId,
+            quantity: 1, // Reduce by 1
+          }),
+        });
+      } else {
+        // Remove item from backend if quantity becomes zero
+        await fetch(`${API_BASE_URL}/cart`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // Include cookies for fallback
 
-            body: JSON.stringify({ productId }),
-          });
-        }
-        await fetchCartFromBackend(); // Refresh cart
+          body: JSON.stringify({ productId }),
+        });
       }
+      await fetchCartFromBackend(); // Refresh cart
     } catch (error) {
       console.error("Error updating cart:", error);
     } finally {
@@ -170,7 +191,10 @@ export const CartProvider = ({ children }) => {
         body: JSON.stringify(payload),
       });
     } catch (error) {
-      console.error("Error removing item from cart:", error);
+      console.error(
+        "Error removing item from cart:",
+        error,
+      );
     } finally {
       await fetchCartFromBackend(); // Refresh cart
       setLoading(false); // Stop loading
@@ -198,12 +222,16 @@ export const CartProvider = ({ children }) => {
 
   // Calculate total quantity of items in the cart
   const totalQuantity = useMemo(() => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.quantity,
+      0,
+    );
   }, [cartItems]);
 
   // "subtotal before discount" comes from server when available
   const subtotal = useMemo(() => {
-    if (cartTotals?.subtotal != null) return cartTotals.subtotal;
+    if (cartTotals?.subtotal != null)
+      return cartTotals.subtotal;
     return calcSubtotal(cartItems);
     // return cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
   }, [cartItems, cartTotals]);
@@ -220,23 +248,30 @@ export const CartProvider = ({ children }) => {
   // Calculate total (subtotal + shipping + taxes/other modifiers)
   const total = useMemo(() => {
     // Backend total excludes shipping, so we add it here
-    const base = cartTotals?.total ?? calcSubtotal(cartItems);
+    const base =
+      cartTotals?.total ?? calcSubtotal(cartItems);
     return base + shippingCost; // Add other modifiers like taxes if needed
   }, [cartTotals, cartItems, shippingCost]);
 
   // Helpers to get unit price
 
-  const getUnitPrice = (item) => item?.pricing?.unitPrice ?? item.price ?? 0;
+  const getUnitPrice = (item) =>
+    item?.pricing?.unitPrice ?? item.price ?? 0;
 
   const getDiscountedUnitPrice = (item) =>
     item?.pricing?.discountedUnitPrice ?? item.price ?? 0;
 
   const getLineTotal = (item) =>
-    item?.pricing?.lineTotal ?? (item.price || 0) * (item.quantity || 0);
+    item?.pricing?.lineTotal ??
+    (item.price || 0) * (item.quantity || 0);
 
   const getLineDiscount = (item) =>
     item?.pricing?.lineDiscount ??
-    Math.max((item.price || 0) * (item.quantity || 0) - getLineTotal(item), 0);
+    Math.max(
+      (item.price || 0) * (item.quantity || 0) -
+        getLineTotal(item),
+      0,
+    );
 
   const getLineSubtotal = (item) =>
     item?.pricing?.lineSubtotal ??
@@ -251,9 +286,10 @@ export const CartProvider = ({ children }) => {
     //   return;
     // }
     // Check user agent to prevent fetching cart for bots/crawlers
-    const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(
-      navigator.userAgent,
-    );
+    const isBot =
+      /bot|googlebot|crawler|spider|robot|crawling/i.test(
+        navigator.userAgent,
+      );
     if (isBot) return;
 
     // Todo: Will check for cart cookie instead of authStatus in the future, to allow cart fetching for non-logged in users as well.

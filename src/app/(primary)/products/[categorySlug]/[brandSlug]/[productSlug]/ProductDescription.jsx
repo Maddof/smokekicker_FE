@@ -16,7 +16,11 @@ const ChevronIcon = () => (
 );
 
 // Reusable accordion section component
-const AccordionSection = ({ title, defaultOpen = false, children }) => (
+const AccordionSection = ({
+  title,
+  defaultOpen = false,
+  children,
+}) => (
   <details
     className="group rounded-2xl border border-gray-100 bg-white px-4 shadow-lg"
     open={defaultOpen}
@@ -39,21 +43,14 @@ const formatSpecValue = (spec) => {
   }
 
   if (dataType === "NUMBER" && spec.numericValue !== null) {
-    // Special case for nicotine strength where we might want to say "20 mg/ml" instead of just "20 mg"
-    if (spec.specificationType.slug === "nikotin-styrka") {
-      return `${spec.numericValue} ${unit}/ml`;
-    }
-
-    // For puffs, add "ca" prefix as it's an approximate value
-    if (spec.specificationType.slug === "puffs") {
-      return `ca ${spec.numericValue}`;
-    }
-
-    return `${spec.numericValue}${unit || ""}`;
+    return `${spec.numericValue} ${unit || ""}`;
   }
 
-  if (dataType === "BOOLEAN" && spec.booleanValue !== null) {
-    return spec.booleanValue ? "Ja" : "Nej";
+  if (
+    dataType === "BOOLEAN" &&
+    spec.booleanValue !== null
+  ) {
+    return spec.booleanValue ? "Yes" : "No";
   }
 
   return "N/A";
@@ -66,29 +63,39 @@ export default function ProductDescription({
   ingredients,
 }) {
   const hasSpecifications =
-    Array.isArray(specifications) && specifications.length > 0;
+    Array.isArray(specifications) &&
+    specifications.length > 0;
   return (
     <section className="pt-4 md:py-12">
       <div className="container mx-auto max-w-4xl">
         <div className="space-y-4">
           {/* Product Description */}
-          <AccordionSection title="Produktbeskrivning" defaultOpen={true}>
+          <AccordionSection
+            title="Product Description"
+            defaultOpen={true}
+          >
             {longDesc ? (
               <div
                 className="flex flex-col gap-3 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: longDesc }}
+                dangerouslySetInnerHTML={{
+                  __html: longDesc,
+                }}
               />
             ) : (
               <div className="py-4 text-gray-500">
                 <p>
-                  Produkten har ingen detaljerad beskrivning för tillfället.
+                  The product does not have a detailed
+                  description at the moment.
                 </p>
               </div>
             )}
             {nicotineLabelWarningText && (
               <div
                 className="mt-6 border-4 border-black bg-white p-2 text-center text-xs font-bold text-black uppercase sm:text-sm"
-                style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
+                style={{
+                  fontFamily:
+                    "Helvetica, Arial, sans-serif",
+                }}
               >
                 {nicotineLabelWarningText}
               </div>
@@ -97,17 +104,22 @@ export default function ProductDescription({
 
           {/* Specifications - Only show if specifications exist */}
           {hasSpecifications && (
-            <AccordionSection title="Specifikationer">
+            <AccordionSection title="Specifications">
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse">
                   <tbody>
                     {specifications.map((spec) => (
-                      <tr key={spec.id} className="border-b border-gray-100">
+                      <tr
+                        key={spec.id}
+                        className="border-b border-gray-100"
+                      >
                         <td className="xsm:w-4/5 py-3 pr-6 font-medium">
                           {spec.specificationType?.name ||
-                            `Specifikation ${spec.specificationTypeId}`}
+                            `Specification ${spec.specificationTypeId}`}
                         </td>
-                        <td className="py-3">{formatSpecValue(spec)}</td>
+                        <td className="py-3">
+                          {formatSpecValue(spec)}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -118,7 +130,7 @@ export default function ProductDescription({
 
           {/* Ingredients - Only show if ingredients exist */}
           {ingredients && ingredients.trim() !== "" && (
-            <AccordionSection title="Ingredienser">
+            <AccordionSection title="Ingredients">
               <p>{ingredients}</p>
             </AccordionSection>
           )}

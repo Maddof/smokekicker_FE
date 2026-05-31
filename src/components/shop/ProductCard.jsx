@@ -8,16 +8,40 @@ import { ROUTES } from "@/config/routes";
 // Default fallback image
 const fallbackImage = "/images/fallback.png";
 
-export default function ProductCard({ product, className = "" }) {
+export default function ProductCard({
+  product,
+  className = "",
+}) {
   if (!product) {
     return null;
   }
 
-  const { id, name, price, slug, brand, details, category, imgUrl } = product;
+  const {
+    id,
+    name,
+    price,
+    slug,
+    brand,
+    details,
+    category,
+    media,
+  } = product;
 
   // Get image URL with fallback
-
-  const imageUrl = getImageUrl?.(imgUrl) || fallbackImage;
+  const primaryMedia =
+    media?.find((m) => m.role === "PRIMARY_IMAGE") ??
+    media?.[0];
+  const imageUrl =
+    getImageUrl(primaryMedia?.mediaAsset?.url) ||
+    fallbackImage;
+  const imageAlt =
+    primaryMedia?.mediaAsset?.altText || name;
+  const imageWidth = primaryMedia?.mediaAsset?.width;
+  const imageHeight = primaryMedia?.mediaAsset?.height;
+  const imageDimensions =
+    imageWidth && imageHeight
+      ? { width: imageWidth, height: imageHeight }
+      : { fill: true };
 
   // Generate product URL safely
   const productUrl = `${ROUTES.SHOP.INDEX}/${category.slug}/${brand.slug}/${slug}`;
@@ -25,10 +49,13 @@ export default function ProductCard({ product, className = "" }) {
   // Determine nicotine unit based on category
   const getNicotineUnit = () => {
     const categorySlug = category?.slug?.toLowerCase();
-    if (categorySlug === "vitt-snus" || categorySlug === "nikotinavvanjning") {
-      return "mg/portion";
+    if (
+      categorySlug === "nicotine-pouches" ||
+      categorySlug === "caffeine-pouches"
+    ) {
+      return "mg/pouch";
     }
-    return "mg/ml";
+    return "mg/portion";
   };
 
   const nicotineUnit = getNicotineUnit();
@@ -46,8 +73,8 @@ export default function ProductCard({ product, className = "" }) {
         <Image
           src={imageUrl}
           id={`product-card__image-${id}`}
-          alt={name}
-          fill
+          alt={imageAlt}
+          {...imageDimensions}
           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
           className="w-full object-contain transition-transform duration-200 group-hover:scale-105"
         />
@@ -57,7 +84,10 @@ export default function ProductCard({ product, className = "" }) {
         id="product-card__meta"
         className="xsm:flex-row flex w-full flex-col gap-1.5"
       >
-        <span id="product-card__type" className="text-muted text-xs">
+        <span
+          id="product-card__type"
+          className="text-muted text-xs"
+        >
           {details?.type}
         </span>
         <span
@@ -86,8 +116,14 @@ export default function ProductCard({ product, className = "" }) {
         </h3>
       </Link>
 
-      <div id="product-card__actions" className="mt-auto w-full">
-        <span id={`product-card__price-${id}`} className="block font-bold">
+      <div
+        id="product-card__actions"
+        className="mt-auto w-full"
+      >
+        <span
+          id={`product-card__price-${id}`}
+          className="block font-bold"
+        >
           {formatCurrency(price)}
         </span>
         <AtcButtonDefault

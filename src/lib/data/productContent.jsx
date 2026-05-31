@@ -1,25 +1,27 @@
 import { CATEGORY_SLUGS } from "./categorySlugs";
 
 const nicotineLabelWarningText =
-  "Nikotin är ett mycket beroendeframkallande ämne. Denna produkt är inte riskfri och rekommenderas endast för personer som redan använder nikotin. Produkten ska inte användas av gravida eller ammande och ska förvaras utom räckhåll för barn.";
+  "Nicotine is a highly addictive substance. This product is not risk-free and is only recommended for people who are already using nicotine. The product should not be used by pregnant or breastfeeding women and should be kept out of the reach of children.";
 
 const warningText =
-  "Denna produkt innehåller nikotin som är ett beroendeframkallande ämne.";
+  "This product contains nicotine, which is a highly addictive substance.";
 
 export const productContent = {
-  [CATEGORY_SLUGS.START_KIT_PREFILLED]: {
+  [CATEGORY_SLUGS.NICOTINE_POUCHES]: {
     bulletPointsIcon: {
-      src: "/images/icons/sketches/vape_sketch_bg.png",
-      alt: "Vape pod startkit illustration",
+      src: "/images/icons/sketches/nicotine_pouch_sketch-min.png",
+      alt: "Nicotine pouch illustration",
       width: 160,
-      height: 200,
+      height: 160,
     },
     nicotineLabelWarningText,
     warningText: warningText,
     sameBrandProductsPicker: {
       title: "Upptäck övriga startkit",
-      description: "Välj bland alla övriga förfyllda vape start-kit från ",
-      emptyMessage: "Inga andra produkter tillgängliga just nu.",
+      description:
+        "Välj bland alla övriga förfyllda vape start-kit från ",
+      emptyMessage:
+        "Inga andra produkter tillgängliga just nu.",
       showIfEmpty: false,
     },
   },
@@ -37,7 +39,8 @@ export const productContent = {
       title: "Fler varianter av samma modell",
       description:
         "Välj bland alla övriga påfyllningsbara vape start-kit från " /* + brandName will be added in the component */,
-      emptyMessage: "Inga andra produkter tillgängliga just nu.",
+      emptyMessage:
+        "Inga andra produkter tillgängliga just nu.",
       showIfEmpty: false,
     },
   },
@@ -55,7 +58,8 @@ export const productContent = {
       title: "Upptäck övriga smaker av samma märke",
       description:
         "Välj bland alla övriga förfyllda pods från " /* + brandName will be added in the component */,
-      emptyMessage: "Inga andra produkter tillgängliga just nu.",
+      emptyMessage:
+        "Inga andra produkter tillgängliga just nu.",
       showIfEmpty: false,
     },
   },
@@ -70,8 +74,10 @@ export const productContent = {
     warningText: warningText,
     sameBrandProductsPicker: {
       title: "Fler e-juice smaker av samma märke",
-      description: "Utforska fler smaker och nikotinstyrkor av e-juice från ",
-      emptyMessage: "Inga andra produkter tillgängliga just nu.",
+      description:
+        "Utforska fler smaker och nikotinstyrkor av e-juice från ",
+      emptyMessage:
+        "Inga andra produkter tillgängliga just nu.",
       showIfEmpty: false,
     },
   },
@@ -87,8 +93,10 @@ export const productContent = {
     warningText: warningText,
     sameBrandProductsPicker: {
       title: "Fler varianter av vitt snus av samma märke",
-      description: "Utforska fler smaker och styrkor av vitt snus från ",
-      emptyMessage: "Inga andra produkter tillgängliga just nu.",
+      description:
+        "Utforska fler smaker och styrkor av vitt snus från ",
+      emptyMessage:
+        "Inga andra produkter tillgängliga just nu.",
       showIfEmpty: false,
     },
   },
@@ -122,7 +130,8 @@ export const productContent = {
       title: "Hitta rätt hjälpmedel för dig",
       description:
         "Utforska fler nikotinavvänjningsprodukter, nikotintuggummin och plåster från " /* + brandName will be added in the component */,
-      emptyMessage: "Inga andra produkter tillgängliga just nu.",
+      emptyMessage:
+        "Inga andra produkter tillgängliga just nu.",
       showIfEmpty: false,
     },
   },
@@ -139,7 +148,8 @@ export const productContent = {
       title: "Utforska övriga tillbehör",
       description:
         "Övriga tillbehör från " /* + brandName will be added in the component */,
-      emptyMessage: "Inga andra tillbehör tillgängliga just nu.",
+      emptyMessage:
+        "Inga andra tillbehör tillgängliga just nu.",
       showIfEmpty: false,
     },
   },
