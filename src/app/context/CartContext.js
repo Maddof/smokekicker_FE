@@ -65,7 +65,7 @@ export const CartProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      // console.log("Fetched cart data:", data);
+      console.log("Fetched cart data:", data);
       setCartItems(data.items); // Sync cart state
       setCartTotals({
         subtotal: data.totals.subtotal,
@@ -107,12 +107,13 @@ export const CartProvider = ({ children }) => {
 
       const data = await response.json();
 
+      console.log("Add to cart response:", data);
+
       if (!response.ok) {
         hasError = true;
         console.error("Error adding to cart:", data.error);
         setErrorMessage(data.error); // Store error message in state
         return { success: false, error: data.error };
-        return;
       }
     } catch (error) {
       hasError = true;

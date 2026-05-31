@@ -176,8 +176,6 @@ export default async function SingleProductPage({
     productSlug,
   );
 
-  console.log("product: ", product);
-
   if (!product) {
     return (
       <section>

@@ -3,7 +3,7 @@
 import SheetWrapper from "@/components/SheetWrapper";
 import CartLink from "@/components/header/cartLink";
 import { useCart } from "@/app/context/CartContext";
-import { Minus, Plus, X } from "lucide-react";
+import { Minus, Plus, Trash2, X } from "lucide-react";
 import { formatCurrency } from "@/lib/utils/currencyFormatter";
 import QuantityButton from "./quantityButton";
 import { SheetClose } from "../ui/scn/sheet";
@@ -32,6 +32,7 @@ export default function MiniCart() {
     getDiscountedUnitPrice,
     getLineTotal,
     getLineDiscount,
+    getLineSubtotal,
   } = useCart();
 
   const { isCheckoutPage, addressSubmitted } =
@@ -92,6 +93,9 @@ export default function MiniCart() {
               const hasDiscount =
                 discountRate > 0 && discountedUnit < unit;
 
+              // For potential future use: line subtotal (without discount)
+              const lineSubtotal = getLineSubtotal(item);
+
               return (
                 <li
                   key={item.id}
@@ -111,26 +115,40 @@ export default function MiniCart() {
                         {item?.name || "Okänd produkt"}
                       </Link>
                     </SheetClose>
-                    <p className="text-sm font-semibold">
-                      {formatCurrency(lineTotal)}
-                    </p>
+                    {/* Right: line total */}
+                    <div className="flex flex-row items-end gap-2 text-sm font-semibold">
+                      {hasDiscount &&
+                        lineSubtotal > lineTotal && (
+                          <span className="text-white/60 line-through">
+                            {formatCurrency(lineSubtotal)}
+                          </span>
+                        )}
+                      <span>
+                        {formatCurrency(lineTotal)}
+                      </span>
+                    </div>
                   </div>
                   <div className="flex w-full items-start justify-between gap-2">
                     {/* qty + unit price (with discount display) */}
                     <div className="mt-1 flex max-w-60 flex-col flex-wrap items-start gap-x-2 text-sm text-wrap">
                       <p>
-                        <span>{item.quantity} × </span>
+                        <span className="font-semibold">
+                          {item.quantity} ×{" "}
+                        </span>
 
                         {hasDiscount ? (
                           <>
-                            <span>
+                            <span className="font-semibold">
                               {formatCurrency(
                                 discountedUnit,
                               )}
                             </span>
+                            <span className="ml-2 text-white/60 line-through">
+                              {formatCurrency(unit)}
+                            </span>
                           </>
                         ) : (
-                          <span>
+                          <span className="font-semibold">
                             {formatCurrency(unit)}
                           </span>
                         )}
@@ -138,7 +156,7 @@ export default function MiniCart() {
 
                       {/* per-line savings */}
                       {hasDiscount && lineDiscount > 0 && (
-                        <p className="text-muted-foreground mt-2 text-xs">
+                        <p className="mt-2 text-xs text-white/80">
                           You save{" "}
                           {formatCurrency(lineDiscount)} on
                           this item
@@ -200,10 +218,11 @@ export default function MiniCart() {
           )}
 
           <button
-            className="mb-3 border-b-2 text-sm uppercase disabled:opacity-50"
+            className="mb-3 flex items-center gap-1.5 border-b-2 text-sm uppercase disabled:opacity-50"
             onClick={clearCart}
             disabled={loading || shouldDisableControls}
           >
+            <Trash2 className="h-3.5 w-3.5" />
             Empty Cart
           </button>
 
