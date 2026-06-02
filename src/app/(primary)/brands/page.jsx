@@ -20,9 +20,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `All brands | ${SITE_NAME}`,
+    fallbackTitle: `Nicotine Pouch Brands | Shop Leading Brands Online`,
     fallbackDescription:
-      "Discover carefully selected brands in nicotine pouches and white snus. Quality and taste in focus.",
+      "Discover top nicotine pouch brands and explore a wide selection of tobacco-free nicotine pouches in various flavors and strengths.",
     defaultPath: ROUTES.BRANDS.INDEX,
   });
 }
@@ -45,7 +45,7 @@ export default async function BrandsPage() {
 
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://smokify.se";
+    "https://smokekicker.com";
 
   // Generate JSON-LD for breadcrumbs
   const breadcrumbJsonLd = {

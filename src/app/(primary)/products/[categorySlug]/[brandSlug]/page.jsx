@@ -1,5 +1,8 @@
 import { fetchProductsByCategorySlugAndBrandSlug } from "@/lib/data/api/fetchProducts";
-import { fetchAllBrands, fetchBrandBySlug } from "@/lib/data/api/fetchBrands";
+import {
+  fetchAllBrands,
+  fetchBrandBySlug,
+} from "@/lib/data/api/fetchBrands";
 import {
   fetchAllPublishedCategories,
   fetchPublishedCategoryBySlug,
@@ -14,33 +17,26 @@ export async function generateMetadata({ params }) {
 
   // Fetch the necessary data
   const brand = await fetchBrandBySlug(brandSlug);
-  const category = await fetchPublishedCategoryBySlug(categorySlug);
+  const category =
+    await fetchPublishedCategoryBySlug(categorySlug);
 
   // Handle case where data is missing
   if (!brand || !category) {
     return {
-      title: "Produkter ej hittade | " + SITE_NAME,
-      description: "Den här sidan kunde inte hittas.",
+      title: "Products not found | " + SITE_NAME,
+      description: "This page could not be found.",
     };
   }
 
   // Build the metadata
   const title = `${brand.name} ${category.name}`;
-  const description = `Utforska vår kollektion av ${category.name.toLowerCase()} från ${brand.name}.`;
-  const url = `${process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se"}/produkter/${categorySlug}/${brandSlug}`;
+  const description = `Explore our collection of ${category.name.toLowerCase()} from ${brand.name}.`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL || "https://smokekicker.com"}/products/${categorySlug}/${brandSlug}`;
 
   return {
     // Basic metadata
     title,
     description,
-    keywords: [
-      brand.name,
-      category.name,
-      "vejping",
-      "vape",
-      "e-cigaretter",
-      `${brand.name} ${category.name}`,
-    ].join(", "),
 
     // Canonical URL
     alternates: {
@@ -50,7 +46,10 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  if (process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION === "true") {
+  if (
+    process.env.NEXT_PUBLIC_SKIP_STATIC_GENERATION ===
+    "true"
+  ) {
     return [];
   }
   try {
@@ -60,7 +59,9 @@ export async function generateStaticParams() {
 
     // Handle missing data safely
     if (!categories || !brands) {
-      console.warn("Missing category or brand data for static paths");
+      console.warn(
+        "Missing category or brand data for static paths",
+      );
       return [];
     }
 
@@ -78,19 +79,24 @@ export async function generateStaticParams() {
 
     return paths;
   } catch (error) {
-    console.error("Error generating static paths for brand pages:", error);
+    console.error(
+      "Error generating static paths for brand pages:",
+      error,
+    );
     return [];
   }
 }
 
 export default async function BrandPage({ params }) {
   const { categorySlug, brandSlug } = await params;
-  const products = await fetchProductsByCategorySlugAndBrandSlug(
-    categorySlug,
-    brandSlug,
-  );
+  const products =
+    await fetchProductsByCategorySlugAndBrandSlug(
+      categorySlug,
+      brandSlug,
+    );
   const brand = await fetchBrandBySlug(brandSlug);
-  const category = await fetchPublishedCategoryBySlug(categorySlug);
+  const category =
+    await fetchPublishedCategoryBySlug(categorySlug);
 
   if (!brand) {
     notFound();
@@ -100,12 +106,12 @@ export default async function BrandPage({ params }) {
     <section className="brand-products">
       <div className="container mb-8">
         <h1 className="mb-2 text-2xl font-bold">
-          {category.name} från <strong>{brand.name}</strong>
+          {category.name} from <strong>{brand.name}</strong>
         </h1>
         <p className="text-muted mb-6 text-sm">
-          Utforska hela vårt sortiment av{" "}
+          Explore our full range of{" "}
           <a href={ROUTES.BRANDS.DETAIL(brand.slug)}>
-            {brand.name} produkter här
+            {brand.name} products here
           </a>
           .
         </p>

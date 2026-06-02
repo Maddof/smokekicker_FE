@@ -6,39 +6,6 @@ import { AboutContentWrapper } from "./AboutAnimation";
 import { ScrollBlob } from "./BlurryCircle";
 import { resolveCmsIcon } from "@/lib/cms/resolveCmsIcon";
 
-const DEFAULT_ABOUT_CONTENT = {
-  eyebrowLabel: "Om Smokify",
-  headline: "Smokify i korthet",
-  description:
-    "Att stå för något viktigt. Fokus på skadereducering, ansvar och valfrihet – inga engångs-vapes eller nikotinpåsar med extremt hög nikotinhalt.",
-  aboutLink: "Läs vår resa",
-  pillarCards: [
-    {
-      icon: "Droplets",
-      title: "Skadereducering",
-      description:
-        "Vi lyfter fram alternativ med lägre påverkan – från pod-system till nikotintuggummi och smarta prenumerationer.",
-    },
-    {
-      icon: "ShieldCheck",
-      title: "Ansvar",
-      description:
-        "Inga engångs-vapes eller extremt höga nikotinnivåer. Vårt sortiment väljs med omtanke.",
-    },
-    {
-      icon: "Calendar",
-      title: "Smarta prenumerationer",
-      description:
-        "Få dina favoriter levererade hem regelbundet – enkelt att pausa, ändra eller avsluta när du vill.",
-    },
-  ],
-  trustBadges: [
-    { icon: "PackageCheck", label: "0 engångs\u2011vapes i sortimentet" },
-    { icon: "ShieldCheck", label: "EU\u2011godkända varumärken" },
-    { icon: "Leaf", label: "Låg nikotinhalt på alla produkter" },
-  ],
-};
-
 function parseJsonField(value) {
   if (Array.isArray(value)) return value;
   if (typeof value !== "string") return null;
@@ -58,15 +25,12 @@ export default function AboutShort({
   trustBadges,
   aboutLink,
 }) {
-  const resolvedEyebrowLabel =
-    eyebrowLabel || DEFAULT_ABOUT_CONTENT.eyebrowLabel;
-  const resolvedHeadline = headline || DEFAULT_ABOUT_CONTENT.headline;
-  const resolvedDescription = description || DEFAULT_ABOUT_CONTENT.description;
-  const resolvedAboutLink = aboutLink || DEFAULT_ABOUT_CONTENT.aboutLink;
-  const resolvedPillarCards =
-    parseJsonField(pillarCards) || DEFAULT_ABOUT_CONTENT.pillarCards;
-  const resolvedTrustBadges =
-    parseJsonField(trustBadges) || DEFAULT_ABOUT_CONTENT.trustBadges;
+  const resolvedEyebrowLabel = eyebrowLabel;
+  const resolvedHeadline = headline;
+  const resolvedDescription = description;
+  const resolvedAboutLink = aboutLink;
+  const resolvedPillarCards = parseJsonField(pillarCards);
+  const resolvedTrustBadges = parseJsonField(trustBadges);
 
   return (
     <section
@@ -109,7 +73,7 @@ export default function AboutShort({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05, duration: 0.5 }}
-            className="max-w-2xl text-base leading-relaxed text-neutral-300 sm:text-lg"
+            className="max-w-2xl text-base leading-relaxed text-white sm:text-lg"
           >
             <BoldFirstSentence text={resolvedDescription} />
           </AboutContentWrapper>
@@ -131,7 +95,7 @@ export default function AboutShort({
         </div>
 
         {/* Trust row */}
-        <div className="mt-6 grid grid-cols-1 gap-3 text-sm text-neutral-300 sm:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
           {resolvedTrustBadges.map((badge) => {
             const Icon = resolveCmsIcon(badge.icon);
             return (
@@ -188,8 +152,10 @@ function PillarCard({ icon, title, desc }) {
           {icon}
         </div>
         <div>
-          <h3 className="text-base font-semibold text-white">{title}</h3>
-          <p className="mt-1 text-sm leading-relaxed text-neutral-300">
+          <h3 className="text-base font-semibold text-white">
+            {title}
+          </h3>
+          <p className="mt-1 text-sm leading-relaxed text-white/90">
             {desc}
           </p>
         </div>
@@ -202,7 +168,7 @@ function TrustItem({ icon, text }) {
   return (
     <div className="inline-flex items-center gap-4 rounded-xl border border-white/10 bg-black/15 px-5 py-2 backdrop-blur">
       <span className="text-white">{icon}</span>
-      <span className="text-neutral-300">{text}</span>
+      <span className="text-white/90">{text}</span>
     </div>
   );
 }

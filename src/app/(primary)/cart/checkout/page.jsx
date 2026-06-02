@@ -14,27 +14,33 @@ export default async function CheckoutPage() {
       <section className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">
         <div className="container">
           <div className="max-w-3xl">
-            <h1>Du är inte inloggad</h1>
+            <h1>You are not logged in</h1>
             <p className="mt-4">
-              Vänligen{" "}
+              Please{" "}
               <Link
                 href={` ${ROUTES.AUTH.BANKID}?returnUrl=${ROUTES.CHECKOUT}`}
                 className="text-primary inline-block text-[125%]"
               >
                 <LogInIcon className="inline-block" />
-                Logga in
+                Log in
               </Link>{" "}
-              och identifiera dig med BankID för att fortsätta till kassan.
+              and verify your identity with BankID to
+              proceed to checkout.
             </p>
             <p className="mt-2">
-              Vid inloggning kontrolleras din identitet, att du är över 18 år
-              och din folkbokförda adress i Sverige.
+              During login, your identity, age (over 18),
+              and registered address in Sweden will be
+              verified.
             </p>
             <p className="text-muted-foreground mt-2">
-              Vi behandlar dina personuppgifter i samband med inloggning för att
-              verifiera din identitet och uppfylla lagkrav. Läs mer om hur vi
-              hanterar dina uppgifter i vår{" "}
-              <Link href={ROUTES.PRIVACY}>integritetspolicy</Link>.
+              We process your personal data during login to
+              verify your identity and comply with legal
+              requirements. Learn more about how we handle
+              your data in our{" "}
+              <Link href={ROUTES.PRIVACY}>
+                privacy policy
+              </Link>
+              .
             </p>
           </div>
         </div>
@@ -49,13 +55,14 @@ export default async function CheckoutPage() {
       <section>
         <div className="container">
           <p>
-            Din kundvagn är tom. Lägg till produkter innan du går till kassan.
+            Your cart is empty. Add some products to your
+            cart before proceeding to checkout.
           </p>
           <a
             href={ROUTES.SHOP.INDEX}
             className="bg-primary mt-4 inline-block rounded-md px-6 py-2 text-white"
           >
-            Fortsätt handla
+            Continue Shopping
           </a>
         </div>
       </section>

@@ -31,11 +31,11 @@ export default async function Home() {
     return (
       <div className="container py-16">
         <h1 className="text-3xl font-bold">
-          Välkommen till {SITE_NAME}
+          Welcome to {SITE_NAME}
         </h1>
         <p className="text-muted-foreground mt-4">
-          Tyvärr kunde vi inte ladda innehållet för den här
-          sidan just nu. Vänligen försök igen senare.
+          Unfortunately, we couldn't load the content for
+          this page at the moment. Please try again later.
         </p>
       </div>
     );
@@ -72,7 +72,7 @@ export default async function Home() {
     "@id": `${siteUrl}#website`,
     url: siteUrl,
     name: SITE_NAME,
-    inLanguage: "sv-SE",
+    inLanguage: "en",
     publisher: {
       "@id": `${siteUrl}#organization`,
     },
@@ -91,17 +91,17 @@ export default async function Home() {
     url: siteUrl,
     logo: {
       "@type": "ImageObject",
-      url: `${siteUrl}/smokify_logo_orange.svg`,
+      url: `${siteUrl}/smokekicker_logo.svg`,
     },
     sameAs: [
-      "https://www.facebook.com/smokifyshop",
-      "https://www.instagram.com/smokify_shop",
+      "https://www.facebook.com/smokekicker",
+      "https://www.instagram.com/smokekicker",
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      areaServed: "SE",
-      availableLanguage: ["sv-SE", "sv"],
-      email: "support@smokify.se",
+      areaServed: "Worldwide",
+      availableLanguage: ["en"],
+      email: "support@smokekicker.com",
       contactType: "customer support",
     },
   };

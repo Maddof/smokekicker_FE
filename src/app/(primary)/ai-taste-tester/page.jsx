@@ -44,20 +44,20 @@ export async function generateMetadata({ searchParams }) {
   );
 
   const title = hasDynamicResult
-    ? `${personalityName + ", " + headline || "Din smakpersonlighet"}`
-    : "Vilken smak är du? - Smakpersonlighetstest";
+    ? `${personalityName + ", " + headline || "Your flavor personality"}`
+    : "What flavor are you? - Flavor Personality Test | Smokekicker";
 
   const description =
     shareText ||
     descriptionParam ||
     headline ||
-    "Svara, klicka, klart: din smakpersonlighet och skräddarsydda AI-rekommendationer serveras direkt. Smakmagi!";
+    "Answer, click, done: your flavor personality and tailored AI recommendations are served directly. Flavor magic!";
 
   const pageUrl = hasDynamicResult
     ? `${SITE_URL}${ROUTES.PERSONALITY}?personalityName=${encodeURIComponent(personalityName)}&headline=${encodeURIComponent(headline)}&description=${encodeURIComponent(descriptionParam)}&shareText=${encodeURIComponent(shareText)}`
     : `${SITE_URL}${ROUTES.PERSONALITY}`;
 
-  const ogImage = `${SITE_URL}/${ROUTES.PERSONALITY}/og?text=${encodeURIComponent(personalityName || "Smakpersonlighetstest")}&headline=${encodeURIComponent(headline || "")}&shareText=${encodeURIComponent(shareText || "")}`;
+  const ogImage = `${SITE_URL}/${ROUTES.PERSONALITY}/og?text=${encodeURIComponent(personalityName || "Flavor Personality Test")}&headline=${encodeURIComponent(headline || "")}&shareText=${encodeURIComponent(shareText || "")}`;
 
   return {
     title,
@@ -71,13 +71,13 @@ export async function generateMetadata({ searchParams }) {
       url: pageUrl,
       siteName: SITE_NAME,
       type: "website",
-      locale: "sv_SE",
+      locale: "en_US",
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: "Smokify smakpersonlighet",
+          alt: "Smokekicker flavor personality",
           type: "image/png",
         },
       ],
@@ -89,7 +89,7 @@ export async function generateMetadata({ searchParams }) {
       images: [
         {
           url: ogImage,
-          alt: "Smokify smakpersonlighet",
+          alt: "Smokekicker flavor personality",
           type: "image/png",
         },
       ],
@@ -97,18 +97,18 @@ export async function generateMetadata({ searchParams }) {
   };
 }
 
-export default async function SmakPersonlighet() {
+export default async function FlavorPersonality() {
   const page = await getTastePage();
 
   if (!page) {
     return (
       <div className="container py-16">
         <h1 className="text-3xl font-bold">
-          Välkommen till {SITE_NAME}
+          Welcome to {SITE_NAME}
         </h1>
         <p className="text-muted-foreground mt-4">
-          Tyvärr kunde vi inte ladda innehållet för den här
-          sidan just nu. Vänligen försök igen senare.
+          Unfortunately, we couldn't load the content for
+          this page at the moment. Please try again later.
         </p>
       </div>
     );
@@ -136,7 +136,7 @@ export default async function SmakPersonlighet() {
 
             <p className="absolute bottom-6 left-6 inline-flex rounded-full border border-cyan-200/40 bg-cyan-300/15 px-3 py-1 text-xs font-semibold tracking-[0.08em] text-cyan-100 uppercase">
               {getFieldValue(page, "hero", "subHeadline") ||
-                "Vilken smak är du?"}
+                "What flavor are you?"}
             </p>
           </div>
         </div>

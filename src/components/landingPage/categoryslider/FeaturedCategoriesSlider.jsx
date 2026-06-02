@@ -28,8 +28,8 @@ import "swiper/css/pagination";
  */
 export default function FeaturedCategoriesSlider({
   items,
-  heading = "Upptäck vapes, vitt snus & nikotinprodukter",
-  description = "Utforska vårt sortiment av noga utvalda produkter. Allt från podsystem till tobaksfritt vitt snus och nikotinersättning.",
+  heading = "Whatever You're Into, We've Got a Pouch for It",
+  description = "Minty, fruity, strong, smooth, or completely nicotine-free—explore our most popular nicotine pouch categories and find your next favorite pouch.",
   className,
   showAutoplay = false,
 }) {
@@ -66,7 +66,9 @@ export default function FeaturedCategoriesSlider({
             {heading}
           </h2>
           {description && (
-            <p className="text-muted mx-auto max-w-2xl">{description}</p>
+            <p className="text-muted mx-auto max-w-2xl">
+              {description}
+            </p>
           )}
         </div>
 
@@ -96,8 +98,10 @@ export default function FeaturedCategoriesSlider({
             swiperRef.current = swiper;
             // Set navigation after swiper is initialized
             if (prevRef.current && nextRef.current) {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.params.navigation.prevEl =
+                prevRef.current;
+              swiper.params.navigation.nextEl =
+                nextRef.current;
               swiper.navigation.init();
               swiper.navigation.update();
             }
@@ -116,8 +120,10 @@ export default function FeaturedCategoriesSlider({
             nextSlideMessage: "Nästa kategori",
           }}
           onBeforeInit={(swiper) => {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
+            swiper.params.navigation.prevEl =
+              prevRef.current;
+            swiper.params.navigation.nextEl =
+              nextRef.current;
           }}
           navigation={{
             prevEl: prevRef.current,
@@ -204,13 +210,15 @@ function CategoryCard({ item }) {
               {item.title}
             </h3>
             {item.description && (
-              <p className="line-clamp-2 text-white">{item.description}</p>
+              <p className="line-clamp-2 text-white">
+                {item.description}
+              </p>
             )}
           </div>
 
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium tracking-wide uppercase">
-              Utforska
+              Explore
             </span>
             <span className="bg-primary group-hover:bg-primary/80 inline-flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur transition-all group-hover:translate-x-1">
               <ChevronRight className="h-4 w-4" />

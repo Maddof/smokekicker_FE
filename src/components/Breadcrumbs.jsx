@@ -3,7 +3,12 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { ROUTES } from "@/config/routes";
 
 export default function Breadcrumbs({
@@ -30,11 +35,12 @@ export default function Breadcrumbs({
     const items = segments.map((segment, index) => {
       const path = `/${segments.slice(0, index + 1).join("/")}`;
       const isBrandCrumb =
-        segments[0] === "produkter" &&
-        segments[1] !== "prenumerationer" &&
+        segments[0] === "products" &&
         index === 2;
 
-      const resolvedPath = isBrandCrumb ? ROUTES.BRANDS.DETAIL(segment) : path;
+      const resolvedPath = isBrandCrumb
+        ? ROUTES.BRANDS.DETAIL(segment)
+        : path;
 
       const defaultLabel = segment
         .replace(/-/g, " ")
@@ -42,7 +48,10 @@ export default function Breadcrumbs({
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
         .join(" ");
 
-      return { label: customLabels[path] || defaultLabel, path: resolvedPath };
+      return {
+        label: customLabels[path] || defaultLabel,
+        path: resolvedPath,
+      };
     });
 
     setBreadcrumbs(items);
@@ -72,8 +81,12 @@ export default function Breadcrumbs({
         className="no-scrollbar flex min-w-full snap-x snap-mandatory scroll-pl-2 items-center gap-0 overflow-x-auto pr-2 text-xs sm:text-sm"
       >
         {/* Home */}
-        <li className="flex flex-shrink-0 snap-start items-center">
-          <Link href={homeHref} className="flex items-center" aria-label="Home">
+        <li className="flex shrink-0 snap-start items-center">
+          <Link
+            href={homeHref}
+            className="flex items-center"
+            aria-label="Home"
+          >
             <Home className="h-4 w-4" />
           </Link>
           {breadcrumbs.length > 0 && separatorElement}
@@ -85,7 +98,7 @@ export default function Breadcrumbs({
             <li
               key={breadcrumb.path}
               ref={isLast ? lastItemRef : undefined}
-              className="flex flex-shrink-0 snap-start items-center"
+              className="flex shrink-0 snap-start items-center"
             >
               {isLast ? (
                 <span
@@ -98,7 +111,7 @@ export default function Breadcrumbs({
                 <>
                   <Link
                     href={breadcrumb.path}
-                    className="max-w-[120px] truncate sm:max-w-none"
+                    className="max-w-30 truncate sm:max-w-none"
                   >
                     {breadcrumb.label}
                   </Link>

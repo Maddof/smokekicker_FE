@@ -18,21 +18,25 @@ export default function FeaturedProducts({
       <div className="container">
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-2xl font-bold tracking-tight md:text-4xl">
-            {headline ?? "Utvalda produkter"}
+            {headline ?? "Best Sellers for a Reason"}
           </h2>
           <p className="text-muted mx-auto max-w-2xl">
-            {description ?? "Våra mest populära produkter just nu!"}
+            {description ??
+              "The crowd has spoken. Discover the nicotine pouches people keep adding to their carts—and coming back for."}
           </p>
         </div>
         <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
           ))}
         </ul>
         <div className="mt-10 flex justify-center">
           <Button asChild>
             <Link href={ROUTES.SHOP.INDEX}>
-              {ctaLabel ?? "Se alla produkter"}
+              {ctaLabel ?? "View all nicotine pouches"}
             </Link>
           </Button>
         </div>

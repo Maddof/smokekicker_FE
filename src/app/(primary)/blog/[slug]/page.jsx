@@ -18,7 +18,10 @@ export async function generateStaticParams() {
   return categories.map((cat) => ({ slug: cat.slug }));
 }
 
-export async function generateMetadata({ params, searchParams }) {
+export async function generateMetadata({
+  params,
+  searchParams,
+}) {
   const { slug } = await params;
   const { page: pageParam } = await searchParams;
   const page = Number(pageParam) || 1;
@@ -26,14 +29,17 @@ export async function generateMetadata({ params, searchParams }) {
 
   if (!category) return {};
 
-  const base = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://smokify.se"}${ROUTES.BLOG.CATEGORY(slug)}`;
+  const base = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://smokekicker.com"}${ROUTES.BLOG.CATEGORY(slug)}`;
 
   return {
-    title: `${category.name} | Blogg`,
+    title: `${category.name} | Blog`,
     description: category.description ?? undefined,
     alternates: {
       canonical: page > 1 ? `${base}?page=${page}` : base,
-      ...(page > 1 && { prev: page === 2 ? base : `${base}?page=${page - 1}` }),
+      ...(page > 1 && {
+        prev:
+          page === 2 ? base : `${base}?page=${page - 1}`,
+      }),
     },
     ...(page > 1 && {
       other: { next: `${base}?page=${page + 1}` },
@@ -41,15 +47,21 @@ export async function generateMetadata({ params, searchParams }) {
   };
 }
 
-export default async function BlogCategoryPage({ params, searchParams }) {
+export default async function BlogCategoryPage({
+  params,
+  searchParams,
+}) {
   const { slug } = await params;
   const { page: pageParam } = await searchParams;
   const page = Number(pageParam) || 1;
 
-  const blogData = await fetchBlogPostsByCategorySlug(slug, {
-    page,
-    limit: 12,
-  });
+  const blogData = await fetchBlogPostsByCategorySlug(
+    slug,
+    {
+      page,
+      limit: 12,
+    },
+  );
   if (!blogData || !blogData.posts) {
     notFound();
   }
@@ -67,13 +79,19 @@ export default async function BlogCategoryPage({ params, searchParams }) {
 
   return (
     <>
-      <BlogHero title={categoryName} description={categoryDescription} />
+      <BlogHero
+        title={categoryName}
+        description={categoryDescription}
+      />
       <BlogCategoryPicker currentPath={currentPath} />
 
-      <section id="blog-posts" className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+      <section
+        id="blog-posts"
+        className="mx-auto max-w-7xl px-4 py-10 sm:px-6"
+      >
         {posts.length === 0 ? (
           <p className="text-muted-foreground py-16 text-center">
-            Inga blogginlägg hittades i denna kategori.
+            No blog posts found in this category.
           </p>
         ) : (
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -85,7 +103,10 @@ export default async function BlogCategoryPage({ params, searchParams }) {
           </ul>
         )}
 
-        <BlogPagination pagination={pagination} basePath={currentPath} />
+        <BlogPagination
+          pagination={pagination}
+          basePath={currentPath}
+        />
       </section>
     </>
   );

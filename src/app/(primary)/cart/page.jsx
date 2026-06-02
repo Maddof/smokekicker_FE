@@ -28,12 +28,17 @@ export default function CartPage() {
   if (cartItems.length === 0) {
     return (
       <section className="neon-bg-radial-top-right flex min-h-[72vh] flex-col items-center justify-center gap-4 bg-black/40 px-6 text-center text-slate-100">
-        <ShoppingCart size={48} className="text-slate-400" />
+        <ShoppingCart
+          size={48}
+          className="text-slate-400"
+        />
         <p className="text-lg font-semibold tracking-wide">
-          Din varukorg är tom
+          Your cart is empty
         </p>
         <Button asChild>
-          <Link href={ROUTES.SHOP.INDEX}>Börja handla</Link>
+          <Link href={ROUTES.SHOP.INDEX}>
+            Start shopping
+          </Link>
         </Button>
       </section>
     );
@@ -41,16 +46,21 @@ export default function CartPage() {
 
   const hasAnyDiscount =
     (discount ?? 0) > 0 ||
-    cartItems.some((i) => (i?.pricing?.discountRate ?? 0) > 0);
+    cartItems.some(
+      (i) => (i?.pricing?.discountRate ?? 0) > 0,
+    );
 
   return (
     <section className="neon-bg-radial-top-right min-h-[72vh] bg-black/40 py-12 text-slate-100">
       <div className="container mx-auto max-w-5xl px-4">
         <header className="mb-6 space-y-2 rounded-xl border border-slate-800/60 bg-slate-900/40 p-4 shadow-lg shadow-black/30">
-          <h1 className="text-lg font-semibold tracking-tight">Varukorg</h1>
+          <h1 className="text-lg font-semibold tracking-tight">
+            Shopping Cart
+          </h1>
           <p className="text-sm text-slate-300">
-            För kvantitetsändringar eller borttagning, öppna mini-korgen via
-            kundvagnsikonen längst upp på sidan.
+            For quantity changes or removal, open the
+            mini-cart via the cart icon at the top of the
+            page.
           </p>
         </header>
 
@@ -66,7 +76,7 @@ export default function CartPage() {
             <div className="overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900/60 shadow-xl shadow-black/40">
               <div className="flex items-center justify-between border-b border-slate-800/70 p-4">
                 <p className="text-sm font-medium text-slate-200">
-                  Produkter ({cartItems.length})
+                  Products ({cartItems.length})
                 </p>
                 <Button
                   variant="outline"
@@ -74,22 +84,30 @@ export default function CartPage() {
                   onClick={clearCart}
                   disabled={loading}
                 >
-                  Töm varukorg
+                  Clear Cart
                 </Button>
               </div>
 
               <ul className="divide-y divide-slate-800/70">
                 {cartItems.map((item) => {
-                  const unit = getUnitPrice?.(item) ?? item.price ?? 0;
+                  const unit =
+                    getUnitPrice?.(item) ?? item.price ?? 0;
                   const discountedUnit =
-                    getDiscountedUnitPrice?.(item) ?? item.price ?? 0;
+                    getDiscountedUnitPrice?.(item) ??
+                    item.price ??
+                    0;
 
                   const lineTotal =
-                    getLineTotal?.(item) ?? unit * (item.quantity || 0);
-                  const lineDiscount = getLineDiscount?.(item) ?? 0;
+                    getLineTotal?.(item) ??
+                    unit * (item.quantity || 0);
+                  const lineDiscount =
+                    getLineDiscount?.(item) ?? 0;
 
-                  const discountRate = item?.pricing?.discountRate ?? 0;
-                  const hasDiscount = discountRate > 0 && discountedUnit < unit;
+                  const discountRate =
+                    item?.pricing?.discountRate ?? 0;
+                  const hasDiscount =
+                    discountRate > 0 &&
+                    discountedUnit < unit;
 
                   return (
                     <li key={item.id} className="p-4">
@@ -108,23 +126,35 @@ export default function CartPage() {
                                   {formatCurrency(unit)}
                                 </span>
                                 <span className="font-medium text-slate-100">
-                                  {formatCurrency(discountedUnit)}
+                                  {formatCurrency(
+                                    discountedUnit,
+                                  )}
                                 </span>
                                 <span className="bg-primary/10 text-primary rounded px-2 py-0.5 text-xs">
-                                  Mängdrabatt {Math.round(discountRate * 100)}%
+                                  Volume discount{" "}
+                                  {Math.round(
+                                    discountRate * 100,
+                                  )}
+                                  %
                                 </span>
                               </>
                             ) : (
-                              <span>{formatCurrency(unit)}</span>
+                              <span>
+                                {formatCurrency(unit)}
+                              </span>
                             )}
                           </div>
 
-                          {hasDiscount && lineDiscount > 0 && (
-                            <p className="mt-2 text-xs text-slate-300">
-                              Du sparar {formatCurrency(lineDiscount)} på denna
-                              vara
-                            </p>
-                          )}
+                          {hasDiscount &&
+                            lineDiscount > 0 && (
+                              <p className="mt-2 text-xs text-slate-300">
+                                You save{" "}
+                                {formatCurrency(
+                                  lineDiscount,
+                                )}{" "}
+                                on this item
+                              </p>
+                            )}
                         </div>
 
                         <div className="shrink-0 text-right">
@@ -134,7 +164,9 @@ export default function CartPage() {
                           {hasDiscount && (
                             <p className="mt-1 text-xs text-slate-400">
                               före rabatt:{" "}
-                              {formatCurrency(unit * (item.quantity || 0))}
+                              {formatCurrency(
+                                unit * (item.quantity || 0),
+                              )}
                             </p>
                           )}
                         </div>
@@ -150,18 +182,18 @@ export default function CartPage() {
           <aside className="lg:sticky lg:top-24">
             <div className="rounded-xl border border-slate-800/60 bg-slate-900/70 p-4 shadow-xl shadow-black/40">
               <h2 className="text-sm font-medium text-slate-200">
-                Sammanfattning
+                Summary
               </h2>
 
               <div className="mt-4 space-y-2 text-sm text-slate-200">
                 <div className="flex justify-between">
-                  <span>Delsumma</span>
+                  <span>Subtotal</span>
                   <span>{formatCurrency(subtotal)}</span>
                 </div>
 
                 {hasAnyDiscount && (discount ?? 0) > 0 && (
                   <div className="flex justify-between">
-                    <span>Rabatt</span>
+                    <span>Discount</span>
                     <span className="text-primary">
                       − {formatCurrency(discount)}
                     </span>
@@ -169,25 +201,29 @@ export default function CartPage() {
                 )}
 
                 <div className="flex justify-between">
-                  <span>Frakt</span>
-                  <span>{formatCurrency(shippingCost)}</span>
+                  <span>Shipping</span>
+                  <span>
+                    {formatCurrency(shippingCost)}
+                  </span>
                 </div>
 
                 <div className="mt-3 flex justify-between border-t border-slate-800/70 pt-3 text-base font-semibold text-white">
-                  <span>Totalt</span>
+                  <span>Total</span>
                   <span>{formatCurrency(total)}</span>
                 </div>
               </div>
 
               <Button asChild className="mt-5 w-full">
-                <Link href={ROUTES.CHECKOUT}>Gå till kassan</Link>
+                <Link href={ROUTES.CHECKOUT}>
+                  Proceed to Checkout
+                </Link>
               </Button>
 
               <Link
                 href={ROUTES.SHOP.INDEX}
                 className="hover:text-primary mt-4 block text-center text-sm text-slate-300 underline-offset-4 transition"
               >
-                Fortsätt handla
+                Continue Shopping
               </Link>
             </div>
           </aside>

@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/scn/input";
 export default function SearchFilter({
   items,
   onFilterChange,
-  placeholder = "Sök...",
+  placeholder = "Search...",
   searchField = "name",
 }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +20,9 @@ export default function SearchFilter({
       return;
     }
 
-    const normalizedSearch = searchTerm.toLowerCase().trim();
+    const normalizedSearch = searchTerm
+      .toLowerCase()
+      .trim();
     const filteredResults = items.filter((item) => {
       // Allow searching in nested fields with dot notation (e.g., "category.name")
       if (searchField.includes(".")) {
@@ -28,14 +30,18 @@ export default function SearchFilter({
         return (
           item[parent] &&
           item[parent][child] &&
-          item[parent][child].toLowerCase().includes(normalizedSearch)
+          item[parent][child]
+            .toLowerCase()
+            .includes(normalizedSearch)
         );
       }
 
       // Regular field search
       return (
         item[searchField] &&
-        item[searchField].toLowerCase().includes(normalizedSearch)
+        item[searchField]
+          .toLowerCase()
+          .includes(normalizedSearch)
       );
     });
 
@@ -49,7 +55,7 @@ export default function SearchFilter({
 
   return (
     <div className="w-full">
-      <p className="mb-2 font-medium">Sök</p>
+      <p className="mb-2 font-medium">Search</p>
       <div className="relative">
         <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
 
@@ -59,14 +65,14 @@ export default function SearchFilter({
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={placeholder}
           className="pr-9 pl-9"
-          aria-label={`Filtrera ${placeholder.toLowerCase()}`}
+          aria-label={`Filter ${placeholder.toLowerCase()}`}
         />
 
         {searchTerm && (
           <button
             onClick={handleClear}
             className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 transition-colors"
-            aria-label="Rensa sökning"
+            aria-label="Clear search"
           >
             <X className="h-4 w-4" />
           </button>

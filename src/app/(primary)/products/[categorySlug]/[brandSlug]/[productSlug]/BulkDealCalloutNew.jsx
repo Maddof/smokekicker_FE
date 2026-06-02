@@ -65,7 +65,7 @@ export default function BulkDealCalloutNew({
               <button
                 type="button"
                 onClick={() => setSelectedTierId(tier.id)}
-                className={`flex w-full flex-col flex-wrap items-center justify-center gap-3 border text-left transition-colors sm:gap-4 ${
+                className={`flex w-full flex-col flex-wrap items-center justify-center gap-2 border text-left transition-colors sm:gap-3 ${
                   isSelected
                     ? "bg-primary/5 ring-primary ring-1 ring-inset"
                     : "hover:bg-slate-50"
@@ -76,7 +76,7 @@ export default function BulkDealCalloutNew({
                     className={`text-secondary font-semibold`}
                   >
                     {hasDiscount
-                      ? `${tier.percentage}%`
+                      ? `-${tier.percentage}%`
                       : "—"}
                   </p>
                 </div>
@@ -88,7 +88,7 @@ export default function BulkDealCalloutNew({
                     {tier.minQuantity}{" "}
                     {tier.minQuantity > 1 ? "cans" : "can"}
                   </span>
-                  <span
+                  {/* <span
                     className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${
                       isSelected
                         ? "border-primary bg-primary"
@@ -98,7 +98,7 @@ export default function BulkDealCalloutNew({
                     {isSelected && (
                       <span className="h-1.5 w-1.5 rounded-full bg-white" />
                     )}
-                  </span>
+                  </span> */}
                 </div>
 
                 <div className="flex flex-col items-center gap-1 text-center">

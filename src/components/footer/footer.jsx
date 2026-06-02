@@ -182,9 +182,9 @@ export default function Component() {
               Nicotine is a highly addictive substance. This
               product is not risk-free and is only
               recommended for people who are already using
-              nicotine. The product should not be used by
-              pregnant or breastfeeding women and should be
-              kept out of the reach of children.
+              nicotine. Nicotine pouches should not be used
+              by pregnant or breastfeeding women and should
+              be kept out of the reach of children.
               <br />
               <br />
               Only for adults 18 years and older. Smokify AB
@@ -199,27 +199,11 @@ export default function Component() {
         </div>
 
         <div className="border-muted-foreground/20 col-span-full border-t pt-8">
-          <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2">
-            {/* Left column - Läkemedelsverket image */}
-            <div className="flex justify-center md:justify-start">
-              <Link
-                href="https://www.lakemedelsverket.se/e-handlare#Z00849"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Länk till Läkemedelsverkets lista över godkända e-handlare"
-              >
-                <Image
-                  src="/images/logos/lakemedelsverket.svg"
-                  alt="Läkemedelsverket logo"
-                  width={50}
-                  height={50}
-                  className="h-24 w-auto sm:h-28"
-                />
-              </Link>
-            </div>
+          <div className="grid grid-cols-1 items-center gap-6">
+            {/* Left column  */}
 
             {/* Right column - Logos */}
-            <div className="flex flex-wrap items-center justify-center gap-4 md:justify-end">
+            <div className="flex flex-wrap items-center justify-center gap-4">
               <Image
                 src="/images/logos/Klarna_Logo_white_450x100.svg"
                 alt="Klarna logo"

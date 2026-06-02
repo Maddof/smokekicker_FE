@@ -1,7 +1,7 @@
 import { CATEGORY_SLUGS } from "./categorySlugs";
 
 const nicotineLabelWarningText =
-  "Nicotine is a highly addictive substance. This product is not risk-free and is only recommended for people who are already using nicotine. The product should not be used by pregnant or breastfeeding women and should be kept out of the reach of children.";
+  "Nicotine is a highly addictive substance. This product is not risk-free and is only recommended for people who are already using nicotine. Nicotine pouches should not be used by pregnant or breastfeeding women and should be kept out of the reach of children.";
 
 const warningText =
   "This product contains nicotine, which is a highly addictive substance.";

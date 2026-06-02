@@ -9,14 +9,14 @@ export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
   const query = params?.query?.trim() || "";
   const title = query
-    ? `Sökresultat för "${query}" | Smokify`
-    : "Utforska vape, vitt snus, nikotinpåsar och nikotinprodukter online hos Smokify";
+    ? `Search result for "${query}" | Smokekicker`
+    : "Explore nicotine pouches online at Smokekicker";
   const description = query
-    ? `Visar sökresultat för "${query}". Hitta dina favoritprodukter hos Smokify.`
-    : "Använd sökfunktionen för att hitta produkter såsom vape, vitt snus, nikotinpåsar och nikotinprodukter. Skriv in sökord och upptäck vårt sortiment.";
+    ? `Showing search results for "${query}". Find your favorite products at Smokekicker.`
+    : "Use the search function to find products such as nicotine pouches. Enter keywords and discover our range.";
   const pageUrl = query
-    ? `${process.env.NEXT_PUBLIC_SITE_URL}/sok?query=${encodeURIComponent(query)}`
-    : `${process.env.NEXT_PUBLIC_SITE_URL}/sok`;
+    ? `${process.env.NEXT_PUBLIC_SITE_URL}/search?query=${encodeURIComponent(query)}`
+    : `${process.env.NEXT_PUBLIC_SITE_URL}/search`;
 
   return {
     title,
@@ -32,7 +32,7 @@ export async function generateMetadata({ searchParams }) {
       title,
       description,
       url: pageUrl,
-      siteName: "Smokify",
+      siteName: "Smokekicker",
     },
   };
 }
@@ -43,7 +43,7 @@ function SearchResultsLoading() {
     <div className="flex flex-col items-center justify-center py-12">
       <Spinner />
       <p className="text-muted-foreground mt-4">
-        Söker produkter...
+        Searching for products...
       </p>
     </div>
   );
@@ -55,20 +55,18 @@ function NoResults({ query }) {
     <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 py-12">
       <AlertCircle className="mb-4 h-12 w-12 text-red-700" />
       <h2 className="mb-2 text-xl font-medium">
-        Inga produkter hittades
+        No products found
       </h2>
       <p className="text-center">
-        Vi kunde inte hitta några produkter som matchar "
-        {query}".
+        We couldn't find any products matching "{query}".
       </p>
       <p className="mt-4 text-center">
-        Försök med andra sökord eller bläddra i våra
-        kategorier.
+        Try different keywords or browse our categories.
       </p>
       {query.length <= 2 && (
         <p className="mt-4 text-center text-red-700">
-          Tips: Använd minst 3 tecken för bättre
-          sökresultat.
+          Tips: Use at least 3 characters for better search
+          results.
         </p>
       )}
     </div>
@@ -88,7 +86,7 @@ async function SearchResults({ query }) {
   return (
     <div className="space-y-6">
       <p className="text-muted-foreground">
-        Visar {products.length} resultat för "{query}"
+        Showing {products.length} results for "{query}"
       </p>
       <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
@@ -108,7 +106,7 @@ export default async function SearchPage({ searchParams }) {
       <div className="container">
         <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
           <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-            Sökresultat
+            Search Results
           </h1>
           <Suspense
             fallback={
@@ -132,11 +130,11 @@ export default async function SearchPage({ searchParams }) {
           <div className="rounded-lg border p-6 text-center">
             <Search className="text-muted-foreground/60 mx-auto mb-4 h-12 w-12" />
             <h2 className="mb-2 text-xl font-medium">
-              Sök bland våra produkter
+              Search among our products
             </h2>
             <p className="text-muted-foreground mx-auto max-w-md">
-              Ange sökord i sökfältet ovan för att hitta
-              produkter.
+              Enter keywords in the search field above to
+              find products.
             </p>
           </div>
         )}

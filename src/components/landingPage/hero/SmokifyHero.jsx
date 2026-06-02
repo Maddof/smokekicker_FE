@@ -34,56 +34,6 @@ function CategoryLinkItem({ href, icon: Icon, children }) {
   );
 }
 
-// USP items data
-const categoryLinks = [
-  {
-    href: ROUTES.SHOP.CATEGORY("start-kit-forfyllda-podsystem"),
-    icon: Zap,
-    label: "Startkit Förfyllda Vape Podsystem",
-  },
-  {
-    href: ROUTES.SHOP.CATEGORY("start-kit-vape"),
-    icon: Zap,
-    label: "Startkit Vape Podsystem",
-  },
-  {
-    href: ROUTES.SHOP.CATEGORY("e-juice"),
-    icon: Droplet,
-    label: "E-juice",
-  },
-  {
-    href: ROUTES.SHOP.CATEGORY("forfyllda-poddar"),
-    icon: Package2,
-    label: "Förfyllda poddar",
-  },
-  {
-    href: ROUTES.SHOP.CATEGORY("vitt-snus"),
-    icon: Leaf,
-    label: "Vitt snus",
-  },
-  {
-    href: ROUTES.SHOP.CATEGORY("nikotinavvanjning"),
-    icon: ChevronsRight,
-    label: "Nikotinavvänjning",
-  },
-  {
-    href: ROUTES.SHOP.CATEGORY("konfektyr"),
-    icon: Candy,
-    label: "Konfektyr",
-  },
-];
-
-const DEFAULT_HERO_CONTENT = {
-  eyebrowText: "Vape, vitt snus och nikotinläkemedel - allt på ett ställe",
-  headline: "Vape och vitt snus med omtanke",
-  description:
-    "Vape och nikotinalternativ som hjälper dig att göra ett smartare val. E-juice, förfyllda pods, vitt snus, smarta prenumerationer och nikotinläkemedel.",
-  primaryCta: "Produkter",
-  secondaryCta: "Prenumerationer",
-  disclaimer:
-    "Nikotin är starkt beroendeframkallande. Endast för vuxna (18+). Läs produktinformation före användning. Håll utom räckhåll för barn.",
-};
-
 export default function SmokifyHero({
   categoryQuickLinks,
   className,
@@ -94,23 +44,25 @@ export default function SmokifyHero({
   secondaryCta,
   disclaimer,
 }) {
-  const resolvedEyebrowText = eyebrowText || DEFAULT_HERO_CONTENT.eyebrowText;
-  const resolvedHeadline = headline || DEFAULT_HERO_CONTENT.headline;
-  const resolvedDescription = description || DEFAULT_HERO_CONTENT.description;
-  const resolvedPrimaryCta = primaryCta || DEFAULT_HERO_CONTENT.primaryCta;
-  const resolvedSecondaryCta =
-    secondaryCta || DEFAULT_HERO_CONTENT.secondaryCta;
-  const resolvedDisclaimer = disclaimer || DEFAULT_HERO_CONTENT.disclaimer;
+  const resolvedEyebrowText = eyebrowText;
+  const resolvedHeadline = headline;
+  const resolvedDescription = description;
+  const resolvedPrimaryCta = primaryCta;
+  const resolvedSecondaryCta = secondaryCta;
+  const resolvedDisclaimer = disclaimer;
   const normalizedCategoryQuickLinks =
     normalizeHeroCategoryLinks(categoryQuickLinks);
   const resolvedCategoryLinks =
     normalizedCategoryQuickLinks.length > 0
       ? normalizedCategoryQuickLinks
-      : categoryLinks;
+      : [];
 
   return (
     <section
-      className={["relative isolate overflow-hidden pb-6", className]
+      className={[
+        "relative isolate overflow-hidden pb-6",
+        className,
+      ]
         .filter(Boolean)
         .join(" ")}
     >
@@ -137,7 +89,11 @@ export default function SmokifyHero({
               />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+          <rect
+            width="100%"
+            height="100%"
+            fill="url(#grid)"
+          />
         </svg>
         <div className="bg-primary/10 absolute top-1/2 right-0 h-72 w-72 -translate-y-1/2 rounded-full blur-3xl" />
       </div>
@@ -152,7 +108,8 @@ export default function SmokifyHero({
             transition={{ duration: 0.5 }}
             className="bg-primary/25 border-primary/50 text-primary inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium shadow-sm"
           >
-            <Droplets className="h-3.5 w-3.5" /> {resolvedEyebrowText}
+            <Droplets className="h-3.5 w-3.5" />{" "}
+            {resolvedEyebrowText}
           </HeroContentWrapper>
 
           <HeroContentWrapper
@@ -164,7 +121,9 @@ export default function SmokifyHero({
           >
             {(() => {
               const words = resolvedHeadline.split(" ");
-              const gradientPart = words.slice(0, 4).join(" ");
+              const gradientPart = words
+                .slice(0, 4)
+                .join(" ");
               const restPart = words.slice(4).join(" ");
               return (
                 <>
@@ -195,9 +154,17 @@ export default function SmokifyHero({
             transition={{ delay: 0.2, duration: 0.45 }}
             className="mt-6 grid w-full grid-cols-1 gap-3 sm:grid-cols-2"
           >
-            <Button asChild className="w-full justify-center">
-              <Link href={ROUTES.SHOP.INDEX}>
-                <ShoppingBag className="mr-2 h-4 w-4" /> {resolvedPrimaryCta}
+            <Button
+              asChild
+              className="w-full justify-center"
+            >
+              <Link
+                href={ROUTES.SHOP.CATEGORY(
+                  "nicotine-pouches",
+                )}
+              >
+                <ShoppingBag className="mr-2 h-4 w-4" />{" "}
+                {resolvedPrimaryCta}
               </Link>
             </Button>
             <Button
@@ -205,8 +172,9 @@ export default function SmokifyHero({
               className="w-full justify-center border border-white/20 bg-transparent text-white hover:border-white/40 hover:bg-white/5 hover:text-white"
               asChild
             >
-              <Link href={"#subscriptions"}>
-                <Calendar className="mr-2 h-4 w-4" /> {resolvedSecondaryCta}
+              <Link href={ROUTES.BRANDS.INDEX}>
+                <Calendar className="mr-2 h-4 w-4" />{" "}
+                {resolvedSecondaryCta}
               </Link>
             </Button>
           </HeroContentWrapper>
@@ -231,7 +199,7 @@ export default function SmokifyHero({
           </HeroContentWrapper>
 
           {/* Legal note */}
-          <div className="mt-6 flex gap-4">
+          <div className="mt-6 flex items-center gap-4">
             <Image
               className="w-10"
               src="/images/icons/plus-18_white.svg"
@@ -313,10 +281,22 @@ export default function SmokifyHero({
                 <div className="grid grid-cols-2 gap-2">
                   {/* Individual pods */}
                   {[
-                    { color: "bg-blue-500/25", name: "Blue Razz" },
-                    { color: "bg-pink-500/25", name: "Strawberry" },
-                    { color: "bg-green-500/25", name: "Lemon Lime" },
-                    { color: "bg-purple-500/25", name: "Grape" },
+                    {
+                      color: "bg-blue-500/25",
+                      name: "Blue Razz",
+                    },
+                    {
+                      color: "bg-pink-500/25",
+                      name: "Strawberry",
+                    },
+                    {
+                      color: "bg-green-500/25",
+                      name: "Lemon Lime",
+                    },
+                    {
+                      color: "bg-purple-500/25",
+                      name: "Grape",
+                    },
                   ].map((pod, i) => (
                     <div
                       key={i}
@@ -352,7 +332,9 @@ export default function SmokifyHero({
                 <div className="relative flex aspect-4/3 w-full items-center justify-center overflow-hidden rounded-lg bg-linear-to-b from-white/40 to-white/20">
                   {/* Gum package */}
                   <div className="flex h-10 w-16 items-center justify-center rounded-md bg-linear-to-b from-white/90 to-white/70 shadow-sm">
-                    <span className="text-[10px] font-bold">NIKOTIN</span>
+                    <span className="text-[10px] font-bold">
+                      NIKOTIN
+                    </span>
                   </div>
                 </div>
                 <div className="mt-2 space-y-1">

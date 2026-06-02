@@ -7,8 +7,8 @@ export default function SameBrandProductsPicker({
   sameBrandProducts = [],
   title,
   brandName,
-  description = "Välj bland alla övriga poddar, glöm inte att köpa med dig startkittet!",
-  emptyMessage = "Inga andra produkter tillgängliga just nu.",
+  description = "Explore more flavors and options from ",
+  emptyMessage = "No other products available at the moment.",
   showIfEmpty = false,
 }) {
   const resolvedTitle =

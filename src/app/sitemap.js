@@ -50,21 +50,21 @@ export default async function sitemap() {
   // 2) Dynamiska sidor
 
   const categoriesRoutes = categories.map((category) => ({
-    url: `${BASE_URL}/produkter/${category.slug}`,
+    url: `${BASE_URL}/products/${category.slug}`,
     lastModified: category.updatedAt
       ? category.updatedAt
       : new Date(),
   }));
 
   const brandsRoutes = brands.map((brand) => ({
-    url: `${BASE_URL}/varumarken/${brand.slug}`,
+    url: `${BASE_URL}/brands/${brand.slug}`,
     lastModified: brand.updatedAt
       ? brand.updatedAt
       : new Date(),
   }));
 
   const productsRoutes = products.map((product) => ({
-    url: `${BASE_URL}/produkter/${product.category.slug}/${product.brand.slug}/${product.slug}`,
+    url: `${BASE_URL}/products/${product.category.slug}/${product.brand.slug}/${product.slug}`,
     lastModified: product.updatedAt
       ? product.updatedAt
       : new Date(),
@@ -72,7 +72,7 @@ export default async function sitemap() {
 
   const blogCategoriesRoutes = blogCategories.map(
     (category) => ({
-      url: `${BASE_URL}/blogg/${category.slug}`,
+      url: `${BASE_URL}/blog/${category.slug}`,
       lastModified: category.updatedAt
         ? category.updatedAt
         : new Date(),
@@ -81,7 +81,7 @@ export default async function sitemap() {
 
   const blogPostRoutes = blogPostsData.posts.map(
     (post) => ({
-      url: `${BASE_URL}/blogg/${post.primaryCategory?.slug || "okategoriserad"}/${
+      url: `${BASE_URL}/blog/${post.primaryCategory?.slug || "uncategorized"}/${
         post.slug
       }`,
       lastModified: post.updatedAt

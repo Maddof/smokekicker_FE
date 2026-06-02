@@ -1,7 +1,8 @@
 import { SITE_NAME } from "@/config/metadata";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://smokekicker.com";
 
 export function buildCmsPageMetadata({
   page,
@@ -41,7 +42,7 @@ export function buildCmsPageMetadata({
       url: canonicalUrl,
       type: "website",
       siteName: SITE_NAME,
-      locale: "sv_SE",
+      locale: "en_US",
       images: [
         {
           url:

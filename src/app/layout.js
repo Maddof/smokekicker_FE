@@ -7,7 +7,8 @@ import { SITE_NAME } from "@/config/metadata";
 
 export const metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se",
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      "https://smokify.se",
   ),
   title: `${SITE_NAME} - Vape och vitt snus med omtanke`,
   description:
@@ -23,7 +24,7 @@ const montserrat = Montserrat({
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="sv"
+      lang="en"
       data-scroll-behavior="smooth" // to disable smooth scrolling when routing via Next.js
       className={`${montserrat.variable} scroll-pt-(--header-height) scroll-smooth`}
     >

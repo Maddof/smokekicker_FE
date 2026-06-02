@@ -14,13 +14,20 @@ export default function ProductFilterWrapper({
   productCount,
   initialDisplayCount = 8,
 }) {
-  const [searchFilteredProducts, setSearchFilteredProducts] =
-    useState(products);
-  const [selectedBrandSlugs, setSelectedBrandSlugs] = useState([]);
-  const [selectedFlavorProfileSlugs, setSelectedFlavorProfileSlugs] = useState(
-    [],
-  );
-  const [selectedNicotineValues, setSelectedNicotineValues] = useState([]);
+  const [
+    searchFilteredProducts,
+    setSearchFilteredProducts,
+  ] = useState(products);
+  const [selectedBrandSlugs, setSelectedBrandSlugs] =
+    useState([]);
+  const [
+    selectedFlavorProfileSlugs,
+    setSelectedFlavorProfileSlugs,
+  ] = useState([]);
+  const [
+    selectedNicotineValues,
+    setSelectedNicotineValues,
+  ] = useState([]);
 
   const [minProductPrice, maxProductPrice] = useMemo(() => {
     const prices = products
@@ -34,15 +41,16 @@ export default function ProductFilterWrapper({
     return [Math.min(...prices), Math.max(...prices)];
   }, [products]);
 
-  const [selectedPriceRange, setSelectedPriceRange] = useState([
-    minProductPrice,
-    maxProductPrice,
-  ]);
+  const [selectedPriceRange, setSelectedPriceRange] =
+    useState([minProductPrice, maxProductPrice]);
   const [visibleProductCount, setVisibleProductCount] =
     useState(initialDisplayCount);
 
   useEffect(() => {
-    setSelectedPriceRange([minProductPrice, maxProductPrice]);
+    setSelectedPriceRange([
+      minProductPrice,
+      maxProductPrice,
+    ]);
   }, [minProductPrice, maxProductPrice]);
 
   useEffect(() => {
@@ -73,7 +81,9 @@ export default function ProductFilterWrapper({
           ? product.flavorProfiles.some(
               (profile) =>
                 typeof profile?.slug === "string" &&
-                selectedFlavorProfileSlugs.includes(profile.slug),
+                selectedFlavorProfileSlugs.includes(
+                  profile.slug,
+                ),
             )
           : false,
       );
@@ -82,12 +92,17 @@ export default function ProductFilterWrapper({
     if (selectedNicotineValues.length > 0) {
       result = result.filter(
         (product) =>
-          Number.isFinite(product?.details?.nicotineValue) &&
-          selectedNicotineValues.includes(product.details.nicotineValue),
+          Number.isFinite(
+            product?.details?.nicotineValue,
+          ) &&
+          selectedNicotineValues.includes(
+            product.details.nicotineValue,
+          ),
       );
     }
 
-    const [selectedMinPrice, selectedMaxPrice] = selectedPriceRange;
+    const [selectedMinPrice, selectedMaxPrice] =
+      selectedPriceRange;
 
     result = result.filter(
       (product) =>
@@ -105,7 +120,8 @@ export default function ProductFilterWrapper({
     selectedPriceRange,
   ]);
 
-  const hasMoreProductsToShow = filteredProducts.length > visibleProductCount;
+  const hasMoreProductsToShow =
+    filteredProducts.length > visibleProductCount;
   const remainingProducts = Math.max(
     filteredProducts.length - visibleProductCount,
     0,
@@ -118,13 +134,15 @@ export default function ProductFilterWrapper({
 
   return (
     <>
-      <p className="mb-4 font-medium">{productCount} Produkter</p>
+      <p className="mb-4 font-medium">
+        {productCount} Products
+      </p>
       <div className="mb-6 flex w-full flex-col items-start justify-between gap-4 border-t border-b py-4">
         <div className="flex w-full flex-col items-start gap-6 lg:flex-row">
           <SearchFilter
             items={products}
             onFilterChange={setSearchFilteredProducts}
-            placeholder="Filtrera efter namn..."
+            placeholder="Filter by name..."
             searchField="name"
           />
           <BrandFilter
@@ -153,9 +171,9 @@ export default function ProductFilterWrapper({
 
       {filteredProducts.length === 0 ? (
         <div className="border-primary my-12 rounded-lg border border-dashed p-8 text-center">
-          <p>Inga produkter matchar din sökning.</p>
+          <p>No products match your search.</p>
           <p className="text-muted-foreground mt-1 text-sm">
-            Försök med ett annat sökord.
+            Try a different keyword.
           </p>
         </div>
       ) : (
@@ -164,7 +182,9 @@ export default function ProductFilterWrapper({
             <ProductCard
               key={product.id}
               product={product}
-              className={index < visibleProductCount ? "" : "hidden"}
+              className={
+                index < visibleProductCount ? "" : "hidden"
+              }
             />
           ))}
         </ul>
@@ -172,8 +192,12 @@ export default function ProductFilterWrapper({
 
       {hasMoreProductsToShow && (
         <div className="mt-8 flex justify-center">
-          <Button type="button" variant="outline" onClick={showMoreProducts}>
-            Visa {nextBatchCount} till
+          <Button
+            type="button"
+            variant="outline"
+            onClick={showMoreProducts}
+          >
+            Show {nextBatchCount} more
           </Button>
         </div>
       )}
