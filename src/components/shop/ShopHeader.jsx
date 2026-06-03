@@ -19,7 +19,7 @@ export default function ShopHeader({
 }) {
   return (
     <section
-      className="relative w-full overflow-hidden bg-black"
+      className="relative w-full overflow-hidden bg-black py-4"
       id="shop-hero"
     >
       {/* Background image */}
@@ -34,7 +34,7 @@ export default function ShopHeader({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center justify-start px-4 py-6 sm:justify-end sm:px-6 sm:py-12">
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center justify-start px-4 sm:justify-end">
         <div className="max-w-xl text-white">
           <h1 className="font-extrabold">{title}</h1>
           <p className="text-secondary-foreground mt-4 font-medium">

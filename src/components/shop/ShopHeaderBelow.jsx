@@ -26,7 +26,10 @@ export default function ShopHeaderBelow({
                 className="xsm:hidden h-auto w-20 object-contain opacity-20"
               />
             </div>
-            <ReadMore id="podSystemInfo" initialParagraphs={initialParagraphs}>
+            <ReadMore
+              id="podSystemInfo"
+              initialParagraphs={initialParagraphs}
+            >
               {children}
             </ReadMore>
           </div>

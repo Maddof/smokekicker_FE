@@ -3,7 +3,11 @@
 import { useMemo } from "react";
 import { Button } from "@/components/ui/scn/button";
 
-export default function BrandFilter({ items, value = [], onValueChange }) {
+export default function BrandFilter({
+  items,
+  value = [],
+  onValueChange,
+}) {
   const brandOptions = useMemo(() => {
     const uniqueBrands = new Map();
 
@@ -27,17 +31,19 @@ export default function BrandFilter({ items, value = [], onValueChange }) {
 
   return (
     <div className="w-full">
-      <p className="mb-2 font-medium">Varumärke</p>
+      <p className="mb-2 font-medium">Brand</p>
       <div className="flex flex-wrap gap-2">
         <Button
           type="button"
           size="sm"
-          variant={value.length === 0 ? "default" : "outline"}
+          variant={
+            value.length === 0 ? "default" : "outline"
+          }
           className="normal-case"
           onClick={() => onValueChange([])}
           aria-pressed={value.length === 0}
         >
-          Alla
+          All
         </Button>
 
         {brandOptions.map((brand) => {
@@ -53,7 +59,10 @@ export default function BrandFilter({ items, value = [], onValueChange }) {
               onClick={() => {
                 if (isSelected) {
                   onValueChange(
-                    value.filter((selectedSlug) => selectedSlug !== brand.slug),
+                    value.filter(
+                      (selectedSlug) =>
+                        selectedSlug !== brand.slug,
+                    ),
                   );
                   return;
                 }

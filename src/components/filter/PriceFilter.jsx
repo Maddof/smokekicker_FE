@@ -16,9 +16,10 @@ export default function PriceFilter({
   return (
     <div className="w-full">
       <div className="mb-2 flex items-center justify-between gap-3">
-        <p className="font-medium">Pris</p>
+        <p className="font-medium">Price</p>
         <p className="text-muted-foreground text-sm">
-          {formatCurrency(currentMin)} – {formatCurrency(currentMax)}
+          {formatCurrency(currentMin)} –{" "}
+          {formatCurrency(currentMax)}
         </p>
       </div>
 
@@ -27,7 +28,7 @@ export default function PriceFilter({
         onValueChange={onValueChange}
         min={minPrice}
         max={maxPrice}
-        step={100}
+        step={10}
         minStepsBetweenThumbs={1}
         disabled={isDisabled}
       />

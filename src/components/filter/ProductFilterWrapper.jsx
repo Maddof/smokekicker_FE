@@ -171,7 +171,7 @@ export default function ProductFilterWrapper({
 
       {filteredProducts.length === 0 ? (
         <div className="border-primary my-12 rounded-lg border border-dashed p-8 text-center">
-          <p>No products match your search.</p>
+          <p>No products found.</p>
           <p className="text-muted-foreground mt-1 text-sm">
             Try a different keyword.
           </p>
