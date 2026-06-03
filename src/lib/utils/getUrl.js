@@ -4,7 +4,8 @@ export function getImageUrl(path) {
   if (path.startsWith("http")) return path;
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_BE_BASE_URL || "https://api.smokify.se";
+    process.env.NEXT_PUBLIC_BE_BASE_URL ||
+    "https://api.smokekicker.com";
 
   return `${baseUrl}${path}`;
 }
@@ -16,7 +17,8 @@ export function getFileUrl(path) {
   if (/^https?:\/\//.test(path)) return path;
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_BE_BASE_URL || "https://api.smokify.se";
+    process.env.NEXT_PUBLIC_BE_BASE_URL ||
+    "https://api.smokekicker.com";
 
   try {
     // URL constructor handles trailing/leading slashes correctly

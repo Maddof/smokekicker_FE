@@ -103,9 +103,9 @@ export default function DropdownMenu() {
         aria-expanded={isOpen}
       >
         <CircleUserRound />
-        <span className="ml-1 min-w-10 self-center text-xs">
+        {/* <span className="ml-1 min-w-10 self-center text-xs">
           Account
-        </span>
+        </span> */}
       </button>
       {isOpen && (
         <div className="bg-muted absolute top-10 left-1/2 z-100 flex w-48 -translate-x-1/2 transform flex-col items-start rounded-lg pb-2">

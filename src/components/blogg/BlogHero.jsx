@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/scn/button";
 import { ChevronDown } from "lucide-react";
 
 export default function BlogHero({
-  title = "Blogg",
-  description = "Guider, produkttips och aktuell information om vapes, e-cigaretter och nikotinpåsar. Här hittar du information om allt från skademinimering och vanliga frågor till nyheter och gällande lagar och regler.",
+  title = "No Smoke. Just Knowledge",
+  description = "Get the latest tips, guides, reviews, and insights from the world of nicotine pouches. Learn something new, discover new favorites, and level up your pouch game.",
   backgroundImage = "/images/bg/blog_hero_moon-neon.jpg",
   backgroundAlt = "Blog Hero Background",
-  viewBlogPostsText = "Se blogginlägg",
+  viewBlogPostsText = "Explore Articles",
 }) {
   return (
     <section
@@ -38,11 +38,13 @@ export default function BlogHero({
               variant="outline"
               className="flex items-center gap-2 hover:text-white"
             >
-              <a href="#category-picker">{viewBlogPostsText}</a>
+              <a href="#category-picker">
+                {viewBlogPostsText}
+              </a>
             </Button>
 
             <span className="text-xs text-white/60">
-              Scrolla ner för att se blogginlägg
+              Scroll down to see blog posts
             </span>
             <ChevronDown className="h-4 w-4 animate-bounce" />
           </div>

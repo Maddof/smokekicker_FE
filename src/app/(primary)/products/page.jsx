@@ -16,7 +16,8 @@ import { buildCmsPageMetadata } from "@/lib/cms/pageMetadata";
 export const revalidate = 86400; // Revalidate this page every 24 hours
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://smokekicker.com";
 
 const fallBackImage = "/images/fallback.png";
 
@@ -89,7 +90,7 @@ export default async function ShopPage() {
       name: `Buy Nicotine Pouches Online | Worldwide & EU Shipping`,
       description:
         "Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on tobacco-free nicotine products.",
-      inLanguage: "en-US",
+      inLanguage: "en",
       isPartOf: {
         "@id": `${SITE_URL}#website`,
       },

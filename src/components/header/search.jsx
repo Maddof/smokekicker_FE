@@ -248,9 +248,9 @@ export default function SearchBox({
           onKeyDown={handleKeyPress}
           // onFocus={() => query.length >= 2 && setShowDropdown(true)}
           onFocus={handleInputFocus}
-          placeholder="Search products..."
+          placeholder="Search nicotine pouches..."
           className="text-foreground border-foreground border pr-10 placeholder:text-gray-800"
-          aria-label="Search products"
+          aria-label="Search nicotine pouches"
           autoFocus={isExpanded}
         />
         {query ? (

@@ -23,20 +23,28 @@ function mapQuestionToMessage(question) {
 }
 
 function sleepRandom(min = 600, max = 1400) {
-  const delay = Math.floor(Math.random() * (max - min + 1)) + min;
-  return new Promise((resolve) => setTimeout(resolve, delay));
+  const delay =
+    Math.floor(Math.random() * (max - min + 1)) + min;
+  return new Promise((resolve) =>
+    setTimeout(resolve, delay),
+  );
 }
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
-  const [currentQuestionState, setCurrentQuestionState] = useState(null);
+  const [currentQuestionState, setCurrentQuestionState] =
+    useState(null);
   const [answers, setAnswers] = useState([]);
   const [result, setResult] = useState(null);
   const [hasStarted, setHasStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [isGeneratingResult, setIsGeneratingResult] = useState(false);
-  const [resultGenerationMessage, setResultGenerationMessage] = useState("");
+  const [isGeneratingResult, setIsGeneratingResult] =
+    useState(false);
+  const [
+    resultGenerationMessage,
+    setResultGenerationMessage,
+  ] = useState("");
   const [error, setError] = useState(null);
 
   const scrollContainerRef = useRef(null);
@@ -53,11 +61,16 @@ export default function Chat() {
     const params = new URLSearchParams();
     if (result.personalityName)
       params.set("personalityName", result.personalityName);
-    if (result.headline) params.set("headline", result.headline);
-    if (result.description) params.set("description", result.description);
-    if (result.shareText) params.set("shareText", result.shareText);
+    if (result.headline)
+      params.set("headline", result.headline);
+    if (result.description)
+      params.set("description", result.description);
+    if (result.shareText)
+      params.set("shareText", result.shareText);
 
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    router.replace(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
   }, [result, pathname, router]);
 
   useEffect(() => {
@@ -120,10 +133,14 @@ export default function Chat() {
 
       const data = await res.json();
 
-      const assistantMessage = mapQuestionToMessage(data.question);
+      const assistantMessage = mapQuestionToMessage(
+        data.question,
+      );
 
       setMessages((prev) =>
-        initialLoad ? [assistantMessage] : [...prev, assistantMessage],
+        initialLoad
+          ? [assistantMessage]
+          : [...prev, assistantMessage],
       );
 
       setCurrentQuestionState({
@@ -136,7 +153,7 @@ export default function Chat() {
         setHasStarted(false);
       }
 
-      setError(err.message || "Något gick fel.");
+      setError(err.message || "Something went wrong.");
     } finally {
       setIsLoading(false);
       setIsTyping(false);
@@ -146,7 +163,7 @@ export default function Chat() {
   async function handleStartChat() {
     setIsTyping(true);
     setHasStarted(true);
-    await sleepRandom(500, 1000); // Liten fördröjning för bättre UX
+    await sleepRandom(500, 1000); // Small delay for better UX
     setIsTyping(false);
     setError(null);
     setMessages([]);
@@ -162,17 +179,22 @@ export default function Chat() {
       setError(null);
       setIsTyping(true);
       setIsGeneratingResult(true);
-      setResultGenerationMessage(pickRandomResultGenerationMessage());
+      setResultGenerationMessage(
+        pickRandomResultGenerationMessage(),
+      );
 
-      const res = await fetch(`${API_BASE_URL}/flavor-personality/result`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `${API_BASE_URL}/flavor-personality/result`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            answers: finalAnswers,
+          }),
         },
-        body: JSON.stringify({
-          answers: finalAnswers,
-        }),
-      });
+      );
 
       if (!res.ok) {
         throw new Error("Kunde inte generera resultat.");
@@ -196,7 +218,7 @@ export default function Chat() {
         setResult(data.result);
       }
     } catch (err) {
-      setError(err.message || "Något gick fel.");
+      setError(err.message || "Something went wrong.");
     } finally {
       setIsTyping(false);
       setIsGeneratingResult(false);
@@ -205,9 +227,11 @@ export default function Chat() {
   }
 
   async function handleSelect(option) {
-    if (!currentQuestionState || isTyping || isLoading) return;
+    if (!currentQuestionState || isTyping || isLoading)
+      return;
 
-    const { stage, isLastQuestion, question } = currentQuestionState;
+    const { stage, isLastQuestion, question } =
+      currentQuestionState;
 
     const userMessage = {
       id: crypto.randomUUID(),
@@ -226,7 +250,9 @@ export default function Chat() {
 
     setMessages((prev) => [
       ...prev.map((msg) =>
-        msg.id === question.id ? { ...msg, options: [] } : msg,
+        msg.id === question.id
+          ? { ...msg, options: [] }
+          : msg,
       ),
       userMessage,
     ]);
@@ -256,11 +282,15 @@ export default function Chat() {
           <>
             <button
               type="button"
+              disabled
               onClick={handleStartChat}
               className="mx-auto inline-flex items-center rounded-xl border border-cyan-100/80 bg-cyan-100 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-105 focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
             >
-              Starta smaktestet
+              Start the Flavor Quiz
             </button>
+            <p className="mx-auto mt-4 text-center text-sm text-neutral-300">
+              Coming soon!
+            </p>
             <div className="mx-auto max-w-xs text-center">
               <Image
                 src="/images/other/robot.png"
@@ -276,7 +306,10 @@ export default function Chat() {
 
         {messages.map((message) =>
           message.role === "user" ? (
-            <UserMessage key={message.id} content={message.content} />
+            <UserMessage
+              key={message.id}
+              content={message.content}
+            />
           ) : (
             <AIMessage
               key={message.id}
@@ -299,7 +332,9 @@ export default function Chat() {
           </AIMessage>
         )}
 
-        {isTyping && !isGeneratingResult && <TypingIndicator />}
+        {isTyping && !isGeneratingResult && (
+          <TypingIndicator />
+        )}
 
         {error && (
           <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">

@@ -13,7 +13,8 @@ async function getBangersFont() {
   if (cachedBangersFont) return cachedBangersFont;
 
   const response = await fetch(BANGERS_FONT_PATH);
-  if (!response.ok) throw new Error("Could not load OG font file.");
+  if (!response.ok)
+    throw new Error("Could not load OG font file.");
 
   cachedBangersFont = await response.arrayBuffer();
   return cachedBangersFont;
@@ -24,11 +25,13 @@ export async function GET(req) {
 
   // const OG_BASE_URL = "https://logiest-kingston-citizenly.ngrok-free.dev";
   // const imageUrl2 = `${OG_BASE_URL}/images/og/fb_share_neon-space.jpg`;
-  // const logoUrl = `${OG_BASE_URL}/smokify_logo_orange.svg`;
+  // const logoUrl = `${OG_BASE_URL}/smokekicker_logo_orange.svg`;
 
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://smokify.se";
+  const SITE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    "https://smokekicker.com";
   const imageUrl2 = `${SITE_URL}/images/og/fb_share_neon-space.jpg`;
-  const logoUrl = `${SITE_URL}/smokify_logo_orange.svg`;
+  const logoUrl = `${SITE_URL}/smokekicker_logo_orange.svg`;
 
   const { searchParams } = requestUrl;
 
@@ -135,7 +138,7 @@ export async function GET(req) {
       {/* Logo */}
       <img
         src={logoUrl}
-        alt="Smokify"
+        alt="Smokekicker Logo"
         style={{
           position: "absolute",
           right: "30px",

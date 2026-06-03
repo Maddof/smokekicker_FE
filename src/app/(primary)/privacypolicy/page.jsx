@@ -6,7 +6,8 @@ import { getOrderedSections } from "@/lib/cms/getSection";
 import { getPageByKey } from "@/lib/cms/getPage";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://smokekicker.com";
 
 async function getPrivacyPolicyPage() {
   const page = await getPageByKey("privacy-policy");

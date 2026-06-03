@@ -150,7 +150,7 @@ export default async function BlogPostPage({ params }) {
       name: title,
       description:
         post.seoMetaDescription || excerpt || undefined,
-      inLanguage: "en-US",
+      inLanguage: "en",
       datePublished: publishedAt,
       dateModified: post.updatedAt || publishedAt,
       author: authorName

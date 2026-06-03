@@ -23,17 +23,17 @@ export default function Header() {
             className="flex items-center"
           >
             <Image
-              className="w-28"
-              src="/smokify_logo_black.svg"
+              className="w-60"
+              src="/smokekicker_logo_black.svg"
               fetchPriority="high"
               loading="eager"
-              alt="Smokify Logo"
+              alt="Smokekicker Logo"
               width={192}
               height={64}
             />
           </Link>
         </div>
-        <div className="flex h-full grow items-center justify-end gap-2 sm:gap-4">
+        <div className="flex h-full grow items-center justify-end gap-3 sm:gap-4">
           {/* <SearchBox /> */}
           <Suspense
             fallback={

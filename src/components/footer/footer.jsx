@@ -29,7 +29,7 @@ export default function Component() {
             <p className="font-bold">
               You must be 18 or older to purchase.
             </p>
-            <p>Mandatory age verification in checkout.</p>
+            <p>Age verification required at checkout.</p>
           </div>
         </div>
       </div>
@@ -39,13 +39,10 @@ export default function Component() {
           <FooterHeading>Help</FooterHeading>
 
           <FooterLink href={ROUTES.CONTACT}>
-            Contact Us
+            Contact
           </FooterLink>
           <FooterLink href={ROUTES.PERSONALITY}>
             AI Taste Test{" "}
-          </FooterLink>
-          <FooterLink href={ROUTES.BRANDS.INDEX}>
-            Brands
           </FooterLink>
           <FooterLink href={ROUTES.BLOG.INDEX}>
             Blog
@@ -60,7 +57,10 @@ export default function Component() {
           >
             Nicotine Pouches
           </FooterLink>
-          <FooterLink
+          <FooterLink href={ROUTES.BRANDS.INDEX}>
+            Brands
+          </FooterLink>
+          {/* <FooterLink
             href={ROUTES.SHOP.CATEGORY(
               "nicotine-free-pouches",
             )}
@@ -81,7 +81,7 @@ export default function Component() {
             href={ROUTES.SHOP.CATEGORY("accessories")}
           >
             Accessories
-          </FooterLink>
+          </FooterLink> */}
         </div>
 
         {/* Resources */}
@@ -126,15 +126,17 @@ export default function Component() {
         <div className="xsm:grid-cols-4 col-span-full grid grid-cols-1 gap-6">
           <div className="col-span-1 flex flex-col items-start gap-4">
             <Image
-              className="w-40"
-              src="/smokify_logo_orange.svg"
-              alt="Smokify Logo"
+              className="w-full"
+              src="/smokekicker_logo-orange.svg"
+              alt="Smokekicker Logo Orange"
               width={288}
               height={96}
             />
-            <p>
-              Smokify AB <br />
-              559445-1386 <br />
+            <p className="text-xs">
+              This site is owned and operated by Smokify AB,
+              a company registered in Sweden (org. number
+              559248-0797) with its registered office at
+              Centralvägen 3, 194 76 Upplands Väsby, Sweden.
             </p>
             <p className="text-sm">
               © {new Date().getFullYear()} Smokify AB. All
@@ -187,13 +189,14 @@ export default function Component() {
               be kept out of the reach of children.
               <br />
               <br />
-              Only for adults 18 years and older. Smokify AB
-              does not sell to minors. By purchasing, you
-              confirm that you are of legal age in your
-              country to buy nicotine products. If you are
-              under 18, please do not attempt to purchase
-              from our store. We are committed to preventing
-              underage access to nicotine products.
+              Only for adults 18 years and older.
+              Smokekicker does not sell to minors. By
+              purchasing, you confirm that you are of legal
+              age in your country to buy nicotine products.
+              If you are under 18, please do not attempt to
+              purchase from our store. We are committed to
+              preventing underage access to nicotine
+              products.
             </p>
           </div>
         </div>

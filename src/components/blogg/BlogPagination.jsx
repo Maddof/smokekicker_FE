@@ -2,7 +2,10 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/scn/button";
 
-export default function BlogPagination({ pagination, basePath = "/blogg" }) {
+export default function BlogPagination({
+  pagination,
+  basePath = "/blog",
+}) {
   if (!pagination) return null;
 
   const {
@@ -28,12 +31,16 @@ export default function BlogPagination({ pagination, basePath = "/blogg" }) {
     const delta = 1;
 
     const rangeStart = Math.max(2, currentPage - delta);
-    const rangeEnd = Math.min(totalPages - 1, currentPage + delta);
+    const rangeEnd = Math.min(
+      totalPages - 1,
+      currentPage + delta,
+    );
 
     pages.push(1);
 
     if (rangeStart > 2) pages.push("...");
-    for (let i = rangeStart; i <= rangeEnd; i++) pages.push(i);
+    for (let i = rangeStart; i <= rangeEnd; i++)
+      pages.push(i);
     if (rangeEnd < totalPages - 1) pages.push("...");
 
     if (totalPages > 1) pages.push(totalPages);
@@ -43,11 +50,11 @@ export default function BlogPagination({ pagination, basePath = "/blogg" }) {
 
   return (
     <nav
-      aria-label="Sidonavigering för blogginlägg"
+      aria-label="Pagination for blog posts"
       className="mt-10 flex flex-col items-center gap-4"
     >
       <p className="text-muted-foreground text-sm">
-        Visar {startItem}–{endItem} av {total} inlägg
+        Showing {startItem}–{endItem} of {total} posts
       </p>
 
       <div className="flex items-center gap-1">
@@ -56,11 +63,14 @@ export default function BlogPagination({ pagination, basePath = "/blogg" }) {
           variant="outline"
           size="icon"
           disabled={!hasPrevPage}
-          aria-label="Föregående sida"
+          aria-label="Previous page"
           asChild={hasPrevPage}
         >
           {hasPrevPage ? (
-            <Link href={createPageURL(currentPage - 1)} rel="prev">
+            <Link
+              href={createPageURL(currentPage - 1)}
+              rel="prev"
+            >
               <ChevronLeft className="h-4 w-4" />
             </Link>
           ) : (
@@ -80,14 +90,20 @@ export default function BlogPagination({ pagination, basePath = "/blogg" }) {
           ) : (
             <Button
               key={page}
-              variant={page === currentPage ? "default" : "outline"}
+              variant={
+                page === currentPage ? "default" : "outline"
+              }
               size="icon"
-              aria-label={`Gå till sida ${page}`}
-              aria-current={page === currentPage ? "page" : undefined}
+              aria-label={`Go to page ${page}`}
+              aria-current={
+                page === currentPage ? "page" : undefined
+              }
               asChild={page !== currentPage}
             >
               {page !== currentPage ? (
-                <Link href={createPageURL(page)}>{page}</Link>
+                <Link href={createPageURL(page)}>
+                  {page}
+                </Link>
               ) : (
                 <span>{page}</span>
               )}
@@ -100,11 +116,14 @@ export default function BlogPagination({ pagination, basePath = "/blogg" }) {
           variant="outline"
           size="icon"
           disabled={!hasNextPage}
-          aria-label="Nästa sida"
+          aria-label="Next page"
           asChild={hasNextPage}
         >
           {hasNextPage ? (
-            <Link href={createPageURL(currentPage + 1)} rel="next">
+            <Link
+              href={createPageURL(currentPage + 1)}
+              rel="next"
+            >
               <ChevronRight className="h-4 w-4" />
             </Link>
           ) : (

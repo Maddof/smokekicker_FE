@@ -59,7 +59,7 @@ export async function generateMetadata({ params }) {
       description:
         description ||
         `Explore our range of ${category.name.toLowerCase()} and find the right product for you.`,
-      url: `https://smokify.se/products/${category.slug}`,
+      url: `https://smokekicker.com/products/${category.slug}`,
       type: "website",
       images: [
         {
@@ -151,7 +151,7 @@ export default async function CategoryPage({ params }) {
 
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://smokify.se";
+    "https://smokekicker.com";
 
   const categoryUrl = `${siteUrl}${currentPath}`;
   const title =
@@ -170,7 +170,7 @@ export default async function CategoryPage({ params }) {
     url: categoryUrl,
     name: title,
     description,
-    inLanguage: "en-US",
+    inLanguage: "en",
     isPartOf: {
       "@id": `${siteUrl}#website`,
     },

@@ -10,6 +10,7 @@ import {
   Candy,
   Zap,
   Droplet,
+  Truck,
 } from "lucide-react";
 import { normalizeHeroCategoryLinks } from "@/lib/cms/normalizeHeroCategoryLinks";
 import { ROUTES } from "@/config/routes";
@@ -108,7 +109,7 @@ export default function SmokifyHero({
             transition={{ duration: 0.5 }}
             className="bg-primary/25 border-primary/50 text-primary inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium shadow-sm"
           >
-            <Droplets className="h-3.5 w-3.5" />{" "}
+            <Truck className="h-3.5 w-3.5" />
             {resolvedEyebrowText}
           </HeroContentWrapper>
 
@@ -122,9 +123,9 @@ export default function SmokifyHero({
             {(() => {
               const words = resolvedHeadline.split(" ");
               const gradientPart = words
-                .slice(0, 4)
+                .slice(0, 2)
                 .join(" ");
-              const restPart = words.slice(4).join(" ");
+              const restPart = words.slice(2).join(" ");
               return (
                 <>
                   <span className="from-primary bg-linear-to-r to-white bg-clip-text text-transparent">
@@ -218,160 +219,23 @@ export default function SmokifyHero({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative -top-10 z-0"
+          className="relative -top-10 z-0 h-full w-full"
         >
           {/* Main showcase container */}
-          <div className="relative mx-auto aspect-square w-full max-w-md">
+          <div className="h-full w-full">
             {/* Background glow effects */}
             <div className="absolute inset-0 -z-10">
               <div className="bg-primary/30 absolute top-1/4 left-1/4 h-48 w-48 rounded-full blur-3xl" />
               <div className="absolute right-1/4 bottom-1/4 h-40 w-40 rounded-full bg-blue-400/20 blur-2xl" />
-              <div className="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-400/15 blur-xl" />
             </div>
-
-            {/* Vape device - main focus */}
-            <HeroContentWrapper
-              initial={{ opacity: 0, y: 20, rotate: -5 }}
-              animate={{ opacity: 1, y: 0, rotate: -5 }}
-              transition={{
-                delay: 0.15,
-                type: "spring",
-                stiffness: 120,
-                damping: 18,
-              }}
-              className="absolute top-8 right-4 z-20 w-48 sm:w-56 md:w-64"
-            >
-              <div className="rounded-2xl border border-white/20 bg-linear-to-b from-white/10 to-white/5 p-4 shadow-2xl backdrop-blur-sm">
-                <div className="relative flex aspect-2/3 w-full items-center justify-center overflow-hidden rounded-xl bg-linear-to-b from-slate-800/50 to-slate-900/50">
-                  {/* Vape sketch image */}
-                  <Image
-                    src="/images/other/vape_neon-blue.webp"
-                    alt="Vape device"
-                    width={120}
-                    height={160}
-                    className="w-4/5 object-cover opacity-40"
-                  />
-                </div>
-                {/* Product info */}
-                <div className="mt-3 space-y-1">
-                  <div className="h-2 w-3/4 rounded-full bg-white/30" />
-                  <div className="h-2 w-1/2 rounded-full bg-white/20" />
-                  <div className="mt-2 flex items-center justify-between">
-                    <span className="text-xs text-white/80">
-                      Vape prenumeration
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </HeroContentWrapper>
-
-            {/* Pod collection - floating */}
-            <HeroContentWrapper
-              initial={{ opacity: 0, x: -20, rotate: 8 }}
-              animate={{ opacity: 1, x: 0, rotate: 8 }}
-              transition={{
-                delay: 0.25,
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
-              }}
-              className="absolute top-6 left-2 z-10 w-40 sm:w-44"
-            >
-              <div className="rounded-xl border border-white/15 bg-linear-to-br from-white/8 to-white/3 p-3 shadow-xl backdrop-blur-sm">
-                <div className="grid grid-cols-2 gap-2">
-                  {/* Individual pods */}
-                  {[
-                    {
-                      color: "bg-blue-500/25",
-                      name: "Blue Razz",
-                    },
-                    {
-                      color: "bg-pink-500/25",
-                      name: "Strawberry",
-                    },
-                    {
-                      color: "bg-green-500/25",
-                      name: "Lemon Lime",
-                    },
-                    {
-                      color: "bg-purple-500/25",
-                      name: "Grape",
-                    },
-                  ].map((pod, i) => (
-                    <div
-                      key={i}
-                      className={`flex min-h-16 flex-col items-center justify-center rounded-lg ${pod.color} p-2`}
-                    >
-                      <span className="text-center text-[10px] text-white/50">
-                        {pod.name}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-2 border-t border-white/10 pt-2">
-                  <span className="text-xs text-white/80">
-                    Förfyllda Pods & E-juice
-                  </span>
-                </div>
-              </div>
-            </HeroContentWrapper>
-
-            {/* Tuggummi/Gum - bottom right */}
-            <HeroContentWrapper
-              initial={{ opacity: 0, y: 20, rotate: -8 }}
-              animate={{ opacity: 1, y: 0, rotate: -8 }}
-              transition={{
-                delay: 0.35,
-                type: "spring",
-                stiffness: 110,
-                damping: 16,
-              }}
-              className="absolute bottom-4 left-8 z-15 w-36 sm:w-40"
-            >
-              <div className="rounded-xl border border-white/15 p-3">
-                <div className="relative flex aspect-4/3 w-full items-center justify-center overflow-hidden rounded-lg bg-linear-to-b from-white/40 to-white/20">
-                  {/* Gum package */}
-                  <div className="flex h-10 w-16 items-center justify-center rounded-md bg-linear-to-b from-white/90 to-white/70 shadow-sm">
-                    <span className="text-[10px] font-bold">
-                      NIKOTIN
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-2 space-y-1">
-                  <div className="h-1.5 w-3/4 rounded-full bg-white/25" />
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/80">
-                      Nikotinläkemedel & Vitt snus
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </HeroContentWrapper>
-
-            {/* Floating elements */}
-            <HeroContentWrapper
-              animate={{
-                y: [-5, 5, -5],
-                rotate: [0, 2, 0, -2, 0],
-              }}
-              transition={{
-                duration: 3,
-                ease: "easeInOut",
-              }}
-              className="bg-primary/40 absolute top-1/3 left-8 h-4 w-4 rounded-full blur-sm"
-            />
-
-            <HeroContentWrapper
-              animate={{
-                y: [5, -5, 5],
-                x: [-2, 2, -2],
-              }}
-              transition={{
-                duration: 4,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-              className="absolute right-12 bottom-1/3 h-3 w-3 rounded-full bg-blue-400/30 blur-sm"
+            {/* Main product image */}
+            <Image
+              src="/images/other/kicking_cigarette.webp"
+              alt="Kicking cigarette"
+              width={120}
+              height={160}
+              className="h-full w-full object-contain opacity-40"
+              loading="eager"
             />
           </div>
         </HeroContentWrapper>

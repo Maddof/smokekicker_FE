@@ -2,11 +2,16 @@ import Link from "next/link";
 import { ROUTES } from "@/config/routes";
 import { fetchBlogCategories } from "@/lib/data/api/fetchBlog";
 
-export default async function BlogCategoryPicker({ currentPath }) {
+export default async function BlogCategoryPicker({
+  currentPath,
+}) {
   const fetchedCategories = await fetchBlogCategories();
   const categories = fetchedCategories ?? [];
 
-  const allItem = { name: "Alla Inlägg", href: ROUTES.BLOG.INDEX };
+  const allItem = {
+    name: "All posts",
+    href: ROUTES.BLOG.INDEX,
+  };
   const categoryItems = categories.map((cat) => ({
     name: cat.name,
     href: ROUTES.BLOG.CATEGORY(cat.slug),
@@ -25,7 +30,7 @@ export default async function BlogCategoryPicker({ currentPath }) {
           <div className="mb-2 flex items-center justify-center gap-2">
             <div className="bg-primary/70 h-0.5 w-6"></div>
             <span className="text-muted text-center text-xs uppercase sm:text-base">
-              Välj Bloggkategori
+              Select Blog Category
             </span>
             <div className="bg-primary/70 h-0.5 w-6"></div>
           </div>
@@ -41,7 +46,9 @@ export default async function BlogCategoryPicker({ currentPath }) {
                   <Link
                     href={cat.href}
                     className={`${
-                      isActive ? "bg-primary border" : "hover:text-primary"
+                      isActive
+                        ? "bg-primary border"
+                        : "hover:text-primary"
                     } border-primary text-foreground group block rounded-lg border px-2 py-2`}
                   >
                     {cat.name}

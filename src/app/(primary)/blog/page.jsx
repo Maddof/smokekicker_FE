@@ -20,11 +20,11 @@ export async function generateMetadata({ searchParams }) {
 
   const title =
     page > 1
-      ? `All about nicotine pouches – Blog Page ${page} | ${SITE_NAME}`
-      : `All about nicotine pouches | Blog | ${SITE_NAME}`;
+      ? `Nicotine Pouch News & Guides | Page ${page} `
+      : `Nicotine Pouch News & Guides | Learn More `;
 
   const description =
-    "Read guides, news and tips about white snus and nicotine pouches. Explore flavor guides, product tips, laws and harm reduction information.";
+    "Stay up to date with the latest nicotine pouch trends, product launches, flavor guides, and educational content for adult nicotine users.";
 
   return {
     title,
@@ -44,7 +44,7 @@ export async function generateMetadata({ searchParams }) {
           url: `${SITE_URL}/images/bg/blog_hero_moon-neon.jpg`,
           width: 2000,
           height: 600,
-          alt: "Smokify Blog - Nicotine Pouches and White Snus Guides, News and Tips",
+          alt: "Smokekicker Blog - Nicotine Pouch News & Guides",
         },
       ],
     },
@@ -99,11 +99,11 @@ export default async function BlogPage({ searchParams }) {
       url: pageUrl,
       name:
         page > 1
-          ? `All about nicotine pouches – Blog Page ${page} | ${SITE_NAME}`
-          : `All about nicotine pouches | Blog | ${SITE_NAME}`,
+          ? `Nicotine Pouch News & Guides – Page ${page} }`
+          : `Nicotine Pouch News & Guides }`,
       description:
-        "Read guides, news and tips about white snus and nicotine pouches. Explore flavor guides, product tips, laws and harm reduction information.",
-      inLanguage: "en-US",
+        "Stay up to date with the latest nicotine pouch trends, product launches, flavor guides, and educational content for adult nicotine users.",
+      inLanguage: "en",
       isPartOf: {
         "@id": `${SITE_URL}#website`,
       },
