@@ -31,7 +31,7 @@ export default function CategoryBenefits({ categorySlug }) {
                 alt={benefitsConfig.image.alt}
                 width={benefitsConfig.image.width}
                 height={benefitsConfig.image.height}
-                className="h-auto max-w-60 rounded-lg border object-contain shadow-lg md:max-w-96"
+                className="h-auto w-full max-w-120 rounded-lg border object-contain shadow-lg"
               />
             </div>
           )}

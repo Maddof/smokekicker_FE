@@ -192,11 +192,11 @@ export default function Component() {
               Only for adults 18 years and older.
               Smokekicker does not sell to minors. By
               purchasing, you confirm that you are of legal
-              age in your country to buy nicotine products.
+              age in your country to buy nicotine pouches.
               If you are under 18, please do not attempt to
               purchase from our store. We are committed to
               preventing underage access to nicotine
-              products.
+              pouches.
             </p>
           </div>
         </div>

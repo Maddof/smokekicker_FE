@@ -486,32 +486,42 @@ export const categoryFaqContent = {
     ],
   },
   [CATEGORY_SLUGS.ACCESSORIES]: {
-    title: "",
-    description: "",
+    title: "FAQ – Nicotine Pouch Accessories",
+    description:
+      "Learn more about nicotine pouch accessories, how they work, and how they can help you keep your pouches organized, protected, and ready for use.",
     items: [
       {
-        question: "",
-        answer: "",
+        question: "What are nicotine pouch accessories?",
+        answer:
+          "Nicotine pouch accessories are products designed to improve your experience, including storage cases, carrying solutions, and other practical items that help keep your pouches organized and protected.",
       },
       {
-        question: "",
-        answer: "",
+        question: "Why should I use a nicotine pouch case?",
+        answer:
+          "A pouch case helps protect your nicotine pouches from damage, moisture, and dirt while making them easier to carry throughout the day.",
       },
       {
-        question: "",
-        answer: "",
+        question: "Do accessories help keep pouches fresh?",
+        answer:
+          "Yes. Quality storage accessories can help protect pouches from environmental factors such as heat and moisture, helping maintain their freshness for longer.",
       },
       {
-        question: "",
-        answer: "",
+        question:
+          "Are nicotine pouch accessories reusable?",
+        answer:
+          "Most nicotine pouch accessories are designed for long-term use and can be reused daily, making them a practical addition to your routine.",
       },
       {
-        question: "",
-        answer: "",
+        question:
+          "Can I carry multiple pouch cans in an accessory case?",
+        answer:
+          "Many accessory cases are designed to hold one or more pouch cans, depending on their size and design. Product descriptions will specify storage capacity where applicable.",
       },
       {
-        question: "",
-        answer: "",
+        question:
+          "Are nicotine pouch accessories suitable for all brands?",
+        answer:
+          "Most accessories are designed to be compatible with standard nicotine pouch can sizes and can be used with products from a wide range of brands.",
       },
     ],
   },
@@ -547,8 +557,8 @@ export const categoryBenefitsContent = {
         title: "Wide Range of Flavors",
         text: "From refreshing mint and cooling menthol to fruity, citrus, and coffee flavors – there is a nicotine pouch to match every taste preference.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/wide_variety_flavors_icon.svg",
+          alt: "Wide variety of flavors icon",
           width: 24,
           height: 24,
         },
@@ -566,10 +576,10 @@ export const categoryBenefitsContent = {
     ],
     showImage: true,
     image: {
-      src: "",
-      alt: "",
-      width: 500,
-      height: 500,
+      src: "/images/other/benefits/nicotine-pouches.jpg",
+      alt: "Nicotine pouches in sketch illustration image",
+      width: 800,
+      height: 800,
     },
   },
   [CATEGORY_SLUGS.NICOTINE_FREE_POUCHES]: {
@@ -601,8 +611,8 @@ export const categoryBenefitsContent = {
         title: "Wide Flavor Selection",
         text: "Available in the same popular flavors as nicotine pouches, including mint, berry, citrus, and more.",
         icon: {
-          src: "/images/icons/flavor.svg",
-          alt: "Flavor icon",
+          src: "/images/icons/wide_variety_flavors_icon.svg",
+          alt: "Wide variety of flavors icon",
           width: 24,
           height: 24,
         },
@@ -620,10 +630,10 @@ export const categoryBenefitsContent = {
     ],
     showImage: true,
     image: {
-      src: "",
-      alt: "",
-      width: 500,
-      height: 500,
+      src: "/images/other/benefits/nicotine-free-pouches.jpg",
+      alt: "Nicotine-free pouches in sketch illustration image",
+      width: 800,
+      height: 800,
     },
   },
   [CATEGORY_SLUGS.CAFFEINE_POUCHES]: {
@@ -635,8 +645,8 @@ export const categoryBenefitsContent = {
         title: "Caffeine on the Go",
         text: "Get a measured dose of caffeine anytime, anywhere – no drinks or preparation needed.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/lightning_bolt.svg",
+          alt: "Lightning bolt icon",
           width: 24,
           height: 24,
         },
@@ -665,8 +675,8 @@ export const categoryBenefitsContent = {
         title: "Variety of Flavors",
         text: "Available in refreshing mint, fruit, and other flavors to make your caffeine boost more enjoyable.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/wide_variety_flavors_icon.svg",
+          alt: "Wide variety of flavors icon",
           width: 24,
           height: 24,
         },
@@ -674,10 +684,10 @@ export const categoryBenefitsContent = {
     ],
     showImage: true,
     image: {
-      src: "",
-      alt: "",
-      width: 500,
-      height: 500,
+      src: "/images/other/benefits/caffeine-pouches.jpg",
+      alt: "Caffeine pouches in sketch illustration image",
+      width: 800,
+      height: 800,
     },
   },
   [CATEGORY_SLUGS.SWEDISH_CANDY]: {
@@ -699,8 +709,8 @@ export const categoryBenefitsContent = {
         title: "Wide Variety",
         text: "From chewy gummies and hard candies to licorice and chocolate, there is a Swedish candy for every taste.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/wide_variety_flavors_icon.svg",
+          alt: "Wide variety of flavors icon",
           width: 24,
           height: 24,
         },
@@ -709,8 +719,8 @@ export const categoryBenefitsContent = {
         title: "Worldwide Shipping",
         text: "We ship Swedish candy to the EU and worldwide, so you can enjoy your favorites wherever you are.",
         icon: {
-          src: "/images/icons/delivery-truck.svg",
-          alt: "Delivery truck icon",
+          src: "/images/icons/worldwide_shipping.svg",
+          alt: "Worldwide shipping icon",
           width: 24,
           height: 24,
         },
@@ -719,8 +729,8 @@ export const categoryBenefitsContent = {
         title: "Trusted Brands",
         text: "Our selection features well-known Swedish candy brands with long traditions of quality and flavor.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/quality.svg",
+          alt: "Quality icon",
           width: 24,
           height: 24,
         },
@@ -728,42 +738,53 @@ export const categoryBenefitsContent = {
     ],
     showImage: true,
     image: {
-      src: "",
-      alt: "",
-      width: 500,
-      height: 500,
+      src: "/images/other/benefits/swedish-candy.jpg",
+      alt: "Swedish candy in sketch illustration image",
+      width: 800,
+      height: 800,
     },
   },
   [CATEGORY_SLUGS.ACCESSORIES]: {
     title: "Benefits of nicotine pouch accessories",
-    description: "",
+    description:
+      "Nicotine pouch accessories help you get more out of your experience by keeping your pouches fresh, organized, and easy to carry wherever you go. From storage solutions to everyday essentials, the right accessories add convenience and style to your routine.",
     benefits: [
       {
-        title: "",
-        text: "",
+        title: "Keep Pouches Fresh",
+        text: "Quality storage accessories help protect your nicotine pouches from moisture, heat, and other factors that can affect freshness.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/sparkles.svg",
+          alt: "Fresh nicotine pouch icon",
           width: 24,
           height: 24,
         },
       },
       {
-        title: "",
-        text: "",
+        title: "Easy to Carry",
+        text: "Compact accessory cases make it simple to keep your favorite pouches close at hand whether you're at work, traveling, or on the go.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/briefcase.svg",
+          alt: "Portable accessory case icon",
           width: 24,
           height: 24,
         },
       },
       {
-        title: "",
-        text: "",
+        title: "Stay Organized",
+        text: "Dedicated storage solutions help keep your nicotine pouches and accessories neatly organized and easy to find.",
         icon: {
-          src: "",
-          alt: "",
+          src: "/images/icons/folder.svg",
+          alt: "Organization icon",
+          width: 24,
+          height: 24,
+        },
+      },
+      {
+        title: "Built for Everyday Use",
+        text: "Designed for durability and convenience, nicotine pouch accessories are made to fit seamlessly into your daily routine.",
+        icon: {
+          src: "/images/icons/shield-check.svg",
+          alt: "Durability and quality icon",
           width: 24,
           height: 24,
         },
@@ -771,10 +792,10 @@ export const categoryBenefitsContent = {
     ],
     showImage: true,
     image: {
-      src: "",
-      alt: "",
-      width: 500,
-      height: 500,
+      src: "/images/other/benefits/nicotine-pouch-accessory.jpg",
+      alt: "Nicotine pouch accessories in sketch illustration image",
+      width: 800,
+      height: 800,
     },
   },
 };
