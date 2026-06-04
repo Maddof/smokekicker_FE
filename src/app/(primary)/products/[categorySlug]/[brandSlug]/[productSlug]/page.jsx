@@ -389,9 +389,11 @@ export default async function SingleProductPage({
                       ),
                     )}
                   </ul>
-                  <p className="mt-auto text-xs italic">
-                    {productConfig.warningText}
-                  </p>
+                  <aside>
+                    <p className="mt-auto text-xs italic">
+                      {productConfig.warningText}
+                    </p>
+                  </aside>
                 </div>
                 <div className="xxsm:flex hidden w-full items-center justify-center md:w-1/3">
                   <Image

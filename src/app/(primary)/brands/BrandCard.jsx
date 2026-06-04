@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ROUTES } from "@/config/routes";
+import { getImageUrl } from "@/lib/utils/getUrl";
 
 export default function BrandCard({ brand }) {
   // Safety check for required props
@@ -8,19 +9,26 @@ export default function BrandCard({ brand }) {
     return null;
   }
 
+  const logoMedia = brand.media?.find(
+    (m) => m.role === "LOGO",
+  );
+  const logoUrl = logoMedia?.mediaAsset?.url;
+
   return (
     <Link
       href={ROUTES.BRANDS.DETAIL(brand.slug)}
-      className="group hover:border-primary flex flex-col items-center rounded-lg border p-4 transition-all hover:shadow-md"
+      className="hover:border-primary flex flex-col items-center rounded-lg border p-4 transition-all hover:shadow-md"
     >
-      <div className="relative mb-4 aspect-square w-full overflow-hidden">
-        {brand.logoUrl ? (
+      <div className="relative mb-4 aspect-2/1 w-full overflow-hidden">
+        {logoUrl ? (
           <Image
-            src={brand.logoUrl}
-            alt={brand.name}
-            fill
-            sizes="(max-width: 768px) 40vw, 200px"
-            className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+            src={getImageUrl(logoUrl)}
+            alt={
+              logoMedia?.mediaAsset?.altText || brand.name
+            }
+            width={logoMedia?.mediaAsset?.width || 400}
+            height={logoMedia?.mediaAsset?.height || 200}
+            className="object-contain"
           />
         ) : (
           <div className="bg-secondary flex h-full w-full items-center justify-center rounded-md">
@@ -30,11 +38,11 @@ export default function BrandCard({ brand }) {
           </div>
         )}
       </div>
-      <h2 className="text-center text-sm font-medium group-hover:underline">
+      <h2 className="text-center font-medium">
         {brand.name}
       </h2>
       {brand.description && (
-        <p className="text-muted-foreground mt-1 line-clamp-2 text-center text-xs">
+        <p className="text-foreground mt-1 line-clamp-2 text-center text-[85%]">
           {brand.description}
         </p>
       )}

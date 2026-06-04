@@ -10,13 +10,14 @@ import {
   STORE_CITY,
   STORE_PHONE_NUMBER,
   STORE_POSTAL_CODE,
+  STORE_COUNTRY,
 } from "@/config/general";
 
 export default function Component() {
   return (
     <footer className="bg-muted text-muted-foreground relative w-full">
       {/* Rest of footer content with adjusted z-index */}
-      <div className="border-primary bg-foreground text-secondary-foreground z-10 w-full border-t border-b py-6">
+      <aside className="border-primary bg-foreground text-secondary-foreground z-10 w-full border-t border-b py-6">
         <div className="container flex items-center justify-center">
           <div className="flex max-w-96 flex-col items-center gap-2 text-center">
             <Image
@@ -32,7 +33,7 @@ export default function Component() {
             <p>Age verification required at checkout.</p>
           </div>
         </div>
-      </div>
+      </aside>
       <div className="xsm:grid-cols-2 relative z-10 container mx-auto grid grid-cols-1 gap-6 py-12 md:grid-cols-4 md:justify-between lg:grid-cols-4">
         {/* Quick Links */}
         <div className="flex flex-col gap-2">
@@ -111,6 +112,8 @@ export default function Component() {
               {STORE_ADDRESS_LINE1}
               <br />
               {STORE_POSTAL_CODE} {STORE_CITY}
+              <br />
+              {STORE_COUNTRY}
             </address>
           </div>
           <div className="flex items-center gap-2">

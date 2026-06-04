@@ -38,7 +38,7 @@ export default function BulkDealCalloutNew({
     <div
       className={`rounded-lg border border-slate-200 bg-white/80 shadow-sm ${className}`}
     >
-      <div className="mb-2 border-b px-3 py-2 sm:px-4">
+      <div className="mb-2 border-b px-3 py-3 sm:px-4">
         <p className="text-xs font-semibold tracking-wide uppercase">
           Bulk deal — buy more, save more
         </p>

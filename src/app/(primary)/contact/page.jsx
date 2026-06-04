@@ -10,6 +10,7 @@ import {
   STORE_CITY,
   STORE_PHONE_NUMBER,
   STORE_POSTAL_CODE,
+  STORE_COUNTRY,
 } from "@/config/general";
 import { getOrderedSections } from "@/lib/cms/getSection";
 import { ContactFormInner } from "@/components/contact/ContactFormInner";
@@ -109,6 +110,8 @@ export default async function ContactPage() {
                       {STORE_ADDRESS_LINE1}
                       <br />
                       {STORE_POSTAL_CODE} {STORE_CITY}
+                      <br />
+                      {STORE_COUNTRY}
                     </address>
                   </div>
                 </div>

@@ -38,6 +38,8 @@ export default async function BrandsPage() {
   // Fetch all brands
   const brands = await fetchAllBrands();
 
+  console.log("Fetched brands:", brands); // Debug log
+
   // Handle missing data
   if (!brands) {
     return notFound();

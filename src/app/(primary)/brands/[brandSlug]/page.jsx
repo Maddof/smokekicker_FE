@@ -8,6 +8,7 @@ import ProductFilterWrapper from "@/components/filter/ProductFilterWrapper";
 import { ReadMore } from "@/components/ReadMore";
 import Image from "next/image";
 import { ROUTES } from "@/config/routes";
+import { getImageUrl } from "@/lib/utils/getUrl";
 
 export const revalidate = 86400; // Revalidate every 24 hours
 
@@ -71,6 +72,11 @@ export default async function BrandPage({ params }) {
       notFound();
     }
 
+    const logoMedia = brand.media?.find(
+      (m) => m.role === "LOGO",
+    );
+    const logoUrl = logoMedia?.mediaAsset?.url;
+
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL ||
       "https://smokekicker.com";
@@ -115,33 +121,35 @@ export default async function BrandPage({ params }) {
         />
         <div className="container">
           <div className="mb-8">
-            <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-center">
-              {brand.logoUrl && (
-                <div className="flex-shrink-0">
-                  <Image
-                    src={brand.logoUrl}
-                    alt={brand.name}
-                    width={120}
-                    height={120}
-                    className="h-20 w-20 rounded-md object-contain md:h-24 md:w-24"
-                  />
-                </div>
+            <div className="mb-4 flex flex-col gap-4">
+              {logoUrl && (
+                <Image
+                  src={getImageUrl(logoUrl)}
+                  alt={
+                    logoMedia?.mediaAsset?.altText ||
+                    brand.name
+                  }
+                  width={
+                    logoMedia?.mediaAsset?.width || 400
+                  }
+                  height={
+                    logoMedia?.mediaAsset?.height || 200
+                  }
+                  className="aspect-2/1 w-auto max-w-60 rounded-md object-contain"
+                />
               )}
-
-              <div>
-                <h1 className="mb-2">{brand.name}</h1>
-                {brand.description && (
-                  <ReadMore initialParagraphs={1}>
-                    <div className="text-muted max-w-3xl">
-                      {brand.description
-                        .split("\n")
-                        .map((paragraph, i) => (
-                          <p key={i}>{paragraph}</p>
-                        ))}
-                    </div>
-                  </ReadMore>
-                )}
-              </div>
+              <h1>{brand.name}</h1>
+              {brand.description && (
+                <ReadMore initialParagraphs={1}>
+                  <div className="text-muted max-w-3xl">
+                    {brand.description
+                      .split("\n")
+                      .map((paragraph, i) => (
+                        <p key={i}>{paragraph}</p>
+                      ))}
+                  </div>
+                </ReadMore>
+              )}
             </div>
           </div>
 

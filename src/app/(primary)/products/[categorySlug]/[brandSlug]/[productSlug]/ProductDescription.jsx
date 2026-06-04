@@ -26,7 +26,7 @@ const AccordionSection = ({
     open={defaultOpen}
   >
     <summary className="flex w-full cursor-pointer items-center justify-between py-4">
-      <h2 className="h2-accordion-shop">{title}</h2>
+      <span className="accordion-shop-title">{title}</span>
       <ChevronIcon />
     </summary>
     <div className="pt-0 pb-6">{children}</div>
@@ -90,7 +90,7 @@ export default function ProductDescription({
               </div>
             )}
             {nicotineLabelWarningText && (
-              <div
+              <aside
                 className="mt-6 border-4 border-black bg-white p-2 text-center text-xs font-bold text-black uppercase sm:text-sm"
                 style={{
                   fontFamily:
@@ -98,7 +98,7 @@ export default function ProductDescription({
                 }}
               >
                 {nicotineLabelWarningText}
-              </div>
+              </aside>
             )}
           </AccordionSection>
 

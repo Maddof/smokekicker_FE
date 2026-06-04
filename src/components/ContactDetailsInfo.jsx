@@ -5,6 +5,7 @@ import {
   STORE_PHONE_NUMBER,
   STORE_POSTAL_CODE,
   STORE_REGISTRATION_NUMBER,
+  STORE_COUNTRY,
 } from "@/config/general";
 import { ROUTES } from "@/config/routes";
 
@@ -23,6 +24,7 @@ export function ContactDetailsInfo({ className = "" }) {
           Address: {STORE_ADDRESS_LINE1}, {STORE_CITY},{" "}
           {STORE_POSTAL_CODE}
         </p>
+        <p>{STORE_COUNTRY}</p>
         <p>
           Email: <MailtoLink className="text-primary" />
         </p>

@@ -10,7 +10,7 @@ export default function BenefitsBanner() {
         </div>
         <div>
           <Truck className="mr-1.5 inline h-4 w-4 align-top md:h-5 md:w-5" />
-          <span>Fast Shipping</span>
+          <span>EU & Worldwide Shipping</span>
         </div>
       </div>
     </section>

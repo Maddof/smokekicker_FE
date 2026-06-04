@@ -55,9 +55,7 @@ export const ContactFormInner = () => {
 
     try {
       if (!capToken) {
-        throw new Error(
-          "Verifiera att du inte är en robot.",
-        );
+        throw new Error("Verify that you are not a robot.");
       }
 
       const response = await fetch(
@@ -103,7 +101,7 @@ export const ContactFormInner = () => {
         // Handle general error
         setSubmitError(
           error.response?.data?.error ||
-            "Det gick inte att skicka formuläret. Försök igen senare.",
+            "Failed to submit the form. Please try again later.",
         );
       }
     } finally {
@@ -113,12 +111,12 @@ export const ContactFormInner = () => {
 
   return (
     <div className="rounded-lg bg-white p-6">
-      <h2 className="mb-6">Kontakta oss</h2>
+      <h2 className="mb-6">Contact Us</h2>
 
       {submitSuccess && (
         <div className="mb-6 rounded-lg bg-green-100 p-4 text-green-700">
-          Tack för ditt meddelande! Vi återkommer så snart
-          som möjligt.
+          Thank you for your message! We will get back to
+          you as soon as possible.
         </div>
       )}
 
@@ -152,7 +150,7 @@ export const ContactFormInner = () => {
         {/* Name field */}
         <div className="mb-4">
           <Label htmlFor="name" className="mb-2">
-            Namn *
+            Name *
           </Label>
           <Input
             type="text"
@@ -173,7 +171,7 @@ export const ContactFormInner = () => {
         {/* Email field */}
         <div className="mb-4">
           <Label htmlFor="email" className="mb-2">
-            E-post *
+            Email *
           </Label>
           <Input
             type="email"
@@ -194,7 +192,7 @@ export const ContactFormInner = () => {
         {/* Phone field (optional) */}
         <div className="mb-4">
           <Label htmlFor="phone" className="mb-2 block">
-            Telefon (valfritt)
+            Phone (optional)
           </Label>
           <Input
             type="tel"
@@ -218,7 +216,7 @@ export const ContactFormInner = () => {
         {/* Subject field */}
         <div className="mb-4">
           <Label htmlFor="subject" className="mb-2 block">
-            Ämne *
+            Subject *
           </Label>
           <Input
             type="text"
@@ -239,7 +237,7 @@ export const ContactFormInner = () => {
         {/* Message field */}
         <div className="mb-6">
           <Label htmlFor="message" className="mb-2">
-            Meddelande *
+            Message *
           </Label>
           <textarea
             id="message"
@@ -266,10 +264,10 @@ export const ContactFormInner = () => {
         {isMounted && (
           <cap-widget
             ref={capWidgetRef}
-            data-cap-api-endpoint="https://cap.smokify.se/2a8eda71be/"
-            data-cap-i18n-initial-state="Verifiera att du inte är en robot"
-            data-cap-i18n-verifying-label="Verifierar..."
-            data-cap-i18n-solved-label="Verifierad"
+            data-cap-api-endpoint="https://cap.smokekicker.com/2a8eda71be/"
+            data-cap-i18n-initial-state="Verify that you are not a robot"
+            data-cap-i18n-verifying-label="Verifying..."
+            data-cap-i18n-solved-label="Verified"
             onsolve={(e) => {
               setCapToken(e.detail.token);
             }}
@@ -285,9 +283,7 @@ export const ContactFormInner = () => {
           disabled={isSubmitting || !capToken}
           className="w-full"
         >
-          {isSubmitting
-            ? "Skickar..."
-            : "Skicka meddelande"}
+          {isSubmitting ? "Sending..." : "Send Message"}
         </Button>
       </form>
     </div>
