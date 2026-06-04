@@ -38,10 +38,14 @@ export default function ProductCard({
     primaryMedia?.mediaAsset?.altText || name;
   const imageWidth = primaryMedia?.mediaAsset?.width;
   const imageHeight = primaryMedia?.mediaAsset?.height;
+  // const imageDimensions =
+  //   imageWidth && imageHeight
+  //     ? { width: imageWidth, height: imageHeight }
+  //     : { fill: true };
   const imageDimensions =
     imageWidth && imageHeight
       ? { width: imageWidth, height: imageHeight }
-      : { fill: true };
+      : { width: 400, height: 400 }; // Default dimensions for fallback
 
   // Generate product URL safely
   const productUrl = `${ROUTES.SHOP.INDEX}/${category.slug}/${brand.slug}/${slug}`;
@@ -63,11 +67,11 @@ export default function ProductCard({
   return (
     <li
       id={`product-card-${id}`}
-      className={`flex h-full flex-col items-start gap-3 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md sm:gap-4 sm:p-4 ${className}`}
+      className={`flex flex-col items-start gap-3 bg-white p-2 shadow-sm transition-all duration-200 hover:shadow-md sm:gap-4 sm:p-4 ${className}`}
     >
       <Link
         href={productUrl}
-        className="group xsm:h-48 relative block h-40 w-full sm:h-56 md:h-64"
+        className="group flex w-full items-center justify-center"
         id={`product-card__image-link-${id}`}
       >
         <Image
@@ -75,8 +79,7 @@ export default function ProductCard({
           id={`product-card__image-${id}`}
           alt={imageAlt}
           {...imageDimensions}
-          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-          className="w-full object-contain transition-transform duration-200 group-hover:scale-105"
+          className="flex h-30 w-auto object-contain transition-transform duration-200 md:h-50"
         />
       </Link>
 

@@ -88,7 +88,7 @@ async function SearchResults({ query }) {
       <p className="text-muted-foreground">
         Showing {products.length} results for "{query}"
       </p>
-      <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <ul className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

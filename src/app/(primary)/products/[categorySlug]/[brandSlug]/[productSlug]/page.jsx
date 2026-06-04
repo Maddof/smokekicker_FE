@@ -441,7 +441,7 @@ export default async function SingleProductPage({
               You might also like
             </h2>
 
-            <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            <ul className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {relatedProducts.map((product) => (
                 <ProductCard
                   key={product.id}

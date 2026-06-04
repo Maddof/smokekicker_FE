@@ -23,11 +23,17 @@ Accordion.propTypes = {
  * Use this to create an individual expandable item that can be toggled open or closed.
  * It renders a details element that manages its own open/close state with smooth animations.
  */
-function AccordionItem({ children }) {
+function AccordionItem({ children, defaultOpen = false }) {
   const detailsRef = React.useRef(null);
   const animationRef = React.useRef(null);
   const isClosingRef = React.useRef(false);
   const isExpandingRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (defaultOpen && detailsRef.current) {
+      detailsRef.current.open = true;
+    }
+  }, [defaultOpen]);
 
   const handleSummaryClick = React.useCallback((e) => {
     e.preventDefault();
@@ -35,20 +41,37 @@ function AccordionItem({ children }) {
     const detailsElement = detailsRef.current;
     if (!detailsElement) return;
 
-    const summaryElement = detailsElement.querySelector("summary");
-    const contentElement = detailsElement.querySelector("div");
+    const summaryElement =
+      detailsElement.querySelector("summary");
+    const contentElement =
+      detailsElement.querySelector("div");
     if (!summaryElement || !contentElement) return;
 
     detailsElement.style.overflow = "hidden";
 
     if (isClosingRef.current || !detailsElement.open) {
-      openAccordion(detailsElement, summaryElement, contentElement);
-    } else if (isExpandingRef.current || detailsElement.open) {
-      closeAccordion(detailsElement, summaryElement, contentElement);
+      openAccordion(
+        detailsElement,
+        summaryElement,
+        contentElement,
+      );
+    } else if (
+      isExpandingRef.current ||
+      detailsElement.open
+    ) {
+      closeAccordion(
+        detailsElement,
+        summaryElement,
+        contentElement,
+      );
     }
   }, []);
 
-  const openAccordion = (detailsElement, summaryElement, contentElement) => {
+  const openAccordion = (
+    detailsElement,
+    summaryElement,
+    contentElement,
+  ) => {
     detailsElement.style.height = `${detailsElement.offsetHeight}px`;
     detailsElement.open = true;
 
@@ -57,7 +80,8 @@ function AccordionItem({ children }) {
       const startHeight = `${detailsElement.offsetHeight}px`;
       const endHeight = `${summaryElement.scrollHeight + contentElement.scrollHeight}px`;
 
-      if (animationRef.current) animationRef.current.cancel();
+      if (animationRef.current)
+        animationRef.current.cancel();
 
       animationRef.current = detailsElement.animate(
         { height: [startHeight, endHeight] },
@@ -66,11 +90,16 @@ function AccordionItem({ children }) {
 
       animationRef.current.onfinish = () =>
         onAnimationFinish(true, detailsElement);
-      animationRef.current.oncancel = () => (isExpandingRef.current = false);
+      animationRef.current.oncancel = () =>
+        (isExpandingRef.current = false);
     });
   };
 
-  const closeAccordion = (detailsElement, summaryElement, contentElement) => {
+  const closeAccordion = (
+    detailsElement,
+    summaryElement,
+    contentElement,
+  ) => {
     isClosingRef.current = true;
     const startHeight = `${detailsElement.offsetHeight}px`;
     const endHeight = `${summaryElement.scrollHeight}px`;
@@ -84,7 +113,8 @@ function AccordionItem({ children }) {
 
     animationRef.current.onfinish = () =>
       onAnimationFinish(false, detailsElement);
-    animationRef.current.oncancel = () => (isClosingRef.current = false);
+    animationRef.current.oncancel = () =>
+      (isClosingRef.current = false);
   };
 
   const onAnimationFinish = (open, detailsElement) => {
@@ -99,7 +129,10 @@ function AccordionItem({ children }) {
   return (
     <details ref={detailsRef} className="group">
       {React.Children.map(children, (child) => {
-        if (React.isValidElement(child) && child.type === AccordionTrigger) {
+        if (
+          React.isValidElement(child) &&
+          child.type === AccordionTrigger
+        ) {
           return React.cloneElement(child, {
             ...child.props,
             onClick: handleSummaryClick,
@@ -113,6 +146,7 @@ function AccordionItem({ children }) {
 
 AccordionItem.propTypes = {
   children: PropTypes.node.isRequired,
+  defaultOpen: PropTypes.bool,
 };
 
 /**
@@ -120,11 +154,15 @@ AccordionItem.propTypes = {
  * Use this to define the title or trigger that users click to expand or collapse the content.
  * It renders a summary element with a title and an arrow icon that rotates when toggled.
  */
-function AccordionTrigger({ children, onClick, className }) {
+function AccordionTrigger({
+  children,
+  onClick,
+  className,
+}) {
   return (
     <summary
       className={cn(
-        `flex w-full cursor-pointer items-center justify-between py-4 text-lg font-semibold text-zinc-900`,
+        `flex w-full cursor-pointer items-center justify-between py-4 font-semibold`,
         className,
       )}
       onClick={onClick}
@@ -161,7 +199,7 @@ AccordionTrigger.propTypes = {
 function AccordionContent({ children, className }) {
   return (
     <div
-      className={`pb-6 text-sm leading-5 tracking-normal text-zinc-900 ${className}`}
+      className={`pb-6 text-sm leading-5 tracking-normal ${className}`}
     >
       {children}
     </div>
@@ -177,10 +215,16 @@ AccordionContent.propTypes = {
  * A component for creating semantic headings within accordion triggers
  * Allows you to use proper heading levels (h2, h3, etc.) for accessibility
  */
-function AccordionHeading({ level = 2, children, className }) {
+function AccordionHeading({
+  level = 2,
+  children,
+  className,
+}) {
   const Heading = `h${level}`;
   return (
-    <Heading className={cn("font-semibold", className)}>{children}</Heading>
+    <Heading className={cn("font-semibold", className)}>
+      {children}
+    </Heading>
   );
 }
 

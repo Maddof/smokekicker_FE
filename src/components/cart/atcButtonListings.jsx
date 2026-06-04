@@ -71,7 +71,7 @@ export default function AtcButtonListings({
   return (
     <div className={className}>
       {hasBulkTiers && (
-        <div className="mb-2 grid grid-cols-2 gap-1 lg:grid-cols-4">
+        <div className="mb-2 grid grid-cols-2 gap-1 md:grid-cols-4">
           {tiers.map((tier) => {
             const rate = parseFloat(tier.percentage) / 100;
             const discountedUnit = Math.round(
@@ -133,7 +133,7 @@ export default function AtcButtonListings({
       <Button
         onClick={handleAddToCart}
         disabled={isDisabled}
-        className="w-full"
+        className="m-0 w-full p-6 sm:p-4"
       >
         <ShoppingCart size={22} />
         {getButtonLabel()}{" "}

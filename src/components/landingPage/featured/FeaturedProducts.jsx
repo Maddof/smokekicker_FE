@@ -25,7 +25,7 @@ export default function FeaturedProducts({
               "The crowd has spoken. Discover the nicotine pouches people keep adding to their carts—and coming back for."}
           </p>
         </div>
-        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (
             <ProductCard
               key={product.id}

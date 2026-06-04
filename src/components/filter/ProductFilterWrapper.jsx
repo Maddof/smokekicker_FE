@@ -9,6 +9,13 @@ import FlavorProfileFilter from "@/components/filter/FlavorProfileFilter";
 import FormatFilter from "@/components/filter/FormatFilter";
 import ProductCard from "@/components/shop/ProductCard";
 import { Button } from "@/components/ui/scn/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../ui/custom/CustomAccordion";
+import { ListFilter } from "lucide-react";
 
 export default function ProductFilterWrapper({
   products,
@@ -48,6 +55,11 @@ export default function ProductFilterWrapper({
     useState([minProductPrice, maxProductPrice]);
   const [visibleProductCount, setVisibleProductCount] =
     useState(initialDisplayCount);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 768);
+  }, []);
 
   useEffect(() => {
     setSelectedPriceRange([
@@ -152,42 +164,61 @@ export default function ProductFilterWrapper({
       <p className="mb-4 font-medium">
         {productCount} Products
       </p>
-      <div className="mb-6 flex w-full flex-col items-start justify-between gap-4 border-t border-b py-4">
-        <div className="flex w-full flex-col items-start gap-6 lg:flex-row">
-          <SearchFilter
-            items={products}
-            onFilterChange={setSearchFilteredProducts}
-            placeholder="Filter by name..."
-            searchField="name"
-          />
-          <BrandFilter
-            items={products}
-            value={selectedBrandSlugs}
-            onValueChange={setSelectedBrandSlugs}
-          />
-          <FlavorProfileFilter
-            items={products}
-            value={selectedFlavorProfileSlugs}
-            onValueChange={setSelectedFlavorProfileSlugs}
-          />
-          <NicotineFilter
-            items={products}
-            value={selectedNicotineValues}
-            onValueChange={setSelectedNicotineValues}
-          />
-          <FormatFilter
-            items={products}
-            value={selectedFormatValues}
-            onValueChange={setSelectedFormatValues}
-          />
-          <PriceFilter
-            minPrice={minProductPrice}
-            maxPrice={maxProductPrice}
-            value={selectedPriceRange}
-            onValueChange={setSelectedPriceRange}
-          />
-        </div>
-      </div>
+      <Accordion className="mb-2 w-full">
+        <AccordionItem defaultOpen={isDesktop}>
+          <AccordionTrigger>
+            <div className="flex items-center gap-2">
+              <ListFilter size={18} />
+              <span className="group-open:hidden">
+                Show Filters
+              </span>
+              <span className="hidden group-open:inline">
+                Hide Filters
+              </span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="flex w-full flex-col items-start justify-between gap-4 border-t border-b py-4">
+              <div className="flex w-full flex-col items-start gap-6 lg:flex-row">
+                <SearchFilter
+                  items={products}
+                  onFilterChange={setSearchFilteredProducts}
+                  placeholder="Filter by name..."
+                  searchField="name"
+                />
+                <BrandFilter
+                  items={products}
+                  value={selectedBrandSlugs}
+                  onValueChange={setSelectedBrandSlugs}
+                />
+                <FlavorProfileFilter
+                  items={products}
+                  value={selectedFlavorProfileSlugs}
+                  onValueChange={
+                    setSelectedFlavorProfileSlugs
+                  }
+                />
+                <NicotineFilter
+                  items={products}
+                  value={selectedNicotineValues}
+                  onValueChange={setSelectedNicotineValues}
+                />
+                <FormatFilter
+                  items={products}
+                  value={selectedFormatValues}
+                  onValueChange={setSelectedFormatValues}
+                />
+                <PriceFilter
+                  minPrice={minProductPrice}
+                  maxPrice={maxProductPrice}
+                  value={selectedPriceRange}
+                  onValueChange={setSelectedPriceRange}
+                />
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
 
       {filteredProducts.length === 0 ? (
         <div className="border-primary my-12 rounded-lg border border-dashed p-8 text-center">
@@ -197,7 +228,7 @@ export default function ProductFilterWrapper({
           </p>
         </div>
       ) : (
-        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
           {filteredProducts.map((product, index) => (
             <ProductCard
               key={product.id}
