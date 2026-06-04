@@ -13,7 +13,7 @@ import Image from "next/image";
 import { ROUTES } from "@/config/routes";
 import { SITE_NAME } from "@/config/metadata";
 import ProductDescription from "./ProductDescription";
-import BulkDealCalloutNew from "./BulkDealCalloutNew";
+import BulkDealCallout from "./BulkDealCallout";
 import SameBrandProductsPicker from "@/components/shop/products/SameBrandProductsPicker";
 import ProductCard from "@/components/shop/ProductCard";
 import Link from "next/link";
@@ -362,7 +362,7 @@ export default async function SingleProductPage({
               </div>
 
               {showBulkCallout && (
-                <BulkDealCalloutNew
+                <BulkDealCallout
                   product={product}
                   unitPrice={product.price}
                   tiers={bulkDiscountTiers}

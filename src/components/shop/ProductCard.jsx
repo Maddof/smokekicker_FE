@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import AtcButtonDefault from "@/components/cart/atcButton";
 import { getImageUrl } from "@/lib/utils/getUrl";
 import { formatCurrency } from "@/lib/utils/currencyFormatter";
 import { ROUTES } from "@/config/routes";
+import AtcButtonListings from "../cart/atcButtonListings";
 
 // Default fallback image
 const fallbackImage = "/images/fallback.png";
@@ -120,15 +120,14 @@ export default function ProductCard({
         id="product-card__actions"
         className="mt-auto w-full"
       >
-        <span
+        {/* <span
           id={`product-card__price-${id}`}
           className="block font-bold"
         >
           {formatCurrency(price)}
-        </span>
-        <AtcButtonDefault
+        </span> */}
+        <AtcButtonListings
           product={product}
-          className="mt-4 w-full"
           id={`product-card__atc-${id}`}
         />
       </div>

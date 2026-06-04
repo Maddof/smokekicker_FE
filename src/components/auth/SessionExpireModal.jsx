@@ -10,22 +10,30 @@ import {
 } from "@/components/ui/scn/dialog";
 import { Button } from "@/components/ui/scn/button";
 
-export default function SessionExpireModal({ isOpen, onClose, onRefresh }) {
+export default function SessionExpireModal({
+  isOpen,
+  onClose,
+  onRefresh,
+}) {
   return (
     <Dialog open={isOpen}>
       <DialogContent className="sm:max-w-md [&>button:last-child]:hidden">
         <DialogHeader>
-          <DialogTitle>Sessionen löper snart ut</DialogTitle>
+          <DialogTitle>
+            Session is about to expire
+          </DialogTitle>
           <DialogDescription>
-            Din session håller på att löpa ut. Klicka nedan för att förbli
-            inloggad.
+            Your session is about to expire. Click below to
+            stay logged in.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="destructive" onClick={onClose}>
-            Logga ut
+            Log out
           </Button>
-          <Button onClick={onRefresh}>Håll mig inloggad</Button>
+          <Button onClick={onRefresh}>
+            Stay logged in
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -3,37 +3,34 @@
 import { useMemo } from "react";
 import { Button } from "@/components/ui/scn/button";
 
-export default function FlavorProfileFilter({
+export default function FormatFilter({
   items,
   value = [],
   onValueChange,
 }) {
-  const flavorProfileOptions = useMemo(() => {
-    const uniqueFlavorProfiles = new Map();
+  const formatOptions = useMemo(() => {
+    const unique = new Set();
 
     items.forEach((item) => {
-      item?.flavorProfiles?.forEach((profile) => {
-        const slug = profile?.slug;
-        const name = profile?.name;
-
-        if (!slug || !name) {
-          return;
-        }
-
-        if (!uniqueFlavorProfiles.has(slug)) {
-          uniqueFlavorProfiles.set(slug, { slug, name });
-        }
-      });
+      const format = item?.details?.format;
+      if (typeof format === "string" && format) {
+        unique.add(format);
+      }
     });
 
-    return Array.from(uniqueFlavorProfiles.values()).sort(
-      (a, b) => a.name.localeCompare(b.name, "en"),
-    );
+    return Array.from(unique)
+      .sort((a, b) => a.localeCompare(b, "en"))
+      .map((format) => ({
+        value: format,
+        label:
+          format.charAt(0).toUpperCase() +
+          format.slice(1).toLowerCase(),
+      }));
   }, [items]);
 
   return (
     <div className="w-full">
-      <p className="mb-2 font-medium">Flavor Profile</p>
+      <p className="mb-2 font-medium">Format</p>
       <div className="flex flex-wrap gap-2">
         <Button
           type="button"
@@ -48,12 +45,12 @@ export default function FlavorProfileFilter({
           All
         </Button>
 
-        {flavorProfileOptions.map((profile) => {
-          const isSelected = value.includes(profile.slug);
+        {formatOptions.map((option) => {
+          const isSelected = value.includes(option.value);
 
           return (
             <Button
-              key={profile.slug}
+              key={option.value}
               type="button"
               size="sm"
               variant={isSelected ? "default" : "outline"}
@@ -61,19 +58,16 @@ export default function FlavorProfileFilter({
               onClick={() => {
                 if (isSelected) {
                   onValueChange(
-                    value.filter(
-                      (selectedSlug) =>
-                        selectedSlug !== profile.slug,
-                    ),
+                    value.filter((v) => v !== option.value),
                   );
                   return;
                 }
 
-                onValueChange([...value, profile.slug]);
+                onValueChange([...value, option.value]);
               }}
               aria-pressed={isSelected}
             >
-              {profile.name}
+              {option.label}
             </Button>
           );
         })}

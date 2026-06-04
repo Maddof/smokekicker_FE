@@ -25,7 +25,7 @@ export default function BrandFilter({
     });
 
     return Array.from(uniqueBrands.values()).sort((a, b) =>
-      a.name.localeCompare(b.name, "sv"),
+      a.name.localeCompare(b.name, "en"),
     );
   }, [items]);
 

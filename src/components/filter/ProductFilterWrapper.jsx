@@ -6,6 +6,7 @@ import NicotineFilter from "@/components/filter/NicotineFilter";
 import PriceFilter from "@/components/filter/PriceFilter";
 import BrandFilter from "@/components/filter/BrandFilter";
 import FlavorProfileFilter from "@/components/filter/FlavorProfileFilter";
+import FormatFilter from "@/components/filter/FormatFilter";
 import ProductCard from "@/components/shop/ProductCard";
 import { Button } from "@/components/ui/scn/button";
 
@@ -28,6 +29,8 @@ export default function ProductFilterWrapper({
     selectedNicotineValues,
     setSelectedNicotineValues,
   ] = useState([]);
+  const [selectedFormatValues, setSelectedFormatValues] =
+    useState([]);
 
   const [minProductPrice, maxProductPrice] = useMemo(() => {
     const prices = products
@@ -61,6 +64,7 @@ export default function ProductFilterWrapper({
     selectedBrandSlugs,
     selectedFlavorProfileSlugs,
     selectedNicotineValues,
+    selectedFormatValues,
     selectedPriceRange,
   ]);
 
@@ -101,6 +105,16 @@ export default function ProductFilterWrapper({
       );
     }
 
+    if (selectedFormatValues.length > 0) {
+      result = result.filter(
+        (product) =>
+          typeof product?.details?.format === "string" &&
+          selectedFormatValues.includes(
+            product.details.format,
+          ),
+      );
+    }
+
     const [selectedMinPrice, selectedMaxPrice] =
       selectedPriceRange;
 
@@ -117,6 +131,7 @@ export default function ProductFilterWrapper({
     selectedBrandSlugs,
     selectedFlavorProfileSlugs,
     selectedNicotineValues,
+    selectedFormatValues,
     selectedPriceRange,
   ]);
 
@@ -159,6 +174,11 @@ export default function ProductFilterWrapper({
             items={products}
             value={selectedNicotineValues}
             onValueChange={setSelectedNicotineValues}
+          />
+          <FormatFilter
+            items={products}
+            value={selectedFormatValues}
+            onValueChange={setSelectedFormatValues}
           />
           <PriceFilter
             minPrice={minProductPrice}

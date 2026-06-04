@@ -4,7 +4,7 @@ import { useState } from "react";
 import { formatCurrency } from "@/lib/utils/currencyFormatter";
 import AtcButtonDefault from "@/components/cart/atcButton";
 
-export default function BulkDealCalloutNew({
+export default function BulkDealCallout({
   product,
   unitPrice,
   tiers = [],

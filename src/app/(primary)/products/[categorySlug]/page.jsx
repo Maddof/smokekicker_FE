@@ -16,9 +16,6 @@ import { ROUTES } from "@/config/routes";
 import { getImageUrl } from "@/lib/utils/getUrl";
 import FaqSection from "@/components/FaqSectionCategory";
 import CategoryBenefits from "@/components/shop/products/CategoryBenefits";
-import HowToPrefilledPodSystem from "@/components/shop/products/HowToPrefilledPodSystem";
-import PrefilledPodsFeatures from "@/components/shop/products/PrefilledPodsFeatures";
-import NicotinePouchCollectionFeatures from "@/components/shop/products/NicotinePouchesFeatures";
 import ProductFilterWrapper from "@/components/filter/ProductFilterWrapper";
 import BlogCard from "@/components/blogg/BlogCard";
 
@@ -121,6 +118,12 @@ export default async function CategoryPage({ params }) {
       </section>
     );
   }
+
+  console.log(
+    "Fetched products for category:",
+    categorySlug,
+    products,
+  );
 
   const categoryHeaderConfig = categoryContent[
     categorySlug
@@ -330,16 +333,6 @@ export default async function CategoryPage({ params }) {
           />
         </div>
       </section>
-      {category.slug ===
-        "start-kit-forfyllda-podsystem" && (
-        <HowToPrefilledPodSystem />
-      )}
-      {category.slug === "forfyllda-poddar" && (
-        <PrefilledPodsFeatures />
-      )}
-      {category.slug === "vitt-snus" && (
-        <NicotinePouchCollectionFeatures />
-      )}
       <CategoryBenefits categorySlug={categorySlug} />
       <FaqSection categorySlug={categorySlug} />
 

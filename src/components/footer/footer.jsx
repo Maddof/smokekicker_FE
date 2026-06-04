@@ -215,42 +215,42 @@ export default function Component() {
                 alt="Klarna logo"
                 width={450}
                 height={100}
-                className="h-4 w-auto"
+                className="h-5 w-auto"
               />
               <Image
                 src="/images/logos/Stripe_Logo_white_240x100.svg"
                 alt="Stripe logo"
                 width={240}
                 height={100}
-                className="h-4 w-auto"
+                className="h-5 w-auto"
               />
               <Image
                 src="/images/logos/Visa_Logo_white_320x100.svg"
                 alt="Visa logo"
                 width={320}
                 height={100}
-                className="h-4 w-auto"
+                className="h-5 w-auto"
               />
               <Image
                 src="/images/logos/PostNord_Logo_white_450x100.svg"
                 alt="PostNord logo"
                 width={450}
                 height={100}
-                className="h-4 w-auto"
+                className="h-5 w-auto"
               />
               <Image
-                src="/images/logos/Instabox_Logo_white_450x100.svg"
-                alt="Instabox logo"
-                width={450}
-                height={100}
-                className="h-4 w-auto"
+                src="/images/logos/ups_logo_280_250.svg"
+                alt="UPS logo"
+                width={280}
+                height={250}
+                className="h-5 w-auto"
               />
               <Image
                 src="/images/logos/DHL_Logo_white_450x100.svg"
                 alt="DHL logo"
                 width={450}
                 height={100}
-                className="h-4 w-auto"
+                className="h-5 w-auto"
               />
             </div>
           </div>

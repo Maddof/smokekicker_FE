@@ -1,4 +1,5 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const isDev = process.env.NODE_ENV === "development";
 
 async function fetchAllProducts() {
   try {
@@ -14,7 +15,6 @@ async function fetchAllProducts() {
 }
 
 async function fetchAllPublishedProducts() {
-  const isDev = process.env.NODE_ENV === "development";
   try {
     const response = await fetch(
       `${API_BASE_URL}/products/published`,
@@ -84,7 +84,9 @@ async function fetchProductsByCategorySlugAndBrandSlug(
     const response = await fetch(
       `${API_BASE_URL}/products/category/${categorySlug}/brand/${brandSlug}`,
       {
-        next: { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for category-brand product lists to keep them fresh but not too volatile
+        next: isDev
+          ? { revalidate: 0 }
+          : { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for category-brand product lists to keep them fresh but not too volatile
       },
     );
     if (!response.ok) {
@@ -108,7 +110,9 @@ async function fetchProductsByBrandIdAndIsForSub(brandId) {
     const response = await fetch(
       `${API_BASE_URL}/products/brandId/${brandId}`,
       {
-        next: { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for brand products to keep them fresh but not too volatile
+        next: isDev
+          ? { revalidate: 0 }
+          : { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for brand products to keep them fresh but not too volatile
       },
     );
     if (!response.ok) {
@@ -132,7 +136,9 @@ async function fetchEjuicesAndIsForSub() {
     const response = await fetch(
       `${API_BASE_URL}/products/ejuices/isForSub`,
       {
-        next: { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for e-juices to keep them fresh but not too volatile
+        next: isDev
+          ? { revalidate: 0 }
+          : { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for e-juices to keep them fresh but not too volatile
       },
     );
     if (!response.ok) {
@@ -158,7 +164,9 @@ async function fetchAllFreeStarterKitsByBrandSlug(
     const response = await fetch(
       `${API_BASE_URL}/products/brand/${brandSlug}/free-starter-kits`,
       {
-        next: { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for free starter kits to keep them fresh but not too volatile
+        next: isDev
+          ? { revalidate: 0 }
+          : { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for free starter kits to keep them fresh but not too volatile
       },
     );
     if (!response.ok) {
@@ -182,7 +190,9 @@ async function fetchProductsByCategorySlug(categorySlug) {
     const response = await fetch(
       `${API_BASE_URL}/products/category/${categorySlug}`,
       {
-        next: { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for category products to keep them fresh but not too volatile
+        next: isDev
+          ? { revalidate: 0 }
+          : { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for category products to keep them fresh but not too volatile
       },
     );
     if (!response.ok) {
@@ -209,7 +219,9 @@ async function fetchProductBySlugAndCategorySlug(
     const response = await fetch(
       `${API_BASE_URL}/products/category/${categorySlug}/product/${productSlug}`,
       {
-        next: { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for individual products to keep them fresh but not too volatile
+        next: isDev
+          ? { revalidate: 0 }
+          : { revalidate: 43200 }, // Revalidate every 12 hours (43200 seconds) for individual products to keep them fresh but not too volatile
       },
     );
     if (!response.ok) {
@@ -268,12 +280,19 @@ async function fetchRelatedProductsSeeded(
     const response = await fetch(
       `${API_BASE_URL}/products/related/category/${categorySlug}/brand/${brandSlug}/product/${productSlug}?take=${take}`,
       {
-        next: {
-          tags: [
-            `related:${categorySlug}:${brandSlug}:${productSlug}`,
-          ],
-          revalidate: 21600, // Revalidate every 6 hours (21600 seconds) for related products to keep them fresh but not too volatile
-        },
+        next: isDev
+          ? {
+              tags: [
+                `related:${categorySlug}:${brandSlug}:${productSlug}`,
+              ],
+              revalidate: 0,
+            }
+          : {
+              tags: [
+                `related:${categorySlug}:${brandSlug}:${productSlug}`,
+              ],
+              revalidate: 21600,
+            }, // Revalidate every 6 hours (21600 seconds) for related products to keep them fresh but not too volatile
       },
     );
 
@@ -299,7 +318,9 @@ async function fetchProductsByBrandSlug(brandSlug) {
     const response = await fetch(
       `${API_BASE_URL}/products/brand/${brandSlug}`,
       {
-        next: { revalidate: 86400 }, // Revalidate every 24 hours (86400 seconds)
+        next: isDev
+          ? { revalidate: 0 }
+          : { revalidate: 86400 }, // Revalidate every 24 hours (86400 seconds)
       },
     );
     if (!response.ok) {
@@ -338,21 +359,6 @@ async function fetchProductsByCategoryId(categoryId) {
     return null;
   }
 }
-
-// LEGACY - Not currently used but may be needed for future features or admin dashboard
-// async function fetchSelectedProducts() {
-//   try {
-//     const response = await fetch(`${API_BASE_URL}/products/selected`);
-//     if (!response.ok) {
-//       throw new Error(`Failed to fetch selected products: ${response.status}`);
-//     }
-//     const products = await response.json();
-//     return products;
-//   } catch (error) {
-//     console.error("Error fetching selected products:", error);
-//     return []; // Return empty array instead of null for easier handling
-//   }
-// }
 
 async function searchProducts(query) {
   try {
