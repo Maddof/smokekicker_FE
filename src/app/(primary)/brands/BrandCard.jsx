@@ -19,7 +19,7 @@ export default function BrandCard({ brand }) {
       href={ROUTES.BRANDS.DETAIL(brand.slug)}
       className="hover:border-primary flex flex-col items-center rounded-lg border p-4 transition-all hover:shadow-md"
     >
-      <div className="relative mb-4 aspect-2/1 w-full overflow-hidden">
+      <div className="relative mb-4 flex aspect-2/1 w-full overflow-hidden">
         {logoUrl ? (
           <Image
             src={getImageUrl(logoUrl)}
@@ -38,7 +38,7 @@ export default function BrandCard({ brand }) {
           </div>
         )}
       </div>
-      <h2 className="text-center font-medium">
+      <h2 className="text-center text-base font-medium">
         {brand.name}
       </h2>
       {brand.description && (
