@@ -30,7 +30,6 @@ export default function Component() {
             <p className="font-bold">
               You must be 18 or older to purchase.
             </p>
-            <p>Age verification required at checkout.</p>
           </div>
         </div>
       </aside>
@@ -69,9 +68,9 @@ export default function Component() {
             Nicotine-Free Pouches
           </FooterLink>
           <FooterLink
-            href={ROUTES.SHOP.CATEGORY("caffeine-pouches")}
+            href={ROUTES.SHOP.CATEGORY("energy-pouches")}
           >
-            Caffeine Pouches
+            Energy Pouches
           </FooterLink>
           <FooterLink
             href={ROUTES.SHOP.CATEGORY("swedish-candy")}

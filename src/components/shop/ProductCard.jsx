@@ -55,7 +55,7 @@ export default function ProductCard({
     const categorySlug = category?.slug?.toLowerCase();
     if (
       categorySlug === "nicotine-pouches" ||
-      categorySlug === "caffeine-pouches"
+      categorySlug === "energy-pouches"
     ) {
       return "mg/pouch";
     }

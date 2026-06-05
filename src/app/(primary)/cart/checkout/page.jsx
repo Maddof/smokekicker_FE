@@ -14,23 +14,9 @@ export default async function CheckoutPage() {
       <section className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">
         <div className="container">
           <div className="max-w-3xl">
-            <h1>You are not logged in</h1>
+            <h1>Not live</h1>
             <p className="mt-4">
-              Please{" "}
-              <Link
-                href={` ${ROUTES.AUTH.BANKID}?returnUrl=${ROUTES.CHECKOUT}`}
-                className="text-primary inline-block text-[125%]"
-              >
-                <LogInIcon className="inline-block" />
-                Log in
-              </Link>{" "}
-              and verify your identity with BankID to
-              proceed to checkout.
-            </p>
-            <p className="mt-2">
-              During login, your identity, age (over 18),
-              and registered address in Sweden will be
-              verified.
+              Currently not selling to the public.
             </p>
             <p className="text-muted-foreground mt-2">
               We process your personal data during login to

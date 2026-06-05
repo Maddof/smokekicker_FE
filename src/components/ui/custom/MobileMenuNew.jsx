@@ -41,8 +41,8 @@ const MENU_SECTIONS = [
         label: "Nicotine-Free Pouches",
       },
       {
-        href: ROUTES.SHOP.CATEGORY("caffeine-pouches"),
-        label: "Caffeine Pouches",
+        href: ROUTES.SHOP.CATEGORY("energy-pouches"),
+        label: "Energy Pouches",
       },
       {
         href: ROUTES.SHOP.CATEGORY("swedish-candy"),

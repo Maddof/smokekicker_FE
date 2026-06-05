@@ -156,26 +156,26 @@ export const categoryContent = {
         "Explore our guides about nicotine-free pouches and learn more about tobacco-free, nicotine-free alternatives for everyday use.",
     },
   },
-  [CATEGORY_SLUGS.CAFFEINE_POUCHES]: {
-    title: "Caffeine Pouches",
+  [CATEGORY_SLUGS.ENERGY_POUCHES]: {
+    title: "Energy Pouches",
     description:
-      "Shop caffeine pouches – a tobacco-free, nicotine-free way to boost your energy on the go. Available in great flavors. EU and worldwide shipping.",
+      "Shop energy pouches – a tobacco-free, nicotine-free way to boost your energy on the go. Available in great flavors. EU and worldwide shipping.",
     heroImage:
       "/images/bg/nicotine-pouch_background-neon_min.jpg",
-    heroImageAlt: "Nioctine pouches in neon",
+    heroImageAlt: "Energy pouches in neon",
     showNavigationButtons: false,
     warningLabelText: nicotineWarningText,
     belowHero: {
-      title: "Energy On-the-Go With Caffeine Pouches",
+      title: "Energy On-the-Go With Energy Pouches",
       iconImgBg:
         "/images/icons/sketches/nicotine_pouch_sketch-min.png",
-      inconImgBgAlt: "Nicotine pouches illustration",
+      inconImgBgAlt: "Energy pouches illustration",
       initialParagraphs: 2,
       content: (
         <>
           <p>
-            Caffeine pouches are a modern, tobacco-free way
-            to get your caffeine fix without coffee, energy
+            Energy pouches are a modern, tobacco-free way to
+            get your caffeine fix without coffee, energy
             drinks, or other beverages. Slim and discreet,
             they can be used anytime, anywhere.
           </p>
@@ -184,12 +184,12 @@ export const categoryContent = {
             through the gum tissue, giving you a steady
             energy boost without the need for drinks or
             pills. Available in a variety of refreshing
-            flavors, caffeine pouches are nicotine-free and
+            flavors, energy pouches are nicotine-free and
             tobacco-free.
           </p>
           <p>
             Whether you need to stay alert at work, during a
-            workout, or while traveling, caffeine pouches
+            workout, or while traveling, energy pouches
             offer a convenient and enjoyable alternative to
             traditional caffeine sources.
           </p>
@@ -197,9 +197,9 @@ export const categoryContent = {
       ),
     },
     relatedPostsSection: {
-      title: "Guides and Tips for Caffeine Pouches",
+      title: "Guides and Tips for Energy Pouches",
       description:
-        "Read our guides about caffeine pouches, how they work, and how to find the right strength and flavor for your needs.",
+        "Read our guides about energy pouches, how they work, and how to find the right strength and flavor for your needs.",
     },
   },
   [CATEGORY_SLUGS.SWEDISH_CANDY]: {
@@ -405,37 +405,37 @@ export const categoryFaqContent = {
       },
     ],
   },
-  [CATEGORY_SLUGS.CAFFEINE_POUCHES]: {
-    title: "FAQ – Caffeine Pouches",
+  [CATEGORY_SLUGS.ENERGY_POUCHES]: {
+    title: "FAQ – Energy Pouches",
     description:
-      "Common questions about caffeine pouches and how they work.",
+      "Common questions about energy pouches and how they work.",
     items: [
       {
-        question: "What are caffeine pouches?",
+        question: "What are energy pouches?",
         answer:
-          "Caffeine pouches are small, tobacco-free and nicotine-free pouches placed under the upper lip. They deliver caffeine through the gum tissue, providing an energy boost without the need for coffee, energy drinks, or other beverages.",
+          "Energy pouches are small, tobacco-free and nicotine-free pouches placed under the upper lip. They deliver caffeine through the gum tissue, providing an energy boost without the need for coffee, energy drinks, or other beverages.",
       },
       {
         question:
-          "How much caffeine is in a caffeine pouch?",
+          "How much caffeine is in an energy pouch?",
         answer:
-          "The caffeine content varies by brand and product, but most caffeine pouches contain between 20–80 mg of caffeine per pouch, which is roughly comparable to a cup of coffee. Always check the product label for specific caffeine content.",
+          "The caffeine content varies by brand and product, but most energy pouches contain between 20–80 mg of caffeine per pouch, which is roughly comparable to a cup of coffee. Always check the product label for specific caffeine content.",
       },
       {
-        question: "How do you use caffeine pouches?",
+        question: "How do you use energy pouches?",
         answer:
           "Place one pouch under your upper lip and leave it for 20–45 minutes. The caffeine is absorbed through the gum tissue during this time. Once finished, dispose of the pouch in the catch lid or a waste bin.",
       },
       {
-        question: "Are caffeine pouches safe?",
+        question: "Are energy pouches safe?",
         answer:
-          "Caffeine pouches are intended for healthy adults. People who are sensitive to caffeine, pregnant or breastfeeding, or have certain medical conditions should consult a doctor before use. Do not exceed the recommended daily intake of caffeine.",
+          "Energy pouches are intended for healthy adults. People who are sensitive to caffeine, pregnant or breastfeeding, or have certain medical conditions should consult a doctor before use. Do not exceed the recommended daily intake of caffeine.",
       },
       {
         question:
-          "Do caffeine pouches contain nicotine or tobacco?",
+          "Do energy pouches contain nicotine or tobacco?",
         answer:
-          "No, caffeine pouches are nicotine-free and tobacco-free. They are suitable for adults who want an energy boost without nicotine or tobacco.",
+          "No, energy pouches are nicotine-free and tobacco-free. They are suitable for adults who want an energy boost without nicotine or tobacco.",
       },
     ],
   },
@@ -636,13 +636,13 @@ export const categoryBenefitsContent = {
       height: 800,
     },
   },
-  [CATEGORY_SLUGS.CAFFEINE_POUCHES]: {
-    title: "Benefits of Caffeine Pouches",
+  [CATEGORY_SLUGS.ENERGY_POUCHES]: {
+    title: "Benefits of Energy Pouches",
     description:
-      "Get your caffeine fix without coffee or energy drinks. Caffeine pouches are tobacco-free, nicotine-free, and available in great flavors.",
+      "Get your energy boost without coffee or energy drinks. Energy pouches are tobacco-free, nicotine-free, and available in great flavors.",
     benefits: [
       {
-        title: "Caffeine on the Go",
+        title: "Energy on the Go",
         text: "Get a measured dose of caffeine anytime, anywhere – no drinks or preparation needed.",
         icon: {
           src: "/images/icons/lightning_bolt.svg",
@@ -653,7 +653,7 @@ export const categoryBenefitsContent = {
       },
       {
         title: "Tobacco and Nicotine-Free",
-        text: "Caffeine pouches contain no tobacco or nicotine, making them suitable for a wide range of adults.",
+        text: "Energy pouches contain no tobacco or nicotine, making them suitable for a wide range of adults.",
         icon: {
           src: "/images/icons/no-smoking.svg",
           alt: "No smoking icon",

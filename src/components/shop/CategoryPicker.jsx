@@ -13,8 +13,8 @@ export default function CategoryPicker({ currentPath }) {
       href: `${ROUTES.SHOP.INDEX}/nicotine-free-pouches`,
     },
     {
-      name: "Caffeine Pouches",
-      href: `${ROUTES.SHOP.INDEX}/caffeine-pouches`,
+      name: "Energy Pouches",
+      href: `${ROUTES.SHOP.INDEX}/energy-pouches`,
     },
     {
       name: "Swedish Candy",

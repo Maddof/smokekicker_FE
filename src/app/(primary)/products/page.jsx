@@ -61,16 +61,12 @@ export default async function ShopPage() {
     (product) =>
       product.category.slug === "nicotine-pouches",
   );
-  const vapePodStarterKits = productsPublished.filter(
-    (product) => product.category.slug === "start-kit-vape",
-  );
   const nicotineFreePouches = productsPublished.filter(
     (product) =>
       product.category.slug === "nicotine-free-pouches",
   );
-  const caffeinePouches = productsPublished.filter(
-    (product) =>
-      product.category.slug === "caffeine-pouches",
+  const energyPouches = productsPublished.filter(
+    (product) => product.category.slug === "energy-pouches",
   );
   const candyProducts = productsPublished.filter(
     (product) => product.category.slug === "swedish-candy",
@@ -192,7 +188,7 @@ export default async function ShopPage() {
             title="Nicotine Pouches"
             description="Nicotine pouches in a variety of flavors and strengths."
             imageSrc="/images/icons/pouch_icon.svg"
-            imageClassName="w-24 opacity-20 sm:w-32 invert brightness-200"
+            imageClassName="w-24 opacity-40 sm:w-32 invert brightness-200"
             imageAlt="Nicotine Pouch Icon"
             categoryHref={ROUTES.SHOP.CATEGORY(
               "nicotine-pouches",
@@ -215,8 +211,9 @@ export default async function ShopPage() {
           <CategoryHeader
             title="Nicotine-Free Pouches"
             description="Nicotine-free pouches for a smooth and discreet experience without refilling. Swap pods, keep vaping."
-            imageSrc="/images/icons/vape_prefilled-pods_icons.svg"
-            imageAlt="Nicotine-Free Pouches Icon"
+            imageSrc="/images/icons/pouch_icon.svg"
+            imageClassName="w-24 opacity-40 sm:w-32 invert brightness-200"
+            imageAlt="Nicotine Pouch Icon"
             categoryHref={ROUTES.SHOP.CATEGORY(
               "nicotine-free-pouches",
             )}
@@ -232,23 +229,24 @@ export default async function ShopPage() {
         </>
       )}
 
-      {/* Caffeine Pouches Section */}
-      {caffeinePouches.length > 0 && (
+      {/* Energy Pouches Section */}
+      {energyPouches.length > 0 && (
         <>
           <CategoryHeader
-            title="Caffeine Pouches"
-            description="Caffeine pouches for a convenient and discreet energy boost."
-            imageSrc="/images/icons/caffeine_pouch_icon.svg"
-            imageAlt="Caffeine pouch icon"
+            title="Energy Pouches"
+            description="Energy pouches for a convenient and discreet energy boost."
+            imageSrc="/images/icons/pouch_icon.svg"
+            imageClassName="w-24 opacity-40 sm:w-32 invert brightness-200"
+            imageAlt="Nicotine Pouch Icon"
             categoryHref={ROUTES.SHOP.CATEGORY(
-              "caffeine-pouches",
+              "energy-pouches",
             )}
           />
 
           <section>
             <div className="container">
               <ProductGridLoadMore
-                products={caffeinePouches}
+                products={energyPouches}
               />
             </div>
           </section>
@@ -263,7 +261,7 @@ export default async function ShopPage() {
             description="Discover our selection of Swedish candy, including popular brands and unique flavors that offer a sweet and satisfying treat for every palate."
             imageSrc="/images/icons/candy.svg"
             imageAlt="Candy and gum icons"
-            imageClassName="w-24 opacity-20 sm:w-32 invert brightness-200"
+            imageClassName="w-24 opacity-40 sm:w-32 invert brightness-200"
             categoryHref={ROUTES.SHOP.CATEGORY("konfektyr")}
           />
 
@@ -284,7 +282,7 @@ export default async function ShopPage() {
             title="Accessories"
             description="Complement your nicotine pouch experience with practical accessories."
             imageSrc="/images/icons/accessory_icon_charger.svg"
-            imageAlt="Vape accessories icons"
+            imageAlt="Accessories icons"
             categoryHref={ROUTES.SHOP.CATEGORY("tillbehor")}
           />
 

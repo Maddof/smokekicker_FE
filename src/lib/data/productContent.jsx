@@ -26,130 +26,78 @@ export const productContent = {
     },
   },
 
-  [CATEGORY_SLUGS.START_KIT_VAPE]: {
+  [CATEGORY_SLUGS.NICOTINE_FREE_POUCHES]: {
     bulletPointsIcon: {
-      src: "/images/icons/sketches/vape_sketch_bg.png",
-      alt: "Påfyllningsbart podsystem illustration",
-      width: 160,
-      height: 200,
-    },
-    nicotineLabelWarningText,
-    warningText: warningText,
-    sameBrandProductsPicker: {
-      title: "Fler varianter av samma modell",
-      description:
-        "Välj bland alla övriga påfyllningsbara vape start-kit från " /* + brandName will be added in the component */,
-      emptyMessage:
-        "Inga andra produkter tillgängliga just nu.",
-      showIfEmpty: false,
-    },
-  },
-
-  [CATEGORY_SLUGS.PREFILLED_PODS]: {
-    bulletPointsIcon: {
-      src: "/images/icons/sketches/vape_pod_sketch.png",
-      alt: "Förfylld pod illustration",
+      src: "/images/icons/sketches/nicotine_pouch_sketch-min.png",
+      alt: "Nicotine-free pouch illustration",
       width: 454,
       height: 652,
     },
-    nicotineLabelWarningText,
-    warningText: warningText,
+    // nicotineLabelWarningText,
+    warningText: "This product is nicotine-free.",
     sameBrandProductsPicker: {
-      title: "Upptäck övriga smaker av samma märke",
+      title: "Discover more flavors from the same brand",
       description:
-        "Välj bland alla övriga förfyllda pods från " /* + brandName will be added in the component */,
+        "Explore more flavors and strengths of nicotine-free pouches from " /* + brandName will be added in the component */,
       emptyMessage:
-        "Inga andra produkter tillgängliga just nu.",
+        "No other products available at the moment.",
       showIfEmpty: false,
     },
   },
-  [CATEGORY_SLUGS.E_JUICE]: {
+  [CATEGORY_SLUGS.ENERGY_POUCHES]: {
     bulletPointsIcon: {
-      src: "/images/icons/sketches/e-juice_sketch.png",
-      alt: "E-juice flaska illustration",
+      src: "/images/icons/sketches/nicotine_pouch_sketch-min.png",
+      alt: "Energy pouch illustration",
       width: 160,
       height: 200,
     },
-    nicotineLabelWarningText,
-    warningText: warningText,
+    // nicotineLabelWarningText,
+    warningText:
+      "This product contains caffeine, which is a stimulant. Consume in moderation.",
     sameBrandProductsPicker: {
-      title: "Fler e-juice smaker av samma märke",
+      title:
+        "More energy pouch flavors from the same brand",
       description:
-        "Utforska fler smaker och nikotinstyrkor av e-juice från ",
+        "Explore more flavors and strengths of energy pouches from " /* + brandName will be added in the component */,
       emptyMessage:
-        "Inga andra produkter tillgängliga just nu.",
+        "No other products available at the moment.",
       showIfEmpty: false,
     },
   },
 
-  [CATEGORY_SLUGS.WHITE_SNUS]: {
-    bulletPointsIcon: {
-      src: "/images/icons/sketches/nicotine_pouch_sketch-min.png",
-      alt: "Vitt snus illustration",
-      width: 160,
-      height: 200,
-    },
-    nicotineLabelWarningText,
-    warningText: warningText,
-    sameBrandProductsPicker: {
-      title: "Fler varianter av vitt snus av samma märke",
-      description:
-        "Utforska fler smaker och styrkor av vitt snus från ",
-      emptyMessage:
-        "Inga andra produkter tillgängliga just nu.",
-      showIfEmpty: false,
-    },
-  },
-  [CATEGORY_SLUGS.CANDY]: {
+  [CATEGORY_SLUGS.SWEDISH_CANDY]: {
     bulletPointsIcon: {
       src: "/images/icons/sketches/lollipops_retro_transp.png",
-      alt: "Konfektyr illustration",
+      alt: "Swedish candy illustration",
       width: 160,
       height: 160,
     },
     warningText:
-      "Dessa produkter innehåller INTE nikotin och är ett nikotinfritt alternativ för personer som försöker sluta med nikotinprodukter.",
+      "This product contains sugar and should be consumed in moderation as part of a balanced diet.",
     sameBrandProductsPicker: {
-      title: "Konfektyr av samma märke",
+      title: "More Swedish candy from the same brand",
       description:
-        "Utforska fler smaker och varianter av vårt nikotinfria godis från " /* + brandName will be added in the component */,
-      emptyMessage: "Fler varianter kommer snart.",
-      showIfEmpty: false,
-    },
-  },
-  [CATEGORY_SLUGS.NICOTINE_CESSATION]: {
-    bulletPointsIcon: {
-      src: "/images/icons/sketches/nicotine_chewing-gum_blister.png", // You'll need to create this image
-      alt: "Nikotintuggummi illustration",
-      width: 160,
-      height: 200,
-    },
-    warningText:
-      "Detta är ett receptfritt läkemedel som innehåller nikotin. Läs bipacksedeln noga före användning. Från 18 år. För farmaceutisk rådgivning, kontakta apotek eller Läkemedelsupplysningen.",
-    sameBrandProductsPicker: {
-      title: "Hitta rätt hjälpmedel för dig",
-      description:
-        "Utforska fler nikotinavvänjningsprodukter, nikotintuggummin och plåster från " /* + brandName will be added in the component */,
-      emptyMessage:
-        "Inga andra produkter tillgängliga just nu.",
+        "Explore more flavors and varieties of our nicotine-free candy from " /* + brandName will be added in the component */,
+      emptyMessage: "More varieties coming soon.",
       showIfEmpty: false,
     },
   },
   [CATEGORY_SLUGS.ACCESSORIES]: {
     bulletPointsIcon: {
       src: "/images/icons/sketches/usb_charger_sketch.png", // You'll need to create this image
-      alt: "Vape accessories illustration",
+      alt: "Accessories illustration",
       width: 160,
       height: 200,
     },
     warningText:
-      "Använd alltid tillbehör som är kompatibla med din specifika enhet för bästa resultat och säkerhet.",
+      "Always use accessories that are compatible with your specific device for optimal performance.",
     sameBrandProductsPicker: {
-      title: "Utforska övriga tillbehör",
+      title:
+        "Explore other accessories from the same brand",
       description:
-        "Övriga tillbehör från " /* + brandName will be added in the component */,
+        "Explore other accessories from " /* + brandName will be added in the component */,
       emptyMessage:
-        "Inga andra tillbehör tillgängliga just nu.",
+        "No other accessories available at the moment.",
       showIfEmpty: false,
     },
   },
