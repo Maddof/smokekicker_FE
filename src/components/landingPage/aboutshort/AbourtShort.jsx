@@ -22,7 +22,6 @@ export default function AboutShort({
   headline,
   description,
   pillarCards,
-  trustBadges,
   aboutLink,
 }) {
   const resolvedEyebrowLabel = eyebrowLabel;
@@ -30,7 +29,6 @@ export default function AboutShort({
   const resolvedDescription = description;
   const resolvedAboutLink = aboutLink;
   const resolvedPillarCards = parseJsonField(pillarCards);
-  const resolvedTrustBadges = parseJsonField(trustBadges);
 
   return (
     <section
@@ -94,20 +92,6 @@ export default function AboutShort({
           })}
         </div>
 
-        {/* Trust row */}
-        <div className="mt-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
-          {resolvedTrustBadges.map((badge) => {
-            const Icon = resolveCmsIcon(badge.icon);
-            return (
-              <TrustItem
-                key={badge.label}
-                icon={<Icon className="h-4 w-4" />}
-                text={badge.label}
-              />
-            );
-          })}
-        </div>
-
         {/* CTA to About */}
         <div className="mt-6">
           <Link
@@ -161,14 +145,5 @@ function PillarCard({ icon, title, desc }) {
         </div>
       </div>
     </AboutContentWrapper>
-  );
-}
-
-function TrustItem({ icon, text }) {
-  return (
-    <div className="inline-flex items-center gap-4 rounded-xl border border-white/10 bg-black/15 px-5 py-2 backdrop-blur">
-      <span className="text-white">{icon}</span>
-      <span className="text-white/90">{text}</span>
-    </div>
   );
 }

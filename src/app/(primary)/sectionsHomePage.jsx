@@ -11,7 +11,8 @@ import LatestBlogPosts from "@/components/LatestBlogPosts";
 const fallBackImage = "/images/fallback.png";
 const getFieldValue = (section, key) => {
   if (!Array.isArray(section?.fields)) return undefined;
-  return section.fields.find((field) => field?.key === key)?.value;
+  return section.fields.find((field) => field?.key === key)
+    ?.value;
 };
 
 export function HomeHeroSection({ section }) {
@@ -35,14 +36,15 @@ export function HomeAboutSection({ section }) {
       headline={section?.headline}
       description={section?.description}
       pillarCards={section?.pillarCards}
-      trustBadges={section?.trustBadges}
       aboutLink={section?.aboutLink}
     />
   );
 }
 
 export function HomeFeaturedCategoriesSection({ section }) {
-  const featuredCategoryItems = [...(section?.selectedCategories ?? [])]
+  const featuredCategoryItems = [
+    ...(section?.selectedCategories ?? []),
+  ]
     .sort((a, b) => a.sortOrder - b.sortOrder)
     .map((selectedCategory) => {
       const category = selectedCategory?.category;
@@ -52,8 +54,11 @@ export function HomeFeaturedCategoriesSection({ section }) {
 
       return {
         title: category?.name,
-        href: category?.slug ? ROUTES.SHOP.CATEGORY(category.slug) : undefined,
-        imageSrc: getImageUrl(featuredImage?.url) || fallBackImage,
+        href: category?.slug
+          ? ROUTES.SHOP.CATEGORY(category.slug)
+          : undefined,
+        imageSrc:
+          getImageUrl(featuredImage?.url) || fallBackImage,
         imageAlt: featuredImage?.altText || category?.name,
         description: category?.details?.shortDesc,
       };
@@ -63,21 +68,30 @@ export function HomeFeaturedCategoriesSection({ section }) {
   return (
     <FeaturedCategoriesSlider
       items={
-        featuredCategoryItems.length > 0 ? featuredCategoryItems : undefined
+        featuredCategoryItems.length > 0
+          ? featuredCategoryItems
+          : undefined
       }
-      heading={section?.headline ?? getFieldValue(section, "headline")}
+      heading={
+        section?.headline ??
+        getFieldValue(section, "headline")
+      }
       description={section?.description}
     />
   );
 }
 
 export function HomeHeroQuizBannerSection({ section }) {
-  const backgroundImageField = getFieldValue(section, "backgroundImage");
+  const backgroundImageField = getFieldValue(
+    section,
+    "backgroundImage",
+  );
 
   return (
     <HeroQuizBanner
       backgroundImageSrc={
-        getImageUrl(section?.backgroundImage.url) || fallBackImage
+        getImageUrl(section?.backgroundImage.url) ||
+        fallBackImage
       }
       backgroundImageAlt={backgroundImageField?.altText}
       headline={section?.headline}
@@ -109,22 +123,33 @@ export function HomeFaqSection({ section }) {
 
   return (
     <FaqSectionCMS
-      title={section?.headline ?? getFieldValue(section, "headline")}
+      title={
+        section?.headline ??
+        getFieldValue(section, "headline")
+      }
       description={
-        section?.description ?? getFieldValue(section, "description")
+        section?.description ??
+        getFieldValue(section, "description")
       }
       items={items}
     />
   );
 }
 
-export function HomeLatestBlogPostsSection({ section, posts }) {
+export function HomeLatestBlogPostsSection({
+  section,
+  posts,
+}) {
   return (
     <LatestBlogPosts
       posts={posts}
-      headline={section?.headline ?? getFieldValue(section, "headline")}
+      headline={
+        section?.headline ??
+        getFieldValue(section, "headline")
+      }
       description={
-        section?.description ?? getFieldValue(section, "description")
+        section?.description ??
+        getFieldValue(section, "description")
       }
       showExcerpt={section?.config?.showExcerpt ?? true}
     />

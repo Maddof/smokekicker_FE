@@ -77,14 +77,14 @@ export default function FeaturedCategoriesSlider({
           <div className="flex items-center gap-2">
             <button
               ref={prevRef}
-              aria-label="Föregående kategori"
+              aria-label="Previous category"
               className="prev-btn group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <ChevronLeft className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
             </button>
             <button
               ref={nextRef}
-              aria-label="Nästa kategori"
+              aria-label="Next category"
               className="next-btn group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
@@ -116,8 +116,8 @@ export default function FeaturedCategoriesSlider({
           keyboard={{ enabled: true }}
           a11y={{
             // enabled: true,
-            prevSlideMessage: "Föregående kategori",
-            nextSlideMessage: "Nästa kategori",
+            prevSlideMessage: "Previous category",
+            nextSlideMessage: "Next category",
           }}
           onBeforeInit={(swiper) => {
             swiper.params.navigation.prevEl =
@@ -190,7 +190,7 @@ function CategoryCard({ item }) {
     <Link
       href={item.href}
       className="group block overflow-hidden rounded-2xl bg-white/5 shadow-lg backdrop-blur transition-all duration-300 hover:bg-white/10 hover:shadow-xl"
-      aria-label={`Utforska kategori: ${item.title}`}
+      aria-label={`Browse category: ${item.title}`}
     >
       <div className="relative aspect-3/4 w-full overflow-hidden">
         <Image
@@ -204,13 +204,13 @@ function CategoryCard({ item }) {
         />
 
         {/* Content */}
-        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black via-black/50 to-transparent p-4">
+        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black to-black/10 px-4 pt-6 pb-4">
           <div className="mb-1">
-            <h3 className="mb line-clamp-2 text-base font-bold text-white sm:text-lg">
+            <h3 className="text-base font-bold text-white sm:text-lg">
               {item.title}
             </h3>
             {item.description && (
-              <p className="line-clamp-2 text-white">
+              <p className="text-white">
                 {item.description}
               </p>
             )}
@@ -218,7 +218,7 @@ function CategoryCard({ item }) {
 
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium tracking-wide uppercase">
-              Explore
+              Shop
             </span>
             <span className="bg-primary group-hover:bg-primary/80 inline-flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur transition-all group-hover:translate-x-1">
               <ChevronRight className="h-4 w-4" />

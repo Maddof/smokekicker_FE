@@ -1,31 +1,25 @@
 import {
   Package2,
-  Repeat,
-  Leaf,
   ChevronsRight,
-  Candy,
-  Zap,
   Droplet,
   Droplets,
   ShieldCheck,
-  PackageCheck,
-  Calendar,
+  Truck,
+  CigaretteOff,
+  Store,
 } from "lucide-react";
 
 const DEFAULT_CMS_ICON = Package2;
 
 const CMS_ICON_MAP = {
-  Repeat,
-  Zap,
   Droplet,
   Droplets,
   Package2,
-  Leaf,
   ChevronsRight,
-  Candy,
   ShieldCheck,
-  PackageCheck,
-  Calendar,
+  Truck,
+  CigaretteOff,
+  Store,
 };
 
 /**

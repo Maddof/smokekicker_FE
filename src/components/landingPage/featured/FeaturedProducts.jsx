@@ -35,8 +35,12 @@ export default function FeaturedProducts({
         </ul>
         <div className="mt-10 flex justify-center">
           <Button asChild>
-            <Link href={ROUTES.SHOP.INDEX}>
-              {ctaLabel ?? "View all nicotine pouches"}
+            <Link
+              href={ROUTES.SHOP.CATEGORY(
+                "nicotine-pouches",
+              )}
+            >
+              {ctaLabel ?? "Shop all nicotine pouches"}
             </Link>
           </Button>
         </div>

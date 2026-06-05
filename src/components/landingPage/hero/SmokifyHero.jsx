@@ -181,7 +181,8 @@ export default function SmokifyHero({
           </HeroContentWrapper>
 
           {/* USPs */}
-          <HeroContentWrapper
+          {/* Disabled for now, can be re-enabled if we want to add quick links to popular categories in the hero section */}
+          {/* <HeroContentWrapper
             type="ul"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -197,10 +198,10 @@ export default function SmokifyHero({
                 {item.label}
               </CategoryLinkItem>
             ))}
-          </HeroContentWrapper>
+          </HeroContentWrapper> */}
 
           {/* Legal note */}
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-8 flex items-center gap-4">
             <Image
               className="w-10"
               src="/images/icons/plus-18_white.svg"
