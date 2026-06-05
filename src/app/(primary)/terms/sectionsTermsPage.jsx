@@ -9,16 +9,21 @@ export function TermsMainContentSection({ section }) {
   return (
     <section id={section?.id}>
       <div className="container">
-        <h1 className="mb-8 font-bold">{section?.headline}</h1>
+        <h1 className="mb-8 font-bold">
+          {section?.headline}
+        </h1>
 
         {section?.content ? (
           <div
             className="prose [&>h2]:my-4"
-            dangerouslySetInnerHTML={{ __html: section.content }}
+            dangerouslySetInnerHTML={{
+              __html: section.content,
+            }}
           />
         ) : (
           <div className="prose [&>h2]:my-4">
-            Tyvärr kunde vi inte ladda innehållet för den här sektionen just nu.
+            Unfortunately, we couldn't load the content for
+            this section at the moment.
           </div>
         )}
 
@@ -29,10 +34,10 @@ export function TermsMainContentSection({ section }) {
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary inline-flex items-center gap-2 font-medium underline underline-offset-4 hover:opacity-80"
-              aria-label={`Visa ${pdf?.title || "villkoren"} som PDF`}
+              aria-label={`Show ${pdf?.title || "terms"} as PDF`}
             >
               <FileText size={18} aria-hidden="true" />
-              Visa {pdf?.title || "villkoren"} som PDF
+              Show {pdf?.title || "terms"} as PDF
             </a>
           </div>
         ) : null}

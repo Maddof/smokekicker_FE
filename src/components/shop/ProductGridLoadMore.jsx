@@ -56,7 +56,7 @@ export default function ProductGridLoadMore({
             variant="outline"
             onClick={showMoreProducts}
           >
-            Visa {nextBatchCount} till
+            Show {nextBatchCount} more
           </Button>
         </div>
       )}
