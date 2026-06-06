@@ -119,12 +119,6 @@ export default async function CategoryPage({ params }) {
     );
   }
 
-  console.log(
-    "Fetched products for category:",
-    categorySlug,
-    products,
-  );
-
   const categoryHeaderConfig = categoryContent[
     categorySlug
   ] || {

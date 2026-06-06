@@ -49,8 +49,6 @@ export default async function ShopPage() {
     );
   }
 
-  console.log("Fetched products:", productsPublished);
-
   const headerConfig = categoryContent["default"];
 
   // Get below hero content or use default

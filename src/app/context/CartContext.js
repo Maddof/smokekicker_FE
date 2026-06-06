@@ -65,7 +65,7 @@ export const CartProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      console.log("Fetched cart data:", data);
+      // console.log("Fetched cart data:", data);
       setCartItems(data.items); // Sync cart state
       setCartTotals({
         subtotal: data.totals.subtotal,
