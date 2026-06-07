@@ -16,7 +16,8 @@ const nextConfig = {
     // unoptimized: true,
     // Disable optimization for development to bypass private IP restrictions
     // unoptimized: process.env.NODE_ENV === "development",
-    unoptimized: process.env.NEXT_PUBLIC_UNOPTIMIZED_IMAGES === "true",
+    unoptimized:
+      process.env.NEXT_PUBLIC_UNOPTIMIZED_IMAGES === "true",
     remotePatterns: [
       {
         protocol: "http",
@@ -34,7 +35,7 @@ const nextConfig = {
       // Production image hosting (no port needed for standard HTTPS)
       {
         protocol: "https",
-        hostname: "api.smokify.se",
+        hostname: "api.smokekicker.com",
         pathname: "/**",
       },
     ],
