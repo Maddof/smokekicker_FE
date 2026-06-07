@@ -1,5 +1,4 @@
 import Image from "next/image";
-import BankIDBanksignering from "./components/BankID";
 
 export default function LoginPage() {
   return (
@@ -14,9 +13,9 @@ export default function LoginPage() {
         />
         <h1 className="mb-2">BankID Autentisering</h1>
         <p className="text-muted-foreground">
-          OBS! Om du inte är över 18 år kommer du bli nekad inloggning.
+          OBS! Om du inte är över 18 år kommer du bli nekad
+          inloggning.
         </p>
-        <BankIDBanksignering />
       </div>
     </section>
   );
