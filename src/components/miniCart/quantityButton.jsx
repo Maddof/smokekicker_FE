@@ -1,8 +1,5 @@
 // components/quantityButton.jsx
 
-const FREE_KIT_CATEGORY_ID =
-  parseInt(process.env.NEXT_PUBLIC_FREE_KIT_CATEGORY_ID) || 6;
-
 export default function QuantityButton({
   onClick,
   icon: Icon,

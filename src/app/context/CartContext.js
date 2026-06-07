@@ -14,9 +14,6 @@ import {
 
 const CartContext = createContext();
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const TEN_MINUTES = parseInt(
-  process.env.NEXT_PUBLIC_TIMECHECK_TOKEN,
-);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
