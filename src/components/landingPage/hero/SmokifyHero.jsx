@@ -233,8 +233,8 @@ export default function SmokifyHero({
             <Image
               src="/images/other/kicking_cigarette.webp"
               alt="Kicking cigarette"
-              width={120}
-              height={160}
+              width={1174}
+              height={604}
               className="h-full w-full object-contain opacity-40"
               loading="eager"
             />
