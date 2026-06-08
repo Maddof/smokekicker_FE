@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 import MobileMenuNew from "../ui/custom/MobileMenuNew";
 import MiniCart from "../miniCart/miniCart";
 import DropdownMenuWrapper from "../ui/custom/profileDropdownToggle/DropdownWrapper";
@@ -33,7 +34,16 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex h-full grow items-center justify-end gap-3 sm:gap-4">
-          <ResponsiveSearch />
+          <Suspense
+            fallback={
+              <div
+                className="h-10 w-10"
+                aria-hidden="true"
+              />
+            }
+          >
+            <ResponsiveSearch />
+          </Suspense>
           <DropdownMenuWrapper />
           <MiniCart />
           <MobileMenuNew />
