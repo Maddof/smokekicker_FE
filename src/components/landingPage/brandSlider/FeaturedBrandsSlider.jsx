@@ -17,6 +17,8 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { ROUTES } from "@/config/routes";
+import { Button } from "@/components/ui/scn/button";
 
 /**
  * FeaturedBrandsSlider – Enhanced responsive Swiper.js carousel for brand links.
@@ -221,6 +223,16 @@ export default function FeaturedBrandsSlider({
             </SwiperSlide>
           ))}
         </Swiper>
+        <div className="mt-6 flex justify-center">
+          <Button asChild>
+            <Link
+              href={ROUTES.BRANDS.INDEX}
+              className="text-primary text-sm font-medium hover:underline"
+            >
+              View all brands
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
