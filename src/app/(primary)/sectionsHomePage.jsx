@@ -83,8 +83,44 @@ export function HomeFeaturedCategoriesSection({ section }) {
 }
 
 export function HomeFeaturedBrandsSection({ section }) {
+  const featuredBrands = [
+    ...(section?.selectedBrands ?? []),
+  ]
+    .sort((a, b) => a.sortOrder - b.sortOrder)
+    .map((selectedBrand) => {
+      const brand = selectedBrand?.brand;
+      const logoImage = brand?.media?.find(
+        (mediaItem) => mediaItem.role === "LOGO",
+      );
+
+      return {
+        name: brand?.name,
+        href: brand?.slug
+          ? ROUTES.BRANDS.DETAIL(brand.slug)
+          : undefined,
+        imageSrc:
+          getImageUrl(logoImage?.url) || fallBackImage,
+        imageAlt: logoImage?.altText || brand?.name,
+        imageWidth: logoImage?.width,
+        imageHeight: logoImage?.height,
+      };
+    });
   return (
-    <FeaturedBrandsSlider headline={section?.headline} />
+    <FeaturedBrandsSlider
+      items={
+        featuredBrands.length > 0
+          ? featuredBrands
+          : undefined
+      }
+      headline={
+        section?.headline ??
+        getFieldValue(section, "headline")
+      }
+      description={
+        section?.description ??
+        getFieldValue(section, "description")
+      }
+    />
   );
 }
 
@@ -116,8 +152,14 @@ export function HomeFeaturedProductsSection({ section }) {
   return (
     <FeaturedProducts
       products={products}
-      headline={section?.headline}
-      description={section?.description}
+      headline={
+        section?.headline ??
+        getFieldValue(section, "headline")
+      }
+      description={
+        section?.description ??
+        getFieldValue(section, "description")
+      }
       ctaLabel={section?.ctaLabel}
     />
   );

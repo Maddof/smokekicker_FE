@@ -43,6 +43,11 @@ export default async function Home() {
 
   const orderedSections = getOrderedSections(page);
 
+  console.log(
+    "Ordered sections for homepage:",
+    orderedSections,
+  );
+
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
     "https://smokekicker.com";

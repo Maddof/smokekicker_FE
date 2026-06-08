@@ -27,43 +27,43 @@ import "swiper/css/pagination";
  * - Improved accessibility
  */
 
-const brands = [
-  {
-    title: "Zyn",
-    imageSrc:
-      "/images/other/featuredBrandsSlider/zyn_logo.svg",
-    imageAlt: "Zyn Logo",
-    href: "/brands/zyn",
-  },
-  {
-    title: "Pablo",
-    imageSrc:
-      "/images/other/featuredBrandsSlider/pablo_logo.svg",
-    imageAlt: "Pablo Logo",
-    href: "/brands/pablo",
-  },
-  {
-    title: "Velo",
-    imageSrc:
-      "/images/other/featuredBrandsSlider/velo_logo.svg",
-    imageAlt: "Velo Logo",
-    href: "/brands/velo",
-  },
-  {
-    title: "Siberia",
-    imageSrc:
-      "/images/other/featuredBrandsSlider/siberia_logo.svg",
-    imageAlt: "Siberia Logo",
-    href: "/brands/siberia",
-  },
-  {
-    title: "Loop",
-    imageSrc:
-      "/images/other/featuredBrandsSlider/loop_logo.svg",
-    imageAlt: "Loop Logo",
-    href: "/brands/loop",
-  },
-];
+// const brands = [
+//   {
+//     title: "Zyn",
+//     imageSrc:
+//       "/images/other/featuredBrandsSlider/zyn_logo.svg",
+//     imageAlt: "Zyn Logo",
+//     href: "/brands/zyn",
+//   },
+//   {
+//     title: "Pablo",
+//     imageSrc:
+//       "/images/other/featuredBrandsSlider/pablo_logo.svg",
+//     imageAlt: "Pablo Logo",
+//     href: "/brands/pablo",
+//   },
+//   {
+//     title: "Velo",
+//     imageSrc:
+//       "/images/other/featuredBrandsSlider/velo_logo.svg",
+//     imageAlt: "Velo Logo",
+//     href: "/brands/velo",
+//   },
+//   {
+//     title: "Siberia",
+//     imageSrc:
+//       "/images/other/featuredBrandsSlider/siberia_logo.svg",
+//     imageAlt: "Siberia Logo",
+//     href: "/brands/siberia",
+//   },
+//   {
+//     title: "Loop",
+//     imageSrc:
+//       "/images/other/featuredBrandsSlider/loop_logo.svg",
+//     imageAlt: "Loop Logo",
+//     href: "/brands/loop",
+//   },
+// ];
 
 export default function FeaturedBrandsSlider({
   items,
@@ -76,7 +76,9 @@ export default function FeaturedBrandsSlider({
   const nextRef = useRef(null);
   const swiperRef = useRef(null);
 
-  // const brands = items;
+  const brands = items;
+
+  console.log("FeaturedBrandsSlider items:", brands);
 
   const handleMouseEnter = () => {
     if (swiperRef.current?.autoplay) {
@@ -238,13 +240,13 @@ function BrandCard({ item, index }) {
       style={{
         backgroundImage: `url('/images/other/featuredBrandsSlider/bg/dark-orange_bg_variation-${variationNumber}.webp')`,
       }}
-      aria-label={`Browse brand: ${item.title}`}
+      aria-label={`Browse brand: ${item.name}`}
     >
       <Image
         src={item.imageSrc}
-        alt={item.imageAlt || item.title}
-        width={400}
-        height={200}
+        alt={item.imageAlt || item.name}
+        width={item.imageWidth || 400}
+        height={item.imageHeight || 200}
         className="h-auto w-4/5 object-cover opacity-80 invert-100 transition-[transform__opacity] duration-500 group-hover:scale-110 group-hover:opacity-100"
         priority={false}
       />
@@ -253,7 +255,7 @@ function BrandCard({ item, index }) {
       <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black to-black/10 px-4 pt-6 pb-4">
         <div className="mb-1">
           <h3 className="text-base font-bold text-white sm:text-lg">
-            {item.title}
+            {item.name}
           </h3>
         </div>
 
