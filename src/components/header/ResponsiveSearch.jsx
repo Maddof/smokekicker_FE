@@ -13,16 +13,24 @@ export default function ResponsiveSearch() {
     function handleClickOutside(event) {
       if (
         searchContainerRef.current &&
-        !searchContainerRef.current.contains(event.target) &&
+        !searchContainerRef.current.contains(
+          event.target,
+        ) &&
         isExpanded
       ) {
         setIsExpanded(false);
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside,
+    );
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside,
+      );
     };
   }, [isExpanded]);
 
@@ -40,7 +48,9 @@ export default function ResponsiveSearch() {
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="bg-foreground/10 text-foreground flex h-9 w-9 items-center justify-center rounded-full sm:hidden"
-        aria-label={isExpanded ? "Stäng sökning" : "Öppna sökning"}
+        aria-label={
+          isExpanded ? "Close search" : "Open search"
+        }
       >
         {isExpanded ? (
           <X className="h-5 w-5" />

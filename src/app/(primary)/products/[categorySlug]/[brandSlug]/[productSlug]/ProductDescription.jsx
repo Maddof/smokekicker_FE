@@ -91,7 +91,7 @@ export default function ProductDescription({
             )}
             {nicotineLabelWarningText && (
               <aside
-                className="mt-6 border-4 border-black bg-white p-2 text-center text-xs font-bold text-black uppercase sm:text-sm"
+                className="mt-6 border-4 border-black bg-white p-2 text-center text-[10px] font-bold text-black uppercase sm:text-sm"
                 style={{
                   fontFamily:
                     "Helvetica, Arial, sans-serif",

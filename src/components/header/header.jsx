@@ -5,7 +5,6 @@ import MiniCart from "../miniCart/miniCart";
 import DropdownMenuWrapper from "../ui/custom/profileDropdownToggle/DropdownWrapper";
 import { ROUTES } from "@/config/routes";
 import ResponsiveSearch from "./ResponsiveSearch";
-import { Suspense } from "react";
 
 export default function Header() {
   return (
@@ -34,16 +33,7 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex h-full grow items-center justify-end gap-3 sm:gap-4">
-          {/* <SearchBox /> */}
-          <Suspense
-            fallback={
-              <div className="hidden w-auto sm:block sm:w-full">
-                <div className="h-9 w-full animate-pulse rounded bg-gray-200"></div>
-              </div>
-            }
-          >
-            <ResponsiveSearch />
-          </Suspense>
+          <ResponsiveSearch />
           <DropdownMenuWrapper />
           <MiniCart />
           <MobileMenuNew />

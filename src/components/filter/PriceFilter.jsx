@@ -15,7 +15,7 @@ export default function PriceFilter({
 
   return (
     <div className="w-full">
-      <div className="mb-2 flex items-center justify-between gap-3">
+      <div className="mb-2 flex items-center justify-between gap-2">
         <p className="font-medium">Price</p>
         <p className="text-muted-foreground text-sm">
           {formatCurrency(currentMin)} –{" "}

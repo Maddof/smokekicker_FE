@@ -320,22 +320,18 @@ export default async function SingleProductPage({
         <div className="z-10 container">
           <div className="flex flex-col gap-6 md:flex-row md:gap-10">
             {/* Product Image Column */}
-            <div className="relative flex h-64 w-full items-center justify-center sm:h-72 md:h-auto md:w-2/5">
+            <div className="relative flex h-68 w-full items-center justify-center sm:h-72 md:h-auto md:w-2/5">
               <Image
                 src={imageUrl}
                 alt={imageAlt}
                 {...imageDimensions}
                 fetchPriority="high"
                 loading="eager"
-                className={`z-20 object-contain ${
-                  imageWidth && imageHeight
-                    ? "h-auto w-auto"
-                    : "h-full w-full"
-                }`}
+                className={`relative z-20 max-h-full max-w-full object-contain`}
               />
               {/* Full-width background overlay */}
               <div
-                className="absolute right-[-100vw] bottom-0 left-[-100vw] z-10 mx-auto h-16 md:-bottom-4 md:h-32"
+                className="absolute right-[-100vw] -bottom-2 left-[-100vw] z-10 mx-auto h-16 md:-bottom-4 md:h-32"
                 style={{
                   backgroundColor:
                     product.details?.color || "#FFF", // fallback to white if no color is specified

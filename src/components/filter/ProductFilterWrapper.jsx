@@ -32,12 +32,18 @@ export default function ProductFilterWrapper({
     selectedFlavorProfileSlugs,
     setSelectedFlavorProfileSlugs,
   ] = useState([]);
-  const [
-    selectedNicotineValues,
-    setSelectedNicotineValues,
-  ] = useState([]);
-  const [selectedFormatValues, setSelectedFormatValues] =
-    useState([]);
+  const [minNicotineValue, maxNicotineValue] =
+    useMemo(() => {
+      const values = products
+        .map((product) => product?.details?.nicotineValue)
+        .filter((v) => Number.isFinite(v));
+
+      if (values.length === 0) {
+        return [0, 0];
+      }
+
+      return [Math.min(...values), Math.max(...values)];
+    }, [products]);
 
   const [minProductPrice, maxProductPrice] = useMemo(() => {
     const prices = products
@@ -51,6 +57,10 @@ export default function ProductFilterWrapper({
     return [Math.min(...prices), Math.max(...prices)];
   }, [products]);
 
+  const [selectedNicotineRange, setSelectedNicotineRange] =
+    useState([minNicotineValue, maxNicotineValue]);
+  const [selectedFormatValues, setSelectedFormatValues] =
+    useState([]);
   const [selectedPriceRange, setSelectedPriceRange] =
     useState([minProductPrice, maxProductPrice]);
   const [visibleProductCount, setVisibleProductCount] =
@@ -60,6 +70,13 @@ export default function ProductFilterWrapper({
   useEffect(() => {
     setIsDesktop(window.innerWidth >= 768);
   }, []);
+
+  useEffect(() => {
+    setSelectedNicotineRange([
+      minNicotineValue,
+      maxNicotineValue,
+    ]);
+  }, [minNicotineValue, maxNicotineValue]);
 
   useEffect(() => {
     setSelectedPriceRange([
@@ -75,7 +92,7 @@ export default function ProductFilterWrapper({
     searchFilteredProducts,
     selectedBrandSlugs,
     selectedFlavorProfileSlugs,
-    selectedNicotineValues,
+    selectedNicotineRange,
     selectedFormatValues,
     selectedPriceRange,
   ]);
@@ -105,17 +122,17 @@ export default function ProductFilterWrapper({
       );
     }
 
-    if (selectedNicotineValues.length > 0) {
-      result = result.filter(
-        (product) =>
-          Number.isFinite(
-            product?.details?.nicotineValue,
-          ) &&
-          selectedNicotineValues.includes(
-            product.details.nicotineValue,
-          ),
-      );
-    }
+    const [selectedMinNicotine, selectedMaxNicotine] =
+      selectedNicotineRange;
+
+    result = result.filter(
+      (product) =>
+        Number.isFinite(product?.details?.nicotineValue) &&
+        product.details.nicotineValue >=
+          selectedMinNicotine &&
+        product.details.nicotineValue <=
+          selectedMaxNicotine,
+    );
 
     if (selectedFormatValues.length > 0) {
       result = result.filter(
@@ -142,7 +159,7 @@ export default function ProductFilterWrapper({
     searchFilteredProducts,
     selectedBrandSlugs,
     selectedFlavorProfileSlugs,
-    selectedNicotineValues,
+    selectedNicotineRange,
     selectedFormatValues,
     selectedPriceRange,
   ]);
@@ -179,7 +196,7 @@ export default function ProductFilterWrapper({
           </AccordionTrigger>
           <AccordionContent>
             <div className="flex w-full flex-col items-start justify-between gap-4 border-t border-b py-4">
-              <div className="flex w-full flex-col items-start gap-6 lg:flex-row">
+              <div className="grid w-full grid-cols-1 items-start gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
                 <SearchFilter
                   items={products}
                   onFilterChange={setSearchFilteredProducts}
@@ -198,15 +215,16 @@ export default function ProductFilterWrapper({
                     setSelectedFlavorProfileSlugs
                   }
                 />
-                <NicotineFilter
-                  items={products}
-                  value={selectedNicotineValues}
-                  onValueChange={setSelectedNicotineValues}
-                />
                 <FormatFilter
                   items={products}
                   value={selectedFormatValues}
                   onValueChange={setSelectedFormatValues}
+                />
+                <NicotineFilter
+                  minNicotine={minNicotineValue}
+                  maxNicotine={maxNicotineValue}
+                  value={selectedNicotineRange}
+                  onValueChange={setSelectedNicotineRange}
                 />
                 <PriceFilter
                   minPrice={minProductPrice}

@@ -1,74 +1,35 @@
 "use client";
 
-import { useMemo } from "react";
-import { Button } from "@/components/ui/scn/button";
+import { Slider } from "@/components/ui/scn/slider";
 
 export default function NicotineFilter({
-  items,
-  value = [],
+  minNicotine,
+  maxNicotine,
+  value,
   onValueChange,
 }) {
-  const nicotineOptions = useMemo(() => {
-    const values = items
-      .map((item) => item?.details?.nicotineValue)
-      .filter((nicotineValue) =>
-        Number.isFinite(nicotineValue),
-      );
-
-    return [...new Set(values)].sort((a, b) => a - b);
-  }, [items]);
+  const currentMin = value?.[0] ?? minNicotine;
+  const currentMax = value?.[1] ?? maxNicotine;
+  const isDisabled = minNicotine >= maxNicotine;
 
   return (
     <div className="w-full">
-      <p className="mb-2 font-medium">Nicotine/pouch</p>
-      <div className="flex flex-wrap gap-2">
-        <Button
-          type="button"
-          size="sm"
-          variant={
-            value.length === 0 ? "default" : "outline"
-          }
-          className="normal-case"
-          onClick={() => onValueChange([])}
-          aria-pressed={value.length === 0}
-        >
-          All
-        </Button>
-
-        {nicotineOptions.map((nicotineValue) => {
-          const isSelected = value.includes(nicotineValue);
-
-          return (
-            <Button
-              key={nicotineValue}
-              type="button"
-              size="sm"
-              variant={isSelected ? "default" : "outline"}
-              className="normal-case"
-              onClick={() => {
-                if (isSelected) {
-                  onValueChange(
-                    value.filter(
-                      (selected) =>
-                        selected !== nicotineValue,
-                    ),
-                  );
-                  return;
-                }
-
-                onValueChange(
-                  [...value, nicotineValue].sort(
-                    (a, b) => a - b,
-                  ),
-                );
-              }}
-              aria-pressed={isSelected}
-            >
-              {nicotineValue} mg
-            </Button>
-          );
-        })}
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <p className="font-medium">Nicotine/pouch</p>
+        <p className="text-muted-foreground text-sm">
+          {currentMin} – {currentMax} mg
+        </p>
       </div>
+
+      <Slider
+        value={[currentMin, currentMax]}
+        onValueChange={onValueChange}
+        min={minNicotine}
+        max={maxNicotine}
+        step={1}
+        minStepsBetweenThumbs={1}
+        disabled={isDisabled}
+      />
     </div>
   );
 }
