@@ -172,7 +172,7 @@ export default function FeaturedCategoriesSlider({
               spaceBetween: 24,
             },
           }}
-          className="pb-12!"
+          className="smokekicker-slider pb-12!"
         >
           {categories.map((category, index) => (
             <SwiperSlide key={`${category.href}-${index}`}>
@@ -189,41 +189,36 @@ function CategoryCard({ item }) {
   return (
     <Link
       href={item.href}
-      className="group block overflow-hidden rounded-2xl bg-white/5 shadow-lg backdrop-blur transition-all duration-300 hover:bg-white/10 hover:shadow-xl"
+      className="group block aspect-3/4 overflow-hidden rounded-2xl shadow-lg backdrop-blur transition-all duration-300 hover:bg-white/10 hover:shadow-xl"
       aria-label={`Browse category: ${item.title}`}
     >
-      <div className="relative aspect-3/4 w-full overflow-hidden">
-        <Image
-          src={item.imageSrc}
-          alt={item.imageAlt || item.title}
-          fill
-          // sizes="(max-width: 480px) 85vw, (max-width: 768px) 45vw, (max-width: 1024px) 33vw, 25vw"
-          sizes="(max-width: 479px) 85vw, (max-width: 639px) 67vw, (max-width: 767px) 50vw, (max-width: 1023px) 40vw, (max-width: 1279px) 33vw, (max-width: 1535px) 29vw, 25vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
-          priority={false}
-        />
+      <Image
+        src={item.imageSrc}
+        alt={item.imageAlt || item.title}
+        width={800}
+        height={800}
+        className="absolute h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+        priority={false}
+      />
 
-        {/* Content */}
-        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black to-black/10 px-4 pt-6 pb-4">
-          <div className="mb-1">
-            <h3 className="text-base font-bold text-white sm:text-lg">
-              {item.title}
-            </h3>
-            {item.description && (
-              <p className="text-white">
-                {item.description}
-              </p>
-            )}
-          </div>
+      {/* Content */}
+      <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black to-black/10 px-4 pt-6 pb-4">
+        <div className="mb-1">
+          <h3 className="text-base font-bold text-white sm:text-lg">
+            {item.title}
+          </h3>
+          {item.description && (
+            <p className="text-white">{item.description}</p>
+          )}
+        </div>
 
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium tracking-wide uppercase">
-              Shop
-            </span>
-            <span className="bg-primary group-hover:bg-primary/80 inline-flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur transition-all group-hover:translate-x-1">
-              <ChevronRight className="h-4 w-4" />
-            </span>
-          </div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-medium tracking-wide uppercase">
+            Shop
+          </span>
+          <span className="bg-primary group-hover:bg-primary/80 inline-flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur transition-all group-hover:translate-x-1">
+            <ChevronRight className="h-4 w-4" />
+          </span>
         </div>
       </div>
     </Link>

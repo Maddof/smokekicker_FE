@@ -7,6 +7,7 @@ import { getImageUrl } from "@/lib/utils/getUrl";
 import HeroQuizBanner from "@/components/landingPage/heroQuizBanner/HeroQuizBanner";
 import FaqSectionCMS from "@/components/FaqSectionCMS";
 import LatestBlogPosts from "@/components/LatestBlogPosts";
+import FeaturedBrandsSlider from "@/components/landingPage/brandSlider/FeaturedBrandsSlider";
 
 const fallBackImage = "/images/fallback.png";
 const getFieldValue = (section, key) => {
@@ -78,6 +79,12 @@ export function HomeFeaturedCategoriesSection({ section }) {
       }
       description={section?.description}
     />
+  );
+}
+
+export function HomeFeaturedBrandsSection({ section }) {
+  return (
+    <FeaturedBrandsSlider headline={section?.headline} />
   );
 }
 
@@ -165,6 +172,7 @@ export const homeSectionComponents = {
   featuredProducts: HomeFeaturedProductsSection,
   faqHome: HomeFaqSection,
   latestBlogPosts: HomeLatestBlogPostsSection,
+  featuredBrands: HomeFeaturedBrandsSection,
   // Add more section components here as needed, e.g.:
   // flavorQuizCTA: HomeFlavorQuizCTASection,
 };

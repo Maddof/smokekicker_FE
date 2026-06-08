@@ -387,3 +387,22 @@
     --chart-5: hsl(340 75% 55%);
   }
 }
+
+/* Custom styles for the category slider (used in FeaturedCategoriesSlider.jsx)
+Used before swipers classes loads to ensure no FOUC and to set the initial layout for the slider */
+.smokekicker-slider .swiper-slide {
+  margin-right: 1.5rem;
+  width: 65%;
+}
+
+@media (min-width: 640px) {
+  .smokekicker-slider .swiper-slide {
+    width: 49%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .smokekicker-slider .swiper-slide {
+    width: 27.2%;
+  }
+}
