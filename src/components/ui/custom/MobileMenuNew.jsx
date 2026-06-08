@@ -13,6 +13,7 @@ import {
   User,
   ChevronDown,
   ShoppingCart,
+  Award,
 } from "lucide-react";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
@@ -52,6 +53,26 @@ const MENU_SECTIONS = [
         href: ROUTES.SHOP.CATEGORY("accessories"),
         label: "Accessories",
       },
+    ],
+  },
+  {
+    id: "brands",
+    title: "Brands",
+    icon: Award,
+    items: [
+      { href: ROUTES.BRANDS.INDEX, label: "All Brands" },
+      { href: ROUTES.BRANDS.DETAIL("zyn"), label: "Zyn" },
+      {
+        href: ROUTES.BRANDS.DETAIL("pablo"),
+        label: "Pablo",
+      },
+      { href: ROUTES.BRANDS.DETAIL("velo"), label: "Velo" },
+      {
+        href: ROUTES.BRANDS.DETAIL("siberia"),
+        label: "Siberia",
+      },
+      { href: ROUTES.BRANDS.DETAIL("cuba"), label: "Cuba" },
+      { href: ROUTES.BRANDS.DETAIL("loop"), label: "Loop" },
     ],
   },
   {
