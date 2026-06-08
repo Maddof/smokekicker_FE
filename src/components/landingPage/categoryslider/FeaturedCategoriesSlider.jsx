@@ -19,7 +19,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 /**
- * CategorySlider – Enhanced responsive Swiper.js carousel for category links.
+ * FeaturedCategoriesSlider – Enhanced responsive Swiper.js carousel for category links.
  * - Auto-generated category data with proper routing
  * - Keyboard, mouse, and touch-friendly
  * - Auto-play with pause on hover
