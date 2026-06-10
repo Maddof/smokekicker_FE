@@ -35,8 +35,7 @@ export default function Breadcrumbs({
     const items = segments.map((segment, index) => {
       const path = `/${segments.slice(0, index + 1).join("/")}`;
       const isBrandCrumb =
-        segments[0] === "products" &&
-        index === 2;
+        segments[0] === "products" && index === 2;
 
       const resolvedPath = isBrandCrumb
         ? ROUTES.BRANDS.DETAIL(segment)
@@ -86,6 +85,7 @@ export default function Breadcrumbs({
             href={homeHref}
             className="flex items-center"
             aria-label="Home"
+            prefetch={false}
           >
             <Home className="h-4 w-4" />
           </Link>
