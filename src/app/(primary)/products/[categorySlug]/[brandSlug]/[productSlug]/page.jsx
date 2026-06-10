@@ -61,9 +61,14 @@ export async function generateMetadata({ params }) {
   const url = `https://smokekicker.com${ROUTES.SHOP.PRODUCT(categorySlug, brandSlug, productSlug)}`;
 
   // Get image URL for social sharing
-  const imageUrl = product.imgUrl
-    ? getImageUrl(product.imgUrl)
-    : null;
+  const primaryMedia =
+    product.media?.find(
+      (m) => m.role === "PRIMARY_IMAGE",
+    ) ?? product.media?.[0];
+
+  const imageUrl =
+    getImageUrl(primaryMedia?.mediaAsset?.url) ||
+    fallBackImage;
 
   return {
     title: title,
