@@ -176,6 +176,7 @@ function MenuItem({
         href={href}
         onClick={onSelect}
         aria-current={isCurrent ? "page" : undefined}
+        prefetch={false}
         className={cn(
           "hover:bg-secondary flex items-center rounded-md px-3 py-2 transition-colors",
           isSubmenuItem ? "" : "gap-3",
@@ -405,6 +406,7 @@ export default function MobileMenuNew() {
               href={ROUTES.CONTACT}
               onClick={closeMenu}
               className="hover:bg-secondary flex items-center gap-3 rounded-md px-3 py-2 transition-colors"
+              prefetch={false}
             >
               <Mail
                 className="text-primary h-5 w-5"

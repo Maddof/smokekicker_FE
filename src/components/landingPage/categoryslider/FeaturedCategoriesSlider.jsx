@@ -189,6 +189,7 @@ function CategoryCard({ item }) {
   return (
     <Link
       href={item.href}
+      prefetch={false}
       className="group block aspect-3/4 overflow-hidden rounded-2xl shadow-lg backdrop-blur transition-all duration-300 hover:bg-white/10 hover:shadow-xl"
       aria-label={`Browse category: ${item.title}`}
     >

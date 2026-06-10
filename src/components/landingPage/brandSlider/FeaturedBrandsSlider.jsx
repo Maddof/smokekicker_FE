@@ -29,44 +29,6 @@ import { Button } from "@/components/ui/scn/button";
  * - Improved accessibility
  */
 
-// const brands = [
-//   {
-//     title: "Zyn",
-//     imageSrc:
-//       "/images/other/featuredBrandsSlider/zyn_logo.svg",
-//     imageAlt: "Zyn Logo",
-//     href: "/brands/zyn",
-//   },
-//   {
-//     title: "Pablo",
-//     imageSrc:
-//       "/images/other/featuredBrandsSlider/pablo_logo.svg",
-//     imageAlt: "Pablo Logo",
-//     href: "/brands/pablo",
-//   },
-//   {
-//     title: "Velo",
-//     imageSrc:
-//       "/images/other/featuredBrandsSlider/velo_logo.svg",
-//     imageAlt: "Velo Logo",
-//     href: "/brands/velo",
-//   },
-//   {
-//     title: "Siberia",
-//     imageSrc:
-//       "/images/other/featuredBrandsSlider/siberia_logo.svg",
-//     imageAlt: "Siberia Logo",
-//     href: "/brands/siberia",
-//   },
-//   {
-//     title: "Loop",
-//     imageSrc:
-//       "/images/other/featuredBrandsSlider/loop_logo.svg",
-//     imageAlt: "Loop Logo",
-//     href: "/brands/loop",
-//   },
-// ];
-
 export default function FeaturedBrandsSlider({
   items,
   headline = "Leading Nicotine Pouch Brands",
@@ -225,6 +187,7 @@ export default function FeaturedBrandsSlider({
           <Button asChild>
             <Link
               href={ROUTES.BRANDS.INDEX}
+              prefetch={false}
               className="text-primary text-sm font-medium hover:underline"
             >
               View all brands
@@ -246,6 +209,7 @@ function BrandCard({ item, index }) {
   return (
     <Link
       href={item.href}
+      prefetch={false}
       className="group aspect-1 flex min-h-80 flex-col items-center justify-center overflow-hidden rounded-2xl bg-cover bg-center px-6 shadow-lg backdrop-blur transition-all duration-300 hover:bg-white/10 hover:shadow-xl"
       style={{
         backgroundImage: `url('/images/other/featuredBrandsSlider/bg/dark-orange_bg_variation-${variationNumber}.webp')`,
