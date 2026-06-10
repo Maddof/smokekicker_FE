@@ -100,7 +100,7 @@ export default async function BlogPage({ searchParams }) {
       name:
         page > 1
           ? `Nicotine Pouch News & Guides – Page ${page} }`
-          : `Nicotine Pouch News & Guides }`,
+          : `Nicotine Pouch News & Guides`,
       description:
         "Stay up to date with the latest nicotine pouch trends, product launches, flavor guides, and educational content for adult nicotine users.",
       inLanguage: "en",

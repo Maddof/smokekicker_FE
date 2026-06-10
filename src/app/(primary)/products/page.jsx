@@ -8,7 +8,6 @@ import ShopHeaderBelow from "@/components/shop/ShopHeaderBelow";
 import { categoryContent } from "@/lib/data/categoryContent";
 import CategoryPicker from "@/components/shop/CategoryPicker";
 import { ROUTES } from "@/config/routes";
-import Link from "next/link";
 import { getImageUrl } from "@/lib/utils/getUrl";
 import { getPageByKey } from "@/lib/cms/getPage";
 import { buildCmsPageMetadata } from "@/lib/cms/pageMetadata";
@@ -33,7 +32,7 @@ export async function generateMetadata() {
     page,
     fallbackTitle: `Buy Nicotine Pouches Online | Worldwide & EU Shipping`,
     fallbackDescription:
-      "Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on tobacco-free nicotine products.",
+      "Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on nicotine pouches.",
     defaultPath: ROUTES.SHOP.INDEX,
   });
 }
@@ -75,15 +74,24 @@ export default async function ShopPage() {
 
   const shopUrl = `${SITE_URL}${ROUTES.SHOP.INDEX}`;
 
+  const page = await getProductPage();
+
+  const title =
+    page.seo?.metaTitle ||
+    page.title ||
+    `Buy Nicotine Pouches Online | Worldwide & EU Shipping`;
+  const description =
+    page.seo?.metaDescription ||
+    `Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on nicotine pouches.`;
+
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "@id": shopUrl,
       url: shopUrl,
-      name: `Buy Nicotine Pouches Online | Worldwide & EU Shipping`,
-      description:
-        "Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on tobacco-free nicotine products.",
+      name: title,
+      description: description,
       inLanguage: "en",
       isPartOf: {
         "@id": `${SITE_URL}#website`,
@@ -105,8 +113,11 @@ export default async function ShopPage() {
               url: `${SITE_URL}${ROUTES.SHOP.PRODUCT(product.category?.slug, product.brand?.slug, product.slug)}`,
               name: product.name,
               image: [
-                getImageUrl(product.imgUrl) ||
-                  fallBackImage,
+                getImageUrl(
+                  product.media?.find(
+                    (m) => m.role === "PRIMARY_IMAGE",
+                  )?.mediaAsset?.url,
+                ) || fallBackImage,
               ],
               brand: product.brand
                 ? {
