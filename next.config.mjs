@@ -18,6 +18,7 @@ const nextConfig = {
     // unoptimized: process.env.NODE_ENV === "development",
     unoptimized:
       process.env.NEXT_PUBLIC_UNOPTIMIZED_IMAGES === "true",
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     remotePatterns: [
       {
         protocol: "http",
