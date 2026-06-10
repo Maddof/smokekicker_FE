@@ -64,6 +64,7 @@ export default function SameBrandProductsPicker({
                             sameBrandProduct.slug,
                           )}
                           className="text-secondary-foreground mr-2 text-sm"
+                          prefetch={false}
                         >
                           {sameBrandProduct.name},{" "}
                           {formatCurrency(

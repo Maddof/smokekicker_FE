@@ -456,6 +456,7 @@ export default async function SingleProductPage({
               className="group mt-6 px-4 py-6"
             >
               <Link
+                prefetch={false}
                 href={ROUTES.SHOP.CATEGORY(
                   product.category.slug,
                 )}

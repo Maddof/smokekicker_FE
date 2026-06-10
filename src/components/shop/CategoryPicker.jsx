@@ -52,6 +52,7 @@ export default function CategoryPicker({ currentPath }) {
                 <li key={cat.name} className="list-none">
                   <Link
                     href={cat.href}
+                    prefetch={false}
                     className={`${
                       isActive
                         ? "bg-primary border"
