@@ -186,7 +186,11 @@ export default async function CategoryPage({ params }) {
             url: `${siteUrl}${ROUTES.SHOP.PRODUCT(product.category?.slug, product.brand?.slug, product.slug)}`,
             name: product.name,
             image: [
-              getImageUrl(product.imgUrl) || fallBackImage,
+              getImageUrl(
+                product.media?.find(
+                  (m) => m.role === "PRIMARY_IMAGE",
+                )?.mediaAsset?.url,
+              ) || fallBackImage,
             ],
             description:
               product.details.shortDesc +
@@ -201,7 +205,7 @@ export default async function CategoryPage({ params }) {
               : undefined,
             offers: {
               "@type": "Offer",
-              priceCurrency: product.currency ?? "SEK",
+              priceCurrency: product.currency ?? "EUR",
               price: (product.price / 100).toFixed(2),
               availability:
                 product.stock > 0
