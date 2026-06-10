@@ -7,7 +7,8 @@ import getFieldValue from "@/lib/cms/getFieldValue";
 import { getImageUrl } from "@/lib/utils/getUrl";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://smokekicker.com";
 
 // const SITE_URL = "https://logiest-kingston-citizenly.ngrok-free.dev";
 

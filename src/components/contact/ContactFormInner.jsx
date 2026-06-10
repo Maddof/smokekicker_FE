@@ -9,7 +9,7 @@ import "cap-widget";
 
 const BE_BASE_URL =
   process.env.NEXT_PUBLIC_BE_BASE_URL ||
-  "https://api.smokify.se";
+  "https://api.smokekicker.com";
 
 export const ContactFormInner = () => {
   // const { executeRecaptcha } = useGoogleReCaptcha();

@@ -7,7 +7,8 @@ import BlogPagination from "@/components/blogg/BlogPagination";
 import { SITE_NAME } from "@/config/metadata";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://smokekicker.com";
 
 // Revalidate this page every 12 hours (43200 seconds) to keep content fresh without overloading the server. Adjust as needed based on how often blog content changes.
 export const revalidate = 43200;

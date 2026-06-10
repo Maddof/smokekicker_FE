@@ -3,16 +3,15 @@ import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 import { Montserrat } from "next/font/google";
 import { CheckoutProvider } from "./context/CheckoutContext";
-import { SITE_NAME } from "@/config/metadata";
 
 export const metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://smokify.se",
+      "https://smokekicker.com",
   ),
-  title: `${SITE_NAME} - Vape och vitt snus med omtanke`,
+  title: `Nicotine Pouches Online | EU & Worldwide Shipping`,
   description:
-    "Förfyllda pods, e-cigaretter, vitt snus, unika prenumerationer och nikotinersättning. Din väg till en rökfri vardag börjar här.",
+    "Buy nicotine pouches and tobacco freee snus on Smokekicker.com. Fast EU & International shipping, secure payments and trackable orders straight to your door",
 };
 
 const montserrat = Montserrat({

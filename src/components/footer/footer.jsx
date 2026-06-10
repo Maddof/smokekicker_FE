@@ -60,28 +60,6 @@ export default function Component() {
           <FooterLink href={ROUTES.BRANDS.INDEX}>
             Brands
           </FooterLink>
-          {/* <FooterLink
-            href={ROUTES.SHOP.CATEGORY(
-              "nicotine-free-pouches",
-            )}
-          >
-            Nicotine-Free Pouches
-          </FooterLink>
-          <FooterLink
-            href={ROUTES.SHOP.CATEGORY("energy-pouches")}
-          >
-            Energy Pouches
-          </FooterLink>
-          <FooterLink
-            href={ROUTES.SHOP.CATEGORY("swedish-candy")}
-          >
-            Swedish Candy
-          </FooterLink>
-          <FooterLink
-            href={ROUTES.SHOP.CATEGORY("accessories")}
-          >
-            Accessories
-          </FooterLink> */}
         </div>
 
         {/* Resources */}
@@ -146,11 +124,11 @@ export default function Component() {
             </p>
             <div className="flex gap-4">
               <Link
-                href="https://www.facebook.com/smokifyshop"
+                href="https://www.facebook.com/smokekickershop"
                 prefetch={false}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Besök Smokify på Facebook (öppnas i ny flik)"
+                aria-label="Visit Smokekicker on Facebook (opens in new tab)"
               >
                 <svg
                   role="img"
@@ -163,11 +141,11 @@ export default function Component() {
                 </svg>
               </Link>
               <Link
-                href="https://www.instagram.com/smokify_shop"
+                href="https://www.instagram.com/smokekickershop"
                 prefetch={false}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Besök Smokify på Instagram (öppnas i ny flik)"
+                aria-label="Visit Smokekicker on Instagram (opens in new tab)"
               >
                 <svg
                   role="img"

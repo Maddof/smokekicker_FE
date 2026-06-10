@@ -8,7 +8,8 @@ import { fetchAllPublishedCategories } from "@/lib/data/api/fetchCategories";
 import { fetchAllPublishedProducts } from "@/lib/data/api/fetchProducts";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://smokekicker.com";
 
 export const revalidate = 43200; // 12 timmar i sekunder
 

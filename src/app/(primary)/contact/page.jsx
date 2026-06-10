@@ -16,7 +16,8 @@ import { getOrderedSections } from "@/lib/cms/getSection";
 import { ContactFormInner } from "@/components/contact/ContactFormInner";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://smokekicker.com";
 
 async function getContactPage() {
   const page = await getPageByKey("contact");
@@ -30,7 +31,7 @@ export async function generateMetadata() {
     page,
     fallbackTitle: `Contact | ${SITE_NAME}`,
     fallbackDescription:
-      "Contact Smokekicker for questions, support, or feedback.",
+      "Get help with orders, shipping, nicotine pouch products, returns, and general inquiries. Contact our support team today.",
     defaultPath: ROUTES.CONTACT,
   });
 }

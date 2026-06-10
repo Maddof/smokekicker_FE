@@ -6,7 +6,8 @@ import { getOrderedSections } from "@/lib/cms/getSection";
 import { getPageByKey } from "@/lib/cms/getPage";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://smokekicker.com";
 
 async function getCookiePolicyPage() {
   const page = await getPageByKey("cookie-policy");
@@ -20,7 +21,7 @@ export async function generateMetadata() {
     page,
     fallbackTitle: `Cookie Policy | ${SITE_NAME}`,
     fallbackDescription:
-      "Read how Smokekicker handles, stores, and protects your personal data according to GDPR.",
+      "Learn how cookies are used to improve your browsing experience, shopping experience, analyze website performance, and provide essential site functionality.",
     defaultPath: ROUTES.COOKIE_POLICY,
   });
 }

@@ -8,7 +8,8 @@ import { aboutSectionComponents } from "./sectionsAboutPage";
 export const revalidate = 86400; // Revalidate this page every 24 hours
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://smokify.se";
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://smokekicker.com";
 
 async function getAboutPage() {
   return getPageByKey("about");
@@ -19,9 +20,9 @@ export async function generateMetadata() {
 
   return buildCmsPageMetadata({
     page,
-    fallbackTitle: `About Us | ${SITE_NAME}`,
+    fallbackTitle: `About Us | ${SITE_NAME} | Swedish Nicotine Pouches Worldwide`,
     fallbackDescription:
-      "Get to know Smokekicker - nicotine pouches online, fast worldwide shipping.",
+      "Learn about Smokekicker and our mission to bring Swedish nicotine pouches to customers across Europe and worldwide.",
     defaultPath: ROUTES.ABOUT,
   });
 }
