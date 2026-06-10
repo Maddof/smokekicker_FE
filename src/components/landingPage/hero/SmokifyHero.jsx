@@ -41,6 +41,7 @@ export default function SmokifyHero({
   const resolvedDisclaimer = disclaimer;
   const normalizedCategoryQuickLinks =
     normalizeHeroCategoryLinks(categoryQuickLinks);
+
   const resolvedCategoryLinks =
     normalizedCategoryQuickLinks.length > 0
       ? normalizedCategoryQuickLinks
