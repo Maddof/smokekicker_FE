@@ -1,17 +1,5 @@
 import Link from "next/link";
-import {
-  ShoppingBag,
-  Droplets,
-  Calendar,
-  Package2,
-  Repeat,
-  Leaf,
-  ChevronsRight,
-  Candy,
-  Zap,
-  Droplet,
-  Truck,
-} from "lucide-react";
+import { Truck } from "lucide-react";
 import { normalizeHeroCategoryLinks } from "@/lib/cms/normalizeHeroCategoryLinks";
 import { ROUTES } from "@/config/routes";
 import { Button } from "../../ui/scn/button";
@@ -164,7 +152,6 @@ export default function SmokifyHero({
                   "nicotine-pouches",
                 )}
               >
-                <ShoppingBag className="mr-2 h-4 w-4" />{" "}
                 {resolvedPrimaryCta}
               </Link>
             </Button>
@@ -174,7 +161,6 @@ export default function SmokifyHero({
               asChild
             >
               <Link href={ROUTES.BRANDS.INDEX}>
-                <Calendar className="mr-2 h-4 w-4" />{" "}
                 {resolvedSecondaryCta}
               </Link>
             </Button>

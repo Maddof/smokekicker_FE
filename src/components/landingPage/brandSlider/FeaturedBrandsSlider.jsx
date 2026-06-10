@@ -80,8 +80,6 @@ export default function FeaturedBrandsSlider({
 
   const brands = items;
 
-  console.log("FeaturedBrandsSlider items:", brands);
-
   const handleMouseEnter = () => {
     if (swiperRef.current?.autoplay) {
       swiperRef.current.autoplay.stop();
