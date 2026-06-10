@@ -91,7 +91,7 @@ export default async function Home() {
     url: siteUrl,
     logo: {
       "@type": "ImageObject",
-      url: `${siteUrl}/smokekicker_logo.svg`,
+      url: `${siteUrl}/smokekicker_logo_orange.svg`,
     },
     sameAs: [
       "https://www.facebook.com/smokekicker",
