@@ -7,6 +7,9 @@ import PriceFilter from "@/components/filter/PriceFilter";
 import BrandFilter from "@/components/filter/BrandFilter";
 import FlavorProfileFilter from "@/components/filter/FlavorProfileFilter";
 import FormatFilter from "@/components/filter/FormatFilter";
+import ProductSort, {
+  sortProducts,
+} from "@/components/filter/sorting/ProductSort";
 import ProductCard from "@/components/shop/ProductCard";
 import { Button } from "@/components/ui/scn/button";
 import {
@@ -63,6 +66,8 @@ export default function ProductFilterWrapper({
     useState([]);
   const [selectedPriceRange, setSelectedPriceRange] =
     useState([minProductPrice, maxProductPrice]);
+  const [selectedSortValue, setSelectedSortValue] =
+    useState("");
   const [visibleProductCount, setVisibleProductCount] =
     useState(initialDisplayCount);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -95,6 +100,7 @@ export default function ProductFilterWrapper({
     selectedNicotineRange,
     selectedFormatValues,
     selectedPriceRange,
+    selectedSortValue,
   ]);
 
   const filteredProducts = useMemo(() => {
@@ -154,7 +160,7 @@ export default function ProductFilterWrapper({
         product.price <= selectedMaxPrice,
     );
 
-    return result;
+    return sortProducts(result, selectedSortValue);
   }, [
     searchFilteredProducts,
     selectedBrandSlugs,
@@ -162,6 +168,7 @@ export default function ProductFilterWrapper({
     selectedNicotineRange,
     selectedFormatValues,
     selectedPriceRange,
+    selectedSortValue,
   ]);
 
   const hasMoreProductsToShow =
@@ -179,7 +186,8 @@ export default function ProductFilterWrapper({
   return (
     <>
       <p className="mb-4 font-medium">
-        {productCount} Products
+        {productCount} Products ({filteredProducts.length}{" "}
+        shown)
       </p>
       <Accordion className="mb-2 w-full">
         <AccordionItem defaultOpen={isDesktop}>
@@ -237,6 +245,13 @@ export default function ProductFilterWrapper({
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      <div className="mb-4 flex">
+        <ProductSort
+          value={selectedSortValue}
+          onValueChange={setSelectedSortValue}
+        />
+      </div>
 
       {filteredProducts.length === 0 ? (
         <div className="border-primary my-12 rounded-lg border border-dashed p-8 text-center">
