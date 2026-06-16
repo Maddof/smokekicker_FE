@@ -26,20 +26,27 @@ export default function OrderSummary({
 
   const hasAnyDiscount =
     (discount ?? 0) > 0 ||
-    cartItems.some((i) => (i?.pricing?.discountRate ?? 0) > 0);
+    cartItems.some(
+      (i) => (i?.pricing?.discountRate ?? 0) > 0,
+    );
 
   return (
-    <div className={`border-primary/50 rounded-lg border p-4 ${className}`}>
-      <h3 className="mb-4 font-semibold">Orderöversikt</h3>
+    <div
+      className={`border-primary/50 rounded-lg border p-4 ${className}`}
+    >
+      <h3 className="mb-4 font-semibold">Order summary</h3>
 
       {/* Produktlista */}
       <ul className="mb-6 space-y-4">
         {cartItems.map((item) => {
           const unit = getUnitPrice(item);
-          const discountedUnit = getDiscountedUnitPrice(item);
+          const discountedUnit =
+            getDiscountedUnitPrice(item);
           const lineDiscount = getLineDiscount(item);
-          const discountRate = item?.pricing?.discountRate ?? 0;
-          const hasDiscount = discountRate > 0 && discountedUnit < unit;
+          const discountRate =
+            item?.pricing?.discountRate ?? 0;
+          const hasDiscount =
+            discountRate > 0 && discountedUnit < unit;
 
           return (
             <li
@@ -72,7 +79,8 @@ export default function OrderSummary({
                 {/* Line discount (optional) */}
                 {hasDiscount && lineDiscount > 0 && (
                   <p className="text-muted-foreground mt-2 text-xs">
-                    Du sparar {formatCurrency(lineDiscount)} på denna vara
+                    You save {formatCurrency(lineDiscount)}{" "}
+                    on this item
                   </p>
                 )}
               </div>
@@ -84,7 +92,8 @@ export default function OrderSummary({
                 </p>
                 {hasDiscount && (
                   <p className="text-muted-foreground text-xs">
-                    före: {formatCurrency(getLineSubtotal(item))}
+                    before:{" "}
+                    {formatCurrency(getLineSubtotal(item))}
                   </p>
                 )}
               </div>
@@ -93,34 +102,46 @@ export default function OrderSummary({
         })}
       </ul>
 
-      {/* Summering */}
+      {/* Summary */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
-          <span>Delsumma</span>
+          <span>Subtotal</span>
           <span>{formatCurrency(subtotal)}</span>
         </div>
 
-        {/* Rabatt (if you expose it from context/server) */}
+        {/* Discount (if you expose it from context/server) */}
         {hasAnyDiscount && (discount ?? 0) > 0 && (
           <div className="flex justify-between text-sm">
-            <span>Rabatt</span>
-            <span className="text-primary">− {formatCurrency(discount)}</span>
+            <span>Discount</span>
+            <span className="text-primary">
+              − {formatCurrency(discount)}
+            </span>
           </div>
         )}
 
         <div className="flex justify-between text-sm">
-          <span>{selectedShippingOption ? `Frakt` : "Frakt"}</span>
-          <span>{formatCurrency(shippingCost)}</span>
+          <span className="text-xs">
+            {selectedShippingOption
+              ? `Shipping`
+              : "Shipping (calculated in checkout)"}
+          </span>
+          <span className="text-xs">
+            {formatCurrency(shippingCost)}
+          </span>
         </div>
 
         <div className="flex justify-between text-sm">
-          <span className="text-xs">Varav moms</span>
-          <span>{formatCurrency(vat)}</span>
+          <span className="text-xs">VAT</span>
+          <span className="text-xs">
+            {formatCurrency(vat)}
+          </span>
         </div>
 
         <div className="flex justify-between border-t pt-3 font-semibold">
-          <span>Totalt</span>
-          <span className="text-primary">{formatCurrency(total)}</span>
+          <span>Total</span>
+          <span className="text-primary">
+            {formatCurrency(total)}
+          </span>
         </div>
       </div>
     </div>

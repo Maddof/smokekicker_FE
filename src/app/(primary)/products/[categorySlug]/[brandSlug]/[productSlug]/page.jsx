@@ -19,6 +19,7 @@ import ProductCard from "@/components/shop/ProductCard";
 import Link from "next/link";
 import { Button } from "@/components/ui/scn/button";
 import { ChevronRight } from "lucide-react";
+import ProductViewTracker from "./ProductViewTracker";
 
 const fallBackImage = "/images/fallback.png";
 
@@ -307,6 +308,7 @@ export default async function SingleProductPage({
     primaryMedia?.mediaAsset?.altText || product.name;
   return (
     <>
+      <ProductViewTracker productSlug={productSlug} />
       <section className="overflow-hidden pt-4 pb-2 md:pt-8 md:pb-4">
         {/* Add JSON-LD to your page */}
 

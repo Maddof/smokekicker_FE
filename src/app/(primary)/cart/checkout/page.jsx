@@ -11,22 +11,7 @@ const GUEST_CART_COOKIE_NAME =
   process.env.NEXT_PUBLIC_GUEST_CART_COOKIE_NAME ||
   "guest_cart";
 
-const EmptyCart = () => (
-  <section className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">
-    <div className="container">
-      <p>
-        Your cart is empty. Add some products to your cart
-        before proceeding to checkout.
-      </p>
-      <a
-        href={ROUTES.SHOP.CATEGORY("nicotine-pouches")}
-        className="bg-primary mt-4 inline-block rounded-md px-6 py-2 text-white"
-      >
-        Continue Shopping
-      </a>
-    </div>
-  </section>
-);
+const isDev = process.env.NODE_ENV === "development";
 
 const fetchCartFromBackend = async (token) => {
   try {
@@ -79,6 +64,11 @@ export default async function CheckoutPage() {
   if (session) {
     user = await getUserAndAddressById();
   }
+
+  if (!isDev && !session) {
+    return <NotLiveMessage />;
+  }
+
   // Pre-fill initial data for the checkout form
   const initialData = {
     givenName: user?.givenName || "",
@@ -97,3 +87,37 @@ export default async function CheckoutPage() {
     </div>
   );
 }
+
+const EmptyCart = () => (
+  <section className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">
+    <div className="container">
+      <p>
+        Your cart is empty. Add some products to your cart
+        before proceeding to checkout.
+      </p>
+      <a
+        href={ROUTES.SHOP.CATEGORY("nicotine-pouches")}
+        className="bg-primary mt-4 inline-block rounded-md px-6 py-2 text-white"
+      >
+        Continue Shopping
+      </a>
+    </div>
+  </section>
+);
+
+const NotLiveMessage = () => (
+  <section className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">
+    <div className="container">
+      <p>
+        The checkout page is not live yet. Please check back
+        later.
+      </p>
+      <a
+        href={ROUTES.SHOP.CATEGORY("nicotine-pouches")}
+        className="bg-primary mt-4 inline-block rounded-md px-6 py-2 text-white"
+      >
+        Continue Shopping
+      </a>
+    </div>
+  </section>
+);
