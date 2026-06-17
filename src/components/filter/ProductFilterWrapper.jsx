@@ -67,7 +67,7 @@ export default function ProductFilterWrapper({
   const [selectedPriceRange, setSelectedPriceRange] =
     useState([minProductPrice, maxProductPrice]);
   const [selectedSortValue, setSelectedSortValue] =
-    useState("");
+    useState("default");
   const [visibleProductCount, setVisibleProductCount] =
     useState(initialDisplayCount);
   const [isDesktop, setIsDesktop] = useState(false);

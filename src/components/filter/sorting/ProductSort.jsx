@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/scn/select";
 
 export const SORT_OPTIONS = [
+  { value: "default", label: "Default" },
   { value: "name-asc", label: "Name (A to Z)" },
   { value: "name-desc", label: "Name (Z to A)" },
   { value: "price-asc", label: "Price (Low to High)" },
@@ -91,7 +92,7 @@ export function sortProducts(products, sortValue) {
 }
 
 export default function ProductSort({
-  value = "",
+  value = "default",
   onValueChange,
 }) {
   return (
