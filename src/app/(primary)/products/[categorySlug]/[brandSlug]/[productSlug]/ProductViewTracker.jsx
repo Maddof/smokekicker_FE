@@ -32,7 +32,7 @@ export default function ProductViewTracker({
     }
 
     fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/products/${productSlug}/view`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${productSlug}/view`,
       {
         method: "POST",
       },
