@@ -264,7 +264,7 @@ export const ContactFormInner = () => {
         {isMounted && (
           <cap-widget
             ref={capWidgetRef}
-            data-cap-api-endpoint="https://cap.smokekicker.com/2a8eda71be/"
+            data-cap-api-endpoint="https://cap.smokekicker.com/60b81bff48/"
             data-cap-i18n-initial-state="Verify that you are not a robot"
             data-cap-i18n-verifying-label="Verifying..."
             data-cap-i18n-solved-label="Verified"
