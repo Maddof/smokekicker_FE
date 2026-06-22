@@ -37,7 +37,7 @@ export default function Header() {
           <Suspense
             fallback={
               <div
-                className="h-10 w-10"
+                className="h-11 w-11"
                 aria-hidden="true"
               />
             }
