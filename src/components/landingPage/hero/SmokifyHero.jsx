@@ -58,8 +58,7 @@ export default function SmokifyHero({
     >
       {/* Decorative background */}
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-linear-to-b from-neutral-900 to-black" />
-        <div className="absolute -top-28 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-blue-600/20 blur-3xl" />
+        <div className="absolute inset-0 bg-black" />
         <svg
           className="absolute inset-0 -z-10 h-full w-full opacity-[0.07]"
           xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +84,9 @@ export default function SmokifyHero({
             fill="url(#grid)"
           />
         </svg>
-        <div className="bg-primary/10 absolute top-1/2 right-0 h-72 w-72 -translate-y-1/2 rounded-full blur-3xl" />
+        {/* Decorative blurred circles */}
+        <div className="absolute -top-28 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
+        <div className="absolute top-1/2 right-0 h-72 w-72 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl" />
       </div>
 
       <div className="container grid max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 lg:gap-16">

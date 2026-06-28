@@ -219,7 +219,7 @@ export default async function ShopPage() {
         <>
           <CategoryHeader
             title="Nicotine-Free Pouches"
-            description="Nicotine-free pouches for a smooth and discreet experience without refilling. Swap pods, keep vaping."
+            description="Nicotine-free pouches for a smooth and discreet experience without refilling."
             imageSrc="/images/icons/pouch_icon.svg"
             imageClassName="w-24 opacity-40 sm:w-32 invert brightness-200"
             imageAlt="Nicotine Pouch Icon"

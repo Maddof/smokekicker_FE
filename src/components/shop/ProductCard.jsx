@@ -71,6 +71,7 @@ export default function ProductCard({
     >
       <Link
         href={productUrl}
+        prefetch={false}
         className="group flex w-full items-center justify-center"
         id={`product-card__image-link-${id}`}
       >
@@ -109,6 +110,7 @@ export default function ProductCard({
       <Link
         href={productUrl}
         className="w-full"
+        prefetch={false}
         id={`product-card__title-link-${id}`}
       >
         <h3

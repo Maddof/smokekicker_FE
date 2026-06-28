@@ -10,10 +10,7 @@ import { ROUTES } from "@/config/routes";
 export default function CartPage() {
   const {
     cartItems = [],
-    subtotal = 0,
-    discount = 0,
-    shippingCost = 0,
-    total = 0,
+    cartTotals = {},
     clearCart,
     errorMessage,
     loading,
@@ -24,6 +21,9 @@ export default function CartPage() {
     getLineTotal,
     getLineDiscount,
   } = useCart();
+
+  const { subtotal = 0, discount = 0 } = cartTotals;
+  const total = cartTotals?.total ?? 0;
 
   if (cartItems.length === 0) {
     return (
@@ -199,13 +199,6 @@ export default function CartPage() {
                     </span>
                   </div>
                 )}
-
-                <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span>
-                    {formatCurrency(shippingCost)}
-                  </span>
-                </div>
 
                 <div className="mt-3 flex justify-between border-t border-slate-800/70 pt-3 text-base font-semibold text-white">
                   <span>Total</span>

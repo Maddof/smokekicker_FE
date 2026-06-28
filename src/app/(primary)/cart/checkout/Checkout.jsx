@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useCart } from "@/app/context/CartContext";
 import { useCheckout } from "@/app/context/CheckoutContext";
 import UserCheckoutProfileForm from "./UserCheckoutAddressForm";
 import { SquarePen } from "lucide-react";
@@ -8,13 +7,13 @@ import OrderSummary from "./OrderSummary";
 import ShippingOptions from "./ShippingOptions";
 import CheckoutStepper from "./CheckoutStepper";
 import { Button } from "@/components/ui/scn/button";
+import { useCart } from "@/app/context/CartContext";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function Checkout({ initialData }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { setShippingCost } = useCart(); // Get cart items from cart context
 
   // Nya states för fraktval
   const [
@@ -25,6 +24,8 @@ export default function Checkout({ initialData }) {
   // Add state to track address submission
   const { addressSubmitted, setAddressSubmitted } =
     useCheckout();
+
+  const { fetchCartFromBackend } = useCart();
 
   const [shippingDetails, setShippingDetails] = useState({
     givenName: initialData.givenName || "",
@@ -38,29 +39,27 @@ export default function Checkout({ initialData }) {
     line2: initialData.line2 || "",
   });
 
-  console.log("Shipping details:", shippingDetails);
+  console.log("Initial shipping details:", shippingDetails);
 
   // Callback function to be passed to the form
-  const handleAddressSubmit = (formData) => {
-    setShippingDetails((prev) => ({
-      ...prev,
+  const handleAddressSubmit = async (formData) => {
+    const updatedShippingDetails = {
+      ...shippingDetails,
       ...formData,
-    }));
+    };
 
+    setShippingDetails(updatedShippingDetails);
     setAddressSubmitted(true);
+
+    await fetchCartFromBackend(
+      updatedShippingDetails.country,
+    ); // Refresh cart after address submission to ensure vat and shipping costs are updated based on the selected country
     // setLoading(true); // Start loading for payment intent
   };
 
-  // Manage shipping cost in CartContext
+  // Manage shipping option selection
   const handleShippingOptionChange = (option) => {
     setSelectedShippingOption(option);
-
-    // Update cart context with selected shipping option
-    if (option && option.minorUnitsAmount) {
-      setShippingCost(option.minorUnitsAmount);
-    } else {
-      setShippingCost(0);
-    }
   };
 
   // If the form was successfully submitted and we've entered payment step,

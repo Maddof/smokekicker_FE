@@ -9,16 +9,21 @@ export default function OrderSummary({
 }) {
   const {
     cartItems = [],
-    subtotal = 0,
-    shippingCost = 0,
-    vat = 0,
-    total = 0,
-    discount = 0, // <-- add this to context if you can (recommended)
+    cartTotals = {},
     getUnitPrice,
     getDiscountedUnitPrice,
     getLineTotal,
     getLineDiscount,
   } = useCart();
+
+  const {
+    subtotal = 0,
+    vat = 0,
+    discount = 0,
+  } = cartTotals;
+  const shippingCost =
+    selectedShippingOption?.minorUnitsAmount ?? 0;
+  const total = (cartTotals?.total ?? 0) + shippingCost;
 
   const getLineSubtotal = (item) =>
     item?.pricing?.lineSubtotal ??

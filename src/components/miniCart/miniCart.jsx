@@ -18,11 +18,8 @@ export default function MiniCart() {
     addToCart,
     subtractItemFromCart,
     removeFromCart,
-    subtotal = 0,
-    discount = 0,
-    total = 0,
+    cartTotals = {},
     totalQuantity = 0,
-    shippingCost = 0,
     clearCart,
     errorMessage,
     loading,
@@ -34,6 +31,9 @@ export default function MiniCart() {
     getLineDiscount,
     getLineSubtotal,
   } = useCart();
+
+  const { subtotal = 0, discount = 0 } = cartTotals;
+  const cartTotal = cartTotals?.total ?? 0;
 
   const { isCheckoutPage, addressSubmitted } =
     useCheckout();
@@ -242,14 +242,9 @@ export default function MiniCart() {
               </div>
             )}
 
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span>{formatCurrency(shippingCost)}</span>
-            </div>
-
             <div className="mt-2 flex justify-between border-t pt-2 font-semibold">
               <span>Total</span>
-              <span>{formatCurrency(total)}</span>
+              <span>{formatCurrency(cartTotal)}</span>
             </div>
           </div>
 

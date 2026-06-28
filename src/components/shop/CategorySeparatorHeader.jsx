@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 
 export default function CategoryHeader({
   title = "Category Title",
@@ -27,13 +26,9 @@ export default function CategoryHeader({
             {categoryHref && (
               <Link
                 href={categoryHref}
-                className="inline-flex items-center gap-1 font-medium"
+                className="border-primary hover:bg-primary/10 inline-flex items-center gap-1 rounded-md border px-4 py-2 font-medium transition-colors duration-200"
               >
                 View all in {title}
-                <ChevronRight
-                  className="h-4 w-4"
-                  aria-hidden="true"
-                />
               </Link>
             )}
           </div>

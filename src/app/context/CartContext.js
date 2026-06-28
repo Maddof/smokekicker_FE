@@ -7,10 +7,6 @@ import {
   useMemo,
   useEffect,
 } from "react";
-import {
-  calcSubtotal,
-  calcVat,
-} from "@/lib/utils/cart/calculations";
 
 const CartContext = createContext();
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -21,17 +17,20 @@ export const CartProvider = ({ children }) => {
     subtotal: 0,
     discount: 0,
     total: 0,
+    vat: 0,
+    net: 0,
   });
   const [errorMessage, setErrorMessage] = useState(null); // State for managing error messages
   const [loadingProductIds, setLoadingProductIds] =
     useState([]); // Track loading by product ID
   const [loading, setLoading] = useState(false); // Track loading globally
-  const [shippingCost, setShippingCost] = useState(0); // Default shipping cost (example)
 
   // const { sessionTimeleft, refreshToken } = useAuth();
 
   // Fetch the cart from the backend
-  const fetchCartFromBackend = async () => {
+  const fetchCartFromBackend = async (
+    countryCode = "SE",
+  ) => {
     // Dubbelkolla även bot-check här innan fetch, ifall någon lyckas trigga fetchCartFromBackend på ett sätt som inte går via useEffect ovan.
     const isBot =
       /bot|googlebot|crawler|spider|robot|crawling/i.test(
@@ -40,10 +39,13 @@ export const CartProvider = ({ children }) => {
     if (isBot) return;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/cart`, {
-        method: "GET",
-        credentials: "include", // Include cookies for fallback
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/cart?countryCode=${countryCode}`,
+        {
+          method: "GET",
+          credentials: "include", // Include cookies for fallback
+        },
+      );
 
       if (!response.ok) {
         if (
@@ -51,7 +53,7 @@ export const CartProvider = ({ children }) => {
           response.status === 403
         ) {
           setErrorMessage(
-            "Du måste vara inloggad och registrerad för att hantera din varukorg.",
+            "You must be logged in and registered to manage your cart.",
           );
           return;
         }
@@ -62,12 +64,14 @@ export const CartProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      // console.log("Fetched cart data:", data);
+      console.log("Fetched cart data:", data);
       setCartItems(data.items); // Sync cart state
       setCartTotals({
         subtotal: data.totals.subtotal,
         discount: data.totals.discount,
         total: data.totals.total,
+        vat: data.totals.vat,
+        net: data.totals.net,
       });
       setErrorMessage(null); // Clear any existing error messages
 
@@ -77,7 +81,7 @@ export const CartProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching cart:", error);
       setErrorMessage(
-        "Kunde inte ladda din varukorg. Vänligen försök igen senare.",
+        "Failed to load your cart. Please try again later.",
       ); // Handle unexpected errors
       // alert("Kunde inte ladda din varukorg.");
       // window.location.reload(); // Refresh the page to recover from error
@@ -127,7 +131,7 @@ export const CartProvider = ({ children }) => {
         setErrorMessage(null);
         await fetchCartFromBackend();
       } else {
-        setTimeout(() => setErrorMessage(null), 3000); // Clear error after 4 seconds
+        setTimeout(() => setErrorMessage(null), 3000); // Clear error after 3 seconds
       }
       // setErrorMessage(null); // Clear error if successful
     }
@@ -213,7 +217,13 @@ export const CartProvider = ({ children }) => {
       console.error("Error clearing cart:", error);
     } finally {
       setCartItems([]); // Clear local state
-      setCartTotals({ subtotal: 0, discount: 0, total: 0 }); // Reset totals
+      setCartTotals({
+        subtotal: 0,
+        discount: 0,
+        total: 0,
+        vat: 0,
+        net: 0,
+      }); // Reset totals
       setLoading(false);
     }
   };
@@ -225,31 +235,6 @@ export const CartProvider = ({ children }) => {
       0,
     );
   }, [cartItems]);
-
-  // "subtotal before discount" comes from server when available
-  const subtotal = useMemo(() => {
-    if (cartTotals?.subtotal != null)
-      return cartTotals.subtotal;
-    return calcSubtotal(cartItems);
-    // return cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
-  }, [cartItems, cartTotals]);
-
-  const discount = useMemo(() => {
-    return cartTotals?.discount ?? 0;
-  }, [cartTotals]);
-
-  const vat = useMemo(() => {
-    // Calculate VAT based on cart items and shipping cost
-    return calcVat(cartItems, shippingCost);
-  }, [cartItems, shippingCost]);
-
-  // Calculate total (subtotal + shipping + taxes/other modifiers)
-  const total = useMemo(() => {
-    // Backend total excludes shipping, so we add it here
-    const base =
-      cartTotals?.total ?? calcSubtotal(cartItems);
-    return base + shippingCost; // Add other modifiers like taxes if needed
-  }, [cartTotals, cartItems, shippingCost]);
 
   // Helpers to get unit price
 
@@ -298,6 +283,7 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        fetchCartFromBackend,
         cartItems,
         setCartItems,
         addToCart,
@@ -307,12 +293,7 @@ export const CartProvider = ({ children }) => {
         clearCart,
         removeFromCart,
         totalQuantity,
-        subtotal,
-        vat,
-        shippingCost,
-        setShippingCost,
-        total,
-        discount,
+        cartTotals,
         errorMessage,
         getUnitPrice,
         getDiscountedUnitPrice,
