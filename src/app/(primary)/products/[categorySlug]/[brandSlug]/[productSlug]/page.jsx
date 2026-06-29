@@ -364,6 +364,8 @@ export default async function SingleProductPage({
                 </div>
               </div>
 
+              <p>{product.details.shortDesc}</p>
+
               {showBulkCallout && (
                 <BulkDealCallout
                   product={product}
@@ -372,8 +374,6 @@ export default async function SingleProductPage({
                   className="w-full"
                 />
               )}
-
-              <p>{product.details.shortDesc}</p>
 
               <div className="xsm:flex-row flex w-full flex-col gap-4 rounded-lg bg-white p-4 shadow-sm">
                 <div className="flex w-full flex-col gap-4 md:w-2/3">
