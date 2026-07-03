@@ -20,9 +20,13 @@ export default function OrderSummary({
     subtotal = 0,
     vat = 0,
     discount = 0,
+    vatRate = 0,
   } = cartTotals;
-  const shippingCost =
-    selectedShippingOption?.minorUnitsAmount ?? 0;
+
+  const shippingCost = selectedShippingOption?.price ?? 0;
+  const shippingVatAmount =
+    shippingCost - shippingCost / (1 + vatRate / 100);
+
   const total = (cartTotals?.total ?? 0) + shippingCost;
 
   const getLineSubtotal = (item) =>
@@ -138,7 +142,7 @@ export default function OrderSummary({
         <div className="flex justify-between text-sm">
           <span className="text-xs">VAT</span>
           <span className="text-xs">
-            {formatCurrency(vat)}
+            {formatCurrency(vat + shippingVatAmount)}
           </span>
         </div>
 

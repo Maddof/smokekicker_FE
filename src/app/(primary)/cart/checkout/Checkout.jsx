@@ -15,17 +15,24 @@ export default function Checkout({ initialData }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Nya states för fraktval
+  // States for managing shipping option selection
   const [
     selectedShippingOption,
     setSelectedShippingOption,
   ] = useState(null);
+  const [shippingOptions, setShippingOptions] = useState(
+    [],
+  );
 
   // Add state to track address submission
   const { addressSubmitted, setAddressSubmitted } =
     useCheckout();
 
-  const { fetchCartFromBackend } = useCart();
+  const { fetchCartFromBackend, cartItems, cartTotals } =
+    useCart();
+
+  // console.log("Cart items in Checkout:", cartItems);
+  // console.log("Cart totals in Checkout:", cartTotals);
 
   const [shippingDetails, setShippingDetails] = useState({
     givenName: initialData.givenName || "",
@@ -38,8 +45,6 @@ export default function Checkout({ initialData }) {
     line1: initialData.line1 || "",
     line2: initialData.line2 || "",
   });
-
-  console.log("Initial shipping details:", shippingDetails);
 
   // Callback function to be passed to the form
   const handleAddressSubmit = async (formData) => {
@@ -54,17 +59,58 @@ export default function Checkout({ initialData }) {
     await fetchCartFromBackend(
       updatedShippingDetails.country,
     ); // Refresh cart after address submission to ensure vat and shipping costs are updated based on the selected country
-    // setLoading(true); // Start loading for payment intent
+    setLoading(true); // Start loading for payment intent
+
+    // Artificial delay to simulate fetching shipping options (for demonstration purposes)
+    await new Promise((resolve) =>
+      setTimeout(resolve, 1000),
+    );
+
+    setSelectedShippingOption(null); // Reset selected shipping option when address changes
+    setShippingOptions([]); // Clear previous shipping options
+
+    try {
+      // Fetch shipping options based on the submitted address
+      const response = await fetch(
+        `${API_BASE_URL}/shipping/options?countryCode=${updatedShippingDetails.country}`,
+        {
+          method: "GET",
+          credentials: "include",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch shipping options: ${response.statusText}`,
+        );
+      }
+
+      const data = await response.json();
+      console.log("Fetched shipping options:", data);
+      setShippingOptions(data.options || []);
+    } catch (err) {
+      console.error(
+        "Error fetching shipping options:",
+        err,
+      );
+      setError(
+        "Failed to fetch shipping options. Please try again.",
+      );
+    } finally {
+      setLoading(false); // Stop loading after fetching shipping options
+    }
   };
 
   // Manage shipping option selection
   const handleShippingOptionChange = (option) => {
+    console.log("Selected shipping option:", option);
     setSelectedShippingOption(option);
   };
 
   // If the form was successfully submitted and we've entered payment step,
   // but user wants to edit their info again
   const handleEditAddress = () => {
+    setSelectedShippingOption(null); // Reset selected shipping option when editing address
     setAddressSubmitted(false);
   };
 
@@ -81,7 +127,7 @@ export default function Checkout({ initialData }) {
         },
         body: JSON.stringify({
           shippingDetails,
-          shippingOption: selectedShippingOption,
+          shippingOption: selectedShippingOption.id,
           paymentMethod: "CASH_ON_DELIVERY",
         }),
       });
@@ -182,16 +228,23 @@ export default function Checkout({ initialData }) {
 
             {/* Only show checkout form if address has been submitted */}
             {addressSubmitted && !loading && !error && (
-              <div className="mt-8">
-                <h2 className="mb-6">Shipping</h2>
+              <div className="border-primary/50 mt-8 flex flex-col gap-6 rounded-lg border p-4">
+                <h2>Shipping</h2>
                 <p>Shipping options coming here</p>
-                {/* <ShippingOptions
-                    selectedOption={selectedShippingOption}
-                    onOptionChange={
-                      handleShippingOptionChange
-                    }
-                  /> */}
-                <Button onClick={handlePlaceOrder}>
+                <ShippingOptions
+                  options={shippingOptions}
+                  selectedOption={selectedShippingOption}
+                  onOptionChange={
+                    handleShippingOptionChange
+                  }
+                  loading={loading}
+                />
+                <Button
+                  onClick={handlePlaceOrder}
+                  disabled={
+                    !selectedShippingOption || loading
+                  }
+                >
                   Place order
                 </Button>
               </div>

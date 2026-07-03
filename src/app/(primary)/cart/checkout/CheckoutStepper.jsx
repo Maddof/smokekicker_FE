@@ -2,10 +2,12 @@
 
 import { CheckIcon } from "lucide-react";
 
-export default function CheckoutStepper({ currentStep = 1 }) {
+export default function CheckoutStepper({
+  currentStep = 1,
+}) {
   const steps = [
-    { id: 1, name: "Adressuppgifter" },
-    { id: 2, name: "Frakt & betalning" },
+    { id: 1, name: "Address details" },
+    { id: 2, name: "Shipping & payment" },
   ];
 
   return (
@@ -20,7 +22,9 @@ export default function CheckoutStepper({ currentStep = 1 }) {
                 : ""
             }`}
           >
-            <div className={`flex min-w-36 flex-col items-center`}>
+            <div
+              className={`flex min-w-36 flex-col items-center`}
+            >
               {currentStep > step.id ? (
                 <span className="bg-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
                   <CheckIcon className="h-4 w-4 text-white" />
@@ -36,7 +40,9 @@ export default function CheckoutStepper({ currentStep = 1 }) {
               )}
               <span
                 className={`mt-2 text-center text-xs font-medium sm:text-sm ${
-                  currentStep >= step.id ? "text-primary" : "text-gray-500"
+                  currentStep >= step.id
+                    ? "text-primary"
+                    : "text-gray-500"
                 }`}
               >
                 {step.name}

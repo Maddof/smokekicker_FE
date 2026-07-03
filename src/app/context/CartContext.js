@@ -19,6 +19,7 @@ export const CartProvider = ({ children }) => {
     total: 0,
     vat: 0,
     net: 0,
+    vatRate: 0,
   });
   const [errorMessage, setErrorMessage] = useState(null); // State for managing error messages
   const [loadingProductIds, setLoadingProductIds] =
@@ -72,6 +73,7 @@ export const CartProvider = ({ children }) => {
         total: data.totals.total,
         vat: data.totals.vat,
         net: data.totals.net,
+        vatRate: data.totals.vatRate,
       });
       setErrorMessage(null); // Clear any existing error messages
 
@@ -223,6 +225,7 @@ export const CartProvider = ({ children }) => {
         total: 0,
         vat: 0,
         net: 0,
+        vatRate: 0,
       }); // Reset totals
       setLoading(false);
     }
