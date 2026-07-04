@@ -127,7 +127,7 @@ export default function Checkout({ initialData }) {
         },
         body: JSON.stringify({
           shippingDetails,
-          shippingOption: selectedShippingOption.id,
+          shippingOptionRateId: selectedShippingOption.id,
           paymentMethod: "CASH_ON_DELIVERY",
         }),
       });
