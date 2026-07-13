@@ -11,7 +11,10 @@ import { useCart } from "@/app/context/CartContext";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export default function Checkout({ initialData }) {
+export default function Checkout({
+  initialData,
+  availableShippingCountries,
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -193,6 +196,9 @@ export default function Checkout({ initialData }) {
               <UserCheckoutProfileForm
                 onAddressSubmit={handleAddressSubmit}
                 data={shippingDetails}
+                availableShippingCountries={
+                  availableShippingCountries
+                }
               />
             ) : (
               <div className="border-primary/50 mb-8 rounded-lg border p-4">

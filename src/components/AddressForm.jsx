@@ -6,11 +6,47 @@ import { Button } from "@/components/ui/scn/button";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/scn/select";
 import { CheckCircle2 } from "lucide-react";
+
+const continentLabels = {
+  AF: "Africa",
+  AS: "Asia",
+  EU: "Europe",
+  NA: "North America",
+  OC: "Oceania",
+  SA: "South America",
+  Other: "Other",
+};
+
+const continentOrder = [
+  "AF",
+  "AS",
+  "EU",
+  "NA",
+  "OC",
+  "SA",
+  "Other",
+];
+
+const groupCountriesByContinent = (countries) => {
+  return countries.reduce((groups, country) => {
+    const continent = country?.continent || "Other";
+
+    if (!groups[continent]) {
+      groups[continent] = [];
+    }
+
+    groups[continent].push(country);
+
+    return groups;
+  }, {});
+};
 
 /**
  * Helper function to render field errors.
@@ -36,14 +72,6 @@ const renderErrors = (errors) => {
   );
 };
 
-const SHIPPING_COUNTRIES = [
-  { value: "SE", label: "Sweden" },
-  { value: "DK", label: "Denmark" },
-  { value: "FI", label: "Finland" },
-  { value: "NO", label: "Norway" },
-  { value: "DE", label: "Germany" },
-];
-
 /**
  * Reusable address form component
  * @param {Object} props
@@ -68,7 +96,11 @@ export default function AddressForm({
   showSuccessMessage = true,
   successMessage = "The information has been saved!",
   disableSubmit = false,
+  availableShippingCountries = [],
 }) {
+  const groupedShippingCountries =
+    groupCountriesByContinent(availableShippingCountries);
+
   return (
     <form action={formAction} className="space-y-4">
       <div className="xxsm:grid-cols-2 grid grid-cols-1 gap-4">
@@ -128,7 +160,7 @@ export default function AddressForm({
           type="tel"
           name="phone"
           id="phone"
-          placeholder="Phone"
+          placeholder="+00 12 123 45 67"
           defaultValue={
             state?.data?.phone ?? data?.phone ?? ""
           }
@@ -153,14 +185,31 @@ export default function AddressForm({
             <SelectValue placeholder="Select a country" />
           </SelectTrigger>
           <SelectContent>
-            {SHIPPING_COUNTRIES.map((country) => (
-              <SelectItem
-                key={country.value}
-                value={country.value}
-              >
-                {country.label}
-              </SelectItem>
-            ))}
+            {continentOrder.map((continent) => {
+              const countries =
+                groupedShippingCountries[continent];
+
+              if (!countries?.length) {
+                return null;
+              }
+
+              return (
+                <SelectGroup key={continent}>
+                  <SelectLabel>
+                    {continentLabels[continent] ||
+                      continent}
+                  </SelectLabel>
+                  {countries.map((country) => (
+                    <SelectItem
+                      key={country.code}
+                      value={country.code}
+                    >
+                      {country.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              );
+            })}
           </SelectContent>
         </Select>
         {renderErrors(state?.errors?.country)}
@@ -217,9 +266,10 @@ export default function AddressForm({
               data?.postalCode ??
               ""
             }
-            pattern="\d{5}"
             title="Postal code must be exactly 5 digits"
             required
+            minLength="2"
+            maxLength="10"
           />
           {renderErrors(state?.errors?.postalCode)}
         </div>

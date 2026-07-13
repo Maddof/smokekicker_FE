@@ -1,15 +1,16 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { submitCheckoutFormData } from "./action";
+import { submitCheckoutFormAddressData } from "./action";
 import AddressForm from "@/components/AddressForm";
 
 export default function UserCheckoutProfileForm({
   data,
   onAddressSubmit,
+  availableShippingCountries,
 }) {
   const [state, formAction, pending] = useActionState(
-    submitCheckoutFormData,
+    submitCheckoutFormAddressData,
     {
       data,
     },
@@ -44,6 +45,10 @@ export default function UserCheckoutProfileForm({
         submitLabel="Continue"
         loadingLabel="Saving..."
         showSuccessMessage={false} // Don't show success message in checkout flow
+        disableSubmit={pending} // Disable submit button while pending
+        availableShippingCountries={
+          availableShippingCountries
+        }
       />
     </div>
   );

@@ -22,7 +22,7 @@ function buildReturnData(data, formValues) {
   };
 }
 
-export async function submitCheckoutFormData(
+export async function submitCheckoutFormAddressData(
   prevState,
   formData,
 ) {

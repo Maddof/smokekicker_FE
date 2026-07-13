@@ -49,6 +49,33 @@ const fetchCartFromBackend = async (token) => {
   }
 };
 
+const fetchAvailableShippingCountries = async () => {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/shipping/countries`,
+      {
+        method: "GET",
+        cache: "no-store", // Ensure we get the latest data
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        "Failed to fetch available shipping countries.",
+      );
+    }
+
+    const data = await response.json();
+    return data; // Return the data to the caller
+  } catch (error) {
+    console.error(
+      "Error fetching available shipping countries:",
+      error,
+    );
+    throw error; // Let the caller handle the error
+  }
+};
+
 export default async function CheckoutPage() {
   const session = await fetchSession();
   const token = session
@@ -69,6 +96,31 @@ export default async function CheckoutPage() {
     return <NotLiveMessage />;
   }
 
+  const availableShippingCountries =
+    await fetchAvailableShippingCountries();
+
+  if (
+    !availableShippingCountries ||
+    availableShippingCountries.length === 0
+  ) {
+    return (
+      <div className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">
+        <div className="container">
+          <p>
+            No shipping countries are available at the
+            moment. Please check back later.
+          </p>
+          <a
+            href={ROUTES.SHOP.CATEGORY("nicotine-pouches")}
+            className="bg-primary mt-4 inline-block rounded-md px-6 py-2 text-white"
+          >
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   // Pre-fill initial data for the checkout form
   const initialData = {
     givenName: user?.givenName || "",
@@ -83,7 +135,12 @@ export default async function CheckoutPage() {
   };
   return (
     <div className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">
-      <Checkout initialData={initialData} />
+      <Checkout
+        initialData={initialData}
+        availableShippingCountries={
+          availableShippingCountries
+        }
+      />
     </div>
   );
 }
