@@ -44,6 +44,7 @@ export default function Checkout({
     phone: initialData.phone || "",
     postalCode: initialData.postalCode || "",
     country: initialData.country || "SE", // Default to Sweden
+    region: initialData.region || "",
     city: initialData.city || "",
     line1: initialData.line1 || "",
     line2: initialData.line2 || "",
@@ -118,6 +119,10 @@ export default function Checkout({
   };
 
   const handlePlaceOrder = async () => {
+    // Artificial delay to simulate order placement (for demonstration purposes)
+    await new Promise((resolve) =>
+      setTimeout(resolve, 1000),
+    );
     setLoading(true);
     setError(null);
 
@@ -223,6 +228,7 @@ export default function Checkout({
                   <p>{shippingDetails.line2}</p>
                   <p>
                     {shippingDetails.postalCode}{" "}
+                    {shippingDetails.region}{" "}
                     {shippingDetails.country}{" "}
                     {shippingDetails.city}
                   </p>

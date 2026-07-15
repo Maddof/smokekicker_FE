@@ -105,9 +105,7 @@ export default function AddressForm({
     <form action={formAction} className="space-y-4">
       <div className="xxsm:grid-cols-2 grid grid-cols-1 gap-4">
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Label htmlFor="givenName">First Name</Label>
-          </div>
+          <Label htmlFor="givenName">First Name</Label>
           <Input
             type="text"
             name="givenName"
@@ -123,9 +121,7 @@ export default function AddressForm({
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Label htmlFor="surname">Last Name</Label>
-          </div>
+          <Label htmlFor="surname">Last Name</Label>
           <Input
             type="text"
             name="surname"
@@ -169,56 +165,69 @@ export default function AddressForm({
         {renderErrors(state?.errors?.phone)}
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="country">Country *</Label>
-        <Select
-          name="country"
-          defaultValue={
-            state?.data?.country ?? data?.country ?? "SE"
-          }
-          required
-        >
-          <SelectTrigger
-            id="country"
-            className="bg-background-foreground border-input/50"
+      <div className="xxsm:grid-cols-5 grid grid-cols-1 gap-4">
+        <div className="xxsm:col-span-3 col-span-full space-y-2">
+          <Label htmlFor="country">Country *</Label>
+
+          <Select
+            name="country"
+            defaultValue={
+              state?.data?.country ?? data?.country ?? "SE"
+            }
+            required
           >
-            <SelectValue placeholder="Select a country" />
-          </SelectTrigger>
-          <SelectContent>
-            {continentOrder.map((continent) => {
-              const countries =
-                groupedShippingCountries[continent];
+            <SelectTrigger
+              id="country"
+              className="bg-background-foreground border-input/50"
+            >
+              <SelectValue placeholder="Select a country" />
+            </SelectTrigger>
+            <SelectContent>
+              {continentOrder.map((continent) => {
+                const countries =
+                  groupedShippingCountries[continent];
 
-              if (!countries?.length) {
-                return null;
-              }
+                if (!countries?.length) {
+                  return null;
+                }
 
-              return (
-                <SelectGroup key={continent}>
-                  <SelectLabel>
-                    {continentLabels[continent] ||
-                      continent}
-                  </SelectLabel>
-                  {countries.map((country) => (
-                    <SelectItem
-                      key={country.code}
-                      value={country.code}
-                    >
-                      {country.name}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              );
-            })}
-          </SelectContent>
-        </Select>
-        {renderErrors(state?.errors?.country)}
+                return (
+                  <SelectGroup key={continent}>
+                    <SelectLabel>
+                      {continentLabels[continent] ||
+                        continent}
+                    </SelectLabel>
+                    {countries.map((country) => (
+                      <SelectItem
+                        key={country.code}
+                        value={country.code}
+                      >
+                        {country.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                );
+              })}
+            </SelectContent>
+          </Select>
+          {renderErrors(state?.errors?.country)}
+        </div>
+        <div className="xxsm:col-span-2 col-span-full space-y-2">
+          <Label htmlFor="region">Region / State</Label>
+          <Input
+            name="region"
+            id="region"
+            placeholder="Region"
+            defaultValue={
+              state?.data?.region ?? data?.region ?? ""
+            }
+          />
+          {renderErrors(state?.errors?.region)}
+        </div>
       </div>
 
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Label htmlFor="line1">Address *</Label>
-        </div>
+        <Label htmlFor="line1">Address *</Label>
         <Input
           name="line1"
           id="line1"
@@ -234,9 +243,7 @@ export default function AddressForm({
       </div>
 
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Label htmlFor="line2">Address Line 2</Label>
-        </div>
+        <Label htmlFor="line2">Address Line 2</Label>
         <Input
           name="line2"
           id="line2"
@@ -252,11 +259,7 @@ export default function AddressForm({
 
       <div className="xxsm:grid-cols-5 grid grid-cols-1 gap-4">
         <div className="xxsm:col-span-2 col-span-full space-y-2">
-          <div className="flex items-center gap-2">
-            <Label htmlFor="postalCode">
-              Postal Code *
-            </Label>
-          </div>
+          <Label htmlFor="postalCode">Postal Code *</Label>
           <Input
             name="postalCode"
             id="postalCode"
@@ -275,9 +278,7 @@ export default function AddressForm({
         </div>
 
         <div className="xxsm:col-span-3 col-span-full space-y-2">
-          <div className="flex items-center gap-2">
-            <Label htmlFor="city">City *</Label>
-          </div>
+          <Label htmlFor="city">City *</Label>
           <Input
             name="city"
             id="city"

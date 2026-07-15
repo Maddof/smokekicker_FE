@@ -128,10 +128,11 @@ export default async function CheckoutPage() {
     email: user?.email || "",
     phone: user?.phone || "",
     postalCode: user?.addresses?.[0]?.postalCode || "",
+    country: user?.addresses?.[0]?.country || "SE", // Default to Sweden
+    region: user?.addresses?.[0]?.region || "",
     city: user?.addresses?.[0]?.city || "",
     line1: user?.addresses?.[0]?.line1 || "",
     line2: user?.addresses?.[0]?.line2 || "",
-    country: user?.addresses?.[0]?.country || "SE", // Default to Sweden
   };
   return (
     <div className="neon-bg-radial-top-right text-secondary-foreground min-h-[72vh]">

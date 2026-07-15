@@ -19,6 +19,7 @@ function buildReturnData(data, formValues) {
     line1: address?.line1 || formValues.line1,
     line2: address?.line2 || formValues.line2,
     country: formValues.country,
+    region: address?.region || formValues.region,
   };
 }
 
@@ -33,6 +34,7 @@ export async function submitCheckoutFormAddressData(
     email: formData.get("email"),
     phone: formData.get("phone"),
     country: formData.get("country") || "SE",
+    region: formData.get("region"),
     postalCode: formData.get("postalCode"),
     city: formData.get("city"),
     line1: formData.get("line1"),
