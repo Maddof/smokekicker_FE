@@ -3,50 +3,8 @@
 import { Input } from "@/components/ui/scn/input";
 import { Label } from "@/components/ui/scn/label";
 import { Button } from "@/components/ui/scn/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/scn/select";
 import { CheckCircle2 } from "lucide-react";
-
-const continentLabels = {
-  AF: "Africa",
-  AS: "Asia",
-  EU: "Europe",
-  NA: "North America",
-  OC: "Oceania",
-  SA: "South America",
-  Other: "Other",
-};
-
-const continentOrder = [
-  "AF",
-  "AS",
-  "EU",
-  "NA",
-  "OC",
-  "SA",
-  "Other",
-];
-
-const groupCountriesByContinent = (countries) => {
-  return countries.reduce((groups, country) => {
-    const continent = country?.continent || "Other";
-
-    if (!groups[continent]) {
-      groups[continent] = [];
-    }
-
-    groups[continent].push(country);
-
-    return groups;
-  }, {});
-};
+import CountryRegionFields from "./CountryRegionFields";
 
 /**
  * Helper function to render field errors.
@@ -91,21 +49,19 @@ export default function AddressForm({
   state = {},
   pending = false,
   submitLabel = "Save",
-  hideSubmitButton = false,
   loadingLabel = "Saving...",
   showSuccessMessage = true,
   successMessage = "The information has been saved!",
-  disableSubmit = false,
   availableShippingCountries = [],
 }) {
-  const groupedShippingCountries =
-    groupCountriesByContinent(availableShippingCountries);
-
   return (
-    <form action={formAction} className="space-y-4">
-      <div className="xxsm:grid-cols-2 grid grid-cols-1 gap-4">
+    <form
+      action={formAction}
+      className="flex flex-col gap-6"
+    >
+      <div className="xsm:grid-cols-2 grid grid-cols-1 gap-2">
         <div className="space-y-2">
-          <Label htmlFor="givenName">First Name</Label>
+          <Label htmlFor="givenName">First Name *</Label>
           <Input
             type="text"
             name="givenName"
@@ -116,12 +72,13 @@ export default function AddressForm({
               data?.givenName ??
               ""
             }
+            required
           />
           {renderErrors(state?.errors?.givenName)}
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="surname">Last Name</Label>
+          <Label htmlFor="surname">Last Name *</Label>
           <Input
             type="text"
             name="surname"
@@ -130,101 +87,57 @@ export default function AddressForm({
             defaultValue={
               state?.data?.surname ?? data?.surname ?? ""
             }
+            required
           />
           {renderErrors(state?.errors?.surname)}
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="email">Email *</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email"
-          defaultValue={
-            state?.data?.email ?? data?.email ?? ""
-          }
-          required
-        />
-        {renderErrors(state?.errors?.email)}
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="phone">Phone *</Label>
-        <Input
-          type="tel"
-          name="phone"
-          id="phone"
-          placeholder="+00 12 123 45 67"
-          defaultValue={
-            state?.data?.phone ?? data?.phone ?? ""
-          }
-          required
-        />
-        {renderErrors(state?.errors?.phone)}
-      </div>
-
-      <div className="xxsm:grid-cols-5 grid grid-cols-1 gap-4">
-        <div className="xxsm:col-span-3 col-span-full space-y-2">
-          <Label htmlFor="country">Country *</Label>
-
-          <Select
-            name="country"
+      <div className="xsm:grid-cols-2 grid grid-cols-1 gap-2">
+        <div className="space-y-2">
+          <Label htmlFor="email">Email *</Label>
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
             defaultValue={
-              state?.data?.country ?? data?.country ?? "SE"
+              state?.data?.email ?? data?.email ?? ""
             }
             required
-          >
-            <SelectTrigger
-              id="country"
-              className="bg-background-foreground border-input/50"
-            >
-              <SelectValue placeholder="Select a country" />
-            </SelectTrigger>
-            <SelectContent>
-              {continentOrder.map((continent) => {
-                const countries =
-                  groupedShippingCountries[continent];
-
-                if (!countries?.length) {
-                  return null;
-                }
-
-                return (
-                  <SelectGroup key={continent}>
-                    <SelectLabel>
-                      {continentLabels[continent] ||
-                        continent}
-                    </SelectLabel>
-                    {countries.map((country) => (
-                      <SelectItem
-                        key={country.code}
-                        value={country.code}
-                      >
-                        {country.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                );
-              })}
-            </SelectContent>
-          </Select>
-          {renderErrors(state?.errors?.country)}
-        </div>
-        <div className="xxsm:col-span-2 col-span-full space-y-2">
-          <Label htmlFor="region">Region / State</Label>
-          <Input
-            name="region"
-            id="region"
-            placeholder="Region"
-            defaultValue={
-              state?.data?.region ?? data?.region ?? ""
-            }
           />
-          {renderErrors(state?.errors?.region)}
+          {renderErrors(state?.errors?.email)}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="phone">Phone *</Label>
+          <Input
+            type="tel"
+            name="phone"
+            id="phone"
+            placeholder="+00 12 123 45 67"
+            defaultValue={
+              state?.data?.phone ?? data?.phone ?? ""
+            }
+            required
+          />
+          {renderErrors(state?.errors?.phone)}
         </div>
       </div>
+
+      <CountryRegionFields
+        availableShippingCountries={
+          availableShippingCountries
+        }
+        countryValue={
+          state?.data?.country ?? data?.country ?? "SE"
+        }
+        regionValue={
+          state?.data?.region ?? data?.region ?? ""
+        }
+        errors={state?.errors}
+        renderErrors={renderErrors}
+      />
 
       <div className="space-y-2">
         <Label htmlFor="line1">Address *</Label>
@@ -257,8 +170,8 @@ export default function AddressForm({
         {renderErrors(state?.errors?.line2)}
       </div>
 
-      <div className="xxsm:grid-cols-5 grid grid-cols-1 gap-4">
-        <div className="xxsm:col-span-2 col-span-full space-y-2">
+      <div className="xsm:grid-cols-5 grid grid-cols-1 gap-2">
+        <div className="xsm:col-span-2 col-span-full space-y-2">
           <Label htmlFor="postalCode">Postal Code *</Label>
           <Input
             name="postalCode"
@@ -277,7 +190,7 @@ export default function AddressForm({
           {renderErrors(state?.errors?.postalCode)}
         </div>
 
-        <div className="xxsm:col-span-3 col-span-full space-y-2">
+        <div className="xsm:col-span-3 col-span-full space-y-2">
           <Label htmlFor="city">City *</Label>
           <Input
             name="city"
@@ -293,7 +206,6 @@ export default function AddressForm({
           {renderErrors(state?.errors?.city)}
         </div>
       </div>
-
       {state?.errors?.server && (
         <div className="rounded-md bg-red-50 p-3">
           <p className="text-sm text-red-700">
@@ -314,20 +226,15 @@ export default function AddressForm({
           </p>
         </div>
       )}
-
-      {!hideSubmitButton && (
-        <Button
-          type="submit"
-          className={`mt-6 w-full ${
-            pending || disableSubmit
-              ? "cursor-not-allowed opacity-50"
-              : ""
-          }`}
-          disabled={pending || disableSubmit}
-        >
-          {pending ? loadingLabel : submitLabel}
-        </Button>
-      )}
+      <Button
+        type="submit"
+        className={`mt-2 w-full ${
+          pending ? "cursor-not-allowed opacity-50" : ""
+        }`}
+        disabled={pending}
+      >
+        {pending ? loadingLabel : submitLabel}
+      </Button>
     </form>
   );
 }

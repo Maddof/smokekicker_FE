@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import AddressForm from "@/components/AddressForm";
+import AddressForm from "@/components/AddressForm/AddressForm";
 import { submitCheckoutFormAddressData } from "../../cart/checkout/action";
 
 export default function UserProfileForm({ data }) {
