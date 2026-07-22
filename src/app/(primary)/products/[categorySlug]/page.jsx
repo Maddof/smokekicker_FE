@@ -195,7 +195,7 @@ export default async function CategoryPage({ params }) {
             description:
               product.details.shortDesc +
               " " +
-              product.details.longDesc.slice(0, 150) +
+              product.details.longDesc.slice(0, 100) +
               "...",
             brand: product.brand
               ? {

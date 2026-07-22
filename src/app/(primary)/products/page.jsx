@@ -84,7 +84,7 @@ export default async function ShopPage() {
     page.seo?.metaDescription ||
     `Shop nicotine pouches online at Smokekicker. Explore top brands, strong flavors, and fast worldwide delivery on nicotine pouches.`;
 
-  const jsonLd = [
+  const collectionPageJsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -125,6 +125,12 @@ export default async function ShopPage() {
                     name: product.brand.name,
                   }
                 : undefined,
+              description:
+                product.details.shortDesc +
+                " " +
+                product.details +
+                " " +
+                product.details.longDesc.slice(0, 100), // Limit description length for JSON-LD
               offers: {
                 "@type": "Offer",
                 priceCurrency: product.currency ?? "EUR",
@@ -165,7 +171,7 @@ export default async function ShopPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
+          __html: JSON.stringify(collectionPageJsonLd),
         }}
       />
       <ShopHeader
