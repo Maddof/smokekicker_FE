@@ -8,6 +8,8 @@ import {
   useEffect,
 } from "react";
 
+import { isBot } from "@/lib/utils/botChecker";
+
 const CartContext = createContext();
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -33,11 +35,7 @@ export const CartProvider = ({ children }) => {
     countryCode = "SE",
   ) => {
     // Dubbelkolla även bot-check här innan fetch, ifall någon lyckas trigga fetchCartFromBackend på ett sätt som inte går via useEffect ovan.
-    const isBot =
-      /bot|googlebot|crawler|spider|robot|crawling/i.test(
-        navigator.userAgent,
-      );
-    if (isBot) return;
+    if (isBot()) return;
 
     try {
       const response = await fetch(
@@ -272,11 +270,7 @@ export const CartProvider = ({ children }) => {
     //   return;
     // }
     // Check user agent to prevent fetching cart for bots/crawlers
-    const isBot =
-      /bot|googlebot|crawler|spider|robot|crawling/i.test(
-        navigator.userAgent,
-      );
-    if (isBot) return;
+    if (isBot()) return;
 
     // Todo: Will check for cart cookie instead of authStatus in the future, to allow cart fetching for non-logged in users as well.
 

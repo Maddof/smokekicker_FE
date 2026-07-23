@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { fetchAllPublishedProducts } from "@/lib/data/api/fetchProducts";
-import { Button } from "@/components/ui/scn/button";
 import CategoryHeader from "@/components/shop/CategorySeparatorHeader";
 import ProductGridLoadMore from "@/components/shop/ProductGridLoadMore";
 import ShopHeader from "@/components/shop/ShopHeader";

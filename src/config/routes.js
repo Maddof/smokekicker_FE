@@ -41,6 +41,7 @@ export const ROUTES = {
   SHIPPING: "/shipping",
   RETURNS: "/returns",
   FAQ: "/faq",
+  ADULTS_ONLY: "/adults-only",
 
   // Auth related
   AUTH: {
