@@ -1,3 +1,5 @@
+// @desc: This component is a dialog that prompts the user to confirm their legal age before accessing certain content. It checks for an age verification cookie and displays the dialog if the cookie is not present. The user can either confirm their age or be redirected to an adults-only page.
+
 "use client";
 
 import {
