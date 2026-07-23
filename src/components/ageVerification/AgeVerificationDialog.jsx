@@ -2,20 +2,16 @@
 
 "use client";
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/scn/button";
-import { confirmLegalAge } from "@/app/(primary)/actions/age-verification";
+import { setCookie } from "@/lib/utils/cookies/cookiesClient";
 import { ROUTES } from "@/config/routes";
 import { isBot } from "@/lib/utils/botChecker";
 
 const AGE_COOKIE = "smokekicker_age_verified";
+const AGE_COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
 function hasAgeVerificationCookie() {
   return document.cookie
@@ -28,7 +24,6 @@ export function AgeVerificationDialog({ minimumAge = 18 }) {
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
-  const [isPending, startTransition] = useTransition();
 
   const confirmButtonRef = useRef(null);
 
@@ -57,10 +52,8 @@ export function AgeVerificationDialog({ minimumAge = 18 }) {
   }, [open]);
 
   const handleConfirm = () => {
-    startTransition(async () => {
-      await confirmLegalAge();
-      setOpen(false);
-    });
+    setCookie(AGE_COOKIE, "true", AGE_COOKIE_MAX_AGE);
+    setOpen(false);
   };
 
   const handleReject = () => {
@@ -100,19 +93,15 @@ export function AgeVerificationDialog({ minimumAge = 18 }) {
           <Button
             type="button"
             ref={confirmButtonRef}
-            disabled={isPending}
             onClick={handleConfirm}
             className="w-full"
           >
-            {isPending
-              ? "Confirming..."
-              : `Yes, I am ${minimumAge} or older`}
+            {`Yes, I am ${minimumAge} or older`}
           </Button>
 
           <Button
             type="button"
             variant="outline"
-            disabled={isPending}
             onClick={handleReject}
             className="w-full"
           >

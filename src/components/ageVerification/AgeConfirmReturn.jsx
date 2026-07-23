@@ -1,33 +1,29 @@
 "use client";
 
-import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/scn/button";
-import { confirmLegalAge } from "@/app/(primary)/actions/age-verification";
+import { setCookie } from "@/lib/utils/cookies/cookiesClient";
 import { ROUTES } from "@/config/routes";
+
+const AGE_COOKIE = "smokekicker_age_verified";
+const AGE_COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
 export function AgeConfirmReturn({ minimumAge = 18 }) {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
 
   const handleConfirm = () => {
-    startTransition(async () => {
-      await confirmLegalAge();
-      router.push(ROUTES.HOME);
-    });
+    setCookie(AGE_COOKIE, "true", AGE_COOKIE_MAX_AGE);
+    router.push(ROUTES.HOME);
   };
 
   return (
     <Button
       type="button"
-      disabled={isPending}
       onClick={handleConfirm}
       className="w-full"
     >
-      {isPending
-        ? "Confirming..."
-        : `Yes, I am ${minimumAge} or older`}
+      {`Yes, I am ${minimumAge} or older`}
     </Button>
   );
 }
