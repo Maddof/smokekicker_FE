@@ -6,22 +6,41 @@ import {
   useState,
   useTransition,
 } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/scn/button";
 import { confirmLegalAge } from "@/app/(primary)/actions/age-verification";
 import { ROUTES } from "@/config/routes";
+import { isBot } from "@/lib/utils/botChecker";
+
+const AGE_COOKIE = "smokekicker_age_verified";
+
+function hasAgeVerificationCookie() {
+  return document.cookie
+    .split("; ")
+    .some((cookie) => cookie === `${AGE_COOKIE}=true`);
+}
 
 export function AgeVerificationDialog({ minimumAge = 18 }) {
   const router = useRouter();
+  const pathname = usePathname();
 
-  const [mounted, setMounted] = useState(false);
+  const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const confirmButtonRef = useRef(null);
 
+  // Decide visibility on the client (keeps the tree statically renderable)
   useEffect(() => {
-    setMounted(true);
+    if (pathname === ROUTES.ADULTS_ONLY) return;
+    if (isBot()) return;
+    if (hasAgeVerificationCookie()) return;
+    setOpen(true);
+  }, [pathname]);
+
+  // Lock scroll + focus only while the dialog is actually open
+  useEffect(() => {
+    if (!open) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -33,23 +52,20 @@ export function AgeVerificationDialog({ minimumAge = 18 }) {
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, []);
+  }, [open]);
 
   const handleConfirm = () => {
     startTransition(async () => {
       await confirmLegalAge();
-      router.refresh();
+      setOpen(false);
     });
   };
 
   const handleReject = () => {
-    window.location.replace(ROUTES.ADULTS_ONLY);
+    router.push(ROUTES.ADULTS_ONLY);
   };
 
-  // Prevent rendering on the server to avoid hydration mismatch
-  if (!mounted) {
-    return null;
-  }
+  if (!open) return null;
 
   return (
     <div

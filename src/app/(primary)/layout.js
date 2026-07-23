@@ -3,6 +3,7 @@ import Footer from "@/components/footer/footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import BenefitsBanner from "@/components/BenefitsBanner";
 import { SITE_NAME } from "@/config/metadata";
+import { AgeVerificationDialog } from "@/components/ageVerification/AgeVerificationDialog";
 // import { AgeVerificationGate } from "@/components/ageVerification/AgeVerificationGate";
 
 export const metadata = {
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
       <main style={{ minHeight: "72vh" }}>{children}</main>
       <Footer />
       {/* <AgeVerificationGate /> */}
+      <AgeVerificationDialog minimumAge={18} />
     </>
   );
 }

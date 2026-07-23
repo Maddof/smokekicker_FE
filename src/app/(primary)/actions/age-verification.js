@@ -8,7 +8,7 @@ export async function confirmLegalAge() {
   const cookieStore = await cookies();
 
   cookieStore.set(AGE_VERIFICATION_COOKIE, "true", {
-    httpOnly: true,
+    httpOnly: false,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
