@@ -455,7 +455,7 @@ export default async function SingleProductPage({
             <Button
               asChild
               variant="outline"
-              className="group mt-6 px-4 py-6"
+              className="group mt-6 px-4 py-6 whitespace-normal"
             >
               <Link
                 prefetch={false}

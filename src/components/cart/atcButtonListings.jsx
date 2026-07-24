@@ -73,12 +73,6 @@ export default function AtcButtonListings({
       {hasBulkTiers && (
         <div className="mb-2 grid grid-cols-2 gap-1 md:grid-cols-4">
           {tiers.map((tier) => {
-            const rate = parseFloat(tier.percentage) / 100;
-            const discountedUnit = Math.round(
-              product.price * (1 - rate),
-            );
-            const hasDiscount =
-              parseFloat(tier.percentage) > 0;
             const isSelected = tier.id === selectedTierId;
             const isTierOutOfStock =
               availableStock < tier.minQuantity;
@@ -98,14 +92,6 @@ export default function AtcButtonListings({
                 <span className="text-[125%] font-bold">
                   {tier.minQuantity}
                 </span>
-                {/* <span>
-                  {formatCurrency(discountedUnit)}
-                </span> */}
-                {/* <span className="text-muted text-xs">
-                  {hasDiscount
-                    ? `-${tier.percentage}%`
-                    : ""}
-                </span> */}
               </button>
             );
           })}
@@ -120,7 +106,7 @@ export default function AtcButtonListings({
                 )}
               </span>
             </div>
-            <div className="text-muted-foreground text-[85%]">
+            <div className="text-muted text-[90%]">
               <span className="">
                 {formatCurrency(selectedDiscountedUnit)}
                 <span>/can</span>
